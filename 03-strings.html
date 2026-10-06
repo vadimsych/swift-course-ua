@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Рядки й символи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li class="current"><a href="03-strings.html" aria-current="page"><span class="num">03</span> Рядки й символи</a><ol class="sections"><li><a href="#рядкові-літерали">Рядкові літерали</a></li><li><a href="#порожній-рядок">Порожній рядок</a></li><li><a href="#змінність-рядків">Змінність рядків</a></li><li><a href="#рядки-значення">Рядки — значення</a></li><li><a href="#символи">Символи</a></li><li><a href="#конкатенація">Конкатенація</a></li><li><a href="#інтерполяція">Інтерполяція</a></li><li><a href="#unicode">Unicode</a></li><li><a href="#підрахунок-символів">Підрахунок символів</a></li><li><a href="#доступ-і-зміна">Доступ і зміна</a></li><li><a href="#підрядки">Підрядки</a></li><li><a href="#порівняння">Порівняння</a></li><li><a href="#представлення-в-unicode-кодуваннях">Представлення в Unicode-кодуваннях</a></li></ol></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 03</p>
+  <h1>Рядки й символи</h1>
+  <p class="lede"><code>String</code> і <code>Character</code> у Swift: літерали, інтерполяція, Unicode, чому не можна написати <code>text[3]</code>, підрядки, порівняння і представлення в UTF-8/UTF-16.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/stringsandcharacters/">stringsandcharacters</a></p>
+<h2 id="рядкові-літерали"><a href="#рядкові-літерали">Рядкові літерали</a></h2>
+<p>Звичайний літерал — у подвійних лапках. Багаторядковий — між потрійними лапками, кожна на окремому рядку. Перенесення одразу після відкривальних і перед закривальними лапками в текст не входять; якщо потрібен порожній рядок на початку чи в кінці, залиш порожній рядок усередині літерала:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">greeting</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Привіт"</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">help</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"""</span>
+<span class="s">    Керування:</span>
+<span class="s">      WASD — рух</span>
+<span class="s">      Space — стрибок</span>
+<span class="s">    """</span></code></pre></div>
+<p>У багаторядковому літералі відступ <strong>закривальних</strong> лапок задає, скільки пробілів обрізати з кожного рядка. Тому вище текст починається з «Керування», а «WASD» має два пробіли відступу. Рядок не може бути відступлений менше, ніж закривальні лапки.</p>
+<p>Щоб розбити довгий рядок у коді, але не додавати перенесення в сам текст, рядок закінчують зворотною косою:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">long</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"""</span>
+<span class="s">    Це один рядок, \</span>
+<span class="s">    хоч у коді їх два.</span>
+<span class="s">    """</span></code></pre></div>
+<h3 id="спецсимволи"><a href="#спецсимволи">Спецсимволи</a></h3>
+<p><code>\0</code>, <code>\\</code>, <code>\t</code>, <code>\n</code>, <code>\r</code>, <code>\"</code>, <code>\'</code>, а також Unicode-скаляр у форматі <code>\u{n}</code>, де n — від 1 до 8 шістнадцяткових цифр:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">euro</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"\u{20AC}"</span><span class="w">         </span><span class="c1">// €</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">flagUA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"\u{1F1FA}\u{1F1E6}"</span><span class="w">  </span><span class="c1">// 🇺🇦</span></code></pre></div>
+<p>У багаторядковому літералі лапки <code>"</code> можна писати без екранування. Щоб усередині був сам <code>"""</code>, екрануй хоча б одну з лапок (<code>\"""</code>) або візьми розширений роздільник <code>#"""…"""#</code>.</p>
+<h3 id="розширені-роздільники"><a href="#розширені-роздільники">Розширені роздільники</a></h3>
+<p>Якщо рядок містить багато <code>\</code> або <code>"</code>, його обрамлюють символами <code>#</code>. Тоді спецпослідовності не обробляються, поки в них не додано стільки ж <code>#</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">regexText</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">#</span><span class="s">"\d+\.\d+"</span><span class="p">#</span><span class="w">          </span><span class="c1">// бекслеші як є</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">quote</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">#</span><span class="s">"Він сказав "</span><span class="err">привіт</span><span class="s">""</span><span class="p">#</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">#</span><span class="s">"C:\Games</span><span class="se">\\</span><span class="s">#(folderName)"</span><span class="p">#</span><span class="w">   </span><span class="c1">// \#( ) — інтерполяція, решта бекслешів як є</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Аналог — verbatim-рядки <code>@"..."</code> і raw string literals <code>"""..."""</code> з C# 11. Інтерполяція в розширеному рядку пишеться як <code>\#(value)</code>.</p>
+</aside>
+<h2 id="порожній-рядок"><a href="#порожній-рядок">Порожній рядок</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">log</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">""</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">log2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">String</span><span class="p">()</span>
+<span class="k">if</span><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"порожньо"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<h2 id="змінність-рядків"><a href="#змінність-рядків">Змінність рядків</a></h2>
+<p>Змінність визначає <code>let</code>/<code>var</code>, а не окремий клас:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Рівень"</span>
+<span class="n">title</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">" 1"</span><span class="w">           </span><span class="c1">// ок</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">fixed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Меню"</span>
+<span class="c1">// fixed += "!"         // помилка компіляції</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Немає пари <code>string</code>/<code>StringBuilder</code>. <code>var String</code> уже змінний і ефективно дописується, тому <code>+=</code> у циклі не створює квадратичної кількості копій, як у C#.</p>
+</aside>
+<h2 id="рядки-значення"><a href="#рядки-значення">Рядки — значення</a></h2>
+<p><code>String</code> — структура. При присвоєнні чи передачі у функцію отримувач має <strong>свою копію</strong>, і її зміна не впливає на оригінал. Фізично копіювання відкладене (copy-on-write): буфер дублюється лише тоді, коли одну з копій змінюють. Тож передача рядків дешева.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"abc"</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span>
+<span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">"d"</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w">   </span><span class="c1">// abc abcd</span></code></pre></div>
+<h2 id="символи"><a href="#символи">Символи</a></h2>
+<p><code>Character</code> — один видимий символ. Рядок — колекція символів, тож до нього застосовні всі методи колекцій:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Swift2026!"</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">digits</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">password</span><span class="p">.</span><span class="bp">filter</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">isNumber</span><span class="p">)</span><span class="w">              </span><span class="c1">// "2026"</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">hasUpper</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">password</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="k">where</span><span class="p">:</span><span class="w"> </span><span class="err">\</span><span class="p">.</span><span class="n">isUppercase</span><span class="p">)</span><span class="w"> </span><span class="c1">// true</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">initials</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Taylor Swift"</span><span class="p">.</span><span class="bp">split</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" "</span><span class="p">).</span><span class="n">compactMap</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="bp">first</span><span class="p">)</span><span class="w">  </span><span class="c1">// ["T", "S"]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">fromChars</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="n">initials</span><span class="p">)</span><span class="w">                        </span><span class="c1">// "TS"</span></code></pre></div>
+<p>Літерал з одного символу стає <code>Character</code>, якщо вказати тип: <code>let separator: Character = "|"</code>.</p>
+<h2 id="конкатенація"><a href="#конкатенація">Конкатенація</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Game"</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Over"</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="n">text</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">"!"</span>
+<span class="n">text</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">Character</span><span class="p">(</span><span class="s">"?"</span><span class="p">))</span></code></pre></div>
+<p>Символ не можна дописати до <code>Character</code> — тільки до <code>String</code>.</p>
+<p>Практична дрібниця: склеюючи кілька багаторядкових блоків через <code>+</code>, перевір, чи є між ними перенос — кінцевий перенос перед закривальними лапками в текст не потрапляє, тому блоки можуть «злипнутися» в один рядок.</p>
+<h2 id="інтерполяція"><a href="#інтерполяція">Інтерполяція</a></h2>
+<p><code>\(вираз)</code> усередині рядка:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">coins</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">120</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">45</span>
+<span class="bp">print</span><span class="p">(</span><span class="s">"Після покупки лишиться </span><span class="si">\(</span><span class="n">coins</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">price</span><span class="si">)</span><span class="s"> монет"</span><span class="p">)</span></code></pre></div>
+<p>Вираз усередині <code>\( )</code> у звичайному однорядковому літералі має вміститися в один рядок і не містити «голого» <code>\</code>; у багаторядковому літералі інтерполяцію можна розбивати на кілька рядків. У рядку з розширеним роздільником <code>#"..."#</code> інтерполяція пишеться як <code>\#(...)</code>, а звичайне <code>\(x)</code> лишається просто текстом. Інтерполяцію можна налаштувати для власних типів через протокол <code>CustomStringConvertible</code> (властивість <code>description</code>) — аналог <code>ToString()</code>.</p>
+<h2 id="unicode"><a href="#unicode">Unicode</a></h2>
+<p>Тут Swift сильно відрізняється від C#.</p>
+<h3 id="скаляри"><a href="#скаляри">Скаляри</a></h3>
+<p><code>String</code> побудований з <strong>Unicode-скалярів</strong> — 21-бітних кодів (<code>U+0000…U+D7FF</code> і <code>U+E000…U+10FFFF</code>). Сурогатні пари, як у UTF-16 C#, на цьому рівні не існують.</p>
+<h3 id="розширені-кластери-графем"><a href="#розширені-кластери-графем">Розширені кластери графем</a></h3>
+<p><code>Character</code> — це не один скаляр, а <strong>розширений кластер графем</strong>: послідовність скалярів, яку людина сприймає як один символ.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">thumbs</span><span class="p">:</span><span class="w"> </span><span class="nb">Character</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"\u{1F44D}\u{1F3FD}"</span><span class="w">  </span><span class="c1">// 👍 + модифікатор тону шкіри</span>
+<span class="c1">// два скаляри, але один символ: 👍🏽</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">family</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"👨‍👩‍👧"</span><span class="w">     </span><span class="c1">// кілька емодзі, склеєних ZWJ, — один Character</span></code></pre></div>
+<h2 id="підрахунок-символів"><a href="#підрахунок-символів">Підрахунок символів</a></h2>
+<p>Типове завдання — обмеження довжини нікнейма «до 12 символів». Яку довжину рахувати?</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">nick</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Олег👩‍💻🇺🇦"</span>
+
+<span class="n">nick</span><span class="p">.</span><span class="bp">count</span><span class="w">               </span><span class="c1">// 6 — символи, як їх бачить людина</span>
+<span class="n">nick</span><span class="p">.</span><span class="n">unicodeScalars</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="c1">// 9 — Unicode-скаляри</span>
+<span class="n">nick</span><span class="p">.</span><span class="n">utf16</span><span class="p">.</span><span class="bp">count</span><span class="w">         </span><span class="c1">// 13 — як string.Length у C# чи в JavaScript</span>
+<span class="n">nick</span><span class="p">.</span><span class="n">utf8</span><span class="p">.</span><span class="bp">count</span><span class="w">          </span><span class="c1">// 27 — байти в UTF-8</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">isValidNickname</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">s</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="mf">3.</span><span class="p">..</span><span class="mi">12</span><span class="p">).</span><span class="bp">contains</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="bp">count</span><span class="p">)</span><span class="w">        </span><span class="c1">// для інтерфейсу рахуємо символи</span>
+<span class="p">}</span></code></pre></div>
+<p>Для правил, які бачить користувач, бери <code>count</code>. Для обмежень бекенду чи бази даних, де ліміт у байтах або в UTF-16 одиницях, — відповідне представлення. Розбіжність між ними — часта причина багів «на сервері обрізало емодзі навпіл».</p>
+<p><code>count</code> не зберігається в рядку, а обчислюється: щоб знайти межі символів, рядок треба пройти повністю (O(n)). У гарячому циклі краще порахувати один раз.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>string.Length</code> у C# рахує UTF-16 одиниці: <code>"🇺🇦".Length == 4</code>. У Swift <code>"🇺🇦".count == 1</code>. Еквівалент C#-поведінки — <code>utf16.count</code>.</p>
+</aside>
+<h2 id="доступ-і-зміна"><a href="#доступ-і-зміна">Доступ і зміна</a></h2>
+<h3 id="індекси-рядка"><a href="#індекси-рядка">Індекси рядка</a></h3>
+<p>Через змінну ширину символів <strong>рядок не можна індексувати цілим числом</strong>. Позиції описує тип <code>String.Index</code>, і його отримують від самого рядка. Найчастіше індекси знаходять пошуком, а не обчислюють вручну:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="c1">/// "Ivan Petrenko" → "Ivan P."</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">shortName</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">full</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">space</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">full</span><span class="p">.</span><span class="n">firstIndex</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="s">" "</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">surnameStart</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">full</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">after</span><span class="p">:</span><span class="w"> </span><span class="n">space</span><span class="p">)</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="n">surnameStart</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">full</span><span class="p">.</span><span class="n">endIndex</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">full</span><span class="p">[..&lt;</span><span class="n">space</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="n">full</span><span class="p">[</span><span class="n">surnameStart</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"."</span>
+<span class="p">}</span>
+
+<span class="c1">/// Обрізає рядок до n символів і додає три крапки.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">truncated</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">cut</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">text</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span><span class="w"> </span><span class="n">offsetBy</span><span class="p">:</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">limitedBy</span><span class="p">:</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="n">endIndex</span><span class="p">),</span>
+<span class="w">          </span><span class="n">cut</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="n">endIndex</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">text</span><span class="p">[..&lt;</span><span class="n">cut</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"…"</span>
+<span class="p">}</span></code></pre></div>
+<p>Що тут важливо:</p>
+<ul>
+<li><code>startIndex</code> — перший символ, <code>endIndex</code> — позиція <strong>після</strong> останнього. Звернення <code>text[text.endIndex]</code> — крах, як і <code>index(after: endIndex)</code>. У порожнього рядка <code>startIndex == endIndex</code>.</li>
+<li><code>index(after:)</code>, <code>index(before:)</code>, <code>index(_:offsetBy:)</code> рухають індекс; варіант з <code>limitedBy:</code> повертає <code>nil</code> замість краху.</li>
+<li><code>startIndex</code>, <code>endIndex</code>, <code>index(after:)</code> і <code>index(_:offsetBy:)</code> є в будь-якій <code>Collection</code>; <code>index(before:)</code> — лише у двонаправлених колекціях (<code>BidirectionalCollection</code>: масиви, рядки), а в <code>Set</code> і <code>Dictionary</code> його немає.</li>
+<li>Індекс, отриманий від одного рядка, не можна використовувати з іншим.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p><code>text[3]</code> не скомпілюється — і це не забаганка, а захист від розрізання символу навпіл. Якщо треба часто звертатися за номером, перетвори в масив: <code>let chars = Array(text)</code>, і тоді <code>chars[3]</code> працює за O(1).</p>
+</aside>
+<h3 id="вставка-й-видалення"><a href="#вставка-й-видалення">Вставка й видалення</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">tag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"v2026"</span>
+<span class="n">tag</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="p">:</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">tag</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span><span class="w"> </span><span class="n">offsetBy</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w">   </span><span class="c1">// "v-2026"</span>
+<span class="n">tag</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="s">"beta"</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="p">:</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">endIndex</span><span class="p">)</span><span class="w">               </span><span class="c1">// "v-2026beta"</span>
+<span class="n">tag</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">at</span><span class="p">:</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">startIndex</span><span class="p">)</span><span class="w">                                 </span><span class="c1">// прибрали "v"</span>
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">firstRange</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="s">"beta"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">tag</span><span class="p">.</span><span class="n">replaceSubrange</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="p">:</span><span class="w"> </span><span class="s">"rc"</span><span class="p">)</span><span class="w">                         </span><span class="c1">// "-2026rc"</span>
+<span class="p">}</span>
+<span class="n">tag</span><span class="p">.</span><span class="n">removeFirst</span><span class="p">()</span><span class="w">                                              </span><span class="c1">// "2026rc"</span></code></pre></div>
+<p>Ці методи є в усіх типах, що реалізують <code>RangeReplaceableCollection</code>: <code>String</code>, <code>Array</code>, <code>Data</code> тощо.</p>
+<h2 id="підрядки"><a href="#підрядки">Підрядки</a></h2>
+<p>Результат зрізу (<code>text[a..&lt;b]</code>, <code>prefix</code>, <code>split</code>) — це <code>Substring</code>, а не <code>String</code>. Він <strong>ділить пам'ять з оригіналом</strong>, тому створюється миттєво. Але поки живе <code>Substring</code>, живе й увесь вихідний рядок.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">line</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"player:42"</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">parts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="bp">split</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">":"</span><span class="p">)</span><span class="w">   </span><span class="c1">// [Substring]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">              </span><span class="c1">// копія в окремий String для зберігання</span></code></pre></div>
+<p>Правило: <code>Substring</code> — для короткочасної роботи, а для зберігання (у властивостях, довгоживучих структурах) перетворюй у <code>String</code>. Обидва типи реалізують <code>StringProtocol</code>, тож більшість методів однакові.</p>
+<h2 id="порівняння"><a href="#порівняння">Порівняння</a></h2>
+<h3 id="рівність"><a href="#рівність">Рівність</a></h3>
+<p><code>==</code> порівнює рядки за <strong>змістом</strong> (канонічною еквівалентністю), а не за байтами. Це помітно, коли текст надходить з різних джерел. Наприклад, macOS-файлова система й веб-форма можуть закодувати ту саму літеру «й» по-різному — одним скаляром або «и» + комбінований знак:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">fromFileSystem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Андрі\u{438}\u{306}"</span><span class="w">     </span><span class="c1">// и + бреве</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">fromForm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Андрі\u{439}"</span><span class="w">                 </span><span class="c1">// й одним скаляром</span>
+<span class="n">fromFileSystem</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">fromForm</span><span class="w">                     </span><span class="c1">// true</span>
+<span class="n">fromFileSystem</span><span class="p">.</span><span class="n">utf8</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">fromForm</span><span class="p">.</span><span class="n">utf8</span><span class="p">.</span><span class="bp">count</span><span class="w">   </span><span class="c1">// false — байти різні</span></code></pre></div>
+<p>А от літери з різних алфавітів, навіть однакові на вигляд, рівними не будуть — це важливо для перевірки логінів і доменів.</p>
+<p>Порівняння чутливе до регістру й не залежить від локалі. Для порівняння без урахування регістру — <code>a.lowercased() == b.lowercased()</code> або Foundation-методи (<code>localizedCaseInsensitiveCompare</code>).</p>
+<h3 id="префікс-і-суфікс"><a href="#префікс-і-суфікс">Префікс і суфікс</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"level_03.json"</span>
+<span class="n">file</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="s">"level_"</span><span class="p">)</span><span class="w">   </span><span class="c1">// true</span>
+<span class="n">file</span><span class="p">.</span><span class="n">hasSuffix</span><span class="p">(</span><span class="s">".json"</span><span class="p">)</span><span class="w">    </span><span class="c1">// true</span></code></pre></div>
+<p>Вони теж порівнюють посимвольно з урахуванням еквівалентності.</p>
+<h2 id="представлення-в-unicode-кодуваннях"><a href="#представлення-в-unicode-кодуваннях">Представлення в Unicode-кодуваннях</a></h2>
+<p>Рядок дає три «погляди» на свій вміст:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Ї🇺🇦"</span>
+<span class="nb">Array</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">utf8</span><span class="p">)</span><span class="w">            </span><span class="c1">// байти UTF-8: [208, 135, 240, 159, ...]</span>
+<span class="nb">Array</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">utf16</span><span class="p">)</span><span class="w">           </span><span class="c1">// одиниці UTF-16, як в C# string</span>
+<span class="n">s</span><span class="p">.</span><span class="n">unicodeScalars</span><span class="p">.</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// коди скалярів</span></code></pre></div>
+<ul>
+<li><code>utf8</code> — <code>UInt8</code>, для запису у файли й мережу.</li>
+<li><code>utf16</code> — <code>UInt16</code>, для сумісності з NSString, JavaScript і C#.</li>
+<li><code>unicodeScalars</code> — <code>Unicode.Scalar</code> з властивістю <code>value: UInt32</code> і <code>properties</code> (категорія, чи це емодзі тощо).</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши функцію, яка повертає перші <code>n</code> символів рядка, не падаючи, якщо рядок коротший. Підказка: <code>prefix(_:)</code>.</li>
+<li>Порахуй для <code>"👍🏽 ok"</code> значення <code>count</code>, <code>utf16.count</code>, <code>utf8.count</code> і <code>unicodeScalars.count</code>. Поясни різницю.</li>
+<li>Розбери рядок <code>"hp=100;mp=40;xp=1200"</code> у словник <code>[String: Int]</code>.</li>
+<li>Перевір, чи рядок — паліндром, ігноруючи регістр і пробіли.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="02-operators.html"><small>Попередній</small>Базові оператори</a><a class="next" href="04-collections.html"><small>Наступний</small>Колекції</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

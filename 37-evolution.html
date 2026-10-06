@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Еволюція мови · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li class="current"><a href="37-evolution.html" aria-current="page"><span class="num">37</span> Еволюція мови</a><ol class="sections"><li><a href="#як-розвивається-swift">Як розвивається Swift</a></li><li><a href="#swift-14-формування-мови-20142017">Swift 1–4: формування мови (2014–2017)</a></li><li><a href="#swift-5x-стабільність-і-нові-парадигми-20192024">Swift 5.x: стабільність і нові парадигми (2019–2024)</a></li><li><a href="#swift-6x-безпека-за-замовчуванням-20242026">Swift 6.x: безпека за замовчуванням (2024–2026)</a></li><li><a href="#як-читати-старий-код">Як читати старий код</a></li></ol></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Еволюція мови · урок 37</p>
+  <h1>Еволюція мови</h1>
+  <p class="lede">Короткий путівник по версіях Swift: що з'являлося і коли. Корисно, щоб розуміти старий код на GitHub і Stack Overflow і знати, які можливості доступні в якій версії.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/revisionhistory/">revisionhistory</a></p>
+<h2 id="як-розвивається-swift"><a href="#як-розвивається-swift">Як розвивається Swift</a></h2>
+<p>Зміни мови проходять відкритий процес <strong>Swift Evolution</strong>: кожна пропозиція (SE-NNNN) публікується на форумі swift.org, обговорюється спільнотою й приймається чи відхиляється командою мови. Тексти всіх пропозицій лежать у репозиторії <code>swiftlang/swift-evolution</code>, і це найкраще джерело, якщо треба зрозуміти, <strong>чому</strong> щось влаштовано саме так.</p>
+<p>Великі версії виходять приблизно раз на рік разом з новим Xcode (вересень), проміжні — навесні.</p>
+<h2 id="swift-14-формування-мови-20142017"><a href="#swift-14-формування-мови-20142017">Swift 1–4: формування мови (2014–2017)</a></h2>
+<ul>
+<li><strong>1.x</strong> — перший реліз, тісна прив'язка до Objective-C.</li>
+<li><strong>2.0</strong> — <code>guard</code>, <code>defer</code>, <code>do-catch</code>/<code>throws</code> замість <code>NSError**</code>, розширення протоколів, <code>#available</code>.</li>
+<li><strong>3.0</strong> — великий злам сумісності: нові правила іменування API («Swift API Design Guidelines»), мітка першого параметра стала обов'язковою, прибрано <code>++</code>/<code>--</code> і C-подібний <code>for</code>, <code>fileprivate</code>/<code>open</code>.</li>
+<li><strong>4.0</strong> — <code>Codable</code>, key paths <code>\Type.prop</code>, багаторядкові рядки, <code>String</code> знову колекція символів.</li>
+<li><strong>4.1–4.2</strong> — умовна відповідність протоколам, синтез <code>Equatable</code>/<code>Hashable</code>, <code>CaseIterable</code>, <code>@dynamicMemberLookup</code>, <code>@inlinable</code>, <code>random(in:)</code>.</li>
+</ul>
+<h2 id="swift-5x-стабільність-і-нові-парадигми-20192024"><a href="#swift-5x-стабільність-і-нові-парадигми-20192024">Swift 5.x: стабільність і нові парадигми (2019–2024)</a></h2>
+<ul>
+<li><strong>5.0</strong> — <strong>стабільний ABI</strong>: рантайм Swift вбудовано в iOS 12.2+, застосунки більше не несуть бібліотеку мови з собою. <code>Result</code>, сирі рядки <code>#"..."#</code>.</li>
+<li><strong>5.1</strong> — непрозорі типи <code>some</code>, property wrappers, неявний return в однорядкових функціях, стабільність модулів (бінарні фреймворки).</li>
+<li><strong>5.2–5.4</strong> — <code>callAsFunction</code>, key path як функція, <code>@main</code>, кілька trailing closures, result builders.</li>
+<li><strong>5.5</strong> — <strong>Swift Concurrency</strong>: <code>async</code>/<code>await</code>, <code>Task</code>, групи задач, актори, <code>@MainActor</code>, <code>Sendable</code>, <code>AsyncSequence</code>.</li>
+<li><strong>5.6–5.7</strong> — ключове слово <code>any</code>, <code>@preconcurrency</code>, скорочений <code>if let x</code>, регулярні вирази-літерали й <code>Regex</code>, <code>some</code> у параметрах.</li>
+<li><strong>5.8</strong> — поступове ввімкнення майбутніх можливостей через прапорці <code>-enable-upcoming-feature</code>.</li>
+<li><strong>5.9</strong> — <strong>макроси</strong>, <code>if</code>/<code>switch</code> як вирази, пакети параметрів (<code>each T</code>), noncopyable-типи (<code>~Copyable</code>), <code>consume</code>, модифікатори <code>borrowing</code>/<code>consuming</code>, рівень доступу <code>package</code>, visionOS.</li>
+<li><strong>5.10</strong> — повна перевірка data races (опційно), вкладені протоколи.</li>
+</ul>
+<h2 id="swift-6x-безпека-за-замовчуванням-20242026"><a href="#swift-6x-безпека-за-замовчуванням-20242026">Swift 6.x: безпека за замовчуванням (2024–2026)</a></h2>
+<ul>
+<li><strong>6.0</strong> — <strong>режим мови Swift 6</strong> з обов'язковою перевіркою data races під час компіляції, типізовані помилки <code>throws(E)</code>, рівні доступу на <code>import</code>, Swift Testing (<code>@Test</code>, <code>#expect</code>).</li>
+<li><strong>6.1</strong> — кінцеві коми в списках параметрів, аргументів і generic-параметрів, покращення <code>nonisolated</code> для типів і розширень.</li>
+<li><strong>6.2</strong> — «доступна конкурентність»: опційні <strong>ізоляція на головному акторі за замовчуванням</strong> і поведінка <code>nonisolated(nonsending)</code> (вмикаються налаштуваннями), <code>@concurrent</code> для явного паралелізму; <code>InlineArray</code> і <strong>цілочисельні generic-параметри</strong>, <code>Span</code> для безпечного доступу до неперервної пам'яті, <strong>сирі ідентифікатори</strong> у зворотних лапках.</li>
+<li><strong>6.2.x</strong> — атрибут <code>@export</code> для контролю того, що бачать клієнтські модулі.</li>
+<li><strong>6.3</strong> — проміжний реліз з покращеннями компілятора й діагностики.</li>
+<li><strong>6.4</strong> (Xcode 27) — поточна версія, яку описує книга; документацію доповнено описом body-макросів, сирих ідентифікаторів і протоколів з вимогою суперкласу (сама можливість існує давно).</li>
+</ul>
+<h2 id="як-читати-старий-код"><a href="#як-читати-старий-код">Як читати старий код</a></h2>
+<table>
+<thead>
+<tr>
+<th>Бачиш у коді</th>
+<th>Що це і чим замінити</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>completion: @escaping (Result&lt;T, Error&gt;) -&gt; Void</code></td>
+<td>API до Swift 5.5; сьогодні — <code>async throws -&gt; T</code></td>
+</tr>
+<tr>
+<td><code>DispatchQueue.main.async { }</code></td>
+<td>до Concurrency; сьогодні — <code>@MainActor</code> або <code>await MainActor.run</code></td>
+</tr>
+<tr>
+<td><code>ObservableObject</code> + <code>@Published</code> + <code>@StateObject</code></td>
+<td>до iOS 17; сьогодні — <code>@Observable</code> + <code>@State</code></td>
+</tr>
+<tr>
+<td><code>if let x = x</code></td>
+<td>до 5.7; сьогодні — <code>if let x</code></td>
+</tr>
+<tr>
+<td>протокол як тип без <code>any</code></td>
+<td>до 5.6; сьогодні — <code>any P</code> або краще <code>some P</code></td>
+</tr>
+<tr>
+<td><code>@UIApplicationMain</code></td>
+<td>застарілий; сьогодні — <code>@main</code></td>
+</tr>
+<tr>
+<td><code>fatalError</code> в обробці відомих помилок</td>
+<td>краще <code>throws(E)</code> або <code>Result</code></td>
+</tr>
+<tr>
+<td><code>NSError</code> і <code>inout NSError?</code></td>
+<td>Objective-C стиль; сьогодні — <code>throws</code></td>
+</tr>
+</tbody>
+</table>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Перед використанням нової можливості перевір дві речі: яка мінімальна версія <strong>компілятора</strong> (Xcode) її підтримує і чи потрібна їй підтримка в <strong>рантаймі ОС</strong> (тоді доступність обмежена версією iOS). Мовні можливості, що працюють лише під час компіляції (як <code>if let x</code> чи макроси), доступні на будь-якій iOS.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Знайди на GitHub iOS-проєкт 2019–2020 років і перелічи місця, які сьогодні написали б інакше.</li>
+<li>Відкрий репозиторій <code>swiftlang/swift-evolution</code> і прочитай мотивацію пропозиції про <code>if</code>/<code>switch</code>-вирази.</li>
+<li>Перевір у налаштуваннях свого Xcode-проєкту режим мови й <em>Default Actor Isolation</em>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="36-patterns-generic-params.html"><small>Попередній</small>Довідник: зразки й generic-параметри</a><span></span></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

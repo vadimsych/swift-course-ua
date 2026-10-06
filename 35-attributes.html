@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник: атрибути · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li class="current"><a href="35-attributes.html" aria-current="page"><span class="num">35</span> Довідник: атрибути</a><ol class="sections"><li><a href="#атрибути-оголошень">Атрибути оголошень</a></li><li><a href="#атрибути-типів">Атрибути типів</a></li><li><a href="#атрибути-гілок-switch">Атрибути гілок switch</a></li></ol></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Довідник (за потреби) · урок 35</p>
+  <h1>Довідник: атрибути</h1>
+  <p class="lede">Атрибути додають інформацію до оголошень і типів: доступність API, макроси, <code>@main</code>, dynamic member lookup, property wrappers і result builders, атрибути для Objective-C, бібліотек і конкурентності, а також атрибути типів (<code>@escaping</code>, <code>@Sendable</code>, <code>@autoclosure</code>) і <code>@unknown</code>.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/attributes/">attributes</a></p>
+<p>Атрибут пишеться через <code>@</code> перед оголошенням або типом, деякі приймають аргументи в дужках: <code>@available(iOS 18, *)</code>.</p>
+<h2 id="атрибути-оголошень"><a href="#атрибути-оголошень">Атрибути оголошень</a></h2>
+<h3 id="attached-і-freestanding"><a href="#attached-і-freestanding">attached і freestanding</a></h3>
+<p><code>@attached(роль, names: ...)</code> і <code>@freestanding(роль)</code> застосовуються до <strong>оголошень макросів</strong> і описують, як макрос можна використовувати (урок 19).</p>
+<p>Ролі attached-макросів: <code>peer</code>, <code>accessor</code>, <code>memberAttribute</code>, <code>member</code>, <code>extension</code>, <code>body</code>. Ролі freestanding: <code>expression</code>, <code>declaration</code>.</p>
+<p>Аргумент <code>names:</code> перелічує імена, які створить макрос: <code>named(x)</code>, <code>overloaded</code>, <code>prefixed(_)</code>, <code>suffixed(Mock)</code>, <code>arbitrary</code>. Для <code>extension</code>-ролі додатково вказують <code>conformances:</code> — протоколи, які додасть макрос.</p>
+<p><strong>Body-макроси</strong> (<code>@attached(body)</code>) генерують тіло функції, оголошеної без тіла або з існуючим тілом, яке макрос замінює чи обгортає — наприклад, для автоматичного логування чи трасування виклику.</p>
+<h3 id="available"><a href="#available">available</a></h3>
+<p>Описує доступність оголошення на платформах і версіях:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="n">iOS</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="n">macOS</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">newFeature</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">deprecated</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="s">"Використовуй loadAsync()"</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">load</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span><span class="w"> </span><span class="n">introduced</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="n">deprecated</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="n">obsoleted</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="n">renamed</span><span class="p">:</span><span class="w"> </span><span class="s">"fetch()"</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">oldFetch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">unavailable</span><span class="p">)</span>
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Session</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">noasync</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="s">"Блокує потік"</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">waitSync</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="n">swift</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">onlySwift6Mode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p>Аргументи:</p>
+<ul>
+<li>платформа (<code>iOS</code>, <code>macOS</code>, <code>watchOS</code>, <code>tvOS</code>, <code>visionOS</code>, <code>macCatalyst</code>, <code>*</code>, а також розширення: <code>iOSApplicationExtension</code> тощо);</li>
+<li><code>introduced</code>, <code>deprecated</code>, <code>obsoleted</code> — версії; <code>deprecated</code> без версії — застаріле без конкретної версії;</li>
+<li><code>unavailable</code> — недоступне взагалі;</li>
+<li><code>message</code>, <code>renamed</code> — пояснення й нове ім'я (Xcode запропонує fix-it);</li>
+<li><code>noasync</code> — не можна викликати з асинхронного контексту;</li>
+<li><code>swift</code> замість платформи — доступність за версією мови; таку форму не поєднують з платформами й <code>*</code>.</li>
+</ul>
+<p>Скорочена форма <code>@available(iOS 17, macOS 14, *)</code> еквівалентна кільком <code>introduced</code>.</p>
+<h3 id="backdeployed"><a href="#backdeployed">backDeployed</a></h3>
+<p>Дозволяє бібліотеці «підставити» реалізацію нового API для старих ОС, де його ще немає в системі:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="n">iOS</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="p">@</span><span class="n">backDeployed</span><span class="p">(</span><span class="n">before</span><span class="p">:</span><span class="w"> </span><span class="n">iOS</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">formattedPrice</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p>На старих системах викличеться копія функції з застосунку, на нових — системна. Потрібно лише авторам бібліотек.</p>
+<h3 id="discardableresult"><a href="#discardableresult">discardableResult</a></h3>
+<p>Прибирає попередження про невикористаний результат функції.</p>
+<h3 id="dynamiccallable"><a href="#dynamiccallable">dynamicCallable</a></h3>
+<p>Дозволяє викликати екземпляр як функцію з довільною кількістю аргументів. Тип мусить реалізувати <code>dynamicallyCall(withArguments:)</code> та/або <code>dynamicallyCall(withKeywordArguments:)</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">dynamicCallable</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Logger</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">dynamicallyCall</span><span class="p">(</span><span class="n">withKeywordArguments</span><span class="w"> </span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">KeyValuePairs</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">Any</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="nv">$0</span><span class="p">.</span><span class="n">key</span><span class="si">)</span><span class="s">=</span><span class="si">\(</span><span class="nv">$0</span><span class="p">.</span><span class="n">value</span><span class="si">)</span><span class="s">"</span><span class="w"> </span><span class="p">}.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" "</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">log</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Logger</span><span class="p">()</span>
+<span class="n">log</span><span class="p">(</span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="s">"purchase"</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="mf">4.99</span><span class="p">)</span><span class="w">   </span><span class="c1">// event=purchase price=4.99</span></code></pre></div>
+<p>Застосовується для взаємодії з динамічними мовами (Python, JavaScript).</p>
+<h3 id="dynamicmemberlookup"><a href="#dynamicmemberlookup">dynamicMemberLookup</a></h3>
+<p>Звертання <code>value.будь_яке_ім'я</code> компілятор перетворює на виклик <code>subscript(dynamicMember:)</code>. Є два варіанти сабскрипта:</p>
+<ul>
+<li>з параметром-рядком (<code>String</code>) — ім'я передається як текст; так роблять обгортки над словниками чи динамічними мовами, і помилку в імені компілятор не впіймає;</li>
+<li>з параметром-key path — звертання перевіряється компілятором; якщо є обидва сабскрипти, перевагу має key path.</li>
+</ul>
+<p>Приклад з key path — тема оформлення, що «пропускає» звертання до вкладеної палітри:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Palette</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">accent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"orange"</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">background</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"white"</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">@</span><span class="n">dynamicMemberLookup</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Theme</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">palette</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Palette</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">dynamicMember</span><span class="w"> </span><span class="n">path</span><span class="p">:</span><span class="w"> </span><span class="n">WritableKeyPath</span><span class="p">&lt;</span><span class="n">Palette</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">palette</span><span class="p">[</span><span class="n">keyPath</span><span class="p">:</span><span class="w"> </span><span class="n">path</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">palette</span><span class="p">[</span><span class="n">keyPath</span><span class="p">:</span><span class="w"> </span><span class="n">path</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">dark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Theme</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Dark"</span><span class="p">)</span>
+<span class="n">dark</span><span class="p">.</span><span class="n">accent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"teal"</span><span class="w">        </span><span class="c1">// насправді dark.palette.accent</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">dark</span><span class="p">.</span><span class="n">background</span><span class="p">)</span><span class="w">      </span><span class="c1">// "white"</span>
+<span class="c1">// dark.font                // помилка компіляції: у Palette немає font</span></code></pre></div>
+<h3 id="export"><a href="#export">export</a></h3>
+<p>Застосовується до функцій і методів бібліотек і керує тим, що саме з них бачать клієнтські модулі:</p>
+<ul>
+<li><code>@export(interface)</code> — клієнти отримують лише символ для виклику; тіло функції для них закрите, його не можна вбудувати чи оптимізувати разом з їхнім кодом. Так ховають реалізацію.</li>
+<li><code>@export(implementation)</code> — навпаки, у бінарник бібліотеки символ не потрапляє, а клієнти отримують тіло й самі вбудовують його копію там, де потрібно. Так можна додати нову функцію, не змінюючи ABI бібліотеки.</li>
+</ul>
+<h3 id="frozen"><a href="#frozen">frozen</a></h3>
+<p>Для авторів бібліотек: обіцянка, що тип не змінить свого складу в наступних версіях. Для enum це означає, що <code>@unknown default</code> у <code>switch</code> не потрібен.</p>
+<h3 id="gkinspectable"><a href="#gkinspectable">GKInspectable</a></h3>
+<p>Робить властивість доступною для редагування в редакторі сцен SpriteKit/GameplayKit у Xcode.</p>
+<h3 id="globalactor"><a href="#globalactor">globalActor</a></h3>
+<p>Позначає тип як глобальний актор, щоб його ім'я можна було використовувати як атрибут ізоляції (урок 18). Це може бути актор, структура, enum чи <code>final</code> клас — головне, щоб статична властивість <code>shared</code> повертала екземпляр актора.</p>
+<h3 id="inlinable"><a href="#inlinable">inlinable</a></h3>
+<p>Тіло публічної функції стає частиною інтерфейсу модуля, і клієнти можуть його вбудовувати й спеціалізувати. Код усередині може використовувати лише <code>public</code> або <code>@usableFromInline</code> сутності.</p>
+<h3 id="main"><a href="#main">main</a></h3>
+<p>Позначає тип, що є точкою входу програми. Тип має статичний <code>main()</code>, можливо <code>async throws</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">main</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Tool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"Старт"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>У SwiftUI <code>@main struct MyApp: App</code> працює так само: протокол <code>App</code> надає реалізацію <code>main()</code>.</p>
+<h3 id="nonobjc"><a href="#nonobjc">nonobjc</a></h3>
+<p>Забороняє показувати метод, властивість чи ініціалізатор в Objective-C, навіть якщо тип — <code>@objc</code>.</p>
+<h3 id="nsapplicationmain-і-uiapplicationmain"><a href="#nsapplicationmain-і-uiapplicationmain">NSApplicationMain і UIApplicationMain</a></h3>
+<p>Старі атрибути точки входу для AppKit і UIKit. У режимі Swift 6 вони вже помилка компіляції — замість них використовують <code>@main</code> на класі делегата застосунку.</p>
+<h3 id="nscopying"><a href="#nscopying">NSCopying</a></h3>
+<p>На властивості класу: при присвоєнні зберігається копія значення через <code>copy(with:)</code>, а не саме значення. Тип має відповідати <code>NSCopying</code>.</p>
+<h3 id="nsmanaged"><a href="#nsmanaged">NSManaged</a></h3>
+<p>Для властивостей підкласів <code>NSManagedObject</code> (Core Data): сховище і реалізацію надає Core Data в рантаймі.</p>
+<h3 id="objc"><a href="#objc">objc</a></h3>
+<p>Робить оголошення доступним з Objective-C. Потрібен для <code>#selector</code>, KVO і старих UIKit-делегатів. Можна задати інше ім'я: <code>@objc(showPaywall:)</code>.</p>
+<h3 id="objcmembers"><a href="#objcmembers">objcMembers</a></h3>
+<p>На класі — автоматично додає <code>@objc</code> до всіх його членів (і членів розширень). Збільшує розмір бінарника, тож використовується обмежено.</p>
+<h3 id="preconcurrency"><a href="#preconcurrency">preconcurrency</a></h3>
+<p>Пом'якшує перевірки конкурентності для коду, написаного до Swift Concurrency:</p>
+<ul>
+<li><code>@preconcurrency import Module</code> — попередження про <code>Sendable</code> з цього модуля приглушуються;</li>
+<li><code>@preconcurrency</code> на оголошенні — клієнти, що ще не перейшли на сувору перевірку, не отримають помилок від нових анотацій;</li>
+<li><code>@preconcurrency</code> на відповідності протоколу — дозволяє ізольованому типу відповідати неізольованому протоколу з перевіркою в рантаймі.</li>
+</ul>
+<h3 id="propertywrapper"><a href="#propertywrapper">propertyWrapper</a></h3>
+<p>Позначає тип як обгортку властивості (урок 10).</p>
+<h3 id="resultbuilder"><a href="#resultbuilder">resultBuilder</a></h3>
+<p>Позначає тип як result builder (урок 29). Перетворення, які застосовує компілятор:</p>
+<ul>
+<li>кожен вираз → <code>buildExpression(_:)</code> (якщо є);</li>
+<li>послідовність → <code>buildBlock(_:...)</code> або попарно через <code>buildPartialBlock(first:)</code> і <code>buildPartialBlock(accumulated:next:)</code>;</li>
+<li><code>if</code> без <code>else</code> → <code>buildOptional(_:)</code>;</li>
+<li><code>if-else</code>, <code>switch</code> → вкладені <code>buildEither(first:)</code>/<code>buildEither(second:)</code>;</li>
+<li><code>for</code> → <code>buildArray(_:)</code>;</li>
+<li><code>if #available</code> → <code>buildLimitedAvailability(_:)</code>;</li>
+<li>результат → <code>buildFinalResult(_:)</code> (якщо є).</li>
+</ul>
+<p>Усередині builder-замикання не працюють <code>return</code>, <code>break</code>, <code>guard</code>, <code>while</code> і <code>do-catch</code>.</p>
+<p>Атрибут builder-а застосовують до параметра-замикання функції, до самої функції чи методу та до геттера обчислюваної властивості — тоді їхнє тіло перетворюється за правилами builder-а.</p>
+<h3 id="requires-stored-property-inits"><a href="#requires-stored-property-inits">requires_stored_property_inits</a></h3>
+<p>На класі: кожна збережена властивість мусить мати значення за замовчуванням в оголошенні.</p>
+<h3 id="testable"><a href="#testable">testable</a></h3>
+<p>На <code>import</code> у тестах: дає доступ до <code>internal</code>-сутностей модуля, зібраного з увімкненим тестуванням, а <code>internal</code> і <code>public</code> класи та їхні члени для тестового коду поводяться як <code>open</code> — їх можна успадковувати й перевизначати в моках.</p>
+<h3 id="unchecked"><a href="#unchecked">unchecked</a></h3>
+<p>На відповідності протоколу (<code>@unchecked Sendable</code>) — вимикає перевірку компілятором вимог протоколу. Підтримується лише для <code>Sendable</code>. Відповідальність за коректність на тобі.</p>
+<h3 id="usablefrominline"><a href="#usablefrominline">usableFromInline</a></h3>
+<p>Робить <code>internal</code>-сутність доступною для використання в <code>@inlinable</code>-коді, не відкриваючи її як <code>public</code>.</p>
+<h3 id="warn-unqualified-access"><a href="#warn-unqualified-access">warn_unqualified_access</a></h3>
+<p>На методі: компілятор попередить, якщо метод викликано без явного <code>self.</code> чи імені типу. Допомагає уникнути плутанини з глобальними функціями з тим самим ім'ям (як <code>min</code>/<code>max</code>).</p>
+<h3 id="атрибути-interface-builder"><a href="#атрибути-interface-builder">Атрибути Interface Builder</a></h3>
+<p><code>@IBOutlet</code>, <code>@IBAction</code>, <code>@IBSegueAction</code>, <code>@IBInspectable</code>, <code>@IBDesignable</code> — зв'язок коду з елементами в сторібордах і XIB. Усі вони неявно додають <code>@objc</code> (так само, як <code>@NSManaged</code> і <code>@GKInspectable</code>).</p>
+<h2 id="атрибути-типів"><a href="#атрибути-типів">Атрибути типів</a></h2>
+<h3 id="autoclosure"><a href="#autoclosure">autoclosure</a></h3>
+<p>На параметрі функціонального типу без параметрів: аргумент-вираз автоматично загортається в замикання й обчислюється ліниво (урок 7).</p>
+<h3 id="convention"><a href="#convention">convention</a></h3>
+<p>Задає конвенцію виклику функціонального типу:</p>
+<ul>
+<li><code>@convention(swift)</code> — звичайне Swift-замикання (за замовчуванням);</li>
+<li><code>@convention(block)</code> — Objective-C блок;</li>
+<li><code>@convention(c)</code> — вказівник на C-функцію, не може захоплювати контекст.</li>
+</ul>
+<h3 id="escaping"><a href="#escaping">escaping</a></h3>
+<p>Параметр-замикання може пережити виклик функції (урок 7).</p>
+<h3 id="sendable"><a href="#sendable">Sendable</a></h3>
+<p><code>@Sendable</code> на функціональному типі: замикання безпечно передавати між областями ізоляції — воно захоплює лише <code>Sendable</code>-значення й не змінює захоплені змінні.</p>
+<h2 id="атрибути-гілок-switch"><a href="#атрибути-гілок-switch">Атрибути гілок switch</a></h2>
+<h3 id="unknown"><a href="#unknown">unknown</a></h3>
+<p><code>@unknown default</code> (або <code>@unknown case _</code>) — гілка для варіантів enum, що можуть з'явитися в майбутніх версіях бібліотеки. Компілятор попереджає, якщо відомі варіанти не оброблено явно (урок 33).</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Познач функцію як <code>@available(*, deprecated, renamed: "newName()")</code> і подивись, який fix-it пропонує Xcode.</li>
+<li>Зроби обгортку <code>@dynamicMemberLookup</code> над конфігом, що проксує доступ до властивостей вкладеної структури через key path.</li>
+<li>Створи консольну програму з <code>@main struct</code> і <code>static func main() async</code>.</li>
+<li>Знайди в документації SwiftUI три атрибути з цього уроку й поясни, навіщо вони там.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="34-declarations.html"><small>Попередній</small>Довідник: оголошення</a><a class="next" href="36-patterns-generic-params.html"><small>Наступний</small>Довідник: зразки й generic-параметри</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

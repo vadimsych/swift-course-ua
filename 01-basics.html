@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Основи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li class="current"><a href="01-basics.html" aria-current="page"><span class="num">01</span> Основи</a><ol class="sections"><li><a href="#константи-й-змінні">Константи й змінні</a></li><li><a href="#коментарі-й-крапки-з-комою">Коментарі й крапки з комою</a></li><li><a href="#цілі-числа">Цілі числа</a></li><li><a href="#числа-з-рухомою-комою">Числа з рухомою комою</a></li><li><a href="#безпека-типів-і-виведення-типів">Безпека типів і виведення типів</a></li><li><a href="#числові-літерали">Числові літерали</a></li><li><a href="#перетворення-числових-типів">Перетворення числових типів</a></li><li><a href="#псевдоніми-типів">Псевдоніми типів</a></li><li><a href="#булеві-значення">Булеві значення</a></li><li><a href="#кортежі">Кортежі</a></li><li><a href="#опціонали">Опціонали</a></li><li><a href="#безпека-памяті">Безпека пам'яті</a></li><li><a href="#обробка-помилок">Обробка помилок</a></li><li><a href="#assertions-і-preconditions">Assertions і preconditions</a></li></ol></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 01</p>
+  <h1>Основи</h1>
+  <p class="lede">Константи й змінні, числові типи, виведення типів, кортежі, опціонали, базово про помилки й безпеку пам'яті, а також assertions і preconditions.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/">thebasics</a></p>
+<h2 id="константи-й-змінні"><a href="#константи-й-змінні">Константи й змінні</a></h2>
+<p><code>let</code> оголошує константу, <code>var</code> — змінну. У Swift заведено писати <code>let</code> усюди, де значення не змінюється, і компілятор сам підкаже, якщо <code>var</code> ніколи не модифікується.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">levelCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">12</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">currentLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">currentLevel</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">wins</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">losses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">draws</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="c1">// кілька в одному рядку</span></code></pre></div>
+<p>Значення константи не обов'язково відоме під час компіляції, і його можна присвоїти пізніше, але рівно один раз на кожному шляху виконання:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">reward</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="k">if</span><span class="w"> </span><span class="n">currentLevel</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">reward</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">500</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">reward</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="p">}</span>
+<span class="c1">// reward = 0  // помилка: константу вже ініціалізовано</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>let</code> — це не <code>const</code> (той лише для compile-time значень) і не зовсім <code>readonly</code>. Ближче за все — локальна змінна, якій можна присвоїти один раз. Для <code>let</code>-властивості класу посилання незмінне, а об'єкт усередині змінювати можна, як у <code>readonly</code> поля в C#. А от <code>let</code> зі структурою робить незмінною всю структуру — про це в уроці про структури.</p>
+</aside>
+<h3 id="анотації-типу"><a href="#анотації-типу">Анотації типу</a></h3>
+<p>Тип пишеться після імені через двокрапку. Потрібен він, коли початкового значення немає або коли треба інший тип, ніж вивів би компілятор:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">playerName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">volume</span><span class="p">:</span><span class="w"> </span><span class="nb">Float</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="c1">// без анотації було б Int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">minPrice</span><span class="p">,</span><span class="w"> </span><span class="n">maxPrice</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span></code></pre></div>
+<h3 id="імена"><a href="#імена">Імена</a></h3>
+<p>Імена можуть містити майже будь-які Unicode-символи, зокрема кирилицю й емодзі, але не пробіли, математичні символи, стрілки й не можуть починатися з цифри. На практиці пишуть латиницею в <code>lowerCamelCase</code> для змінних і функцій та <code>UpperCamelCase</code> для типів.</p>
+<p>Якщо дуже потрібно використати ключове слово як ім'я, його беруть у зворотні лапки:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="p">`</span><span class="k">default</span><span class="p">`</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"fallback"</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout new"><b>Swift 6</b><p>Зворотні лапки тепер дозволяють і «сирі ідентифікатори» з пробілами та цифрами на початку, наприклад для назв тестів: <code>func `login fails with wrong password`()</code>. Детальніше в уроці про лексичну структуру.</p>
+</aside>
+<h3 id="виведення"><a href="#виведення">Виведення</a></h3>
+<p><code>print(_:separator:terminator:)</code> виводить значення. Інтерполяція рядків — через <code>\(...)</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">coins</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">250</span>
+<span class="bp">print</span><span class="p">(</span><span class="s">"Монет: </span><span class="si">\(</span><span class="n">coins</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">              </span><span class="c1">// як $"Монет: {coins}"</span>
+<span class="bp">print</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">,</span><span class="w"> </span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">"-"</span><span class="p">)</span><span class="w">  </span><span class="c1">// a-b-c</span></code></pre></div>
+<h2 id="коментарі-й-крапки-з-комою"><a href="#коментарі-й-крапки-з-комою">Коментарі й крапки з комою</a></h2>
+<p>Коментарі як у C#: <code>//</code> і <code>/* */</code>. Різниця в тому, що багаторядкові коментарі <strong>вкладаються</strong>: <code>/* зовнішній /* внутрішній */ все ще коментар */</code>. Тому закоментувати шматок коду, у якому вже є <code>/* */</code>, безпечно.</p>
+<p>Документаційні коментарі пишуть через <code>///</code> у форматі Markdown (а не XML, як у C#):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="c1">/// Повертає кількість досвіду за рівень.</span>
+<span class="c1">/// - Parameter level: Номер рівня, починаючи з 1.</span>
+<span class="c1">/// - Returns: Кількість XP.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">xp</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">level</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p>Крапка з комою потрібна лише тоді, коли кілька інструкцій пишуть в одному рядку: <code>let a = 1; print(a)</code>.</p>
+<h2 id="цілі-числа"><a href="#цілі-числа">Цілі числа</a></h2>
+<p>Є знакові <code>Int8</code>, <code>Int16</code>, <code>Int32</code>, <code>Int64</code> і беззнакові <code>UInt8</code> … <code>UInt64</code>. Межі доступні через <code>.min</code> і <code>.max</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">maxByte</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">UInt8</span><span class="p">.</span><span class="bp">max</span><span class="w">   </span><span class="c1">// 255</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">minShort</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int16</span><span class="p">.</span><span class="bp">min</span><span class="w">  </span><span class="c1">// -32768</span></code></pre></div>
+<p><strong><code>Int</code></strong> має розмір машинного слова платформи: на iPhone, iPad і Mac це 64 біти (<code>Int64</code>), а на 32-бітних платформах, наприклад частині моделей Apple Watch, — 32 біти. Так само <code>UInt</code>. Використовуй <code>Int</code> для всіх цілих чисел за замовчуванням, навіть якщо значення завжди невід'ємне. Це робить код сумісним і позбавляє від перетворень.</p>
+<p><strong><code>UInt</code></strong> використовують тільки тоді, коли справді потрібен беззнаковий тип машинного розміру. Наприклад, <code>Array.count</code> має тип <code>Int</code>, а не <code>UInt</code>.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>У C# <code>int</code> завжди 32-бітний, а <code>long</code> — 64. У Swift базовий <code>Int</code> на 64-бітних платформах відповідає <code>long</code>. І ще: <code>byte</code> у C# беззнаковий, а аналог у Swift — <code>UInt8</code>, тоді як <code>Int8</code> відповідає <code>sbyte</code>.</p>
+</aside>
+<h2 id="числа-з-рухомою-комою"><a href="#числа-з-рухомою-комою">Числа з рухомою комою</a></h2>
+<p><code>Double</code> — 64-бітне число (близько 15 значущих цифр), <code>Float</code> — 32-бітне (близько 6 цифр). За замовчуванням дробовий літерал стає <code>Double</code>. Є ще <code>Float16</code> для специфічних задач (ML, графіка), а також псевдоніми <code>Float32</code> і <code>Float64</code>.</p>
+<p>Дробові числа зберігаються у двійковому форматі IEEE 754, тому значення округлюється до найближчого представимого: <code>0.1 + 0.2 == 0.3</code> — <code>false</code>. Чим більше число, тим більший крок між сусідніми представимими значеннями. Є й особливі значення: <code>.infinity</code>, <code>-.infinity</code>, <code>.nan</code> (<code>x.isNaN</code>) і від'ємний нуль <code>-0.0</code>, який дорівнює <code>0.0</code>.</p>
+<p>Коли що брати:</p>
+<ul>
+<li><strong>Цілі числа</strong> — для лічильників, індексів, кількостей і всього, що за природою дискретне. А також для грошей у мінімальних одиницях (копійках, центах), щоб уникнути похибок округлення.</li>
+<li><strong>Double</strong> — для вимірювань, фізики, координат, будь-яких неточних величин.</li>
+<li><strong>Float</strong> — тільки коли API вимагає саме його або критична пам'ять (великі масиви для GPU).</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>У Unity ти звик до <code>float</code> усюди: <code>Vector3</code>, <code>Time.deltaTime</code>. В iOS-API все навпаки: <code>CGFloat</code> (на 64-біт фактично <code>Double</code>), <code>TimeInterval</code> (це <code>Double</code>). Тут <code>Double</code> — норма.</p>
+</aside>
+<h2 id="безпека-типів-і-виведення-типів"><a href="#безпека-типів-і-виведення-типів">Безпека типів і виведення типів</a></h2>
+<p>Swift строго типізований: не можна передати <code>String</code> туди, де очікується <code>Int</code>. Але тип майже завжди виводиться з контексту, тому код рідко містить явні анотації:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">lives</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w">          </span><span class="c1">// Int</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">speed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">4.5</span><span class="w">        </span><span class="c1">// Double</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.25</span><span class="w">   </span><span class="c1">// Double: літерали без типу підлаштовуються</span></code></pre></div>
+<h2 id="числові-літерали"><a href="#числові-літерали">Числові літерали</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">decimal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">binary</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mb">0b101010</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">octal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mo">0o52</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">hex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mh">0x2A</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">big</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1_000_000</span><span class="w">          </span><span class="c1">// підкреслення для читабельності</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">precise</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.25e3</span><span class="w">         </span><span class="c1">// 1250.0</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">hexFloat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mh">0x1</span><span class="n">p4</span><span class="w">         </span><span class="c1">// 16.0 — двійковий порядок p обов'язковий</span>
+<span class="c1">// let bad = .5              // помилка: у Swift цифри мають бути з обох боків крапки</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">leading</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">007_250.5</span><span class="w">      </span><span class="c1">// нулі на початку дозволені й ігноруються</span></code></pre></div>
+<h2 id="перетворення-числових-типів"><a href="#перетворення-числових-типів">Перетворення числових типів</a></h2>
+<p><strong>Жодних неявних перетворень між числовими типами.</strong> Навіть <code>Int8</code> в <code>Int</code> треба перетворити явно. Значення, що не вміщається, — помилка компіляції для літералів і крах під час виконання для змінних:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">small</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">200</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">large</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1_000</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">large</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="n">small</span><span class="p">)</span><span class="w">        </span><span class="c1">// явне розширення</span>
+
+<span class="c1">// let overflow: Int8 = 200        // помилка компіляції: не вміщається</span>
+<span class="c1">// let crash = UInt8(large)         // крах у рантаймі: не вміщається</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">safe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">UInt8</span><span class="p">(</span><span class="n">exactly</span><span class="p">:</span><span class="w"> </span><span class="n">large</span><span class="p">)</span><span class="w">    </span><span class="c1">// nil замість краху</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">clamped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">UInt8</span><span class="p">(</span><span class="n">clamping</span><span class="p">:</span><span class="w"> </span><span class="n">large</span><span class="p">)</span><span class="w"> </span><span class="c1">// 255</span></code></pre></div>
+<p>Між цілими й дробовими так само:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">itemsInCart</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">pricePerItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">49.99</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Double</span><span class="p">(</span><span class="n">itemsInCart</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pricePerItem</span><span class="w">   </span><span class="c1">// 149.97</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">wholeHryvnias</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="n">total</span><span class="p">)</span><span class="w">                   </span><span class="c1">// 149 — дробова частина відкидається</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">rounded</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="n">total</span><span class="p">.</span><span class="n">rounded</span><span class="p">())</span><span class="w">               </span><span class="c1">// 150</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">cents</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">((</span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">).</span><span class="n">rounded</span><span class="p">())</span><span class="w">         </span><span class="c1">// 14997</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>У C# <code>int</code> неявно стає <code>long</code> чи <code>double</code>. У Swift ні. Спочатку дратує, потім рятує від тихих втрат точності. Літерали ж типу не мають, тому <code>let d: Double = 3</code> працює без перетворення.</p>
+</aside>
+<h2 id="псевдоніми-типів"><a href="#псевдоніми-типів">Псевдоніми типів</a></h2>
+<p><code>typealias</code> дає існуючому типу інше ім'я, як <code>using Alias = Type;</code> у C#:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">typealias</span><span class="w"> </span><span class="n">PlayerID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">UInt64</span>
+<span class="kd">typealias</span><span class="w"> </span><span class="n">Completion</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">Result</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Void</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="n">PlayerID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span></code></pre></div>
+<p>Це саме псевдонім, а не новий тип: <code>PlayerID</code> і <code>UInt64</code> повністю взаємозамінні.</p>
+<h2 id="булеві-значення"><a href="#булеві-значення">Булеві значення</a></h2>
+<p>Тип <code>Bool</code> зі значеннями <code>true</code> і <code>false</code>. В умовах дозволено лише <code>Bool</code>: <code>if count { }</code> не скомпілюється, треба <code>if count != 0 { }</code>. Корисні методи: <code>isMuted.toggle()</code>, а також <code>.random()</code>.</p>
+<h2 id="кортежі"><a href="#кортежі">Кортежі</a></h2>
+<p>Кортеж — анонімна група значень, найчастіше як результат функції, коли заводити окрему структуру зарано:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">parseVersion</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">s</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">major</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">minor</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">parts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="bp">split</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">"."</span><span class="p">).</span><span class="n">compactMap</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">parseVersion</span><span class="p">(</span><span class="s">"6.4"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">major</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">minor</span><span class="p">)</span><span class="w">                  </span><span class="c1">// за іменами елементів</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">                               </span><span class="c1">// або за номером</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">major</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">parseVersion</span><span class="p">(</span><span class="s">"5.10"</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">   </span><span class="c1">// розбір з відкиданням зайвого</span></code></pre></div>
+<p>Імена елементів — частина типу кортежу, але необов'язкова. Для довгоживучих даних і публічного API краще завести <code>struct</code>.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Те саме, що кортежі <code>(int major, int minor)</code> у C#, і синтаксис майже однаковий.</p>
+</aside>
+<h2 id="опціонали"><a href="#опціонали">Опціонали</a></h2>
+<p>Опціонал описує значення, якого може не бути. <code>String?</code> означає «або <code>String</code>, або <code>nil</code>». Будь-який тип без <code>?</code> гарантовано має значення.</p>
+<p>Опціонали з'являються скрізь, де результат не гарантований:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s">"dark"</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">fontSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">settings</span><span class="p">[</span><span class="s">"fontSize"</span><span class="p">]</span><span class="w">          </span><span class="c1">// String? — ключа може не бути</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">firstVIP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="bp">first</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">isVIP</span><span class="w"> </span><span class="p">}</span><span class="w">       </span><span class="c1">// User? — такого може не знайтись</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="n">userInput</span><span class="p">)</span><span class="w">             </span><span class="c1">// URL? — рядок може бути некоректним</span></code></pre></div>
+<h3 id="nil"><a href="#nil">nil</a></h3>
+<p><code>nil</code> можна присвоїти тільки опціоналу. Змінна-опціонал без значення автоматично стає <code>nil</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">lastError</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w">   </span><span class="c1">// nil за замовчуванням</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Схоже на nullable reference types, але з принциповою різницею: у Swift це не попередження, а частина типу. <code>String</code> і <code>String?</code> — різні типи, і без розгортання ти не викличеш метод на опціоналі. Плюс опціонали працюють однаково для value і reference типів: <code>Int?</code> і <code>Enemy?</code> поводяться ідентично.</p>
+</aside>
+<h3 id="привязування-опціоналу"><a href="#привязування-опціоналу">Прив'язування опціоналу</a></h3>
+<p>Щоб працювати зі значенням, його спочатку «розгортають». Основний інструмент — <code>if let</code> і <code>guard let</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">theme</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">settings</span><span class="p">[</span><span class="s">"theme"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">apply</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span><span class="w">                      </span><span class="c1">// theme тут — String, і живе лише в цьому блоці</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">apply</span><span class="p">(</span><span class="s">"system"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">theme</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">settings</span><span class="p">[</span><span class="s">"theme"</span><span class="p">],</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">accent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">settings</span><span class="p">[</span><span class="s">"accent"</span><span class="p">],</span><span class="w"> </span><span class="n">theme</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"dark"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">applyDark</span><span class="p">(</span><span class="n">accent</span><span class="p">:</span><span class="w"> </span><span class="n">accent</span><span class="p">)</span><span class="w">         </span><span class="c1">// кілька умов через кому — усі мають виконатися</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">nickname</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">loadNickname</span><span class="p">()</span>
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">nickname</span><span class="w"> </span><span class="p">{</span><span class="w">                     </span><span class="c1">// коротка форма: те саме ім'я</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Привіт, </span><span class="si">\(</span><span class="n">nickname</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">draft</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">savedDraft</span><span class="w"> </span><span class="p">{</span><span class="w">           </span><span class="c1">// if var — змінна копія для модифікації</span>
+<span class="w">    </span><span class="n">draft</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">" (чернетка)"</span>
+<span class="w">    </span><span class="n">show</span><span class="p">(</span><span class="n">draft</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">while</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">job</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">pendingJobs</span><span class="p">.</span><span class="n">popLast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// прив'язування працює й у while</span>
+<span class="w">    </span><span class="n">run</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p><code>guard let</code> робить те саме, але розгорнуте значення доступне <strong>після</strong> інструкції, а гілка <code>else</code> мусить вийти з поточної області:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">link</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">link</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="n">link</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"Немає посилання"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Відкриваємо </span><span class="si">\(</span><span class="n">url</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">      </span><span class="c1">// url доступний до кінця функції</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="значення-за-замовчуванням"><a href="#значення-за-замовчуванням">Значення за замовчуванням</a></h3>
+<p>Оператор <code>??</code> працює як у C#:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">nickname</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">"Гравець"</span></code></pre></div>
+<h3 id="примусове-розгортання"><a href="#примусове-розгортання">Примусове розгортання</a></h3>
+<p><code>value!</code> дістає значення без перевірки, а на <code>nil</code> зупиняє програму. Тобто це не «я впевнений», а «якщо я помилився — нехай падає»:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">privacyURL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://example.com/privacy"</span><span class="p">)</span><span class="o">!</span><span class="w">   </span><span class="c1">// літерал у коді: nil означав би баг</span></code></pre></div>
+<h3 id="неявно-розгорнуті-опціонали"><a href="#неявно-розгорнуті-опціонали">Неявно розгорнуті опціонали</a></h3>
+<p>Тип <code>T!</code> — опціонал, який компілятор сам розгортає там, де потрібне не-опціональне значення. Він існує для однієї ситуації: значення гарантовано з'явиться одразу після створення об'єкта, але не в самому <code>init</code>. Класичний приклад — outlet в UIKit, який заповнює система після завантаження сторіборду:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PaywallController</span><span class="p">:</span><span class="w"> </span><span class="bp">UIViewController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">@IBOutlet</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">titleLabel</span><span class="p">:</span><span class="w"> </span><span class="bp">UILabel</span><span class="p">!</span>
+
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">viewDidLoad</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+<span class="w">        </span><span class="n">titleLabel</span><span class="p">.</span><span class="n">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Pro"</span><span class="w">          </span><span class="c1">// розгорнуто автоматично</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">titleLabel</span><span class="w">           </span><span class="c1">// а тут тип — UILabel?, бо контекст допускає опціонал</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Правило виведення: якщо результат можна залишити опціональним, компілятор так і робить; розгортання відбувається лише там, де без нього не скомпілюється. З <code>T!</code> можна працювати і як зі звичайним опціоналом (<code>if let</code>, <code>!= nil</code>). Звернення, поки значення <code>nil</code>, — крах. У SwiftUI-коді такі опціонали майже не трапляються.</p>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Звичка з C# писати <code>!</code> (null-forgiving operator) тут небезпечна. У C# <code>!</code> лише вимикає попередження, а в Swift це реальна перевірка в рантаймі з крахом застосунку.</p>
+</aside>
+<h2 id="безпека-памяті"><a href="#безпека-памяті">Безпека пам'яті</a></h2>
+<p>Swift за замовчуванням не дає зробити низку помилок, які в C чи небезпечному C# призводять до невизначеної поведінки:</p>
+<ul>
+<li>читання змінної до ініціалізації;</li>
+<li>вихід за межі масиву (крах замість читання чужої пам'яті);</li>
+<li>переповнення цілого числа (крах замість тихого загортання);</li>
+<li>звернення до звільненого об'єкта;</li>
+<li>конфліктний одночасний доступ до тієї самої пам'яті (див. урок про безпеку пам'яті);</li>
+<li>data races між потоками (у режимі Swift 6, див. урок про конкурентність).</li>
+</ul>
+<p>Коли перевірки в рантаймі знаходять порушення, програма зупиняється, а не продовжує роботу з пошкодженими даними. Обійти захист можна лише явно позначеними засобами: типами й функціями зі словами <code>unsafe</code>, <code>unchecked</code>, <code>unmanaged</code> у назві (<code>UnsafePointer</code>, <code>Unmanaged</code>, <code>@unchecked Sendable</code>, <code>unowned(unsafe)</code>), або режимом компіляції <code>-Ounchecked</code>.</p>
+<h2 id="обробка-помилок"><a href="#обробка-помилок">Обробка помилок</a></h2>
+<p>Функція, що може завершитися помилкою, позначається <code>throws</code>, а виклик — <code>try</code>. Ловлять помилки в <code>do</code>-<code>catch</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">SaveError</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">diskFull</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">save</span><span class="p">()</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="n">SaveError</span><span class="p">.</span><span class="n">diskFull</span>
+<span class="p">}</span>
+
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="n">save</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Не вдалося зберегти: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Головна відмінність від C#: те, що функція кидає помилку, видно в її сигнатурі, а кожен виклик явно позначений <code>try</code>. Детально — в уроці про обробку помилок.</p>
+<h2 id="assertions-і-preconditions"><a href="#assertions-і-preconditions">Assertions і preconditions</a></h2>
+<p>Це перевірки інваріантів під час виконання. Якщо умова хибна, виконання зупиняється.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span><span class="n">volume</span>
+<span class="bp">assert</span><span class="p">((</span><span class="mf">0.</span><span class="p">..</span><span class="mi">1</span><span class="p">).</span><span class="bp">contains</span><span class="p">(</span><span class="n">volume</span><span class="p">),</span><span class="w"> </span><span class="s">"Гучність має бути в межах 0…1, а не </span><span class="si">\(</span><span class="n">volume</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">item</span><span class="p">(</span><span class="n">at</span><span class="w"> </span><span class="n">index</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">precondition</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="bp">indices</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="n">index</span><span class="p">),</span><span class="w"> </span><span class="s">"Індекс </span><span class="si">\(</span><span class="n">index</span><span class="si">)</span><span class="s"> поза межами"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="k">break</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="bp">assertionFailure</span><span class="p">(</span><span class="s">"Невідомий стан </span><span class="si">\(</span><span class="n">state</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Різниця в тому, де вони працюють:</p>
+<table>
+<thead>
+<tr>
+<th>Функція</th>
+<th>Debug</th>
+<th>Release (<code>-O</code>)</th>
+<th><code>-Ounchecked</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>assert</code>, <code>assertionFailure</code></td>
+<td>перевіряє</td>
+<td><strong>ігнорується</strong></td>
+<td>ігнорується</td>
+</tr>
+<tr>
+<td><code>precondition</code>, <code>preconditionFailure</code></td>
+<td>перевіряє</td>
+<td>перевіряє</td>
+<td>компілятор вважає умову істинною</td>
+</tr>
+<tr>
+<td><code>fatalError</code></td>
+<td>зупиняє</td>
+<td>зупиняє</td>
+<td>зупиняє</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>assert</code> — для перевірок під час розробки, які не повинні гальмувати релізну збірку.</li>
+<li><code>precondition</code> — для умов, порушення яких робить подальшу роботу безглуздою, навіть у релізі.</li>
+<li><code>fatalError("…")</code> — для коду, який не повинен виконатися ніколи, наприклад обов'язковий <code>init(coder:)</code>, який ти не підтримуєш.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>assert</code> ≈ <code>Debug.Assert</code>. <code>precondition</code> — як <code>throw new InvalidOperationException()</code>, тільки без можливості перехопити: програма просто зупиняється. Assertions — не механізм обробки помилок, а спосіб рано знайти баг.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши функцію <code>parseAge(_ text: String) -&gt; Int?</code>, яка повертає вік, якщо рядок — число від 0 до 150, інакше <code>nil</code>.</li>
+<li>Використай її з <code>if let</code>, <code>guard let</code> і <code>??</code>.</li>
+<li>Оголоси <code>let score: UInt8 = 250</code> і спробуй додати до нього <code>10</code>. Що станеться? Тепер спробуй <code>UInt8(clamping: 260)</code> і <code>UInt8(exactly: 260)</code>.</li>
+<li>Поверни з функції кортеж <code>(min: Int, max: Int)?</code> для масиву цілих (і <code>nil</code> для порожнього масиву).</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="00-start.html"><small>Попередній</small>Як влаштований курс і що таке Swift</a><a class="next" href="02-operators.html"><small>Наступний</small>Базові оператори</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

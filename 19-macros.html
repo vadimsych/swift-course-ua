@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Макроси · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li class="current"><a href="19-macros.html" aria-current="page"><span class="num">19</span> Макроси</a><ol class="sections"><li><a href="#що-таке-макрос">Що таке макрос</a></li><li><a href="#freestanding-макроси">Freestanding-макроси</a></li><li><a href="#attached-макроси">Attached-макроси</a></li><li><a href="#оголошення-макросу">Оголошення макросу</a></li><li><a href="#розгортання">Розгортання</a></li><li><a href="#реалізація-макросу">Реалізація макросу</a></li><li><a href="#розробка-й-налагодження">Розробка й налагодження</a></li></ol></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 19</p>
+  <h1>Макроси</h1>
+  <p class="lede">Макроси генерують код під час компіляції. Урок про те, як ними користуватися (freestanding і attached), як вони оголошуються, як розгортаються і як пишеться власний макрос.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/">macros</a></p>
+<h2 id="що-таке-макрос"><a href="#що-таке-макрос">Що таке макрос</a></h2>
+<p>Якщо ти писав source generators у C#, ідея знайома: компілятор запускає твій код, який генерує інший код. Різниця в масштабі. Генератор C# бачить усю компіляцію і додає нові файли. Макрос Swift отримує <strong>лише один фрагмент</strong> — вираз чи оголошення, до якого застосований, — і повертає код, що вбудовується поруч чи замість виклику.</p>
+<p>Що з цього випливає на практиці:</p>
+<ul>
+<li>макрос не може «тихо» переписати твій код — він тільки доповнює його в місці застосування;</li>
+<li>результат проходить звичайну перевірку типів, тому помилку в згенерованому коді покаже компілятор;</li>
+<li>будь-яке розгортання можна відкрити в Xcode (правий клік → <em>Expand Macro</em>) і прочитати як звичайний Swift.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>З макросами C/C++ це не має нічого спільного: там текстова підстановка до компіляції, тут перетворення синтаксичного дерева з перевіркою типів.</p>
+</aside>
+<p>Є два види: <strong>freestanding</strong> (самостійні, через <code>#</code>) і <strong>attached</strong> (прикріплені до оголошення, через <code>@</code>).</p>
+<h2 id="freestanding-макроси"><a href="#freestanding-макроси">Freestanding-макроси</a></h2>
+<p>Стоять у коді самостійно — як вираз, інструкція чи оголошення:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">SwiftUI</span>
+
+<span class="c1">// вираз: Predicate будується з типобезпечного замикання на етапі компіляції</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">activeTrials</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">#</span><span class="n">Predicate</span><span class="p">&lt;</span><span class="n">Subscription</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">isTrial</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">daysLeft</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// оголошення: створює тип для попереднього перегляду в Xcode</span>
+<span class="p">#</span><span class="n">Preview</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">"Paywall"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// інструкція: попередження компілятора</span>
+<span class="p">#</span><span class="n">warning</span><span class="p">(</span><span class="s">"Перед релізом прибрати тестові ціни"</span><span class="p">)</span></code></pre></div>
+<p>Макроси стандартної бібліотеки, які ти вже бачив, — <code>#function</code>, <code>#fileID</code>, <code>#line</code>, <code>#warning</code>, <code>#error</code>.</p>
+<h2 id="attached-макроси"><a href="#attached-макроси">Attached-макроси</a></h2>
+<p>Пишуться через <code>@</code> перед оголошенням і <strong>доповнюють</strong> його: додають члени, розширення, атрибути, тіло функції.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Observation</span>
+
+<span class="p">@</span><span class="n">Observable</span>
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CartModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">total</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span></code></pre></div>
+<p><code>@Observable</code> — це attached-макрос. Він додає до класу сховище спостерігачів, переписує кожну властивість на обчислювану з відстеженням доступу і додає відповідність протоколу <code>Observable</code>. SwiftUI-View, що читає <code>items</code>, перемалюється при зміні саме <code>items</code>.</p>
+<p>Інші відомі attached-макроси: <code>@Model</code> (SwiftData), <code>@Test</code> (Swift Testing), <code>@Entry</code> (значення <code>EnvironmentValues</code>). А <code>#expect</code> зі Swift Testing — freestanding-макрос-вираз.</p>
+<p>Ролі attached-макросів визначають, що саме вони додають:</p>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Що додає</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>peer</code></td>
+<td>нові оголошення поруч з оригінальним</td>
+</tr>
+<tr>
+<td><code>accessor</code></td>
+<td>геттери й сеттери властивості</td>
+</tr>
+<tr>
+<td><code>memberAttribute</code></td>
+<td>атрибути до членів типу</td>
+</tr>
+<tr>
+<td><code>member</code></td>
+<td>нові члени в тип</td>
+</tr>
+<tr>
+<td><code>extension</code></td>
+<td>розширення з протоколами й членами</td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>тіло функції, яка оголошена без тіла</td>
+</tr>
+</tbody>
+</table>
+<p>Один макрос може мати кілька ролей одночасно — як <code>@Observable</code>.</p>
+<h2 id="оголошення-макросу"><a href="#оголошення-макросу">Оголошення макросу</a></h2>
+<p>Макрос складається з <strong>оголошення</strong> (сигнатура й ролі) і <strong>реалізації</strong> (код, що генерує код). Оголошення виглядає як функція з ключовим словом <code>macro</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">freestanding</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">macro</span><span class="w"> </span><span class="n">squared</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="n">Numeric</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="p">#</span><span class="n">externalMacro</span><span class="p">(</span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="s">"MyMacrosPlugin"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="s">"SquaredMacro"</span><span class="p">)</span>
+
+<span class="p">@</span><span class="n">attached</span><span class="p">(</span><span class="n">member</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">:</span><span class="w"> </span><span class="n">named</span><span class="p">(</span><span class="n">reset</span><span class="p">))</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">macro</span><span class="w"> </span><span class="n">Resettable</span><span class="p">()</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="p">#</span><span class="n">externalMacro</span><span class="p">(</span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="s">"MyMacrosPlugin"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="s">"ResettableMacro"</span><span class="p">)</span></code></pre></div>
+<ul>
+<li>Атрибут перед <code>macro</code> задає вид і роль.</li>
+<li><code>names:</code> повідомляє, які імена макрос створить (<code>named(x)</code>, <code>prefixed(_)</code>, <code>suffixed(Mock)</code>, <code>arbitrary</code>). Компілятор має знати це до розгортання.</li>
+<li><code>#externalMacro</code> вказує модуль-плагін і тип з реалізацією.</li>
+<li>Імена freestanding-макросів пишуть у <code>lowerCamelCase</code> (як функції), attached — у <code>UpperCamelCase</code> (як атрибути).</li>
+<li>Оголошення макросу зазвичай <code>public</code>: макроси існують, щоб їх використовували інші модулі, бо реалізація все одно живе в окремому плагіні.</li>
+</ul>
+<h2 id="розгортання"><a href="#розгортання">Розгортання</a></h2>
+<p>Коли компілятор зустрічає макрос, він передає його фрагмент коду у вигляді синтаксичного дерева в <strong>окремий процес-плагін</strong> і вбудовує те, що плагін повернув. Звідси практичні наслідки:</p>
+<ul>
+<li>Плагін ізольований: він не бачить інших файлів проєкту, не має доступу до диска й мережі. Тому макрос не може, скажімо, прочитати JSON з ресурсів і згенерувати з нього типи.</li>
+<li>Результат має залежати <strong>лише від вхідного коду</strong>. Компілятор може кешувати розгортання і перезапускати плагін коли завгодно, тож макрос, що підставляє поточну дату чи випадкове число, працюватиме непередбачувано.</li>
+<li>Вкладені макроси розгортаються <strong>ззовні всередину</strong>: спочатку зовнішній, і він може змінити чи прибрати внутрішній ще до його розгортання.</li>
+<li>Attached-макрос з кількома ролями розгортається окремо для кожної ролі.</li>
+</ul>
+<h2 id="реалізація-макросу"><a href="#реалізація-макросу">Реалізація макросу</a></h2>
+<p>Реалізація — Swift-код, що використовує бібліотеку <strong>SwiftSyntax</strong> для роботи з синтаксичним деревом. Макроси живуть в окремому Swift-пакеті:</p>
+<div class="code bash"><pre><code>swift package init --type macro</code></pre></div>
+<p>Шаблон створює чотири таргети: бібліотеку з оголошеннями (її імпортують клієнти), плагін компілятора з реалізаціями, невелику виконувану програму-клієнт для експериментів і тести.</p>
+<p>Спрощена реалізація freestanding-макроса:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">SwiftSyntax</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">SwiftSyntaxMacros</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">SwiftCompilerPlugin</span>
+
+<span class="c1">// #squared(a + 1)  розгортається в  ((a + 1) * (a + 1))</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">SquaredMacro</span><span class="p">:</span><span class="w"> </span><span class="n">ExpressionMacro</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">expansion</span><span class="p">(</span>
+<span class="w">        </span><span class="n">of</span><span class="w"> </span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">FreestandingMacroExpansionSyntax</span><span class="p">,</span>
+<span class="w">        </span><span class="k">in</span><span class="w"> </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">MacroExpansionContext</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">ExprSyntax</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">argument</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">arguments</span><span class="p">.</span><span class="bp">first</span><span class="p">?.</span><span class="n">expression</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">fatalError</span><span class="p">(</span><span class="s">"потрібен аргумент"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"((</span><span class="si">\(</span><span class="n">argument</span><span class="si">)</span><span class="s">) * (</span><span class="si">\(</span><span class="n">argument</span><span class="si">)</span><span class="s">))"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="n">main</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">MyMacrosPlugin</span><span class="p">:</span><span class="w"> </span><span class="n">CompilerPlugin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">providingMacros</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Macro</span><span class="p">.</span><span class="kr">Type</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">SquaredMacro</span><span class="p">.</span><span class="kc">self</span><span class="p">]</span>
+<span class="p">}</span></code></pre></div>
+<p>Для кожної ролі є свій протокол: <code>ExpressionMacro</code>, <code>DeclarationMacro</code>, <code>MemberMacro</code>, <code>PeerMacro</code>, <code>AccessorMacro</code>, <code>ExtensionMacro</code>, <code>BodyMacro</code> тощо.</p>
+<h2 id="розробка-й-налагодження"><a href="#розробка-й-налагодження">Розробка й налагодження</a></h2>
+<ul>
+<li>Макрос — це функція «дерево → дерево», тож його ідеально тестувати юніт-тестами: <code>assertMacroExpansion</code> з <code>SwiftSyntaxMacrosTestSupport</code> порівнює вхідний код з очікуваним розгорнутим.</li>
+<li>Відлагоджувати реалізацію під час збірки складно, тому основний цикл розробки — через тести.</li>
+<li>Пакет макросів тягне за собою SwiftSyntax, що помітно збільшує час збірки з нуля.</li>
+</ul>
+<h3 id="додавання-макросів-у-наявний-пакет"><a href="#додавання-макросів-у-наявний-пакет">Додавання макросів у наявний пакет</a></h3>
+<p>Якщо макроси потрібні в уже існуючому пакеті, у <code>Package.swift</code> треба:</p>
+<ul>
+<li>версія інструментів щонайменше 5.9 і <code>import CompilerPluginSupport</code>;</li>
+<li>залежність від пакета <code>swift-syntax</code>;</li>
+<li>таргет виду <code>.macro</code> з реалізаціями (залежить від <code>SwiftSyntaxMacros</code> і <code>SwiftCompilerPlugin</code>);</li>
+<li>звичайний таргет-бібліотека з оголошеннями, що залежить від <code>.macro</code>-таргета;</li>
+<li>мінімальна версія macOS у <code>platforms</code>, бо плагін виконується на машині розробника.</li>
+</ul>
+<p>Замість <code>fatalError</code> реалізація може просто кинути помилку — компілятор покаже її як помилку компіляції в місці виклику макросу.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Писати власні макроси доводиться рідко. Спочатку навчися читати розгорнутий код чужих макросів (<code>@Observable</code>, <code>@Model</code>) — це допоможе зрозуміти, чому вони поводяться саме так.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Створи клас з <code>@Observable</code> і подивись його розгортання в Xcode. Які властивості й члени додав макрос?</li>
+<li>Згенеруй шаблон пакета <code>swift package init --type macro</code> і запусти тести, що йдуть у комплекті.</li>
+<li>Додай у пакет макрос <code>#squared</code> з цього уроку і тест для нього через <code>assertMacroExpansion</code>. Подумай, чому аргумент обгорнуто в дужки і що буде з <code>#squared(nextRandom())</code>.</li>
+<li>Додай діагностику: якщо аргумент — літерал, макрос має видавати попередження.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="18-concurrency.html"><small>Попередній</small>Конкурентність</a><a class="next" href="20-type-casting.html"><small>Наступний</small>Приведення типів</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

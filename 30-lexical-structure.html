@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник: лексична структура · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li class="current"><a href="30-lexical-structure.html" aria-current="page"><span class="num">30</span> Довідник: лексична структура</a><ol class="sections"><li><a href="#як-влаштована-довідкова-частина">Як влаштована довідкова частина</a></li><li><a href="#як-компілятор-ділить-текст-на-токени">Як компілятор ділить текст на токени</a></li><li><a href="#пробіли-й-коментарі">Пробіли й коментарі</a></li><li><a href="#ідентифікатори">Ідентифікатори</a></li><li><a href="#ключові-слова-й-пунктуація">Ключові слова й пунктуація</a></li><li><a href="#літерали">Літерали</a></li><li><a href="#оператори">Оператори</a></li></ol></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Довідник (за потреби) · урок 30</p>
+  <h1>Довідник: лексична структура</h1>
+  <p class="lede">Як читати формальну граматику в довіднику Swift, а також з чого складається текст програми: пробіли, коментарі, ідентифікатори (зокрема сирі), ключові слова, літерали й оператори.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/aboutthelanguagereference/">aboutthelanguagereference</a> · <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/lexicalstructure/">lexicalstructure</a></p>
+<h2 id="як-влаштована-довідкова-частина"><a href="#як-влаштована-довідкова-частина">Як влаштована довідкова частина</a></h2>
+<p>Перша частина курсу пояснювала мову через приклади. Довідкова частина книги Swift описує мову <strong>формально</strong>: кожна конструкція має граматичне правило. Читати її від початку до кінця не обов'язково — до неї звертаються, коли потрібно точно знати, що дозволено.</p>
+<p>Граматику записують так:</p>
+<ul>
+<li>стрілка <code>→</code> означає «складається з»: <code>оголошення-змінної → var шаблон ініціалізатор</code>;</li>
+<li><em>курсивом</em> позначають синтаксичні категорії (інші правила), <strong>жирним</strong> — буквальні слова й символи;</li>
+<li>альтернативи записують окремими рядками або через <code>|</code>;</li>
+<li>знак <code>?</code> після елемента означає, що він необов'язковий.</li>
+</ul>
+<div class="code text"><pre><code>guard-statement → guard condition-list else code-block
+condition-list  → condition | condition , condition-list
+initializer?    // приклад необов'язкового елемента</code></pre></div>
+<p>Читається так: інструкція <code>guard</code> — це слово <strong>guard</strong>, список умов, слово <strong>else</strong> і блок коду; список умов — одна умова або умова, кома і ще список (тобто одна чи більше умов через кому). Уроки 30–36 курсу коротко проходять довідник, а повну граматику дивись в оригіналі книги.</p>
+<h2 id="як-компілятор-ділить-текст-на-токени"><a href="#як-компілятор-ділить-текст-на-токени">Як компілятор ділить текст на токени</a></h2>
+<p>Компілятор читає код зліва направо й щоразу бере <strong>найдовший</strong> можливий токен. Тому <code>a+++b</code> — це не <code>a + ++b</code>, а спроба знайти оператор <code>+++</code>.</p>
+<h2 id="пробіли-й-коментарі"><a href="#пробіли-й-коментарі">Пробіли й коментарі</a></h2>
+<p>Пробіли (пробіл, табуляція, перенесення рядка й кілька службових символів) розділяють токени й <strong>впливають на значення операторів</strong> (див. нижче). Коментарі вважаються пробілами.</p>
+<ul>
+<li><code>//</code> — до кінця рядка;</li>
+<li><code>/* */</code> — блоковий, може бути вкладеним;</li>
+<li><code>///</code> і <code>/** */</code> — документаційні коментарі у форматі Markdown, які Xcode показує в Quick Help.</li>
+</ul>
+<h2 id="ідентифікатори"><a href="#ідентифікатори">Ідентифікатори</a></h2>
+<p>Ідентифікатор починається з літери (будь-якого алфавіту, включно з кирилицею й багатьма Unicode-символами) або <code>_</code>, далі — літери, цифри, <code>_</code> і комбіновані символи. Регістр має значення.</p>
+<p>Якщо дуже треба назвати змінну ключовим словом, бери його в зворотні лапки: <code>let `default` = 1</code>. На практиці частіше це не потрібно: після крапки ключові слова можна писати як звичайні імена (<code>.default</code>, <code>.class</code>).</p>
+<p>Імена з <code>$</code> (<code>$0</code> у замиканнях, <code>$value</code> у property wrappers) і <code>_</code>-префіксом створює компілятор — власні змінні так не називай.</p>
+<h3 id="сирі-ідентифікатори"><a href="#сирі-ідентифікатори">Сирі ідентифікатори</a></h3>
+<p>Починаючи зі Swift 6.2, у зворотних лапках можна писати майже <strong>будь-які</strong> символи, включно з пробілами, цифрами на початку й пунктуацією:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">Test</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="p">`</span><span class="err">логін</span><span class="w"> </span><span class="err">не</span><span class="w"> </span><span class="err">проходить</span><span class="w"> </span><span class="err">з</span><span class="w"> </span><span class="err">неправильним</span><span class="w"> </span><span class="err">паролем</span><span class="p">`()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">HTTPVersion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">`</span><span class="mf">1.1</span><span class="p">`</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">`</span><span class="mi">2</span><span class="p">`</span>
+<span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">HTTPVersion</span><span class="p">.`</span><span class="mf">1.1</span><span class="p">`</span></code></pre></div>
+<p>Обмеження: сирий ідентифікатор не може бути порожнім і не може складатися лише з символів операторів. Усередині не можна використовувати зворотні лапки, зворотну косу, нульовий символ, табуляцію, переноси рядків і більшість пробільних символів Unicode (звичайний пробіл дозволено). Головне застосування — читабельні назви тестів і значення, що природно починаються з цифр.</p>
+<h2 id="ключові-слова-й-пунктуація"><a href="#ключові-слова-й-пунктуація">Ключові слова й пунктуація</a></h2>
+<p>Ключові слова поділяються на групи:</p>
+<ul>
+<li><strong>в оголошеннях</strong>: <code>associatedtype</code>, <code>borrowing</code>, <code>class</code>, <code>consuming</code>, <code>deinit</code>, <code>enum</code>, <code>extension</code>, <code>fileprivate</code>, <code>func</code>, <code>import</code>, <code>init</code>, <code>inout</code>, <code>internal</code>, <code>let</code>, <code>nonisolated</code>, <code>open</code>, <code>operator</code>, <code>private</code>, <code>precedencegroup</code>, <code>protocol</code>, <code>public</code>, <code>static</code>, <code>struct</code>, <code>subscript</code>, <code>typealias</code>, <code>var</code>;</li>
+<li><strong>в інструкціях</strong>: <code>break</code>, <code>case</code>, <code>catch</code>, <code>continue</code>, <code>default</code>, <code>defer</code>, <code>do</code>, <code>else</code>, <code>fallthrough</code>, <code>for</code>, <code>guard</code>, <code>if</code>, <code>in</code>, <code>repeat</code>, <code>return</code>, <code>throw</code>, <code>switch</code>, <code>where</code>, <code>while</code>;</li>
+<li><strong>у виразах і типах</strong>: <code>Any</code>, <code>as</code>, <code>await</code>, <code>catch</code>, <code>false</code>, <code>is</code>, <code>nil</code>, <code>rethrows</code>, <code>self</code>, <code>Self</code>, <code>super</code>, <code>throw</code>, <code>throws</code>, <code>true</code>, <code>try</code>;</li>
+<li><strong>у зразках</strong>: <code>_</code>;</li>
+<li>починаються з <code>#</code>: <code>#available</code>, <code>#unavailable</code>, <code>#if</code>, <code>#else</code>, <code>#elseif</code>, <code>#endif</code>, <code>#sourceLocation</code>, <code>#selector</code>, <code>#keyPath</code> та інші (а <code>#warning</code>, <code>#error</code>, <code>#file</code>, <code>#line</code> тепер — макроси стандартної бібліотеки);</li>
+<li><strong>контекстні</strong> — зарезервовані лише в певних місцях: <code>async</code>, <code>package</code>, <code>convenience</code>, <code>didSet</code>, <code>dynamic</code>, <code>final</code>, <code>get</code>, <code>indirect</code>, <code>lazy</code>, <code>mutating</code>, <code>nonmutating</code>, <code>optional</code>, <code>override</code>, <code>required</code>, <code>set</code>, <code>some</code>, <code>any</code>, <code>unowned</code>, <code>weak</code>, <code>willSet</code> тощо. Поза своїм контекстом їх можна використовувати як імена.</li>
+</ul>
+<p>Пунктуацію <code>( ) { } [ ] . , : ; = @ # &amp; -&gt;</code>, а також зворотні лапки, <code>?</code> і <code>!</code> у певних позиціях не можна перевизначити як оператори.</p>
+<h2 id="літерали"><a href="#літерали">Літерали</a></h2>
+<p>Літерал — значення, записане безпосередньо в коді: <code>42</code>, <code>3.14</code>, <code>"text"</code>, <code>/\d+/</code>, <code>true</code>, <code>nil</code>. Літерал не має «власного» типу: тип виводиться з контексту, а за його відсутності береться тип за замовчуванням (<code>Int</code>, <code>Double</code>, <code>String</code>, <code>Bool</code>). Будь-який тип може підтримати ініціалізацію літералом через протоколи <code>ExpressibleBy...Literal</code>.</p>
+<h3 id="цілочисельні"><a href="#цілочисельні">Цілочисельні</a></h3>
+<p>Десяткові, двійкові (<code>0b</code>), вісімкові (<code>0o</code>), шістнадцяткові (<code>0x</code>). Підкреслення між цифрами ігноруються. Від'ємні — з мінусом попереду: <code>-42</code>. Тип за замовчуванням — <code>Int</code>.</p>
+<h3 id="дробові"><a href="#дробові">Дробові</a></h3>
+<p>Десяткові з необов'язковою експонентою (<code>1.5e-3</code>) або шістнадцяткові з обов'язковою двійковою експонентою (<code>0x1.8p3</code> = 12.0). Тип за замовчуванням — <code>Double</code>.</p>
+<h3 id="рядкові"><a href="#рядкові">Рядкові</a></h3>
+<ul>
+<li>однорядкові <code>"..."</code> і багаторядкові <code>"""..."""</code>;</li>
+<li>спецпослідовності <code>\0 \\ \t \n \r \" \' \u{...}</code>;</li>
+<li>інтерполяція <code>\(...)</code>;</li>
+<li>розширені роздільники <code>#"..."#</code>, у яких спецпослідовності пишуться з тією ж кількістю <code>#</code>: <code>\#n</code>, <code>\#(x)</code>.</li>
+</ul>
+<p>Тип за замовчуванням — <code>String</code>. Літерал з одного символу може стати <code>Character</code> чи <code>Unicode.Scalar</code>, якщо контекст цього вимагає.</p>
+<p>Правила багаторядкових літералів детально розібрано в уроці 3 про рядки.</p>
+<h3 id="регулярні-вирази"><a href="#регулярні-вирази">Регулярні вирази</a></h3>
+<p>Літерал регулярного виразу записується між <code>/</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">/</span><span class="p">(</span><span class="err">\</span><span class="n">d</span><span class="o">+</span><span class="p">)</span><span class="err">\</span><span class="p">.(</span><span class="err">\</span><span class="n">d</span><span class="p">{</span><span class="mi">2</span><span class="p">})</span><span class="o">/</span>
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">match</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Ціна 149.99 грн"</span><span class="p">.</span><span class="n">firstMatch</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">price</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">match</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">match</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1">// 149 99 — типізовані групи захоплення</span>
+<span class="p">}</span></code></pre></div>
+<p>Тип літерала — <code>Regex&lt;Output&gt;</code>: компілятор знає, скільки груп захоплення і якого вони типу. Якщо вираз містить <code>/</code> чи пробіли на початку, його пишуть між <code>#/</code> і <code>/#</code>.</p>
+<h2 id="оператори"><a href="#оператори">Оператори</a></h2>
+<p>Самі оператори розібрано в уроках 2 і 29. Тут важливе одне правило, якого в C# немає: <strong>пробіли визначають, як читається оператор</strong>.</p>
+<ul>
+<li><code>a + b</code> чи <code>a+b</code> — бінарний оператор;</li>
+<li><code>a -b</code> — компілятор вирішить, що <code>-b</code> — окремий вираз, і видасть помилку;</li>
+<li><code>value!</code> і <code>value?.x</code> — без пробілу перед <code>!</code> і <code>?</code>.</li>
+</ul>
+<p>Власні оператори можна складати з символів <code>/ = - + ! * % &lt; &gt; &amp; | ^ ? ~</code> (урок 29).</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Залежність від пробілів — головна лексична відмінність від C#. <code>a - b</code> і <code>a-b</code> — віднімання, а <code>a -b</code> компілятор прочитає як два вирази або помилку.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Відкрий будь-яке граматичне правило в довіднику Swift (наприклад, оголошення функції) і прочитай його вголос за описаними правилами.</li>
+<li>Напиши тест із сирим ідентифікатором у назві.</li>
+<li>Побудуй регулярний вираз-літерал, що витягує з рядка <code>"pro_monthly_2026"</code> тип плану і рік, і використай типізовані групи.</li>
+<li>Перевір, як компілятор поводиться з <code>let x = 5 -3</code>, <code>5- 3</code> і <code>5 - 3</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="29-advanced-operators.html"><small>Попередній</small>Розширені оператори</a><a class="next" href="31-types.html"><small>Наступний</small>Довідник: типи</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

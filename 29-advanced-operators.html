@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Розширені оператори · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li class="current"><a href="29-advanced-operators.html" aria-current="page"><span class="num">29</span> Розширені оператори</a><ol class="sections"><li><a href="#бітові-оператори">Бітові оператори</a></li><li><a href="#оператори-з-переповненням">Оператори з переповненням</a></li><li><a href="#пріоритет-і-асоціативність">Пріоритет і асоціативність</a></li><li><a href="#операторні-методи">Операторні методи</a></li><li><a href="#власні-оператори">Власні оператори</a></li><li><a href="#result-builders">Result builders</a></li></ol></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 29</p>
+  <h1>Розширені оператори</h1>
+  <p class="lede">Бітові операції й зсуви, оператори з переповненням, пріоритет і асоціативність, перевантаження операторів для власних типів, власні оператори й result builders.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/advancedoperators/">advancedoperators</a></p>
+<h2 id="бітові-оператори"><a href="#бітові-оператори">Бітові оператори</a></h2>
+<p>Працюють з окремими бітами цілих чисел — для прапорців, масок, кольорів, бінарних протоколів.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mb">0b1100_1010</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mb">0b1010_0110</span>
+
+<span class="o">~</span><span class="n">a</span><span class="w">          </span><span class="c1">// NOT: 0b0011_0101 — інвертує кожен біт</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// AND: 0b1000_0010 — 1 там, де обидва 1</span>
+<span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// OR:  0b1110_1110 — 1 там, де хоча б один 1</span>
+<span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// XOR: 0b0110_1100 — 1 там, де біти різні</span></code></pre></div>
+<p>Практичний приклад — набір прапорців дозволів:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">canRead</span><span class="p">:</span><span class="w">  </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w">     </span><span class="c1">// 0b001</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">canWrite</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="c1">// 0b010</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">canShare</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w">     </span><span class="c1">// 0b100</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">permissions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">canRead</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">canShare</span><span class="w">       </span><span class="c1">// 0b101</span>
+<span class="n">permissions</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">canWrite</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w">                </span><span class="c1">// false</span>
+<span class="n">permissions</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">canWrite</span><span class="w">                    </span><span class="c1">// увімкнути</span>
+<span class="n">permissions</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="n">canShare</span><span class="w">                   </span><span class="c1">// вимкнути</span>
+<span class="n">permissions</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">canRead</span><span class="w">                     </span><span class="c1">// перемкнути</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Для наборів прапорців у Swift є протокол <code>OptionSet</code>, що дає типобезпечний синтаксис множин: <code>let p: Permissions = [.read, .write]</code>, <code>p.contains(.share)</code>. Під капотом — ті самі бітові операції.</p>
+</aside>
+<h3 id="зсуви"><a href="#зсуви">Зсуви</a></h3>
+<p><code>&lt;&lt;</code> і <code>&gt;&gt;</code> зсувають біти вліво й вправо.</p>
+<p><strong>Беззнакові числа</strong> — логічний зсув: біти, що виходять за межі, відкидаються, а звільнені позиції заповнюються нулями. Зсув на n ліворуч — множення на 2ⁿ, праворуч — ділення.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">argb</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mh">0xFF_3A_7B_C4</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">alpha</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">argb</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 255</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">red</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">argb</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0x3A = 58</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">green</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">argb</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0x7B = 123</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">blue</span><span class="w">  </span><span class="p">=</span><span class="w">  </span><span class="n">argb</span><span class="w">        </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0xC4 = 196</span></code></pre></div>
+<p><strong>Знакові числа</strong> зберігаються в доповняльному коді: найстарший біт — знаковий. При зсуві праворуч звільнені позиції заповнюються <strong>знаковим бітом</strong> (арифметичний зсув), тому від'ємні числа лишаються від'ємними: <code>-16 &gt;&gt; 2 == -4</code>.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Зсуви працюють так само, як у C#.</p>
+</aside>
+<h2 id="оператори-з-переповненням"><a href="#оператори-з-переповненням">Оператори з переповненням</a></h2>
+<p>Звичайна арифметика при переповненні — <strong>крах</strong> (урок про оператори). Якщо загортання потрібне свідомо, використовують оператори з <code>&amp;</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">hash</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2_166_136_261</span>
+<span class="k">for</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s">"swift"</span><span class="p">.</span><span class="n">utf8</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">hash</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="nb">UInt32</span><span class="p">(</span><span class="n">byte</span><span class="p">))</span><span class="w"> </span><span class="o">&amp;*</span><span class="w"> </span><span class="mi">16_777_619</span><span class="w">     </span><span class="c1">// FNV-1a: множення із загортанням</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">max</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int8</span><span class="p">.</span><span class="bp">max</span>
+<span class="bp">max</span><span class="w"> </span><span class="o">&amp;+</span><span class="w"> </span><span class="mi">1</span><span class="w">      </span><span class="c1">// -128: переповнення вгору загортається до мінімуму</span>
+<span class="nb">Int8</span><span class="p">.</span><span class="bp">min</span><span class="w"> </span><span class="o">&amp;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 127: переповнення вниз — до максимуму</span></code></pre></div>
+<ul>
+<li><code>&amp;+</code>, <code>&amp;-</code>, <code>&amp;*</code> — додавання, віднімання, множення із загортанням;</li>
+<li><code>&amp;&lt;&lt;</code>, <code>&amp;&gt;&gt;</code> — зсуви, де величина зсуву береться за модулем ширини типу (як у C#).</li>
+</ul>
+<p>Для перевірки переповнення без краху є методи <code>addingReportingOverflow(_:)</code> тощо, що повертають <code>(partialValue, overflow: Bool)</code>.</p>
+<h2 id="пріоритет-і-асоціативність"><a href="#пріоритет-і-асоціативність">Пріоритет і асоціативність</a></h2>
+<p><strong>Пріоритет</strong> визначає, яка операція виконується першою; <strong>асоціативність</strong> — як групуються оператори однакового пріоритету (зліва направо чи справа наліво).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="c1">// 10 - (4 * (2 &lt;&lt; 1)) = -6 — зсув сильніший за множення</span></code></pre></div>
+<p>Swift об'єднує оператори в <strong>групи пріоритетів</strong>. Основні, від найвищого:</p>
+<ol>
+<li><code>BitwiseShiftPrecedence</code> — <code>&lt;&lt;</code>, <code>&gt;&gt;</code></li>
+<li><code>MultiplicationPrecedence</code> — <code>*</code>, <code>/</code>, <code>%</code>, <code>&amp;</code>, <code>&amp;*</code></li>
+<li><code>AdditionPrecedence</code> — <code>+</code>, <code>-</code>, <code>|</code>, <code>^</code>, <code>&amp;+</code></li>
+<li><code>RangeFormationPrecedence</code> — <code>...</code>, <code>..&lt;</code></li>
+<li><code>CastingPrecedence</code> — <code>is</code>, <code>as</code></li>
+<li><code>NilCoalescingPrecedence</code> — <code>??</code></li>
+<li><code>ComparisonPrecedence</code> — <code>==</code>, <code>&lt;</code>, …</li>
+<li><code>LogicalConjunctionPrecedence</code> — <code>&amp;&amp;</code></li>
+<li><code>LogicalDisjunctionPrecedence</code> — <code>||</code></li>
+<li><code>TernaryPrecedence</code> — <code>?:</code></li>
+<li><code>AssignmentPrecedence</code> — <code>=</code>, <code>+=</code>, …</li>
+</ol>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Правила відрізняються від C. Зокрема, <code>&amp;</code> має пріоритет множення, а <code>|</code> і <code>^</code> — додавання. Тому <code>flags &amp; mask == 0</code> у Swift читається як <code>(flags &amp; mask) == 0</code>, на відміну від C, де <code>==</code> сильніший. Але в складних виразах краще ставити дужки.</p>
+</aside>
+<h2 id="операторні-методи"><a href="#операторні-методи">Операторні методи</a></h2>
+<p>Класи й структури можуть реалізувати існуючі оператори для своїх типів. Оператор оголошується як статичний метод:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">cents</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">currency</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">lhs</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">precondition</span><span class="p">(</span><span class="n">lhs</span><span class="p">.</span><span class="n">currency</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">rhs</span><span class="p">.</span><span class="n">currency</span><span class="p">,</span><span class="w"> </span><span class="s">"Різні валюти"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="n">lhs</span><span class="p">.</span><span class="n">cents</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rhs</span><span class="p">.</span><span class="n">cents</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="n">lhs</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">lhs</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="n">lhs</span><span class="p">.</span><span class="n">cents</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="n">lhs</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="mi">4_99</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="mi">1_00</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span><span class="w">   </span><span class="c1">// 15.97</span></code></pre></div>
+<h3 id="префіксні-й-постфіксні-оператори"><a href="#префіксні-й-постфіксні-оператори">Префіксні й постфіксні оператори</a></h3>
+<p>Унарні оператори позначаються <code>prefix</code> або <code>postfix</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kr">prefix</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="p">.</span><span class="n">cents</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">currency</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">refund</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="n">price</span></code></pre></div>
+<h3 id="складене-присвоєння"><a href="#складене-присвоєння">Складене присвоєння</a></h3>
+<p>Лівий операнд — <code>inout</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">lhs</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="n">Money</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lhs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">lhs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rhs</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">wallet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span>
+<span class="n">wallet</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">price</span></code></pre></div>
+<p>Оператор присвоєння <code>=</code> і тернарний <code>?:</code> перевантажити не можна.</p>
+<h3 id="оператори-еквівалентності"><a href="#оператори-еквівалентності">Оператори еквівалентності</a></h3>
+<p>Для <code>==</code> достатньо оголосити відповідність <code>Equatable</code>: якщо всі властивості <code>Equatable</code>, компілятор синтезує реалізацію сам (урок про протоколи). <code>!=</code> з'являється автоматично. Вручну пишуть лише тоді, коли рівність має особливий зміст — наприклад, валюту порівнюємо без урахування регістру:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Money</span><span class="p">:</span><span class="w"> </span><span class="nb">Equatable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="p">(</span><span class="n">lhs</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lhs</span><span class="p">.</span><span class="n">cents</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">rhs</span><span class="p">.</span><span class="n">cents</span>
+<span class="w">            </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">lhs</span><span class="p">.</span><span class="n">currency</span><span class="p">.</span><span class="n">uppercased</span><span class="p">()</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">rhs</span><span class="p">.</span><span class="n">currency</span><span class="p">.</span><span class="n">uppercased</span><span class="p">()</span><span class="w">   </span><span class="c1">// "usd" == "USD"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Як <code>operator +</code> у C# — теж статичний метод. Зручніше лише те, що оператор можна дописати в розширенні до будь-якого типу, а <code>!=</code> з'являється сам.</p>
+</aside>
+<h2 id="власні-оператори"><a href="#власні-оператори">Власні оператори</a></h2>
+<p>Новий оператор спочатку <strong>оголошують глобально</strong> з ключовим словом <code>prefix</code>, <code>infix</code> або <code>postfix</code>, а потім реалізують:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">infix</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ForwardPipePrecedence</span>
+
+<span class="n">precedencegroup</span><span class="w"> </span><span class="n">ForwardPipePrecedence</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">associativity</span><span class="p">:</span><span class="w"> </span><span class="kr">left</span>
+<span class="w">    </span><span class="n">higherThan</span><span class="p">:</span><span class="w"> </span><span class="n">AssignmentPrecedence</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">&gt;(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">transform</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">transform</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">slug</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"  Hello World  "</span>
+<span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">trimmingCharacters</span><span class="p">(</span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">whitespaces</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">lowercased</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="s">" "</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="p">:</span><span class="w"> </span><span class="s">"-"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="c1">// "hello-world"</span></code></pre></div>
+<p>Оператор може складатися з символів <code>/ = - + ! * % &lt; &gt; &amp; | ^ ? ~</code> і деяких Unicode-символів.</p>
+<h3 id="пріоритет-власних-infix-операторів"><a href="#пріоритет-власних-infix-операторів">Пріоритет власних infix-операторів</a></h3>
+<p>Кожен infix-оператор належить групі пріоритету. Без явного вказання він потрапляє в <code>DefaultPrecedence</code> — вище тернарного, без асоціативності. Власну групу оголошують через <code>precedencegroup</code> з полями <code>associativity</code>, <code>higherThan</code>, <code>lowerThan</code>, <code>assignment</code>.</p>
+<p>Префіксні й постфіксні оператори пріоритету не мають. Якщо до операнда застосовано обидва, спочатку виконується постфіксний.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Власні оператори — сильний, але ризикований інструмент: новий символ незрозумілий новачкам у кодовій базі. Використовуй їх для DSL і математичних типів, а не для звичайної бізнес-логіки.</p>
+</aside>
+<h2 id="result-builders"><a href="#result-builders">Result builders</a></h2>
+<p><strong>Result builder</strong> — тип, що дозволяє будувати складні значення декларативно: як список виразів з <code>if</code>, <code>for</code> і <code>switch</code>, а компілятор сам склеює їх у результат. Саме на цьому побудовано SwiftUI (<code>@ViewBuilder</code>).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">resultBuilder</span>
+<span class="kd">enum</span><span class="w"> </span><span class="nc">QueryBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildBlock</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">parts</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">...)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">parts</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildOptional</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">part</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]?)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">part</span><span class="p">?.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" AND "</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">""</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildEither</span><span class="p">(</span><span class="bp">first</span><span class="w"> </span><span class="n">part</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">part</span><span class="p">.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" AND "</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildEither</span><span class="p">(</span><span class="n">second</span><span class="w"> </span><span class="n">part</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">part</span><span class="p">.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" AND "</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildArray</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">parts</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="nb">String</span><span class="p">]])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">parts</span><span class="p">.</span><span class="n">flatMap</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">}.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" AND "</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildFinalResult</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">parts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">parts</span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">!</span><span class="nv">$0</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">}.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" AND "</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">whereClause</span><span class="p">(@</span><span class="n">QueryBuilder</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">build</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s">"WHERE "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">build</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">onlyPaid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">countries</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"UA"</span><span class="p">,</span><span class="w"> </span><span class="s">"PL"</span><span class="p">]</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">sql</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">whereClause</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s">"deleted = 0"</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">onlyPaid</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">"plan != 'free'"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">countries</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">"country &lt;&gt; '</span><span class="si">\(</span><span class="n">code</span><span class="si">)</span><span class="s">'"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// WHERE deleted = 0 AND plan != 'free' AND country &lt;&gt; 'UA' AND country &lt;&gt; 'PL'</span></code></pre></div>
+<p>Компілятор перетворює тіло замикання на виклики статичних методів builder-а:</p>
+<ul>
+<li><code>buildBlock</code> — склеює послідовність виразів;</li>
+<li><code>buildOptional</code> — для <code>if</code> без <code>else</code>;</li>
+<li><code>buildEither(first:)</code> / <code>buildEither(second:)</code> — для <code>if-else</code> і <code>switch</code>;</li>
+<li><code>buildArray</code> — для циклів <code>for</code>;</li>
+<li><code>buildExpression</code> — перетворює кожен окремий вираз (необов'язковий);</li>
+<li><code>buildFinalResult</code> — фінальне перетворення результату (необов'язковий);</li>
+<li><code>buildLimitedAvailability</code> — для <code>if #available</code>;</li>
+<li><code>buildPartialBlock(first:)</code> і <code>buildPartialBlock(accumulated:next:)</code> — альтернатива <code>buildBlock</code>, що склеює вирази попарно й дозволяє будь-яку їх кількість.</li>
+</ul>
+<p>Builder можна застосувати як атрибут до параметра-замикання, до функції, методу чи обчислюваної властивості (як <code>var body</code> у SwiftUI неявно позначено <code>@ViewBuilder</code>).</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Зроби <code>struct Permissions: OptionSet</code> з <code>read</code>, <code>write</code>, <code>share</code>, <code>admin</code> і перевір операції над множинами.</li>
+<li>Розбери 16-бітне значення RGB565 на три компоненти через зсуви й маски.</li>
+<li>Реалізуй для <code>struct Vector3</code> оператори <code>+</code>, <code>-</code>, унарний <code>-</code>, <code>*</code> на скаляр і <code>+=</code>.</li>
+<li>Оголоси оператор <code>??=</code>, що присвоює значення, лише якщо змінна дорівнює <code>nil</code>.</li>
+<li>Напиши result builder <code>@MenuBuilder</code>, що будує масив пунктів меню з підтримкою <code>if</code> і <code>for</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="28-access-control.html"><small>Попередній</small>Контроль доступу</a><a class="next" href="30-lexical-structure.html"><small>Наступний</small>Довідник: лексична структура</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

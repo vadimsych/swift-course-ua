@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Конкурентність · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li class="current"><a href="18-concurrency.html" aria-current="page"><span class="num">18</span> Конкурентність</a><ol class="sections"><li><a href="#асинхронні-функції">Асинхронні функції</a></li><li><a href="#асинхронні-послідовності">Асинхронні послідовності</a></li><li><a href="#паралельний-виклик-async-let">Паралельний виклик: async let</a></li><li><a href="#задачі-й-групи-задач">Задачі й групи задач</a></li><li><a href="#ізоляція">Ізоляція</a></li><li><a href="#головний-актор">Головний актор</a></li><li><a href="#актори">Актори</a></li><li><a href="#глобальні-актори">Глобальні актори</a></li><li><a href="#sendable">Sendable</a></li></ol></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 18</p>
+  <h1>Конкурентність</h1>
+  <p class="lede"><code>async</code>/<code>await</code>, асинхронні послідовності, <code>async let</code>, задачі й групи задач, скасування, неструктуровані задачі, ізоляція, <code>@MainActor</code>, актори, глобальні актори й <code>Sendable</code>. Урок довгий, бо в Swift 6 конкурентність перевіряє компілятор, і без цих понять код просто не збереться.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/concurrency/">concurrency</a></p>
+<h2 id="асинхронні-функції"><a href="#асинхронні-функції">Асинхронні функції</a></h2>
+<p>Функція, що може призупинитися посередині виконання, позначається <code>async</code>. Виклик позначається <code>await</code> — це <strong>точка призупинення</strong>, де потік може бути відданий іншій роботі.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">300</span><span class="p">))</span><span class="w">   </span><span class="c1">// імітація мережі</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1_250</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">refreshHeader</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">balance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Баланс: </span><span class="si">\(</span><span class="n">balance</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Якщо функція і асинхронна, і може кинути помилку, порядок — <code>async throws</code>, а при виклику — <code>try await</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">loadProfile</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Vadim"</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">loadProfile</span><span class="p">()</span></code></pre></div>
+<p>Викликати асинхронну функцію можна лише з асинхронного контексту: з іншої <code>async</code>-функції, з <code>Task { }</code>, з методу <code>.task { }</code> у SwiftUI, з <code>static func main() async</code> в <code>@main</code>-типі.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Плануючи міграцію старого коду на <code>async</code>/<code>await</code>, починай з точок входу — обробників кнопок, <code>onAppear</code>, делегатів застосунку — і рухайся до мережевого шару. Навпаки не вийде: синхронна функція не вміє «почекати» на асинхронну, вона може лише запустити <code>Task</code> і жити далі.</p>
+</aside>
+<p>Між точками <code>await</code> код виконується без переривань з боку інших задач того самого актора. Але <strong>після</strong> <code>await</code> світ міг змінитися: інші задачі могли змінити стан. Це головне, що треба тримати в голові.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Синтаксис майже такий самий, як у C# і UniTask. Відмінності: результат не загортається в <code>Task&lt;T&gt;</code> — функція просто повертає <code>T</code>; на якому потоці продовжиться код, вирішує актор (про це нижче), а не <code>ConfigureAwait</code>; немає <code>async void</code> — «запустити й забути» пишуть явно через <code>Task { }</code>.</p>
+</aside>
+<h2 id="асинхронні-послідовності"><a href="#асинхронні-послідовності">Асинхронні послідовності</a></h2>
+<p><code>for await</code> перебирає послідовність, елементи якої надходять з часом:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">fileURLWithPath</span><span class="p">:</span><span class="w"> </span><span class="s">"/tmp/log.txt"</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">url</span><span class="p">.</span><span class="n">lines</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Власні послідовності роблять, реалізуючи протокол <code>AsyncSequence</code> або, найпростіше, через <code>AsyncStream</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">ticks</span><span class="p">(</span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">AsyncStream</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">AsyncStream</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">continuation</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span><span class="n">Task</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mf">1.</span><span class="p">..</span><span class="bp">count</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">                </span><span class="n">continuation</span><span class="p">.</span><span class="n">yield</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">continuation</span><span class="p">.</span><span class="n">finish</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ticks</span><span class="p">(</span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"тік"</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Аналог — <code>IAsyncEnumerable&lt;T&gt;</code> і <code>await foreach</code>. У StoreKit 2 ти вже зустрічав такий потік: <code>Transaction.updates</code>.</p>
+</aside>
+<h2 id="паралельний-виклик-async-let"><a href="#паралельний-виклик-async-let">Паралельний виклик: async let</a></h2>
+<p><code>await</code> одразу чекає результат. Щоб запустити кілька операцій паралельно, використовують <code>async let</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">loadHome</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">profile</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">loadProfile</span><span class="p">()</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">balance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">offers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">loadOffers</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">screen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="n">profile</span><span class="p">,</span><span class="w"> </span><span class="n">balance</span><span class="p">,</span><span class="w"> </span><span class="n">offers</span><span class="p">)</span><span class="w">   </span><span class="c1">// чекаємо всі три</span>
+<span class="w">    </span><span class="n">render</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p><code>async let</code> запускає дочірню задачу одразу. Чекання відбувається там, де значення використовується. Якщо функція завершиться, не дочекавшись (наприклад, через помилку), незавершені дочірні задачі буде скасовано й дочекано автоматично.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Як запустити кілька <code>Task</code> і зробити <code>await Task.WhenAll(...)</code>, але структуровано: задачі не можуть «загубитися» і пережити функцію.</p>
+</aside>
+<h2 id="задачі-й-групи-задач"><a href="#задачі-й-групи-задач">Задачі й групи задач</a></h2>
+<p><strong>Задача</strong> (<code>Task</code>) — одиниця асинхронної роботи. Усі асинхронні функції виконуються в якійсь задачі. <code>async let</code> створює дочірню задачу неявно.</p>
+<p>Коли кількість паралельних операцій відома лише в рантаймі, використовують <strong>групу задач</strong>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">downloadAll</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">ids</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">])</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">:</span><span class="w"> </span><span class="n">Data</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">withTaskGroup</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">Data</span><span class="p">?).</span><span class="kc">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ids</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">group</span><span class="p">.</span><span class="n">addTask</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">download</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">id</span><span class="p">))</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">result</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">:</span><span class="w"> </span><span class="n">Data</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">{</span><span class="w">      </span><span class="c1">// результати в порядку завершення</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Варіанти групи:</p>
+<ul>
+<li><code>withThrowingTaskGroup</code> — дочірні задачі можуть кидати помилки. Помилка не скасовує решту задач сама: її отримаєш, коли читатимеш результати. Щоб зупинити все одразу, виклич <code>group.cancelAll()</code>.</li>
+<li><code>withDiscardingTaskGroup</code> / <code>withThrowingDiscardingTaskGroup</code> — коли результати не потрібні; у throwing-варіанті перша помилка скасовує всю групу.</li>
+<li><code>group.addTaskUnlessCancelled { }</code> — додає задачу лише якщо група ще не скасована і повертає <code>Bool</code>, чи задачу додано.</li>
+</ul>
+<p>Задачі утворюють <strong>дерево</strong>: батьківська задача не завершиться, поки не завершаться всі дочірні. Це і називається <strong>структурованою конкурентністю</strong>. Що вона дає:</p>
+<ul>
+<li>дочірня задача не переживе батьківську;</li>
+<li>скасування батьківської автоматично поширюється на дочірні;</li>
+<li>помилки й результати повертаються туди, звідки задачу запустили;</li>
+<li>якщо дочірня задача отримує вищий пріоритет, ніж батьківська, пріоритет батьківської підвищується;</li>
+<li>task-local значення (<code>@TaskLocal</code>, наприклад ID запиту для логування) автоматично доступні в дочірніх задачах.</li>
+</ul>
+<h3 id="скасування"><a href="#скасування">Скасування</a></h3>
+<p>Скасування в Swift <strong>кооперативне</strong>: воно лише ставить прапорець, а задача сама вирішує, як реагувати.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">processFrames</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">frames</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Frame</span><span class="p">])</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Frame</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">output</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Frame</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">frames</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">checkCancellation</span><span class="p">()</span><span class="w">          </span><span class="c1">// кидає CancellationError, якщо скасовано</span>
+<span class="w">        </span><span class="n">output</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="n">enhance</span><span class="p">(</span><span class="n">frame</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span>
+<span class="p">}</span>
+
+<span class="c1">// або без помилки:</span>
+<span class="k">if</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">isCancelled</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">partialResult</span>
+<span class="p">}</span></code></pre></div>
+<p>Більшість системних асинхронних API самі перевіряють скасування: <code>Task.sleep</code> кидає <code>CancellationError</code>, а <code>URLSession</code> — <code>URLError(.cancelled)</code>. Ззовні задачі перевірити її стан можна через властивість екземпляра: <code>loadTask.isCancelled</code>.</p>
+<p>Щоб відреагувати на скасування <strong>негайно</strong> (наприклад, закрити сокет), є обробник:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">withTaskCancellationHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">socket</span><span class="p">.</span><span class="n">receive</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="n">onCancel</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">socket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w">        </span><span class="c1">// викликається одразу при скасуванні, з будь-якого потоку</span>
+<span class="p">}</span></code></pre></div>
+<p>Обробник скасування може виконуватися одночасно з основним тілом, тому не діли між ними змінюваний стан без синхронізації.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Замість <code>CancellationToken</code>, який доводиться прокидати в кожну функцію, тут скасування «живе» в самій задачі: перевіряй <code>Task.isCancelled</code> будь-де. У SwiftUI <code>.task { }</code> сам скасовує задачу, коли екран зникає — як <code>GetCancellationTokenOnDestroy()</code> в UniTask.</p>
+</aside>
+<h3 id="неструктуровані-задачі"><a href="#неструктуровані-задачі">Неструктуровані задачі</a></h3>
+<p>Іноді задачу треба запустити з синхронного коду або щоб вона жила незалежно — для цього <code>Task { }</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">MainActor</span>
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PaywallViewModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">loadTask</span><span class="p">:</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">,</span><span class="w"> </span><span class="n">Never</span><span class="p">&gt;?</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">onAppear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">loadTask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">loadProducts</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">onDisappear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">loadTask</span><span class="p">?.</span><span class="n">cancel</span><span class="p">()</span><span class="w">       </span><span class="c1">// неструктуровану задачу скасовуєш сам</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">handle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">handle</span><span class="p">.</span><span class="n">value</span><span class="w">   </span><span class="c1">// дочекатися результату</span></code></pre></div>
+<ul>
+<li><code>Task { }</code> успадковує від місця створення ізоляцію (актор), пріоритет і task-local значення.</li>
+<li><code>Task.detached { }</code> нічого не успадковує. Потрібен рідко.</li>
+<li>За життя й скасування неструктурованої задачі відповідаєш сам: тримай <code>Task</code> і скасовуй його.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p><code>Task { }</code> у методі класу сильно захоплює <code>self</code> до завершення задачі. Для довгих задач (нескінченний <code>for await</code>) використовуй <code>[weak self]</code> і перевіряй <code>self</code> на кожній ітерації, або скасовуй задачу явно.</p>
+</aside>
+<h2 id="ізоляція"><a href="#ізоляція">Ізоляція</a></h2>
+<p>Data race — це коли два потоки одночасно звертаються до однієї змінюваної пам'яті, і хоча б один пише. Swift 6 запобігає цьому <strong>статично</strong>: компілятор доводить, що кожен шматок змінюваного стану в будь-який момент доступний лише з одного місця.</p>
+<p>Коли компілятор свариться на data race, постав собі три запитання. Значення змінюється? Якщо ні (<code>let</code>) — проблеми немає. Його бачить хтось, крім цієї задачі? Якщо ні (локальна змінна) — теж нормально. Якщо і змінюється, і спільне — його має охороняти актор.</p>
+<p>Код, що не належить жодному актору, — <strong>неізольований</strong> (<code>nonisolated</code>): він може працювати будь-де, але до ізольованого стану звертається лише через <code>await</code>. Перехід між областями ізоляції — завжди точка <code>await</code>.</p>
+<h2 id="головний-актор"><a href="#головний-актор">Головний актор</a></h2>
+<p><code>@MainActor</code> — глобальний актор для UI. Увесь код UIKit і SwiftUI ізольований на ньому. На практиці код головного актора виконується на головному потоці, але думати варто в термінах актора: компілятор перевіряє саме ізоляцію.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">MainActor</span>
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ScoreViewModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">score</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                      </span><span class="c1">// доступно лише з головного актора</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">points</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">score</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">points</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="n">MainActor</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">updateLabel</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">backgroundWork</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">heavyComputation</span><span class="p">()</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">updateLabel</span><span class="p">(</span><span class="s">"Готово: </span><span class="si">\(</span><span class="n">result</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">   </span><span class="c1">// перехід на головний актор</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Атрибут на типі ізолює всі його члени. Окремий член можна вивести з ізоляції через <code>nonisolated</code> — або навпаки, позначити <code>@MainActor</code> лише одну властивість чи метод неізольованого типу.</li>
+<li>Ізоляція <strong>успадковується</strong>: підклас <code>@MainActor</code>-класу і тип, що відповідає <code>@MainActor</code>-протоколу, теж на головному акторі. Саме тому будь-який SwiftUI <code>View</code> неявно <code>@MainActor</code> — так оголошено протокол <code>View</code>.</li>
+<li>Властивість з property wrapper, у якого <code>wrappedValue</code> ізольований на <code>@MainActor</code>, теж стає <code>@MainActor</code>.</li>
+<li>Замикання задачі можна ізолювати явно: <code>Task { @MainActor in label.text = "Готово" }</code>.</li>
+<li>Для одноразового виконання на головному акторі є <code>await MainActor.run { ... }</code>.</li>
+<li>Замикання можна позначити як <code>@MainActor () -&gt; Void</code>.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout new"><b>Swift 6</b><p>У нових проєктах Xcode зазвичай увімкнено режим, де <strong>весь код за замовчуванням працює на головному акторі</strong> (налаштування <em>Default Actor Isolation</em>). Тоді фонову роботу явно виносять атрибутом <code>@concurrent</code>. Перевір, як налаштований твій таргет.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout new"><b>Swift 6</b><p>Ще одне налаштування, <em>Approachable Concurrency</em>, робить так, що звичайна <code>async</code>-функція продовжує роботу там, звідки її викликали, а не перескакує у фоновий потік. Це спрощує код, але вмикається окремо.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>@MainActor</code> — це формалізований <code>UnityMainThreadDispatcher</code> чи <code>await UniTask.SwitchToMainThread()</code>, тільки компілятор не дасть торкнутися UI з фонового потоку взагалі.</p>
+</aside>
+<h2 id="актори"><a href="#актори">Актори</a></h2>
+<p>Актор — reference type, як клас, але його <strong>змінюваний стан доступний лише з однієї задачі одночасно</strong>. Звернення ззовні проходить через <code>await</code>, бо, можливо, доведеться почекати, поки актор звільниться.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">actor</span><span class="w"> </span><span class="n">TokenStore</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">token</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">refreshCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">current</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">new</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">token</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">new</span>
+<span class="w">        </span><span class="n">refreshCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">store</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TokenStore</span><span class="p">()</span>
+<span class="k">await</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="s">"abc"</span><span class="p">)</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">current</span><span class="p">()</span></code></pre></div>
+<ul>
+<li>Усередині актора <code>await</code> для власних членів не потрібен: код уже ізольований.</li>
+<li>Актори не підтримують успадкування.</li>
+<li><code>nonisolated</code> члени можна викликати без <code>await</code>, але вони не мають доступу до змінюваного стану.</li>
+</ul>
+<h3 id="реентерабельність"><a href="#реентерабельність">Реентерабельність</a></h3>
+<p>Поки актор чекає на <code>await</code>, інші задачі <strong>можуть</strong> виконувати його методи. Тому стан між двома <code>await</code> може змінитися:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">actor</span><span class="w"> </span><span class="n">ImageCache</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">cache</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">URL</span><span class="p">:</span><span class="w"> </span><span class="n">Image</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">image</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">url</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">cached</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cache</span><span class="p">[</span><span class="n">url</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">cached</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">image</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w">   </span><span class="c1">// тут інший виклик міг уже завантажити те саме</span>
+<span class="w">        </span><span class="n">cache</span><span class="p">[</span><span class="n">url</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">image</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">image</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Правило: після кожного <code>await</code> перевіряй стан заново — поки функція «спала», інший виклик міг його змінити. А зміни, які на мить роблять стан некоректним, пиши в синхронних методах актора: там немає <code>await</code>, тож ніхто не втрутиться посередині.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Уяви клас, де весь код автоматично обгорнутий у <code>lock</code>, — тільки без блокування потоків і без дедлоків. Різниця з <code>lock</code> одна: на кожному <code>await</code> актор «відпускає замок», тож інший виклик може встигнути щось змінити.</p>
+</aside>
+<h2 id="глобальні-актори"><a href="#глобальні-актори">Глобальні актори</a></h2>
+<p>Глобальний актор — актор-синглтон, атрибутом якого можна позначити будь-які типи, функції чи змінні. <code>@MainActor</code> — один з них. Можна оголосити власний:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">globalActor</span>
+<span class="kd">actor</span><span class="w"> </span><span class="n">DatabaseActor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">shared</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DatabaseActor</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="n">DatabaseActor</span>
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LocalStorage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">records</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">r</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">records</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Усе, що позначено <code>@DatabaseActor</code>, виконується послідовно в одній області ізоляції, навіть якщо розкидано по різних типах.</p>
+<h2 id="sendable"><a href="#sendable">Sendable</a></h2>
+<p>Між областями ізоляції можна передавати лише значення, які <strong>безпечно ділити</strong>. Такі типи відповідають протоколу <code>Sendable</code>:</p>
+<ul>
+<li>value types (<code>struct</code>, <code>enum</code>), усі збережені властивості яких <code>Sendable</code>;</li>
+<li>актори;</li>
+<li><code>final</code> класи лише з незмінними <code>let</code>-властивостями <code>Sendable</code>-типів;</li>
+<li>класи, ізольовані на глобальному акторі (наприклад, <code>@MainActor</code>-класи);</li>
+<li><code>final</code> класи, змінюваний стан яких лежить у <code>let</code>-властивостях <code>Sendable</code>-типів на кшталт <code>Mutex</code> — компілятор перевіряє їх без жодних позначок;</li>
+<li>класи з ручною синхронізацією, яку компілятор не бачить (<code>NSLock</code>, черга <code>DispatchQueue</code>), — з позначкою <code>@unchecked Sendable</code>;</li>
+<li>функції та замикання, позначені <code>@Sendable</code> (захоплюють лише <code>Sendable</code>-значення).</li>
+</ul>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Score</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// для внутрішніх структур і так виводиться автоматично</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">points</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">player</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">apiURL</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">apiURL</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">apiURL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">apiURL</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Counter</span><span class="w"> </span><span class="p">{</span><span class="w">           </span><span class="c1">// не Sendable: змінюваний стан</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span></code></pre></div>
+<p>Для непублічних структур і enum компілятор виводить <code>Sendable</code> сам, якщо всі поля <code>Sendable</code>. Для публічних типів відповідність пишуть явно, бо це частина контракту API.</p>
+<p>Значення, що не є <code>Sendable</code>, теж можна передати в іншу область ізоляції, якщо компілятор доведе, що після передачі в старій області на нього ніхто не посилається. Для параметрів і результатів це позначається словом <code>sending</code>.</p>
+<p>Щоб явно заборонити типу бути <code>Sendable</code> (навіть якщо компілятор вивів би це автоматично), пишуть недоступне розширення: <code>@available(*, unavailable) extension Cursor: Sendable {}</code>.</p>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p><code>@unchecked Sendable</code> вимикає перевірку компілятора. Це твоє «повір мені», і data race буде на твоїй совісті. Використовуй лише тоді, коли синхронізація справді є всередині.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>При міграції старого коду, що використовує бібліотеки без анотацій конкурентності, допомагає <code>@preconcurrency import SomeSDK</code>: попередження про <code>Sendable</code> з цього модуля приглушуються, поки бібліотека не оновиться.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши <code>async</code>-функцію, що паралельно через <code>async let</code> завантажує профіль, баланс і список продуктів, і виміряй час порівняно з послідовними <code>await</code>.</li>
+<li>Через <code>withThrowingTaskGroup</code> завантаж 10 URL з обмеженням: не більше 3 одночасно.</li>
+<li>Зроби <code>actor RateLimiter</code> з методом <code>func allow() -&gt; Bool</code>, що дозволяє не більше N викликів за секунду.</li>
+<li>Зроби <code>@MainActor final class</code> ViewModel з методом, що запускає <code>Task</code>, завантажує дані у фоновій <code>@concurrent</code>-функції і оновлює властивість. Додай скасування при закритті екрана.</li>
+<li>Створи клас зі змінюваним станом, передай його екземпляр у <code>Task.detached</code> і <strong>після цього</strong> використай той самий екземпляр у поточній функції. Прочитай помилку компілятора й виправ її трьома різними способами. (Без використання після передачі компілятор помилки не покаже — він доводить, що екземпляр більше ніхто не чіпає.)</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="17-errors.html"><small>Попередній</small>Обробка помилок</a><a class="next" href="19-macros.html"><small>Наступний</small>Макроси</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник: типи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li class="current"><a href="31-types.html" aria-current="page"><span class="num">31</span> Довідник: типи</a><ol class="sections"><li><a href="#два-види-типів">Два види типів</a></li><li><a href="#анотація-типу">Анотація типу</a></li><li><a href="#ідентифікатор-типу">Ідентифікатор типу</a></li><li><a href="#кортежі">Кортежі</a></li><li><a href="#функціональні-типи">Функціональні типи</a></li><li><a href="#масиви">Масиви</a></li><li><a href="#словники">Словники</a></li><li><a href="#опціонали">Опціонали</a></li><li><a href="#неявно-розгорнуті-опціонали">Неявно розгорнуті опціонали</a></li><li><a href="#композиції-протоколів">Композиції протоколів</a></li><li><a href="#непрозорі-типи">Непрозорі типи</a></li><li><a href="#упаковані-протокольні-типи">Упаковані протокольні типи</a></li><li><a href="#метатипи">Метатипи</a></li><li><a href="#тип-any">Тип Any</a></li><li><a href="#тип-self">Тип Self</a></li><li><a href="#список-успадкування">Список успадкування</a></li><li><a href="#виведення-типів">Виведення типів</a></li></ol></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Довідник (за потреби) · урок 31</p>
+  <h1>Довідник: типи</h1>
+  <p class="lede">Огляд усіх видів типів у Swift: іменовані й складені, функціональні типи і обмеження non-escaping замикань, опціонали, композиції протоколів, <code>some</code>/<code>any</code>, метатипи, <code>Any</code>, <code>Self</code>, списки успадкування і виведення типів.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/">types</a></p>
+<h2 id="два-види-типів"><a href="#два-види-типів">Два види типів</a></h2>
+<ul>
+<li><strong>Іменовані</strong> — мають ім'я: класи, структури, enum, протоколи, а також усі типи стандартної бібліотеки (<code>Int</code>, <code>String</code>, <code>Array</code>…). Їх можна розширювати.</li>
+<li><strong>Складені</strong> — описуються структурою, а не іменем: <strong>функціональні</strong> <code>(Int) -&gt; String</code> і <strong>кортежі</strong> <code>(Int, String)</code>. Розширювати їх не можна.</li>
+</ul>
+<p>Дужки навколо типу нічого не змінюють: <code>(Int)</code> — це просто <code>Int</code>.</p>
+<h2 id="анотація-типу"><a href="#анотація-типу">Анотація типу</a></h2>
+<p><code>: Тип</code> після імені змінної чи параметра. Перед типом можуть стояти атрибути (<code>@escaping</code>, <code>@Sendable</code>, <code>@MainActor</code>) і модифікатори (<code>inout</code>, <code>borrowing</code>, <code>consuming</code>).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">job</span><span class="p">:</span><span class="w"> </span><span class="p">@</span><span class="n">escaping</span><span class="w"> </span><span class="p">@</span><span class="n">Sendable</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<h2 id="ідентифікатор-типу"><a href="#ідентифікатор-типу">Ідентифікатор типу</a></h2>
+<p>Ім'я іменованого типу, псевдоніма або generic-параметра, з аргументами в кутових дужках і крапками для вкладених типів: <code>Dictionary&lt;String, Int&gt;</code>, <code>Paywall.Option</code>, <code>Array&lt;Element&gt;.Index</code>.</p>
+<h2 id="кортежі"><a href="#кортежі">Кортежі</a></h2>
+<p>Список типів через кому в дужках, елементи можуть мати імена: <code>(code: Int, message: String)</code>. Імена — частина типу: значення з іншими мітками не присвоїш (<code>(x: 1, y: 2)</code> у змінну типу <code>(a: Int, b: Int)</code>), а кортеж без міток — можна. Порожній кортеж <code>()</code> — це <code>Void</code>. Кортежу з одного елемента не існує: <code>(Int)</code> — просто <code>Int</code>.</p>
+<h2 id="функціональні-типи"><a href="#функціональні-типи">Функціональні типи</a></h2>
+<p><code>(параметри) -&gt; результат</code>, з можливими <code>async</code>, <code>throws</code> або <code>throws(E)</code> перед стрілкою:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">handler</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">simple</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Void</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">curried</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span></code></pre></div>
+<ul>
+<li>Мітки аргументів у тип не входять: <code>func f(x: Int)</code> і <code>func g(y: Int)</code> мають однаковий тип <code>(Int) -&gt; Int</code>.</li>
+<li><code>(Int) -&gt; (Int) -&gt; Int</code> читається як «функція, що повертає функцію».</li>
+<li>Не-throwing функцію можна передати туди, де очікують throwing, а синхронну — туди, де очікують <code>async</code>. Навпаки — ні.</li>
+</ul>
+<h3 id="обмеження-non-escaping-замикань"><a href="#обмеження-non-escaping-замикань">Обмеження non-escaping замикань</a></h3>
+<p>Параметр-замикання без <code>@escaping</code> не може «вийти» за межі функції: його не можна зберегти у властивість чи масив. Детально — урок 7.</p>
+<h2 id="масиви"><a href="#масиви">Масиви</a></h2>
+<p><code>[Element]</code> — скорочення для <code>Array&lt;Element&gt;</code>. Багатовимірні масиви — масиви масивів: <code>[[Int]]</code>. Для масивів фіксованого розміру в стандартній бібліотеці є <code>InlineArray&lt;N, Element&gt;</code> з цілочисельним generic-параметром (урок 36).</p>
+<h2 id="словники"><a href="#словники">Словники</a></h2>
+<p><code>[Key: Value]</code> — скорочення для <code>Dictionary&lt;Key, Value&gt;</code>. <code>Key</code> має бути <code>Hashable</code>.</p>
+<h2 id="опціонали"><a href="#опціонали">Опціонали</a></h2>
+<p><code>T?</code> — скорочення для <code>Optional&lt;T&gt;</code> (пробіл перед <code>?</code> не допускається; для складних типів — дужки: <code>(Int, Int)?</code>), enum з варіантами <code>none</code> і <code>some(T)</code>. Будь-яка змінна опціонального типу без значення має <code>nil</code>. Постфіксний <code>!</code> примусово розгортає, <code>?</code> — запускає ланцюжок.</p>
+<h2 id="неявно-розгорнуті-опціонали"><a href="#неявно-розгорнуті-опціонали">Неявно розгорнуті опціонали</a></h2>
+<p><code>T!</code> — той самий <code>Optional&lt;T&gt;</code>, але компілятор дозволяє використовувати значення без явного розгортання, вставляючи <code>!</code> автоматично там, де потрібен <code>T</code>. Якщо значення <code>nil</code> — крах. Позначка <code>!</code> — властивість <strong>оголошення</strong>, а не окремий тип: <code>[Int!]</code> записати не можна.</p>
+<h2 id="композиції-протоколів"><a href="#композиції-протоколів">Композиції протоколів</a></h2>
+<p><code>P &amp; Q</code> — значення, що відповідає обом протоколам. Можна додати один клас: <code>UIViewController &amp; Trackable</code>. Композицію часто дають псевдоніму: <code>typealias Codable = Decodable &amp; Encodable</code> — саме так визначено <code>Codable</code>.</p>
+<h2 id="непрозорі-типи"><a href="#непрозорі-типи">Непрозорі типи</a></h2>
+<p><code>some P</code> — один конкретний тип, що відповідає <code>P</code>, відомий компілятору, але прихований від користувача. Дозволений у результаті функцій, сабскриптів і обчислюваних властивостей, у типах параметрів (кожен <code>some</code>-параметр — окремий неявний generic-параметр) і в збережених властивостях з ініціалізатором. Усі шляхи повернення мусять давати один тип. Не дозволений у вимогах протоколів, у variadic-параметрі та у функціональних типах параметрів; метод класу з <code>some</code>-результатом не можна перевизначити. Урок 25.</p>
+<h2 id="упаковані-протокольні-типи"><a href="#упаковані-протокольні-типи">Упаковані протокольні типи</a></h2>
+<p><code>any P</code> — контейнер для будь-якого значення, що відповідає <code>P</code>. Тип значення може відрізнятися між екземплярами й змінюватися з часом; за це платять зберіганням у коробці й динамічними викликами. <code>any Any</code> і <code>any AnyObject</code> нічого не змінюють. Для протоколів без асоційованих типів і <code>Self</code>-вимог слово <code>any</code> у старому коді могло бути пропущене, але для нового коду його пишуть завжди.</p>
+<h2 id="метатипи"><a href="#метатипи">Метатипи</a></h2>
+<p><strong>Метатип</strong> — тип самого типу. Для класу, структури чи enum <code>T</code> метатип — <code>T.Type</code>, для протоколу <code>P</code> — <code>P.Protocol</code> (сам протокол) або <code>any P.Type</code> (метатип будь-якого типу, що відповідає <code>P</code>).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">intType</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">.</span><span class="kr">Type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">.</span><span class="kc">self</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">intType</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="s">"42"</span><span class="p">)</span><span class="w">             </span><span class="c1">// Optional(42)</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">Screen</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">required</span><span class="w"> </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Paywall</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">make</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="p">.</span><span class="kr">Type</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">type</span><span class="p">.</span><span class="kd">init</span><span class="p">()</span><span class="w">                            </span><span class="c1">// потрібен required init</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">screen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make</span><span class="p">(</span><span class="n">Paywall</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+<span class="n">type</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">screen</span><span class="p">)</span><span class="w">                           </span><span class="c1">// Paywall.self — динамічний тип</span></code></pre></div>
+<ul>
+<li><code>T.self</code> — значення-метатип (як <code>typeof(T)</code> у C#).</li>
+<li><code>type(of: value)</code> — динамічний тип у рантаймі (як <code>GetType()</code>).</li>
+<li>Ініціалізатор через метатип вимагає <code>required</code> або <code>final</code>-класу.</li>
+</ul>
+<h2 id="тип-any"><a href="#тип-any">Тип Any</a></h2>
+<p><code>Any</code> — тип, якому відповідають <strong>усі</strong> типи, включно з функціями й опціоналами. <code>AnyObject</code> — протокол, якому відповідають усі класи. Урок 20.</p>
+<h2 id="тип-self"><a href="#тип-self">Тип Self</a></h2>
+<p><code>Self</code> — поточний тип <strong>в контексті</strong>, де його вжито:</p>
+<ul>
+<li>у протоколі — тип, що реалізує протокол;</li>
+<li>у структурі, класі чи enum — сам тип (або у класі — динамічний тип екземпляра);</li>
+<li>в результаті методу класу <code>-&gt; Self</code> — гарантія, що метод повертає екземпляр того самого підкласу.</li>
+</ul>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Builder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">required</span><span class="w"> </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">copy</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kc">Self</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">Self</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// підклас поверне свій тип</span>
+<span class="p">}</span></code></pre></div>
+<p>У членах <strong>класу</strong> <code>Self</code> дозволений лише як тип результату методу, тип результату read-only сабскрипта, тип read-only обчислюваної властивості та всередині тіла методу. <code>Self.member</code> — те саме, що <code>type(of: self).member</code>. У вкладених типах <code>Self</code> означає найближчий охопний тип.</p>
+<h2 id="список-успадкування"><a href="#список-успадкування">Список успадкування</a></h2>
+<p>Після двокрапки в оголошенні типу: суперклас (для класів — першим, максимум один), протоколи, а в enum — сирий тип першим. Для протоколів — успадковані протоколи, <code>AnyObject</code> чи суперклас. Придушені неявні відповідності пишуться з тильдою: <code>~Copyable</code>, <code>~Sendable</code>.</p>
+<h2 id="виведення-типів"><a href="#виведення-типів">Виведення типів</a></h2>
+<p>Swift виводить типи двонаправлено: з ініціалізаторів до змінних і з очікуваного типу до літералів і замикань. Інформація може йти й «згори вниз»:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w">            </span><span class="c1">// Int — тип за замовчуванням для цілого літерала</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w">    </span><span class="c1">// літерал стає Double з очікуваного типу</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="w">      </span><span class="c1">// Double — літерали без типу підлаштовуються один під одного</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">names</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">].</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">uppercased</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// замикання отримує тип з map</span></code></pre></div>
+<p>Виведення працює в межах одного виразу чи оголошення. Через це надто складні вирази з багатьма перевантаженими операторами й літералами іноді компілюються довго або спричиняють помилку «unable to type-check in reasonable time». Розв'язок — додати анотацію типу або розбити вираз.</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши функцію <code>func makeAll(_ types: [Screen.Type]) -&gt; [Screen]</code>, що створює екземпляри з масиву метатипів.</li>
+<li>Запиши тип функції, що приймає рядок і повертає асинхронну throwing-функцію без параметрів, яка повертає <code>Int</code>.</li>
+<li>Знайди в стандартній бібліотеці, як визначено <code>Codable</code>, і поясни запис.</li>
+<li>Створи вираз, на якому компілятор довго виводить тип, і виправ його анотацією.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="30-lexical-structure.html"><small>Попередній</small>Довідник: лексична структура</a><a class="next" href="32-expressions.html"><small>Наступний</small>Довідник: вирази</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Структури й класи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li class="current"><a href="09-structs-classes.html" aria-current="page"><span class="num">09</span> Структури й класи</a><ol class="sections"><li><a href="#те-саме-слово-інша-роль">Те саме слово, інша роль</a></li><li><a href="#оголошення-й-створення">Оголошення й створення</a></li><li><a href="#value-semantics-на-практиці">Value semantics на практиці</a></li><li><a href="#reference-semantics">Reference semantics</a></li><li><a href="#як-обрати">Як обрати</a></li></ol></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 09</p>
+  <h1>Структури й класи</h1>
+  <p class="lede">Чим відрізняються <code>struct</code> і <code>class</code> у Swift, що таке value semantics, memberwise-ініціалізатори, оператори тотожності і як обирати між ними — з погляду C#-розробника.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/classesandstructures/">classesandstructures</a></p>
+<h2 id="те-саме-слово-інша-роль"><a href="#те-саме-слово-інша-роль">Те саме слово, інша роль</a></h2>
+<p>У C# <code>struct</code> — нішевий інструмент для дрібних даних, і майже все пишуть класами. У Swift навпаки: <code>Int</code>, <code>String</code>, <code>Array</code>, <code>Dictionary</code>, <code>Date</code>, <code>URL</code> — структури, а класи потрібні лише там, де без них не обійтись.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C# <code>struct</code></th>
+<th>Swift <code>struct</code></th>
+<th>Swift <code>class</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Семантика</td>
+<td>значення</td>
+<td>значення</td>
+<td>посилання</td>
+</tr>
+<tr>
+<td>Методи, властивості, ініціалізатори</td>
+<td>так</td>
+<td>так</td>
+<td>так</td>
+</tr>
+<tr>
+<td>Розширення й протоколи (інтерфейси)</td>
+<td>інтерфейси — так</td>
+<td>так</td>
+<td>так</td>
+</tr>
+<tr>
+<td>Успадкування</td>
+<td>ні</td>
+<td>ні</td>
+<td>так</td>
+</tr>
+<tr>
+<td>Деструктор</td>
+<td>ні</td>
+<td>ні (крім noncopyable)</td>
+<td><code>deinit</code></td>
+</tr>
+<tr>
+<td>Хто може змінювати поля</td>
+<td>будь-який метод</td>
+<td>лише <code>mutating</code>-методи</td>
+<td>будь-який метод</td>
+</tr>
+<tr>
+<td>Типова роль</td>
+<td>дрібні дані</td>
+<td><strong>майже все</strong>: моделі, стани, конфіги</td>
+<td>сервіси, спільний стан, UIKit</td>
+</tr>
+</tbody>
+</table>
+<p>Чому в Swift перевага на боці структур: значення, яке ніхто інший не може змінити у тебе за спиною, простіше аналізувати, безпечніше передавати між потоками (урок 18) і дешевше в пам'яті — без лічильника посилань. Клас вартий своєї складності, коли потрібне одне з трьох: <strong>тотожність</strong> (саме цей об'єкт, а не його копія), <strong>успадкування</strong> або сумісність з Objective-C API.</p>
+<h2 id="оголошення-й-створення"><a href="#оголошення-й-створення">Оголошення й створення</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">amount</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">currency</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"UAH"</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Wallet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">history</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Money</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="n">Money</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">history</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Імена типів — у <code>UpperCamelCase</code>, властивостей і методів — у <code>lowerCamelCase</code>. Звертання до властивостей — через крапку.</p>
+<p>Структура отримує <strong>memberwise-ініціалізатор</strong> автоматично: параметр для кожної збереженої властивості, а для властивостей зі значенням за замовчуванням — необов'язковий. Клас такого не отримує — йому дістається лише <code>init()</code> без параметрів, якщо всі властивості мають початкові значення.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">)</span><span class="w">                     </span><span class="c1">// currency = "UAH"</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">fee</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">wallet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Wallet</span><span class="p">()</span>
+<span class="n">wallet</span><span class="p">.</span><span class="n">deposit</span><span class="p">(</span><span class="n">price</span><span class="p">)</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Memberwise-ініціалізатор зникає, щойно в самому оголошенні структури з'являється власний <code>init</code>. Щоб зберегти обидва, власні ініціалізатори пишуть у <code>extension</code> (урок 14).</p>
+</aside>
+<h2 id="value-semantics-на-практиці"><a href="#value-semantics-на-практиці">Value semantics на практиці</a></h2>
+<p>Найкраще різницю видно на типовому баґу «редагування копії». Уяви екран, що редагує налаштування профілю:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ProfileSettings</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">nickname</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">notificationsOn</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ProfileStore</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ProfileSettings</span><span class="p">(</span><span class="n">nickname</span><span class="p">:</span><span class="w"> </span><span class="s">"guest"</span><span class="p">,</span><span class="w"> </span><span class="n">notificationsOn</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">store</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ProfileStore</span><span class="p">()</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">draft</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">settings</span><span class="w">          </span><span class="c1">// копія: форма редагує чернетку</span>
+<span class="n">draft</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"neo"</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">store</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">nickname</span><span class="p">)</span><span class="w">      </span><span class="c1">// "guest" — збережене не змінилось</span>
+
+<span class="n">store</span><span class="p">.</span><span class="n">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">draft</span><span class="w">              </span><span class="c1">// зберегли явно, коли користувач натиснув «Зберегти»</span></code></pre></div>
+<p>Для форми редагування це саме те, що треба. У C# з класом <code>ProfileSettings</code> змінна <code>draft</code> була б тим самим об'єктом, і форма змінювала б збережені дані одразу.</p>
+<p>Що ще випливає з value semantics:</p>
+<ul>
+<li>копія створюється при присвоєнні, передачі у функцію і збереженні у властивість; стандартні колекції копіюють буфер лише при першій зміні (copy-on-write), тож це дешево;</li>
+<li><strong><code>let</code> зі структурою заморожує все значення</strong>, навіть <code>var</code>-властивості: <code>let s = store.settings; s.nickname = "x"</code> не скомпілюється;</li>
+<li><code>enum</code> — теж value type з тими самими правилами.</li>
+</ul>
+<h2 id="reference-semantics"><a href="#reference-semantics">Reference semantics</a></h2>
+<p>Змінна класу зберігає <strong>посилання</strong>. Присвоєння, передача у функцію чи збереження в колекції копіюють посилання, а не об'єкт, тож зміну видно звідусіль:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">shared</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ProfileStore</span><span class="p">()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">observers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">shared</span><span class="p">]</span><span class="w">            </span><span class="c1">// масив тримає те саме посилання</span>
+<span class="n">observers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">settings</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"trinity"</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">shared</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">nickname</span><span class="p">)</span><span class="w">     </span><span class="c1">// "trinity"</span></code></pre></div>
+<p><code>let shared</code> — константа, але властивості об'єкта змінюються: <code>let</code> фіксує лише посилання.</p>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Структура, що містить поле-клас, при копіюванні копіює лише посилання на нього. Справжня value semantics тримається, тільки якщо всі поля структури самі є value types.</p>
+</aside>
+<h3 id="тотожність-і"><a href="#тотожність-і">Тотожність: === і !==</a></h3>
+<p><code>===</code> перевіряє, чи дві змінні вказують на <strong>той самий екземпляр</strong> класу (аналог <code>ReferenceEquals</code>). <code>==</code> — рівність за значенням, і для класу вона існує лише тоді, коли клас реалізує <code>Equatable</code>.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">if</span><span class="w"> </span><span class="n">observers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">===</span><span class="w"> </span><span class="n">shared</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Той самий об'єкт"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<h3 id="а-де-вказівники"><a href="#а-де-вказівники">А де вказівники?</a></h3>
+<p>Для звичайного коду вони не потрібні: посилання на об'єкти класів працюють без жодного спеціального синтаксису. Ручна робота з адресами пам'яті можлива через типи <code>UnsafePointer</code> і подібні, але це інструмент для інтеропу з C і рідкісних оптимізацій.</p>
+<h3 id="актори"><a href="#актори">Актори</a></h3>
+<p>Третій вид reference types — <strong>актори</strong> (урок 18): схожі на класи, але захищають свій змінюваний стан від одночасного доступу з різних задач.</p>
+<h2 id="як-обрати"><a href="#як-обрати">Як обрати</a></h2>
+<table>
+<thead>
+<tr>
+<th>Питання</th>
+<th>struct</th>
+<th>class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Дані, які достатньо порівнювати за значенням (гроші, налаштування, DTO з API)</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>Потрібна тотожність: «той самий» сервіс, сесія, кеш, з'єднання</td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Потрібне успадкування (наприклад, підклас <code>UIViewController</code>)</td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Потрібен <code>deinit</code> для звільнення ресурсу</td>
+<td></td>
+<td>✓ (або <code>~Copyable</code> struct)</td>
+</tr>
+<tr>
+<td>Модель для SwiftUI-View</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>Спостережувана модель стану (<code>@Observable</code>)</td>
+<td></td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Класи в Swift зазвичай позначають <code>final</code>, якщо успадкування не планується. Це прибирає динамічну диспетчеризацію і робить намір явним.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Змоделюй кошик покупок як структуру з масивом позицій і клас <code>CartStore</code>, що його зберігає. Зроби «чернетку» кошика на екрані оформлення, зміни якої застосовуються лише після підтвердження.</li>
+<li>Створи структуру з полем-класом і покажи, що копія структури «ділить» об'єкт з оригіналом.</li>
+<li>Додай до <code>Money</code> власний <code>init(fromCents:)</code> так, щоб memberwise-ініціалізатор теж лишився.</li>
+<li>Для кожної сутності з твого Unity-проєкту (наприклад, <code>PurchaseConfig</code>, <code>AnalyticsService</code>, <code>PlayerProgress</code>) визнач: struct чи class у Swift, і чому.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="08-enums.html"><small>Попередній</small>Перелічення</a><a class="next" href="10-properties.html"><small>Наступний</small>Властивості</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

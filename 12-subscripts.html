@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сабскрипти · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li class="current"><a href="12-subscripts.html" aria-current="page"><span class="num">12</span> Сабскрипти</a><ol class="sections"><li><a href="#синтаксис">Синтаксис</a></li><li><a href="#використання">Використання</a></li><li><a href="#можливості-сабскриптів">Можливості сабскриптів</a></li><li><a href="#сабскрипти-типу">Сабскрипти типу</a></li></ol></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 12</p>
+  <h1>Сабскрипти</h1>
+  <p class="lede">Як дати своєму типу доступ через квадратні дужки: синтаксис, кілька параметрів, перевантаження і сабскрипти типу.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/subscripts/">subscripts</a></p>
+<h2 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h2>
+<p>Сабскрипт дозволяє звертатися до значення через <code>instance[index]</code>, як до масиву чи словника. Оголошується ключовим словом <code>subscript</code>, схоже на обчислювану властивість з параметрами:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Spreadsheet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">cells</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">column</span><span class="p">:</span><span class="w"> </span><span class="nb">Character</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cells</span><span class="p">[</span><span class="s">"</span><span class="si">\(</span><span class="n">column</span><span class="si">)\(</span><span class="n">row</span><span class="si">)</span><span class="s">"</span><span class="p">]</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">""</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cells</span><span class="p">[</span><span class="s">"</span><span class="si">\(</span><span class="n">column</span><span class="si">)\(</span><span class="n">row</span><span class="si">)</span><span class="s">"</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">newValue</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">sheet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Spreadsheet</span><span class="p">()</span>
+<span class="n">sheet</span><span class="p">[</span><span class="s">"B"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Revenue"</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">sheet</span><span class="p">[</span><span class="s">"B"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w">   </span><span class="c1">// Revenue</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">sheet</span><span class="p">[</span><span class="s">"Z"</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">])</span><span class="w">   </span><span class="c1">// "" — порожня клітинка</span></code></pre></div>
+<p>Як і в обчислюваних властивостей, сеттер отримує <code>newValue</code> (або власне ім'я), а сабскрипт лише для читання пишеться без <code>get { }</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Translations</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">table</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">table</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">table</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">table</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="n">key</span><span class="w">            </span><span class="c1">// немає перекладу — показуємо ключ, щоб помітити на QA</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">uk</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Translations</span><span class="p">([</span><span class="s">"paywall.title"</span><span class="p">:</span><span class="w"> </span><span class="s">"Отримай Pro"</span><span class="p">])</span>
+<span class="n">uk</span><span class="p">[</span><span class="s">"paywall.title"</span><span class="p">]</span><span class="w">   </span><span class="c1">// "Отримай Pro"</span>
+<span class="n">uk</span><span class="p">[</span><span class="s">"paywall.cta"</span><span class="p">]</span><span class="w">     </span><span class="c1">// "paywall.cta"</span></code></pre></div>
+<h2 id="використання"><a href="#використання">Використання</a></h2>
+<p>Сабскрипт підходить, коли тип за змістом — колекція, контейнер або відображення ключів на значення. Стандартна бібліотека використовує їх в <code>Array</code> (за індексом), <code>Dictionary</code> (за ключем, з опціональним результатом), <code>String</code> (за <code>String.Index</code> чи діапазоном).</p>
+<p>Зверни увагу на словник: його сабскрипт повертає <code>Value?</code>, бо ключа може не бути, і так само приймає <code>Value?</code> у сеттері, щоб присвоєння <code>nil</code> видаляло ключ. Свої сабскрипти теж можна проєктувати з опціональним результатом.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Це індексатори (<code>this[int i]</code>), і перевантаження, необов'язкові параметри й <code>params</code> там теж є. Справжні відмінності: параметри сабскрипта можуть мати мітки (<code>list[safe: 3]</code>), бувають статичні сабскрипти на самому типі, а геттер може бути <code>async</code>/<code>throws</code>.</p>
+</aside>
+<h2 id="можливості-сабскриптів"><a href="#можливості-сабскриптів">Можливості сабскриптів</a></h2>
+<p>Сабскрипт поводиться майже як метод з особливим синтаксисом виклику, з кількома відмінностями від функцій:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>функція</th>
+<th>сабскрипт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>мітки аргументів за замовчуванням</td>
+<td>є</td>
+<td><strong>немає</strong> — пишуть явно: <code>subscript(safe i: Int)</code></td>
+</tr>
+<tr>
+<td><code>inout</code>-параметри</td>
+<td>можна</td>
+<td>не можна</td>
+</tr>
+<tr>
+<td>variadic і значення за замовчуванням</td>
+<td>можна</td>
+<td>можна</td>
+</tr>
+<tr>
+<td>перевантаження за типами й мітками</td>
+<td>так</td>
+<td>так</td>
+</tr>
+<tr>
+<td><code>async</code>/<code>throws</code></td>
+<td>так</td>
+<td>лише в геттері</td>
+</tr>
+</tbody>
+</table>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Playlist</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">tracks</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">index</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">tracks</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">safe</span><span class="w"> </span><span class="n">index</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w">          </span><span class="c1">// мітка задана явно</span>
+<span class="w">        </span><span class="n">tracks</span><span class="p">.</span><span class="bp">indices</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">tracks</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">titled</span><span class="w"> </span><span class="kr">prefix</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// перевантаження за міткою й типом</span>
+<span class="w">        </span><span class="n">tracks</span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="kr">prefix</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">mix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Playlist</span><span class="p">(</span><span class="n">tracks</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">"Intro"</span><span class="p">,</span><span class="w"> </span><span class="s">"Interlude"</span><span class="p">,</span><span class="w"> </span><span class="s">"Outro"</span><span class="p">])</span>
+<span class="n">mix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">               </span><span class="c1">// "Intro"</span>
+<span class="n">mix</span><span class="p">[</span><span class="n">safe</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span><span class="w">        </span><span class="c1">// nil замість краху</span>
+<span class="n">mix</span><span class="p">[</span><span class="n">titled</span><span class="p">:</span><span class="w"> </span><span class="s">"In"</span><span class="p">]</span><span class="w">    </span><span class="c1">// ["Intro", "Interlude"]</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Класичне розширення, яке є майже в кожному iOS-проєкті:
+<code>swift
+extension Collection {
+    subscript(safe index: Index) -&gt; Element? {
+        indices.contains(index) ? self[index] : nil
+    }
+}</code></p>
+</aside>
+<p>Сабскрипти можуть бути <code>throws</code> і <code>async</code> (тільки геттер), тоді звернення пишуть через <code>try</code>/<code>await</code>.</p>
+<h2 id="сабскрипти-типу"><a href="#сабскрипти-типу">Сабскрипти типу</a></h2>
+<p>Сабскрипт можна оголосити на самому типі через <code>static</code> (або <code>class</code> у класах, щоб дозволити перевизначення):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">StatusIcon</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">icons</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"🔴"</span><span class="p">,</span><span class="w"> </span><span class="s">"🟠"</span><span class="p">,</span><span class="w"> </span><span class="s">"🟡"</span><span class="p">,</span><span class="w"> </span><span class="s">"🟢"</span><span class="p">]</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">subscript</span><span class="p">(</span><span class="n">health</span><span class="w"> </span><span class="n">percent</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">index</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="bp">max</span><span class="p">(</span><span class="n">percent</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">99</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">25</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">icons</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">StatusIcon</span><span class="p">[</span><span class="n">health</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">]</span><span class="w">   </span><span class="c1">// "🟢"</span>
+<span class="n">StatusIcon</span><span class="p">[</span><span class="n">health</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span><span class="w">   </span><span class="c1">// "🔴"</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Зроби структуру <code>TicTacToeBoard</code> з сабскриптом <code>[row, column]</code>, що повертає <code>Character?</code>, і <code>precondition</code>, що перевіряє межі.</li>
+<li>Додай до дошки сабскрипт <code>[row: Int]</code>, що повертає весь рядок як масив.</li>
+<li>Зроби тип <code>Localization</code> зі статичним сабскриптом <code>Localization["key"]</code>, що повертає рядок зі словника або сам ключ, якщо перекладу немає.</li>
+<li>Реалізуй безпечний сабскрипт <code>[safe:]</code> для <code>Collection</code> і перевір його на масиві й на рядку.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="11-methods.html"><small>Попередній</small>Методи</a><a class="next" href="13-inheritance.html"><small>Наступний</small>Успадкування</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

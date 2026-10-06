@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник: інструкції · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li class="current"><a href="33-statements.html" aria-current="page"><span class="num">33</span> Довідник: інструкції</a><ol class="sections"><li><a href="#цикли">Цикли</a></li><li><a href="#розгалуження">Розгалуження</a></li><li><a href="#інструкції-з-мітками">Інструкції з мітками</a></li><li><a href="#передача-керування">Передача керування</a></li><li><a href="#defer">defer</a></li><li><a href="#do">do</a></li><li><a href="#директиви-компілятора">Директиви компілятора</a></li><li><a href="#умова-доступності">Умова доступності</a></li></ol></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Довідник (за потреби) · урок 33</p>
+  <h1>Довідник: інструкції</h1>
+  <p class="lede">Цикли, розгалуження, мітки, передача керування, <code>defer</code>, <code>do</code>, директиви компілятора (<code>#if</code>, <code>#sourceLocation</code>, <code>#warning</code>) і умова доступності — з точними правилами, які в першій частині курсу лише згадувалися.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/">statements</a></p>
+<p>Інструкції бувають прості (вирази й оголошення), інструкції керування і директиви компілятора. Інструкції розділяються переносом рядка або <code>;</code>.</p>
+<h2 id="цикли"><a href="#цикли">Цикли</a></h2>
+<h3 id="for-in"><a href="#for-in">for-in</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="err">зразок</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">послідовність</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">умова</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">інструкції</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Послідовність — будь-яке значення, що відповідає <code>Sequence</code>. Цикл викликає <code>makeIterator()</code> і далі <code>next()</code>, поки той не поверне <code>nil</code>.</li>
+<li>Зліва може бути будь-який зразок: <code>for (key, value) in dict</code>, <code>for case let .coins(n) in rewards</code>, <code>for case let x? in optionals</code>.</li>
+<li><code>where</code> фільтрує ітерації.</li>
+<li>Для асинхронних послідовностей — <code>for await</code> / <code>for try await</code>.</li>
+</ul>
+<h3 id="while"><a href="#while">while</a></h3>
+<p>Перевіряє умову перед кожною ітерацією. Умова — це <strong>список умов</strong> через кому, кожна з яких може бути булевим виразом, прив'язуванням опціоналу (<code>let x = ...</code>), зразком (<code>case .a = x</code>) або перевіркою доступності.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">while</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">job</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="n">popFirst</span><span class="p">(),</span><span class="w"> </span><span class="o">!</span><span class="n">Task</span><span class="p">.</span><span class="n">isCancelled</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">process</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="repeat-while"><a href="#repeat-while">repeat-while</a></h3>
+<p>Тіло виконується хоча б раз, умова — булевий вираз наприкінці.</p>
+<h2 id="розгалуження"><a href="#розгалуження">Розгалуження</a></h2>
+<h3 id="if"><a href="#if">if</a></h3>
+<p>Список умов, як у <code>while</code>; гілки <code>else if</code> і <code>else</code>. Константи, прив'язані в умові, доступні лише в гілці, де умова виконалась.</p>
+<h3 id="guard"><a href="#guard">guard</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">guard</span><span class="w"> </span><span class="err">список</span><span class="o">-</span><span class="err">умов</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// мусить вийти з області: return, break, continue, throw</span>
+<span class="w">    </span><span class="c1">// або викликати функцію, що повертає Never</span>
+<span class="p">}</span></code></pre></div>
+<p>Прив'язані константи доступні <strong>після</strong> <code>guard</code> до кінця області видимості.</p>
+<h3 id="switch"><a href="#switch">switch</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">switch</span><span class="w"> </span><span class="err">значення</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="err">зразок</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">зразок</span><span class="mi">2</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">умова</span><span class="p">:</span>
+<span class="w">    </span><span class="err">інструкції</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="err">інструкції</span>
+<span class="p">@</span><span class="n">unknown</span><span class="w"> </span><span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="err">інструкції</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Порівняння зі зразками — через оператор <code>~=</code> (його можна перевантажити для власних типів, щоб <code>case</code> розумів, наприклад, діапазони дат).</li>
+<li>Кожна гілка мусить містити хоча б одну інструкцію.</li>
+<li>Гілки розглядаються згори вниз, виконується перша відповідна; неявного переходу в наступну немає.</li>
+<li><code>switch</code> має бути <strong>вичерпним</strong>.</li>
+<li>Якщо в одній гілці кілька зразків, усі вони мусять прив'язувати ті самі імена тих самих типів.</li>
+<li><code>default</code> може бути лише один, і він стоїть останнім.</li>
+</ul>
+<h4>Перелічення, які можуть розширитися</h4>
+<p>Нові версії iOS можуть додавати варіанти до системних enum. Тому <code>switch</code> по такому enum вимагає гілку за замовчуванням. Пиши <code>@unknown default</code>: він обробить майбутні варіанти, а компілятор усе одно попередить, якщо ти пропустив уже відомий.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">switch</span><span class="w"> </span><span class="bp">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">userInterfaceIdiom</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="n">layoutPhone</span><span class="p">()</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">pad</span><span class="p">:</span><span class="w"> </span><span class="n">layoutPad</span><span class="p">()</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">mac</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">tv</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">carPlay</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">vision</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">unspecified</span><span class="p">:</span><span class="w"> </span><span class="n">layoutDefault</span><span class="p">()</span>
+<span class="p">@</span><span class="n">unknown</span><span class="w"> </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="n">layoutDefault</span><span class="p">()</span>
+<span class="p">}</span></code></pre></div>
+<p>Звичайний <code>default</code> для таких enum приховав би пропущені варіанти.</p>
+<h2 id="інструкції-з-мітками"><a href="#інструкції-з-мітками">Інструкції з мітками</a></h2>
+<p>Мітка <code>ім'я:</code> перед циклом, <code>if</code>, <code>switch</code> або <code>do</code> дозволяє звертатися до цієї інструкції з <code>break</code> або <code>continue</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">validation</span><span class="p">:</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="o">!</span><span class="n">email</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="n">validation</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="n">email</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="s">"@"</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="n">validation</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="n">submit</span><span class="p">()</span>
+<span class="p">}</span></code></pre></div>
+<p><code>continue</code> з міткою працює лише для циклів. Мітки мають бути унікальними в межах вкладеності.</p>
+<h2 id="передача-керування"><a href="#передача-керування">Передача керування</a></h2>
+<ul>
+<li><strong>break</strong> — завершує цикл чи <code>switch</code>; з міткою — будь-яку інструкцію з цією міткою. Без мітки з <code>if</code> чи <code>do</code> вийти не можна.</li>
+<li><strong>continue</strong> — переходить до наступної ітерації циклу (найближчого або з міткою).</li>
+<li><strong>fallthrough</strong> — у <code>switch</code> переходить у тіло наступної гілки без перевірки її умови. Не можна переходити в гілку, що прив'язує значення, і не можна використовувати в останній гілці.</li>
+<li><strong>return</strong> — виходить з функції чи методу, повертаючи значення або нічого. В ініціалізаторі — лише <code>return</code> без значення (або <code>return nil</code> у failable).</li>
+<li><strong>throw</strong> — кидає помилку. Значення має відповідати <code>Error</code> (або типу з <code>throws(E)</code>).</li>
+</ul>
+<h2 id="defer"><a href="#defer">defer</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">defer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">інструкції</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Виконується при виході з <strong>поточної області видимості</strong> будь-яким шляхом.</li>
+<li>Кілька <code>defer</code> — у зворотному порядку.</li>
+<li>У <code>defer</code> не можна виходити з області (<code>return</code>, <code>break</code>, кидати помилку назовні), але можна викликати <code>await</code> в асинхронній функції.</li>
+<li><code>defer</code> наприкінці області виконується одразу, тож писати його останньою інструкцією немає сенсу.</li>
+</ul>
+<h2 id="do"><a href="#do">do</a></h2>
+<p><code>do { }</code> створює нову область видимості, з необов'язковими гілками <code>catch</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">do</span><span class="w"> </span><span class="kr">throws</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">request</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">.</span><span class="n">timeout</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">retry</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">show</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w">        </span><span class="c1">// error: NetworkError</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Без <code>catch</code> — просто блок для обмеження видимості й часу життя змінних (аналог <code>{ }</code> у C#).</li>
+<li><code>catch</code> без зразка прив'язує помилку до неявної константи <code>error</code>; якщо в одній гілці кілька зразків, вони прив'язують однакові імена однакових типів.</li>
+<li>Якщо <code>catch</code>-гілки не вичерпні, необроблені помилки поширюються далі, а на верхньому рівні програми необроблена помилка зупиняє її.</li>
+<li><code>do throws(E)</code> задає тип помилок явно. Без нього тип виводиться: якщо тіло нічого не кидає — блок не кидає; якщо всі <code>try</code> кидають один конкретний тип — блок кидає саме його; інакше — <code>any Error</code>.</li>
+</ul>
+<h2 id="директиви-компілятора"><a href="#директиви-компілятора">Директиви компілятора</a></h2>
+<h3 id="умовна-компіляція"><a href="#умовна-компіляція">Умовна компіляція</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="cp">#if</span><span class="w"> </span><span class="cp">DEBUG</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">apiURL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://staging.example.com"</span><span class="p">)</span><span class="o">!</span>
+<span class="cp">#elseif</span><span class="w"> </span><span class="cp">BETA</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">apiURL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://beta.example.com"</span><span class="p">)</span><span class="o">!</span>
+<span class="cp">#else</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">apiURL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span>
+<span class="cp">#endif</span></code></pre></div>
+<p>Умови можуть бути:</p>
+<ul>
+<li>прапорці компіляції (<code>DEBUG</code>, власні з <em>Active Compilation Conditions</em> / <code>-D</code>);</li>
+<li><code>os(iOS)</code>, <code>os(macOS)</code>, <code>os(watchOS)</code>, <code>os(tvOS)</code>, <code>os(visionOS)</code>, <code>os(Linux)</code>, <code>os(Windows)</code>;</li>
+<li><code>arch(arm64)</code>, <code>arch(x86_64)</code> тощо;</li>
+<li><code>swift(&gt;=6.0)</code>, <code>compiler(&gt;=6.2)</code> — версія режиму мови і компілятора;</li>
+<li><code>canImport(UIKit)</code> — чи доступний модуль;</li>
+<li><code>targetEnvironment(simulator)</code>, <code>targetEnvironment(macCatalyst)</code>;</li>
+<li><code>hasFeature(...)</code>, <code>hasAttribute(...)</code> — перевірка підтримки можливостей мови;</li>
+<li>комбінації через <code>!</code>, <code>&amp;&amp;</code>, <code>||</code> і дужки.</li>
+</ul>
+<p>Також можна писати просто <code>true</code> чи <code>false</code>. Між оператором порівняння й версією в <code>swift(&gt;=6.0)</code> пробілу немає. <code>canImport(X)</code> лише перевіряє доступність модуля, а імпортувати його все одно треба окремо.</p>
+<p>Код у неактивній гілці не компілюється, але має бути синтаксично правильним.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Те саме, що <code>#if DEBUG</code> у C#. Відмінність — набір вбудованих перевірок платформи, архітектури й доступності модулів.</p>
+</aside>
+<h3 id="керування-номером-рядка"><a href="#керування-номером-рядка">Керування номером рядка</a></h3>
+<p><code>#sourceLocation(file: "Generated.swift", line: 1)</code> змінює ім'я файлу й номер рядка, які компілятор використовує в діагностиці. <code>#sourceLocation()</code> повертає справжні значення. Застосовується генераторами коду.</p>
+<h3 id="діагностичні-директиви"><a href="#діагностичні-директиви">Діагностичні директиви</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">#</span><span class="n">warning</span><span class="p">(</span><span class="s">"Тимчасова заглушка ціни"</span><span class="p">)</span>
+<span class="p">#</span><span class="n">error</span><span class="p">(</span><span class="s">"Цей модуль не підтримує watchOS"</span><span class="p">)</span></code></pre></div>
+<p>Видають попередження чи помилку компіляції з повідомленням. Зручно в поєднанні з <code>#if</code>. Зі Swift 5.9 це макроси стандартної бібліотеки, а не окремі директиви.</p>
+<h2 id="умова-доступності"><a href="#умова-доступності">Умова доступності</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">if</span><span class="w"> </span><span class="cp">#available</span><span class="p">(</span><span class="cp">iOS</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="cp">macOS</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="k">guard</span><span class="w"> </span><span class="cp">#available</span><span class="p">(</span><span class="cp">iOS</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">#</span><span class="n">unavailable</span><span class="p">(</span><span class="n">iOS</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<ul>
+<li>Перелічуються платформи з мінімальними версіями; <code>*</code> обов'язкова в <code>#available</code> і означає «на інших платформах — мінімальна версія таргета».</li>
+<li>Компілятор використовує цю інформацію, щоб дозволити виклики API, позначених <code>@available</code> з новішою версією, усередині відповідної гілки.</li>
+<li><code>#available</code> не поєднується з іншими умовами через <code>||</code> чи <code>&amp;&amp;</code> — лише через кому в списку умов; заперечують його через <code>#unavailable</code>, у якому <code>*</code> не пишуть.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши <code>switch</code> по <code>UIUserInterfaceStyle</code> з <code>@unknown default</code> і перевір, що буде, якщо прибрати один з відомих варіантів.</li>
+<li>Перевантаж оператор <code>~=</code> так, щоб у <code>switch</code> по <code>Int</code> можна було писати <code>case isEven:</code> з функцією-предикатом.</li>
+<li>Налаштуй у Xcode власний прапорець <code>STAGING</code> і використай його в <code>#if</code>.</li>
+<li>Використай <code>do</code> з міткою і <code>break</code> для валідації форми без вкладених <code>if</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="32-expressions.html"><small>Попередній</small>Довідник: вирази</a><a class="next" href="34-declarations.html"><small>Наступний</small>Довідник: оголошення</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

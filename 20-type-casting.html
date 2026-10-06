@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Приведення типів · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li class="current"><a href="20-type-casting.html" aria-current="page"><span class="num">20</span> Приведення типів</a><ol class="sections"><li><a href="#коли-це-потрібно">Коли це потрібно</a></li><li><a href="#три-оператори">Три оператори</a></li><li><a href="#приведення-в-switch">Приведення в switch</a></li><li><a href="#any-і-anyobject">Any і AnyObject</a></li></ol></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 20</p>
+  <h1>Приведення типів</h1>
+  <p class="lede">Перевірка типу через <code>is</code>, приведення вниз через <code>as?</code> і <code>as!</code>, підняття через <code>as</code>, робота з <code>Any</code> і <code>AnyObject</code> — і чому в Swift до приведення типів вдаються рідше, ніж у C#.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/typecasting/">typecasting</a></p>
+<h2 id="коли-це-потрібно"><a href="#коли-це-потрібно">Коли це потрібно</a></h2>
+<p>Приведення типів потрібне, коли статичний тип значення загальніший за реальний: елемент масиву базового класу, значення з <code>Any</code>, протокольний тип. Типовий iOS-приклад — обійти ієрархію view й знайти конкретні елементи:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">UIKit</span>
+
+<span class="p">@</span><span class="n">MainActor</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">allTextFields</span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">root</span><span class="p">:</span><span class="w"> </span><span class="bp">UIView</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="bp">UITextField</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">result</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="bp">UITextField</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="n">subviews</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">field</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="bp">UITextField</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="c1">// умовне приведення вниз</span>
+<span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">allTextFields</span><span class="p">(</span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="n">sub</span><span class="p">)</span><span class="w">           </span><span class="c1">// рекурсія по дереву</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span>
+<span class="p">}</span></code></pre></div>
+<p><code>subviews</code> має тип <code>[UIView]</code>, а реальні елементи — підкласи: <code>UILabel</code>, <code>UIButton</code>, <code>UITextField</code>. Приведення нічого не змінює в самому об'єкті: це лише інший «погляд» на той самий екземпляр.</p>
+<h2 id="три-оператори"><a href="#три-оператори">Три оператори</a></h2>
+<table>
+<thead>
+<tr>
+<th>Оператор</th>
+<th>Що робить</th>
+<th>Аналог у C#</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x is T</code></td>
+<td><code>true</code>, якщо в рантаймі <code>x</code> — це <code>T</code> або його підтип</td>
+<td><code>x is T</code></td>
+</tr>
+<tr>
+<td><code>x as? T</code></td>
+<td>повертає <code>T?</code>: значення або <code>nil</code></td>
+<td><code>x as T</code></td>
+</tr>
+<tr>
+<td><code>x as! T</code></td>
+<td>повертає <code>T</code> або падає</td>
+<td><code>(T)x</code>, але крах замість <code>InvalidCastException</code></td>
+</tr>
+<tr>
+<td><code>x as T</code></td>
+<td>гарантоване приведення, перевірене компілятором</td>
+<td>неявне приведення</td>
+</tr>
+</tbody>
+</table>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">views</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="bp">UIView</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="bp">UILabel</span><span class="p">(),</span><span class="w"> </span><span class="bp">UIButton</span><span class="p">(),</span><span class="w"> </span><span class="bp">UISwitch</span><span class="p">()]</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">interactiveCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">views</span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="bp">UIControl</span><span class="w"> </span><span class="p">}.</span><span class="bp">count</span><span class="w">   </span><span class="c1">// 2: кнопка й перемикач</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">views</span><span class="p">.</span><span class="bp">first</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="bp">UILabel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">label</span><span class="p">.</span><span class="n">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Готово"</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">button</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">views</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="k">as</span><span class="p">!</span><span class="w"> </span><span class="bp">UIButton</span><span class="w">   </span><span class="c1">// впевнені — інакше крах</span></code></pre></div>
+<p><code>as</code> без знаків застосовують для підняття до суперкласу чи протоколу, мостових перетворень (<code>String</code> ↔ <code>NSString</code>) і щоб уточнити тип літерала: <code>let ratio = 1 as Double</code>.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p><code>as!</code> прийнятний лише там, де невдача — це баг у коді, наприклад <code>tableView.dequeueReusableCell(withIdentifier:) as! ProductCell</code>, коли комірку зареєстровано саме цього класу.</p>
+</aside>
+<h2 id="приведення-в-switch"><a href="#приведення-в-switch">Приведення в switch</a></h2>
+<p>Кілька варіантів типу зручніше розібрати в <code>switch</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">MainActor</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">control</span><span class="p">:</span><span class="w"> </span><span class="bp">UIView</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">toggle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="bp">UISwitch</span><span class="p">:</span>
+<span class="w">        </span><span class="s">"перемикач: </span><span class="si">\(</span><span class="n">toggle</span><span class="p">.</span><span class="n">isOn</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">"увімк."</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">"вимк."</span><span class="si">)</span><span class="s">"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">button</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="bp">UIButton</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">button</span><span class="p">.</span><span class="n">isEnabled</span><span class="p">:</span>
+<span class="w">        </span><span class="s">"активна кнопка"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="bp">UIButton</span><span class="p">:</span>
+<span class="w">        </span><span class="s">"вимкнена кнопка"</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="s">"інший елемент"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p><code>case let x as T</code> — приведення з прив'язуванням, <code>case is T</code> — лише перевірка.</p>
+<h2 id="any-і-anyobject"><a href="#any-і-anyobject">Any і AnyObject</a></h2>
+<ul>
+<li><code>Any</code> — значення <strong>будь-якого</strong> типу: структури, enum, класу, кортежу, функції, опціоналу.</li>
+<li><code>AnyObject</code> — екземпляр будь-якого <strong>класу</strong>.</li>
+</ul>
+<p>Найчастіше <code>Any</code> трапляється на межі з динамічними API: <code>userInfo</code> сповіщень, параметри аналітики, <code>JSONSerialization</code>. Розбирати його зручно тим самим <code>switch</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Any</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">s</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">String</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"рядок «</span><span class="si">\(</span><span class="n">s</span><span class="si">)</span><span class="s">»"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"від'ємне ціле </span><span class="si">\(</span><span class="n">n</span><span class="si">)</span><span class="s">"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">Int</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"ціле </span><span class="si">\(</span><span class="n">n</span><span class="si">)</span><span class="s">"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">Double</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"дробове </span><span class="si">\(</span><span class="n">x</span><span class="si">)</span><span class="s">"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">list</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">[</span><span class="nb">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"масив з </span><span class="si">\(</span><span class="n">list</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> елементів"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">object</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"об'єкт з ключами </span><span class="si">\(</span><span class="n">object</span><span class="p">.</span><span class="n">keys</span><span class="p">.</span><span class="bp">sorted</span><span class="si">())</span><span class="s">"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="bp">NSNull</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"null"</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"невідомий тип </span><span class="si">\(</span><span class="n">type</span><span class="si">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="si">))</span><span class="s">"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Так само можна приводити до кортежів і функціональних типів (<code>as? (Int, Int)</code>, <code>as? () -&gt; Void</code>), а також до протоколів: <code>value as? any CustomStringConvertible</code>, <code>value is any Error</code>.</p>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Числа з <code>JSONSerialization</code> приходять як <code>NSNumber</code>, а <code>NSNumber</code> успішно приводиться і до <code>Int</code>, і до <code>Bool</code>: JSON-число <code>1</code> пройде <code>as? Bool</code>, а <code>true</code> — <code>as? Int</code>. Надійно розрізнити їх через приведення не вийде. Не розбирай JSON вручну — використовуй <code>Codable</code>.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Якщо покласти опціонал в <code>Any</code>, компілятор попередить: значення «зникає» в коробці разом з можливим <code>nil</code>, і потім легко забути його перевірити. Якщо так і задумано, пиши явно <code>optionalValue as Any</code>.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p><code>Any</code> — крайній засіб. У власному коді краще протокол або enum з асоційованими значеннями: компілятор перевірить вичерпність, і <code>default</code> не «проковтне» невідомий випадок.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши функцію, що знаходить у дереві view першу кнопку з певним <code>accessibilityIdentifier</code>.</li>
+<li>Порахуй у масиві <code>[Any]</code> кількість рядків, чисел і всього іншого через <code>switch</code>.</li>
+<li>Розбери <code>userInfo: [AnyHashable: Any]</code> сповіщення про покупку у власну структуру через <code>as?</code>.</li>
+<li>Заміни масив <code>[Any]</code> з пункту 2 на <code>enum Value</code> з асоційованими значеннями і порівняй, як змінився код обробки.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="19-macros.html"><small>Попередній</small>Макроси</a><a class="next" href="21-nested-types.html"><small>Наступний</small>Вкладені типи</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

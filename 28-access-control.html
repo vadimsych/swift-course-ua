@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Контроль доступу · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li class="current"><a href="28-access-control.html" aria-current="page"><span class="num">28</span> Контроль доступу</a><ol class="sections"><li><a href="#модулі-файли-й-пакети">Модулі, файли й пакети</a></li><li><a href="#рівні-доступу">Рівні доступу</a></li><li><a href="#синтаксис">Синтаксис</a></li><li><a href="#власні-типи">Власні типи</a></li><li><a href="#підкласи">Підкласи</a></li><li><a href="#константи-змінні-властивості-й-сабскрипти">Константи, змінні, властивості й сабскрипти</a></li><li><a href="#ініціалізатори">Ініціалізатори</a></li><li><a href="#протоколи">Протоколи</a></li><li><a href="#розширення">Розширення</a></li><li><a href="#узагальнення">Узагальнення</a></li><li><a href="#псевдоніми-типів">Псевдоніми типів</a></li></ol></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 28</p>
+  <h1>Контроль доступу</h1>
+  <p class="lede">Шість рівнів доступу Swift, модулі й пакети, правила за замовчуванням, <code>private(set)</code>, доступ у тестах і як рівні доступу взаємодіють з типами, протоколами, розширеннями й узагальненнями.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/">accesscontrol</a></p>
+<h2 id="модулі-файли-й-пакети"><a href="#модулі-файли-й-пакети">Модулі, файли й пакети</a></h2>
+<p>Контроль доступу в Swift будується навколо трьох одиниць:</p>
+<ul>
+<li><strong>Модуль</strong> — одиниця розповсюдження коду: застосунок, фреймворк, бібліотека, Swift-пакет-таргет. Імпортується через <code>import</code>.</li>
+<li><strong>Файл</strong> — окремий <code>.swift</code>-файл усередині модуля.</li>
+<li><strong>Пакет</strong> — група модулів, що збираються разом: таргети одного Swift Package (<code>Package.swift</code>) або, у Xcode, таргети з однаковим налаштуванням <em>Package Access Identifier</em>.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Модуль ≈ assembly, і <code>internal</code> в обох мовах означає «в межах збірки». Нового тут два рівні: <code>fileprivate</code> (видно в межах файлу) і <code>package</code> (видно в межах пакета).</p>
+</aside>
+<h2 id="рівні-доступу"><a href="#рівні-доступу">Рівні доступу</a></h2>
+<p>Від найвідкритішого до найзакритішого:</p>
+<table>
+<thead>
+<tr>
+<th>Рівень</th>
+<th>Де доступно</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>open</code></td>
+<td>будь-де; клас можна успадковувати, а члени перевизначати в інших модулях</td>
+</tr>
+<tr>
+<td><code>public</code></td>
+<td>будь-де; але успадковувати й перевизначати — лише в модулі, де оголошено</td>
+</tr>
+<tr>
+<td><code>package</code></td>
+<td>у всіх модулях того самого пакета</td>
+</tr>
+<tr>
+<td><code>internal</code></td>
+<td>у межах модуля (за замовчуванням)</td>
+</tr>
+<tr>
+<td><code>fileprivate</code></td>
+<td>у межах файлу</td>
+</tr>
+<tr>
+<td><code>private</code></td>
+<td>у межах оголошення та його розширень у тому самому файлі</td>
+</tr>
+</tbody>
+</table>
+<p><code>open</code> застосовується лише до класів і їхніх членів. Різниця між <code>open</code> і <code>public</code> — свідоме рішення автора бібліотеки: чи дозволено клієнтам успадковуватися.</p>
+<h3 id="головний-принцип"><a href="#головний-принцип">Головний принцип</a></h3>
+<p>Правило одне: <strong>жодна сутність не може «показати назовні» те, що саме закрите сильніше за неї</strong>. Якщо клієнт бачить функцію, він мусить бачити й типи, з якими вона працює. Тому:</p>
+<ul>
+<li>публічна властивість не може мати внутрішній (<code>internal</code>) тип;</li>
+<li>функція, сабскрипт чи ініціалізатор не можуть бути відкритішими за типи своїх параметрів і результату.</li>
+</ul>
+<h3 id="рівні-за-замовчуванням"><a href="#рівні-за-замовчуванням">Рівні за замовчуванням</a></h3>
+<p>Майже все за замовчуванням <code>internal</code>. Тому в застосунку з одного модуля писати модифікатори доступу майже не потрібно.</p>
+<h3 id="застосунки-з-одного-таргета"><a href="#застосунки-з-одного-таргета">Застосунки з одного таргета</a></h3>
+<p>Увесь код і так у межах модуля, тож <code>internal</code> достатньо. Корисно лише приховувати деталі реалізації через <code>private</code> і <code>fileprivate</code>.</p>
+<h3 id="фреймворки"><a href="#фреймворки">Фреймворки</a></h3>
+<p>Публічний API фреймворку позначають <code>public</code> або <code>open</code>. Усе інше лишається <code>internal</code> і є деталлю реалізації, яку можна змінювати без зламу клієнтів.</p>
+<h3 id="таргети-юніт-тестів"><a href="#таргети-юніт-тестів">Таргети юніт-тестів</a></h3>
+<p>Модуль, скомпільований з увімкненим testing (у Debug за замовчуванням), можна імпортувати з атрибутом <code>@testable</code>, і тоді тести бачать його <code>internal</code>-сутності:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">testable</span><span class="w"> </span><span class="kd">import</span><span class="w"> </span><span class="nc">PaywallKit</span></code></pre></div>
+<h2 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">AnalyticsClient</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">internal</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">EventQueue</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">        </span><span class="c1">// internal можна не писати</span>
+<span class="n">fileprivate</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">formatPayload</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">apiKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"..."</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Tracker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isEnabled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">batchSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="w">                 </span><span class="c1">// internal</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">buffer</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="власні-типи"><a href="#власні-типи">Власні типи</a></h2>
+<p>Рівень доступу типу впливає на <strong>рівень за замовчуванням його членів</strong>:</p>
+<ul>
+<li>для <code>private</code> типу члени за замовчуванням <code>private</code>, а для <code>fileprivate</code> — <code>fileprivate</code> (на практиці члени обох видимі в межах файлу);</li>
+<li>для <code>internal</code> чи <code>public</code> типу члени за замовчуванням <code>internal</code>.</li>
+</ul>
+<p>Тобто <code>public</code>-тип <strong>не</strong> робить свої члени публічними автоматично. Кожен член публічного API позначають явно — це захищає від випадкового експорту.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">public</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">Receipt</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w">          </span><span class="c1">// явно публічне</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">rawData</span><span class="p">:</span><span class="w"> </span><span class="n">Data</span><span class="w">              </span><span class="c1">// internal — клієнти не бачать</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">init</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"> </span><span class="n">rawData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Data</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="кортежі"><a href="#кортежі">Кортежі</a></h3>
+<p>Рівень доступу кортежу — <strong>найнижчий</strong> з рівнів його елементів. Явно його не вказують.</p>
+<h3 id="функціональні-типи"><a href="#функціональні-типи">Функціональні типи</a></h3>
+<p>Рівень доступу функції обчислюється як найнижчий серед типів параметрів і результату. Якщо він нижчий за контекст, функцію треба явно позначити цим рівнем:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">private</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">Secret</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// func makeSecret() -&gt; Secret { Secret() }       // помилка: функція internal, тип private</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">makeSecret</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Secret</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Secret</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// ок</span></code></pre></div>
+<h3 id="перелічення"><a href="#перелічення">Перелічення</a></h3>
+<p>Варіанти enum мають той самий рівень доступу, що й сам enum; задати окремий рівень окремому варіанту не можна.</p>
+<h4>Сирі й асоційовані значення</h4>
+<p>Типи сирих і асоційованих значень мусять бути щонайменше такими ж відкритими, як enum.</p>
+<h3 id="вкладені-типи"><a href="#вкладені-типи">Вкладені типи</a></h3>
+<p>Вкладений тип отримує рівень зовнішнього, але не вище <code>internal</code>: у <code>public</code>-типі вкладений тип за замовчуванням <code>internal</code>. Щоб він був публічним, пиши <code>public</code> явно.</p>
+<h2 id="підкласи"><a href="#підкласи">Підкласи</a></h2>
+<p>Правила наслідування залежать від модуля:</p>
+<ul>
+<li><strong>у своєму модулі</strong> можна успадковувати будь-який доступний клас і перевизначати будь-який видимий член;</li>
+<li><strong>з іншого модуля</strong> — лише <code>open</code>-класи й <code>open</code>-члени. <code>public</code> дає їх використовувати, але не успадковувати.</li>
+</ul>
+<p>Підклас не може бути відкритішим за суперклас. А перевизначений член може бути <strong>відкритішим</strong>, ніж у суперкласі — так можна відкрити підкласам частину API, яку суперклас ховав:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">open</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">AnalyticsScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">screenName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"unknown"</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// internal</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PaywallScreen</span><span class="p">:</span><span class="w"> </span><span class="n">AnalyticsScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kr">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">screenName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"paywall"</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// підвищили до public</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="константи-змінні-властивості-й-сабскрипти"><a href="#константи-змінні-властивості-й-сабскрипти">Константи, змінні, властивості й сабскрипти</a></h2>
+<p>Не можуть бути відкритішими за свій тип. <code>public var x: InternalType</code> — помилка. Сабскрипт так само не може бути відкритішим за типи індексу й результату.</p>
+<h3 id="геттери-й-сеттери"><a href="#геттери-й-сеттери">Геттери й сеттери</a></h3>
+<p>Сеттер можна зробити <strong>менш доступним</strong>, ніж геттер, через <code>private(set)</code>, <code>fileprivate(set)</code>, <code>internal(set)</code>, <code>package(set)</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">public</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">Wallet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">coins</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w">      </span><span class="c1">// читати можуть усі, змінювати — лише Wallet</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">earn</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coins</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Це одна з найчастіше вживаних конструкцій у Swift: зовнішній код бачить стан, але змінює його лише через методи.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Те саме, що <code>public int Coins { get; private set; }</code>.</p>
+</aside>
+<h2 id="ініціалізатори"><a href="#ініціалізатори">Ініціалізатори</a></h2>
+<p>Власний ініціалізатор може мати рівень, не вищий за свій тип, а типи його параметрів не можуть бути закритішими за сам ініціалізатор. <code>required</code>-ініціалізатор має той самий рівень, що й клас.</p>
+<h3 id="ініціалізатори-за-замовчуванням"><a href="#ініціалізатори-за-замовчуванням">Ініціалізатори за замовчуванням</a></h3>
+<p>Автоматичний <code>init()</code> має той самий рівень, що й тип, <strong>але не вище <code>internal</code></strong>. Для <code>public</code>-типу, який має бути створюваним ззовні модуля, публічний <code>init()</code> треба написати явно.</p>
+<h3 id="memberwise-ініціалізатори"><a href="#memberwise-ініціалізатори">Memberwise-ініціалізатори</a></h3>
+<p>Memberwise-ініціалізатор структури — <code>private</code>, якщо хоча б одна збережена властивість <code>private</code>; <code>fileprivate</code>, якщо є <code>fileprivate</code>; інакше <code>internal</code>. Публічним він <strong>ніколи</strong> не буває автоматично — для публічних структур бібліотек ініціалізатор пишуть вручну.</p>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Класична помилка при винесенні коду в Swift Package: структура стала <code>public</code>, а створити її з застосунку не вдається — бо memberwise-ініціалізатор лишився <code>internal</code>.</p>
+</aside>
+<h2 id="протоколи"><a href="#протоколи">Протоколи</a></h2>
+<p>Рівень доступу протоколу визначає, хто його бачить. Вимоги протоколу автоматично мають той самий рівень, що й протокол, і окремо задати їм рівень не можна.</p>
+<h3 id="успадкування-протоколів"><a href="#успадкування-протоколів">Успадкування протоколів</a></h3>
+<p>Протокол-нащадок не може бути відкритішим за батьківський.</p>
+<h3 id="відповідність-протоколам"><a href="#відповідність-протоколам">Відповідність протоколам</a></h3>
+<p>Відповідність протоколу <strong>глобальна</strong>: тип не може відповідати одному протоколу двома різними способами в різних місцях програми. Тип може відповідати протоколу з нижчим рівнем доступу, але сама <strong>відповідність</strong> діє на рівні, мінімальному з двох. Реалізації вимог мусять бути щонайменше такими ж доступними, як відповідність:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">public</span><span class="w"> </span><span class="kd">protocol</span><span class="w"> </span><span class="nc">Resettable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">Timer</span><span class="p">:</span><span class="w"> </span><span class="n">Resettable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// має бути public, бо і тип, і протокол public</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="розширення"><a href="#розширення">Розширення</a></h2>
+<p>Члени, додані в розширенні, мають за замовчуванням той самий рівень, що й члени в оригінальному типі. Можна задати рівень для всього розширення: <code>private extension Foo { ... }</code>. Для розширення з відповідністю протоколу рівень явно не вказують — він визначається протоколом.</p>
+<h3 id="приватні-члени-в-розширеннях"><a href="#приватні-члени-в-розширеннях">Приватні члени в розширеннях</a></h3>
+<p><code>private</code>-члени видно в оригінальному оголошенні й у всіх його розширеннях <strong>у тому самому файлі</strong> — у будь-якому напрямку:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Checkout</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">summary</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="n">items</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> товарів, знижка </span><span class="si">\(</span><span class="n">discountPercent</span><span class="si">)</span><span class="s">%"</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// бачить private з розширення</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Checkout</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">discountPercent</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// оголошено в розширенні</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Checkout</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">item</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="w">               </span><span class="c1">// private з оголошення</span>
+<span class="w">        </span><span class="kc">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">discountPercent</span><span class="w">              </span><span class="c1">// і private з іншого розширення</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Тому код можна розбивати на розширення за відповідальністю, не відкриваючи приватний стан.</p>
+<h2 id="узагальнення"><a href="#узагальнення">Узагальнення</a></h2>
+<p>Рівень доступу generic-типу чи функції — мінімальний з рівня самого оголошення і рівнів обмежень його параметрів типу.</p>
+<h2 id="псевдоніми-типів"><a href="#псевдоніми-типів">Псевдоніми типів</a></h2>
+<p>Для контролю доступу псевдонім вважається окремим типом: він не може бути відкритішим за тип, на який посилається (<code>public typealias X = InternalType</code> — помилка). Те саме стосується псевдонімів, що задають асоційовані типи протоколів.</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Створи Swift Package з двома таргетами (<code>Core</code> і <code>Feature</code>) і познач кілька API як <code>package</code>, щоб вони були видні між таргетами, але не клієнтам пакета.</li>
+<li>Зроби публічну структуру <code>Price</code> і переконайся, що з іншого модуля її не можна створити без явного <code>public init</code>.</li>
+<li>Познач властивість <code>public private(set)</code> і спробуй змінити її ззовні.</li>
+<li>Напиши тест з <code>@testable import</code> для <code>internal</code>-функції.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="27-memory-safety.html"><small>Попередній</small>Безпека пам'яті</a><a class="next" href="29-advanced-operators.html"><small>Наступний</small>Розширені оператори</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

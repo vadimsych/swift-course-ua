@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник: зразки й generic-параметри · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li class="current"><a href="36-patterns-generic-params.html" aria-current="page"><span class="num">36</span> Довідник: зразки й generic-параметри</a><ol class="sections"><li><a href="#зразки">Зразки</a></li><li><a href="#generic-параметри">Generic-параметри</a></li></ol></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Довідник (за потреби) · урок 36</p>
+  <h1>Довідник: зразки й generic-параметри</h1>
+  <p class="lede">Усі види зразків (patterns), що використовуються в <code>switch</code>, <code>if case</code>, <code>for case</code>, <code>catch</code> і оголошеннях, а також формальний опис generic-параметрів: цілочисельні параметри, <code>where</code>-умови і generic-аргументи.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/patterns/">patterns</a> · <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/genericparametersandarguments/">genericparametersandarguments</a></p>
+<h2 id="зразки"><a href="#зразки">Зразки</a></h2>
+<p>Зразок описує <strong>форму</strong> значення, з якою значення порівнюють і з якої витягують частини. Зразки бувають двох груп:</p>
+<ul>
+<li><strong>деструктуруючі</strong> — розбирають значення, що завжди має цю форму: заповнювач, ідентифікатор, прив'язування значення, кортеж. Їх можна використовувати в <code>let</code>, <code>var</code>, <code>for-in</code>. У <code>for-in</code> і оголошеннях кортеж-зразок може містити лише заповнювачі, ідентифікатори, опціональні й вкладені кортежні зразки — наприклад, <code>let (status, true) = reply</code> не скомпілюється, бо <code>true</code> — зразок-вираз. Параметр-кортеж замикання деструктурувати в заголовку не можна;</li>
+<li><strong>умовні</strong> — можуть не збігтися: варіант enum, опціонал, приведення типу, вираз. Використовуються лише в <code>switch</code>, <code>if case</code>, <code>guard case</code>, <code>while case</code>, <code>for case</code>, <code>catch</code>.</li>
+</ul>
+<h3 id="заповнювач"><a href="#заповнювач">Заповнювач</a></h3>
+<p><code>_</code> збігається з будь-яким значенням і відкидає його:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="kc">_</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">response</span><span class="w">          </span><span class="c1">// відкидаємо перший елемент</span>
+<span class="n">items</span><span class="p">.</span><span class="n">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// параметр замикання не потрібен</span></code></pre></div>
+<h3 id="ідентифікатор"><a href="#ідентифікатор">Ідентифікатор</a></h3>
+<p>Ім'я, з яким значення зв'язується: <code>let total = 42</code> — <code>total</code> тут зразок-ідентифікатор. Якщо ліворуч від <code>=</code> у <code>let</code>/<code>var</code> стоїть ідентифікатор, він збігається з будь-яким значенням.</p>
+<h3 id="привязування-значення"><a href="#привязування-значення">Прив'язування значення</a></h3>
+<p><code>let</code> або <code>var</code> перед зразком прив'язує всі вкладені ідентифікатори до відповідних частин значення:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">session</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="p">:</span><span class="w"> </span><span class="s">"ann"</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">)</span>
+<span class="k">switch</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w">     </span><span class="c1">// let поширюється на обидва</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">ttl</span><span class="p">):</span><span class="w">               </span><span class="c1">// або для кожного окремо</span>
+<span class="w">    </span><span class="n">ttl</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">60</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="кортеж"><a href="#кортеж">Кортеж</a></h3>
+<p>Список зразків у дужках: <code>(x, 0)</code>, <code>(_, let y)</code>, <code>(1..&lt;10, "ok")</code>. Кортеж з одного елемента — це просто зразок у дужках. Якщо кортеж-зразок має анотацію типу, кожен елемент має відповідати типу.</p>
+<h3 id="варіант-перелічення"><a href="#варіант-перелічення">Варіант перелічення</a></h3>
+<p><code>.варіант</code> або <code>Тип.варіант</code>, за бажанням з кортежем-зразком для асоційованих значень:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Push</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">promo</span><span class="p">(</span><span class="n">campaign</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">discount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">reminder</span><span class="p">(</span><span class="n">daysLeft</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">silent</span>
+<span class="p">}</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">promo</span><span class="p">(</span><span class="kc">_</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">d</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">50</span><span class="p">:</span>
+<span class="w">    </span><span class="n">showBanner</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">promo</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">campaign</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">):</span>
+<span class="w">    </span><span class="n">track</span><span class="p">(</span><span class="n">campaign</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">reminder</span><span class="p">(</span><span class="n">daysLeft</span><span class="p">:</span><span class="w"> </span><span class="mf">0.</span><span class="p">..</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="n">showUrgent</span><span class="p">()</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">reminder</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">silent</span><span class="p">:</span>
+<span class="w">    </span><span class="k">break</span>
+<span class="p">}</span></code></pre></div>
+<p>Цей зразок збігається й з <strong>опціональним</strong> значенням, якщо варіант не має конфлікту з <code>Optional.none</code>/<code>.some</code>. Тобто для <code>let push: Push?</code> можна писати <code>case .promo:</code> без <code>?</code> — Swift автоматично розгорне опціонал.</p>
+<h3 id="опціонал"><a href="#опціонал">Опціонал</a></h3>
+<p><code>зразок?</code> — збігається з <code>.some(значення)</code>, де значення відповідає внутрішньому зразку:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">tokens</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">?]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"a1"</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="s">"b2"</span><span class="p">]</span>
+<span class="k">for</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">token</span><span class="p">?</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="w">                </span><span class="c1">// лише не-nil</span>
+<span class="p">}</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="s">"42"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="p">?</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"додатне </span><span class="si">\(</span><span class="n">n</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kc">_</span><span class="p">?:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"не додатне"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kc">nil</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"не число"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="приведення-типу"><a href="#приведення-типу">Приведення типу</a></h3>
+<ul>
+<li><code>is Тип</code> — збігається, якщо значення в рантаймі має цей тип (або підтип); нічого не прив'язує;</li>
+<li><code>зразок as Тип</code> — приводить і порівнює з внутрішнім зразком:</li>
+</ul>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">switch</span><span class="w"> </span><span class="n">payload</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="bp">NSNull</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"null"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">Int</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"ціле </span><span class="si">\(</span><span class="n">n</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">):</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">break</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="вираз"><a href="#вираз">Вираз</a></h3>
+<p>Будь-який вираз як зразок. Порівняння відбувається через оператор <code>~=</code>. Стандартна реалізація для <code>Equatable</code> — це <code>==</code>, а для діапазонів — <code>contains</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">switch</span><span class="w"> </span><span class="n">httpStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">200</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"OK"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="mf">300.</span><span class="p">.&lt;</span><span class="mi">400</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Перенаправлення"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="mf">400.</span><span class="p">..:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Помилка"</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">break</span>
+<span class="p">}</span></code></pre></div>
+<p>Перевантаживши <code>~=</code>, можна навчити <code>switch</code> нових видів порівнянь:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Prefix</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span><span class="w"> </span><span class="n">Prefix</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">value</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="n">pattern</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="s">"pro_monthly"</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="n">Prefix</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="s">"pro_"</span><span class="p">):</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Преміум-план"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="n">Prefix</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="s">"lite_"</span><span class="p">):</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Базовий план"</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Невідомий план"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="generic-параметри"><a href="#generic-параметри">Generic-параметри</a></h2>
+<h3 id="список-параметрів"><a href="#список-параметрів">Список параметрів</a></h3>
+<p><code>&lt;параметри&gt;</code> після імені функції, типу, ініціалізатора чи сабскрипта. Кожен параметр — ім'я, за бажанням з обмеженням:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">merge</span><span class="p">&lt;</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="nb">Hashable</span><span class="p">,</span><span class="w"> </span><span class="n">Value</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">]</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Pair</span><span class="p">&lt;</span><span class="n">First</span><span class="p">,</span><span class="w"> </span><span class="n">Second</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p>Обмеження: протокол, композиція протоколів, клас (тип має бути його підкласом) або придушене обмеження <code>~Copyable</code>/<code>~Escapable</code>.</p>
+<p>Існують також <strong>пакети параметрів</strong> (<code>each T</code>) для функцій і типів з довільною кількістю generic-параметрів. На них, наприклад, побудовано <code>ViewBuilder</code> у SwiftUI, що приймає будь-яку кількість дочірніх view:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">describeAll</span><span class="p">&lt;</span><span class="n">each</span><span class="w"> </span><span class="n">T</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="k">repeat</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">parts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="k">repeat</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">describing</span><span class="p">:</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">value</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">parts</span>
+<span class="p">}</span>
+<span class="n">describeAll</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"two"</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span><span class="w">   </span><span class="c1">// ["1", "two", "3.0"]</span></code></pre></div>
+<h3 id="цілочисельні-generic-параметри"><a href="#цілочисельні-generic-параметри">Цілочисельні generic-параметри</a></h3>
+<p>Параметр може бути <strong>значенням</strong> типу <code>Int</code>, а не типом. Оголошується через <code>let</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">FixedBuffer</span><span class="p">&lt;</span><span class="kd">let</span><span class="w"> </span><span class="nv">Capacity</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">Element</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">storage</span><span class="p">:</span><span class="w"> </span><span class="n">InlineArray</span><span class="p">&lt;</span><span class="n">Capacity</span><span class="p">,</span><span class="w"> </span><span class="n">Element</span><span class="p">&gt;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">frames</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FixedBuffer</span><span class="p">&lt;</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="nb">Double</span><span class="p">&gt;(</span><span class="n">storage</span><span class="p">:</span><span class="w"> </span><span class="n">InlineArray</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">zeros</span><span class="p">&lt;</span><span class="kd">let</span><span class="w"> </span><span class="nv">N</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">InlineArray</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">InlineArray</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">z</span><span class="p">:</span><span class="w"> </span><span class="n">InlineArray</span><span class="p">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">()</span><span class="w">     </span><span class="c1">// N виведено як 4</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">FixedBuffer</span><span class="p">&lt;</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;.</span><span class="n">Capacity</span><span class="p">)</span><span class="w">      </span><span class="c1">// 8 — доступ як до статичної константи</span></code></pre></div>
+<p>Правила:</p>
+<ul>
+<li>тип параметра — <code>Int</code> (або псевдонім, що зводиться до <code>Int</code>);</li>
+<li>аргументом може бути <strong>цілочисельний літерал</strong> або <strong>інший цілочисельний generic-параметр</strong> з оточення; звичайні константи, generic-типи і пакети — ні;</li>
+<li>значення доступне як статична константа типу (для параметрів типу) чи як константа в тілі функції;</li>
+<li>значення може виводитися з типів аргументів;</li>
+<li>на цілочисельний параметр не можна накласти протокольне чи класове обмеження, а рівність значень можна вимагати в розширенні: <code>extension FixedBuffer where Capacity == 4 { }</code>.</li>
+</ul>
+<p>Головний споживач цієї можливості в стандартній бібліотеці — <code>InlineArray&lt;count, Element&gt;</code>: масив фіксованого розміру, що зберігається без виділення пам'яті в купі.</p>
+<h3 id="where-умови"><a href="#where-умови">where-умови</a></h3>
+<p><code>where</code> перед тілом оголошення задає додаткові вимоги:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">syncAll</span><span class="p">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Dictionary</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="n">Numeric</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">total</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="bp">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Види вимог:</p>
+<ul>
+<li><code>T: Протокол</code> або <code>T: Клас</code> — відповідність чи успадкування;</li>
+<li><code>T == U</code>, <code>T.Element == String</code> — рівність типів;</li>
+<li><code>T: ~Copyable</code> — придушення неявного обмеження.</li>
+</ul>
+<p>Generic-оголошення можна перевантажувати за <code>where</code>-умовами: компілятор обирає найспецифічніше. Умови вкладеного оголошення (методу в generic-типі) додаються до умов охопного типу.</p>
+<h3 id="generic-аргументи"><a href="#generic-аргументи">Generic-аргументи</a></h3>
+<p>Конкретні типи (або цілочисельні значення) в кутових дужках при використанні generic-типу: <code>Array&lt;Int&gt;</code>, <code>Dictionary&lt;String, [Date]&gt;</code>, <code>FixedBuffer&lt;16, UInt8&gt;</code>. Аргументи мусять задовольняти обмеження параметрів. Явно вказувати аргументи для generic-функцій не можна — вони виводяться з контексту виклику; для ініціалізаторів generic-типів можна: <code>Set&lt;Int&gt;()</code>.</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши <code>switch</code> над <code>(Int?, String?)</code>, що окремо обробляє всі чотири комбінації <code>nil</code>/не-<code>nil</code>.</li>
+<li>Перевантаж <code>~=</code> для <code>ClosedRange&lt;Date&gt;</code> і <code>Date</code>, щоб у <code>switch</code> по даті працювали діапазони сезонних акцій.</li>
+<li>Зроби структуру <code>Ring&lt;let N: Int&gt;</code> на основі <code>InlineArray</code> для збереження останніх N значень FPS.</li>
+<li>Напиши функцію з пакетом параметрів, що приймає будь-яку кількість <code>Equatable</code>-пар і перевіряє, чи всі пари рівні.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="35-attributes.html"><small>Попередній</small>Довідник: атрибути</a><a class="next" href="37-evolution.html"><small>Наступний</small>Еволюція мови</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

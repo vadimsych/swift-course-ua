@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Керування потоком виконання · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li class="current"><a href="05-control-flow.html" aria-current="page"><span class="num">05</span> Керування потоком виконання</a><ol class="sections"><li><a href="#цикл-for-in">Цикл for-in</a></li><li><a href="#цикли-while">Цикли while</a></li><li><a href="#умовні-інструкції">Умовні інструкції</a></li><li><a href="#зразки-поза-switch-if-case-і-for-case">Зразки поза switch: if case і for case</a></li><li><a href="#передача-керування">Передача керування</a></li><li><a href="#ранній-вихід-guard">Ранній вихід: guard</a></li><li><a href="#відкладені-дії-defer">Відкладені дії: defer</a></li><li><a href="#перевірка-доступності-api">Перевірка доступності API</a></li></ol></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 05</p>
+  <h1>Керування потоком виконання</h1>
+  <p class="lede">Цикли, <code>if</code> і <code>switch</code> (зокрема як вирази), зіставлення зі зразком, <code>if case</code>, передача керування, мітки, <code>guard</code>, <code>defer</code> і перевірка доступності API.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/controlflow/">controlflow</a></p>
+<h2 id="цикл-for-in"><a href="#цикл-for-in">Цикл for-in</a></h2>
+<p><code>for-in</code> проходить по будь-якій послідовності: масиву, словнику, діапазону, рядку.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mf">1.</span><span class="p">..</span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Рівень </span><span class="si">\(</span><span class="n">level</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mf">0.</span><span class="p">.&lt;</span><span class="mi">3</span><span class="w"> </span><span class="p">{</span><span class="w">          </span><span class="c1">// значення не потрібне</span>
+<span class="w">    </span><span class="n">spawnEnemy</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">bonuses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"gold"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="s">"gems"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bonuses</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Для кроку, відмінного від одиниці, — <code>stride</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="bp">stride</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// 1 26 51 76 — до 100, без нього</span>
+<span class="k">for</span><span class="w"> </span><span class="n">countdown</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="bp">stride</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">through</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// 3 2 1 — включно з кінцевим</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Класичного <code>for (int i = 0; i &lt; n; i++)</code> у Swift немає взагалі. Його заміняє <code>for i in 0..&lt;n</code> або <code>stride</code>. Змінна циклу — константа: змінити <code>i</code> всередині тіла не можна.</p>
+</aside>
+<h2 id="цикли-while"><a href="#цикли-while">Цикли while</a></h2>
+<h3 id="while"><a href="#while">while</a></h3>
+<p>Перевіряє умову перед кожною ітерацією:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">energy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="k">while</span><span class="w"> </span><span class="n">energy</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">energy</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">3</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="repeat-while"><a href="#repeat-while">repeat-while</a></h3>
+<p>Аналог <code>do-while</code>: тіло виконується хоча б раз, умова — наприкінці.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">roll</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="k">repeat</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">roll</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">.</span><span class="n">random</span><span class="p">(</span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="mf">1.</span><span class="p">..</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">roll</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">6</span></code></pre></div>
+<h2 id="умовні-інструкції"><a href="#умовні-інструкції">Умовні інструкції</a></h2>
+<h3 id="if"><a href="#if">if</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">battery</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.15</span>
+<span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">enterLowPowerMode</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">showBatteryWarning</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">hideBatteryWarning</span><span class="p">()</span>
+<span class="p">}</span></code></pre></div>
+<p><code>if</code> може бути <strong>виразом</strong>: кожна гілка дає значення, і всі гілки — одного типу.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">icon</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"battery.0"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">           </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"battery.50"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">           </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"battery.100"</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">label</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">battery</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Зарядіть пристрій"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"OK"</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// вираз як результат функції</span>
+<span class="p">}</span></code></pre></div>
+<p>Щоб <code>if</code> став виразом, кожна його гілка мусить бути одним значенням — або гілкою, з якої виконання не повертається (<code>throw</code>, <code>fatalError</code>). <code>else</code> обов'язковий: значення має бути в будь-якому разі. Коли гілки дають літерали різних типів, підкажи тип анотацією:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">limit</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">isPremium</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">50.5</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">badge</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">isPremium</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"PRO"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// nil потребує опціонального типу</span></code></pre></div>
+<h3 id="switch"><a href="#switch">switch</a></h3>
+<p><code>switch</code> порівнює значення з набором зразків і виконує першу гілку, що збіглася.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">key</span><span class="p">:</span><span class="w"> </span><span class="nb">Character</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"w"</span>
+<span class="k">switch</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="s">"w"</span><span class="p">,</span><span class="w"> </span><span class="s">"W"</span><span class="p">:</span>
+<span class="w">    </span><span class="n">moveUp</span><span class="p">()</span>
+<span class="k">case</span><span class="w"> </span><span class="s">"s"</span><span class="p">:</span>
+<span class="w">    </span><span class="n">moveDown</span><span class="p">()</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="k">break</span>
+<span class="p">}</span></code></pre></div>
+<p>Правила, що відрізняються від C#:</p>
+<ul>
+<li><strong>Вичерпність.</strong> Кожне можливе значення має бути покрите. Для <code>Int</code> чи <code>String</code> це означає <code>default</code>, а для enum можна перелічити всі варіанти без <code>default</code>.</li>
+<li><strong>Немає неявного провалювання.</strong> Після гілки виконання виходить зі <code>switch</code>, <code>break</code> писати не треба. Порожня гілка заборонена — якщо нічого робити не треба, пиши <code>break</code>.</li>
+<li>Кілька значень в одній гілці — через кому.</li>
+<li><code>default</code> може бути лише один і мусить стояти останнім.</li>
+<li>Коментар не рахується як інструкція: гілка лише з коментарем усе одно порожня.</li>
+</ul>
+<p><code>switch</code> теж може бути виразом:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">speed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="n">terrain</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">road</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">grass</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">swamp</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span>
+<span class="p">}</span></code></pre></div>
+<h4>Інтервали</h4>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">ping</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">87</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">quality</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="n">ping</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">..&lt;</span><span class="mi">50</span><span class="p">:</span><span class="w"> </span><span class="s">"відмінно"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mf">50.</span><span class="p">.&lt;</span><span class="mi">120</span><span class="p">:</span><span class="w"> </span><span class="s">"нормально"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mf">120.</span><span class="p">..:</span><span class="w"> </span><span class="s">"погано"</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="s">"?"</span><span class="w">   </span><span class="c1">// для Int компілятор не доводить вичерпність діапазонів</span>
+<span class="p">}</span></code></pre></div>
+<h4>Кортежі</h4>
+<p>Кортеж перевіряється по всіх елементах; <code>_</code> означає «будь-що». Зручно, коли рішення залежить від кількох значень одразу:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">access</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">isLoggedIn</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">isSubscribed</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">trialDays</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Запропонувати вхід"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Повний доступ"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">..</span><span class="mi">7</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Пробний період"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Показати paywall"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Якщо кілька гілок підходять, виконується <strong>перша</strong>. Тут гілки покривають усі можливі комбінації, тож <code>default</code> не потрібен — компілятор доводить вичерпність для <code>Bool</code> і <code>_</code>.</p>
+<h4>Прив'язування значень</h4>
+<p>У гілці можна дістати частину значення в константу (або <code>var</code>) і використати її в тілі:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="n">retryAfter</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="mf">200.</span><span class="p">.&lt;</span><span class="mi">300</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Успіх"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">429</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Повторимо через </span><span class="si">\(</span><span class="n">response</span><span class="p">.</span><span class="n">retryAfter</span><span class="si">)</span><span class="s"> с, код </span><span class="si">\(</span><span class="n">code</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">code</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Помилка клієнта </span><span class="si">\(</span><span class="n">code</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">   </span><span class="c1">// будь-яке інше значення</span>
+<span class="p">}</span></code></pre></div>
+<p>Гілка <code>case let code:</code> збігається з будь-яким значенням, тому <code>default</code> не потрібен — він був би недосяжним.</p>
+<h4>where</h4>
+<p>Додаткова умова для гілки. Розберемо жест свайпу за зсувом по осях:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">swipe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">dx</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">120.0</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">:</span><span class="w"> </span><span class="mf">8.0</span><span class="p">)</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="n">swipe</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="bp">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="bp">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">dx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">"Свайп ліворуч"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">"Свайп праворуч"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="bp">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="bp">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">"Свайп угору"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">"Свайп униз"</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Діагональ — ігноруємо"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h4>Складені гілки</h4>
+<p>Кілька зразків через кому. Якщо зразки прив'язують значення, кожен має прив'язувати однакові імена однакових типів:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Input</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">tap</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">longPress</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">key</span><span class="p">(</span><span class="nb">Character</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">longPress</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">tap</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">y</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">longPress</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">y</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Дотик у точці </span><span class="si">\(</span><span class="n">x</span><span class="si">)</span><span class="s">, </span><span class="si">\(</span><span class="n">y</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">key</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">c</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Клавіша </span><span class="si">\(</span><span class="n">c</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Pattern matching у C# 8+ (<code>switch</code> expression, <code>when</code>, tuple patterns) близький за можливостями. Swift-аналоги: <code>where</code> = <code>when</code>, <code>case let</code> = declaration pattern, <code>_</code> = discard. Головне, що в Swift це було з першої версії і <code>switch</code> завжди вичерпний.</p>
+</aside>
+<h2 id="зразки-поза-switch-if-case-і-for-case"><a href="#зразки-поза-switch-if-case-і-for-case">Зразки поза switch: if case і for case</a></h2>
+<p>Будь-який зразок із <code>switch</code> можна використати в <code>if</code>, <code>guard</code>, <code>while</code> і <code>for</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Reward</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">coins</span><span class="p">(</span><span class="nb">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">item</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">nothing</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">reward</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reward</span><span class="p">.</span><span class="n">coins</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">coins</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">amount</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">reward</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Багато монет: </span><span class="si">\(</span><span class="n">amount</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">rewards</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Reward</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[.</span><span class="n">coins</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">item</span><span class="p">(</span><span class="s">"key"</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">coins</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
+<span class="k">for</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">coins</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">rewards</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w">       </span><span class="c1">// тільки монети від 10: 40</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">maybeScores</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">?]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">]</span>
+<span class="k">for</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">score</span><span class="p">?</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">maybeScores</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="w">   </span><span class="c1">// 10, 30 — зразок опціоналу</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p><code>if case</code> спочатку виглядає дивно: значення стоїть праворуч від <code>=</code>. Читай його як «якщо <code>reward</code> підходить під зразок <code>.coins(let amount)</code>».</p>
+</aside>
+<h2 id="передача-керування"><a href="#передача-керування">Передача керування</a></h2>
+<p><code>continue</code>, <code>break</code>, <code>fallthrough</code>, <code>return</code> і <code>throw</code> (останні два — в уроках про функції й помилки).</p>
+<h3 id="continue"><a href="#continue">continue</a></h3>
+<p>Переходить до наступної ітерації:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">players</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="s">"bot_"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="break"><a href="#break">break</a></h3>
+<p><strong>У циклі</strong> — одразу завершує цикл.</p>
+<p><strong>У switch</strong> — завершує <code>switch</code>. Головне застосування — порожня гілка, яку треба явно позначити:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">switch</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="s">"quit"</span><span class="p">:</span><span class="w"> </span><span class="n">exitGame</span><span class="p">()</span>
+<span class="k">case</span><span class="w"> </span><span class="s">"pause"</span><span class="p">:</span><span class="w"> </span><span class="n">pause</span><span class="p">()</span>
+<span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="w">   </span><span class="c1">// ігноруємо невідомі команди</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="fallthrough"><a href="#fallthrough">fallthrough</a></h3>
+<p>Коли потрібно, щоб після однієї гілки виконалась і наступна, пишуть <code>fallthrough</code>. Умову наступної гілки він ігнорує — просто продовжує в її тілі. Перейти так у гілку з <code>let</code>-прив'язуванням не можна: значень для неї ніхто не підготував.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">perks</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="k">switch</span><span class="w"> </span><span class="n">tier</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">    </span><span class="n">perks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"золота рамка"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">fallthrough</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">    </span><span class="n">perks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"бонусний XP"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">fallthrough</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">    </span><span class="n">perks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"без реклами"</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="k">break</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>C# забороняє неявне провалювання з непорожньої гілки і вимагає <code>goto case</code>. Swift також забороняє, а явний інструмент — <code>fallthrough</code>.</p>
+</aside>
+<h3 id="інструкції-з-мітками"><a href="#інструкції-з-мітками">Інструкції з мітками</a></h3>
+<p>Для вкладених циклів можна вказати, який саме цикл перервати чи продовжити:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">search</span><span class="p">:</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">"Знайдено"</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span><span class="w"> </span><span class="n">search</span><span class="w">      </span><span class="c1">// виходимо з обох циклів</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// наступний рядок</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Мітка працює й для <code>switch</code> всередині циклу: <code>break</code> без мітки там зупинить лише <code>switch</code>, а <code>break loopName</code> — цикл. Мітку можна поставити й на <code>if</code> чи <code>switch</code>, щоб вийти з них через <code>break мітка</code> (звичайний <code>break</code> з <code>if</code> не виходить).</p>
+<h2 id="ранній-вихід-guard"><a href="#ранній-вихід-guard">Ранній вихід: guard</a></h2>
+<p><code>guard</code> перевіряє умову і, якщо вона хибна, виконує <code>else</code>, який <strong>мусить</strong> покинути поточну область видимості (<code>return</code>, <code>break</code>, <code>continue</code>, <code>throw</code> або виклик функції, що не повертається).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">startMatch</span><span class="p">(</span><span class="n">players</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">],</span><span class="w"> </span><span class="bp">map</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="n">players</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"Замало гравців"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"Мапу не обрано"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Старт на </span><span class="si">\(</span><span class="bp">map</span><span class="si">)</span><span class="s"> для </span><span class="si">\(</span><span class="n">players</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> гравців"</span><span class="p">)</span><span class="w">   </span><span class="c1">// map тут String</span>
+<span class="p">}</span></code></pre></div>
+<p>Константи, прив'язані в <code>guard</code>, доступні до кінця функції. Так «щасливий шлях» іде вздовж лівого краю, а не тоне у вкладених <code>if</code>.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Це формалізований early return: <code>if (x == null) return;</code>. Різниця в тому, що компілятор гарантує вихід з <code>else</code> і розгортає опціонал для решти коду.</p>
+</aside>
+<h2 id="відкладені-дії-defer"><a href="#відкладені-дії-defer">Відкладені дії: defer</a></h2>
+<p>Блок <code>defer</code> виконується, коли виконання <strong>покидає</strong> поточну область видимості — будь-яким шляхом: <code>return</code>, <code>break</code>, кинута помилка, кінець блоку.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">loadLevel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">showSpinner</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">hideSpinner</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// точно сховаємо, хоч би що</span>
+
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">readFile</span><span class="p">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="n">parse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Кілька <code>defer</code> виконуються у <strong>зворотному</strong> порядку оголошення. <code>defer</code> не може виконати <code>return</code> чи <code>break</code> сам. Якщо програма аварійно зупиняється (крах), <code>defer</code> не виконується.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Найближче — <code>finally</code> або <code>using</code>/<code>IDisposable</code>. Перевага <code>defer</code> у тому, що прибирання пишеться одразу поруч з ініціалізацією, а не в кінці функції.</p>
+</aside>
+<h2 id="перевірка-доступності-api"><a href="#перевірка-доступності-api">Перевірка доступності API</a></h2>
+<p>Щоб використати API новішої ОС, ніж мінімальна версія застосунку, перевір доступність:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">if</span><span class="w"> </span><span class="cp">#available</span><span class="p">(</span><span class="cp">iOS</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="cp">macOS</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">useNewFeature</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">useFallback</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">guard</span><span class="w"> </span><span class="cp">#available</span><span class="p">(</span><span class="cp">iOS</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">#</span><span class="n">unavailable</span><span class="p">(</span><span class="n">iOS</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">applyLegacyWorkaround</span><span class="p">()</span>
+<span class="p">}</span></code></pre></div>
+<p><code>*</code> означає «на всіх інших платформах — мінімальна версія таргета». Після <code>guard #available(...) else { return }</code> компілятор вважає новіше API доступним до кінця області видимості. Компілятор перевіряє, що ти не викликаєш нове API поза такою перевіркою. Для цілих типів і функцій є атрибут <code>@available(iOS 18, *)</code> (урок про атрибути).</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Ти вже знаєш цю ситуацію з StoreKit 2 і fallback на StoreKit 1. У нативному коді це робиться саме через <code>#available</code> і <code>@available</code>, а компілятор не дасть забути гілку для старої ОС.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши <code>switch</code> над кортежем <code>(isLoggedIn: Bool, hasSubscription: Bool, trialDaysLeft: Int)</code>, що повертає (як вираз) один з рядків: "гість", "підписник", "пробний період", "пробний закінчився".</li>
+<li>Знайди в двовимірному масиві першу клітинку зі значенням 0 і вийди з обох циклів через мітку.</li>
+<li>Перепиши функцію з трьома вкладеними <code>if let</code> на <code>guard</code>.</li>
+<li>Додай два <code>defer</code> у функцію з <code>print</code> і переконайся, в якому порядку вони виконуються.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="04-collections.html"><small>Попередній</small>Колекції</a><a class="next" href="06-functions.html"><small>Наступний</small>Функції</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

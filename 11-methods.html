@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Методи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li class="current"><a href="11-methods.html" aria-current="page"><span class="num">11</span> Методи</a><ol class="sections"><li><a href="#методи-екземпляра">Методи екземпляра</a></li><li><a href="#методи-типу">Методи типу</a></li></ol></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 11</p>
+  <h1>Методи</h1>
+  <p class="lede">Методи екземпляра й типу, <code>self</code>, <code>mutating</code>-методи у value types і присвоєння <code>self</code>.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/methods/">methods</a></p>
+<h2 id="методи-екземпляра"><a href="#методи-екземпляра">Методи екземпляра</a></h2>
+<p>Метод — функція, що належить типу. Методи можуть мати не лише класи, а й <strong>структури та перелічення</strong>. Для C#-розробника нове тут лише останнє: у C# enum методів не має (тільки через extension methods), а в Swift enum — повноцінний тип.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">DownloadQueue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">pending</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">URL</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">enqueue</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">url</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pending</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">clear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pending</span><span class="p">.</span><span class="bp">removeAll</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DownloadQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://example.com/a.zip"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">queue</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span></code></pre></div>
+<p>Правила міток аргументів такі самі, як для функцій.</p>
+<h3 id="self"><a href="#self">self</a></h3>
+<p><code>self</code> — поточний екземпляр, як <code>this</code> у C#. Писати його явно потрібно в двох випадках: коли параметр затіняє властивість з тим самим ім'ям (найчастіше в ініціалізаторах і «сеттерах») і в escaping-замиканнях класів (урок 7):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Profile</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">nickname</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">nickname</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">nickname</span><span class="p">.</span><span class="n">trimmingCharacters</span><span class="p">(</span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">whitespaces</span><span class="p">)</span><span class="w">   </span><span class="c1">// ліворуч — властивість</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="зміна-value-types-у-методах"><a href="#зміна-value-types-у-методах">Зміна value types у методах</a></h3>
+<p>Методи структур і перелічень за замовчуванням <strong>не можуть змінювати</strong> властивості, бо <code>self</code> у них — константа. Щоб дозволити зміну, метод позначають <code>mutating</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Stamina</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">spend</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">stamina</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Stamina</span><span class="p">()</span>
+<span class="n">stamina</span><span class="p">.</span><span class="n">spend</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">stamina</span><span class="p">.</span><span class="n">spend</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="w">          </span><span class="c1">// 0, а не від'ємне</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">frozen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Stamina</span><span class="p">()</span>
+<span class="c1">// frozen.spend(10)        // помилка: mutating-метод на let-константі</span></code></pre></div>
+<p><code>mutating</code> — це інформація і для компілятора, і для читача: «цей метод змінює значення». Мутуючий метод не можна викликати на <code>let</code>-константі.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>У C# метод структури може мовчки змінити копію (класична пастка з <code>List&lt;MyStruct&gt;[i].Mutate()</code>, яка нічого не змінює в списку). У Swift компілятор чітко розрізняє мутуючі й немутуючі методи, а <code>array[i].spend(10)</code> працює правильно і змінює елемент масиву.</p>
+</aside>
+<h3 id="присвоєння-self-у-мутуючому-методі"><a href="#присвоєння-self-у-мутуючому-методі">Присвоєння self у мутуючому методі</a></h3>
+<p>Мутуючий метод може замінити екземпляр цілком. Для enum це головний спосіб змінювати стан — наприклад, крок онбордингу, що вміє перейти до наступного:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">OnboardingStep</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">welcome</span><span class="p">,</span><span class="w"> </span><span class="n">permissions</span><span class="p">,</span><span class="w"> </span><span class="n">paywall</span><span class="p">,</span><span class="w"> </span><span class="n">done</span>
+
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">advance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="kc">self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">welcome</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">permissions</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">permissions</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">paywall</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">paywall</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">done</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">done</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">step</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">OnboardingStep</span><span class="p">.</span><span class="n">welcome</span>
+<span class="n">step</span><span class="p">.</span><span class="bp">advance</span><span class="p">()</span><span class="w">   </span><span class="c1">// .permissions</span></code></pre></div>
+<h2 id="методи-типу"><a href="#методи-типу">Методи типу</a></h2>
+<p>Методи, що викликаються на самому типі, позначаються <code>static</code>. У класах можна використати <code>class func</code>, щоб дозволити підкласам їх перевизначати.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Currency</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">code</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">symbol</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">supported</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="n">Currency</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="s">"UAH"</span><span class="p">,</span><span class="w"> </span><span class="n">symbol</span><span class="p">:</span><span class="w"> </span><span class="s">"₴"</span><span class="p">),</span>
+<span class="w">        </span><span class="n">Currency</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">,</span><span class="w"> </span><span class="n">symbol</span><span class="p">:</span><span class="w"> </span><span class="s">"$"</span><span class="p">),</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Currency</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">supported</span><span class="p">.</span><span class="bp">first</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">code</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// без префікса всередині static</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">known</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">Self</span><span class="p">.</span><span class="bp">find</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w">  </span><span class="c1">// Self — поточний тип</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="n">amount</span><span class="si">)</span><span class="s"> </span><span class="si">\(</span><span class="n">symbol</span><span class="si">)</span><span class="s">"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="n">amount</span><span class="si">)</span><span class="s"> </span><span class="si">\(</span><span class="n">code</span><span class="si">)</span><span class="s">"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Currency</span><span class="p">.</span><span class="bp">find</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="s">"UAH"</span><span class="p">)?.</span><span class="n">format</span><span class="p">(</span><span class="mf">99.5</span><span class="p">)</span><span class="w">   </span><span class="c1">// "99.5 ₴"</span></code></pre></div>
+<p>Якщо результат методу (екземпляра чи типу) нормально ігнорувати — наприклад, <code>insert</code> повертає, чи вдалося вставити, — метод позначають <code>@discardableResult</code>, і компілятор не попереджатиме про невикористане значення.</p>
+<p>У методі типу <code>self</code> посилається на <strong>сам тип</strong>, а не на екземпляр. Всередині методу типу інші статичні члени можна викликати без префікса. У методі екземпляра до статичних членів звертаються через ім'я типу або <code>Self</code>.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>static</code> — як <code>static</code> у C#. <code>class func</code> — статичний метод, який підклас може перевизначити; у C# такого немає.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Зроби структуру <code>Inventory</code> з масивом предметів і методами <code>add</code>, <code>remove(at:)</code>, <code>sortByRarity()</code>. Які з них мають бути <code>mutating</code>?</li>
+<li>Зроби enum <code>PlaybackRate</code> з сирими значеннями <code>0.5</code>, <code>1.0</code>, <code>1.5</code>, <code>2.0</code> і mutating-метод <code>faster()</code>, що переходить до наступної швидкості й зупиняється на максимальній.</li>
+<li>Додай до <code>Inventory</code> статичну властивість <code>maxSlots</code> і статичний метод, що перевіряє, чи вміститься потрібна кількість предметів.</li>
+<li>Перевір, що відбудеться, якщо викликати mutating-метод на елементі масиву структур, на елементі словника і на <code>let</code>-константі.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="10-properties.html"><small>Попередній</small>Властивості</a><a class="next" href="12-subscripts.html"><small>Наступний</small>Сабскрипти</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

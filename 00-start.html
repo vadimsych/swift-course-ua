@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Як влаштований курс і що таке Swift · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li class="current"><a href="00-start.html" aria-current="page"><span class="num">00</span> Як влаштований курс і що таке Swift</a><ol class="sections"><li><a href="#як-читати-цей-курс">Як читати цей курс</a></li><li><a href="#що-таке-swift-коротко">Що таке Swift коротко</a></li><li><a href="#версії-й-режими-мови-що-виставити-в-проєкті">Версії й режими мови: що виставити в проєкті</a></li><li><a href="#мапа-синтаксису-для-c-розробника">Мапа синтаксису для C#-розробника</a></li><li><a href="#playground-і-перший-запуск">Playground і перший запуск</a></li></ol></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Старт · урок 00</p>
+  <h1>Як влаштований курс і що таке Swift</h1>
+  <p class="lede">Перший урок: що за мова Swift, як вона співвідноситься з C#, які версії й режими мови існують, і швидка мапа синтаксису, щоб далі не спотикатися.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/aboutswift/">aboutswift</a> · <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/compatibility/">compatibility</a> · <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/guidedtour/">guidedtour</a></p>
+<h2 id="як-читати-цей-курс"><a href="#як-читати-цей-курс">Як читати цей курс</a></h2>
+<p>Курс іде за розділами офіційної книги «The Swift Programming Language», але текст і приклади тут власні. Він розрахований на людину, яка вже добре знає C# і Unity, тож знайоме я згадую одним рядком, а на відмінностях зупиняюсь детально.</p>
+<p>У тексті трапляються виноски:</p>
+<ul>
+<li><strong>C#</strong> — як те саме виглядає в C# чи Unity;</li>
+<li><strong>Пастка</strong> — де досвід з C# веде в оману;</li>
+<li><strong>Порада</strong> — практичні рекомендації;</li>
+<li><strong>Swift 6</strong> — можливості останніх версій мови;</li>
+<li><strong>Практика</strong> — короткі задачі наприкінці уроку. Пиши їх у Xcode Playground або у файлі, який запускаєш командою <code>swift file.swift</code>.</li>
+</ul>
+<h3 id="маршрут"><a href="#маршрут">Маршрут</a></h3>
+<table>
+<thead>
+<tr>
+<th>Що</th>
+<th>Уроки</th>
+<th>Як читати</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Основа мови</td>
+<td>1–18</td>
+<td>по черзі, обов'язково</td>
+</tr>
+<tr>
+<td>Протоколи, узагальнення, <code>some</code>/<code>any</code>, ARC</td>
+<td>23–26</td>
+<td>обов'язково — без цього SwiftUI не зрозуміти</td>
+</tr>
+<tr>
+<td>Розширення, приведення типів, вкладені типи</td>
+<td>20–22</td>
+<td>швидко, багато знайомого з C#</td>
+</tr>
+<tr>
+<td>Макроси, безпека пам'яті, контроль доступу, розширені оператори</td>
+<td>19, 27–29</td>
+<td>можна відкласти й повернутися, коли знадобиться</td>
+</tr>
+<tr>
+<td>Довідник</td>
+<td>30–36</td>
+<td>не читати підряд — відкривати, коли треба уточнити правило</td>
+</tr>
+<tr>
+<td>Еволюція мови</td>
+<td>37</td>
+<td>щоб розуміти старий код з інтернету</td>
+</tr>
+</tbody>
+</table>
+<h3 id="словничок"><a href="#словничок">Словничок</a></h3>
+<table>
+<thead>
+<tr>
+<th>Термін</th>
+<th>Що означає</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>value type / reference type</strong></td>
+<td>тип, що копіюється при присвоєнні (<code>struct</code>, <code>enum</code>), і тип, яким діляться через посилання (<code>class</code>)</td>
+</tr>
+<tr>
+<td><strong>опціонал</strong></td>
+<td>значення, якого може не бути: <code>String?</code> — або рядок, або <code>nil</code></td>
+</tr>
+<tr>
+<td><strong>розгорнути опціонал</strong></td>
+<td>дістати значення з опціоналу (<code>if let</code>, <code>guard let</code>, <code>??</code>, <code>!</code>)</td>
+</tr>
+<tr>
+<td><strong>замикання (closure)</strong></td>
+<td>лямбда; будь-який блок коду, який можна передати як значення</td>
+</tr>
+<tr>
+<td><strong>escaping-замикання</strong></td>
+<td>замикання, яке функція зберігає й викличе пізніше, після свого завершення</td>
+</tr>
+<tr>
+<td><strong>протокол</strong></td>
+<td>інтерфейс у Swift</td>
+</tr>
+<tr>
+<td><strong>розширення (extension)</strong></td>
+<td>спосіб дописати методи, властивості чи протоколи до вже існуючого типу</td>
+</tr>
+<tr>
+<td><strong>узагальнення (generics)</strong></td>
+<td>код, що працює з різними типами: <code>Array&lt;Element&gt;</code></td>
+</tr>
+<tr>
+<td><strong><code>some P</code> / <code>any P</code></strong></td>
+<td>«один конкретний тип, що відповідає P» / «коробка з будь-яким значенням, що відповідає P» (урок 25)</td>
+</tr>
+<tr>
+<td><strong>ARC</strong></td>
+<td>автоматичний підрахунок посилань — як Swift звільняє пам'ять без збирача сміття</td>
+</tr>
+<tr>
+<td><strong>цикл сильних посилань</strong></td>
+<td>два об'єкти тримають один одного, і ARC не може їх звільнити — витік пам'яті</td>
+</tr>
+<tr>
+<td><strong><code>weak</code> / <code>unowned</code></strong></td>
+<td>посилання, які не утримують об'єкт; ними розривають цикли</td>
+</tr>
+<tr>
+<td><strong>актор</strong></td>
+<td>об'єкт, що захищає свій стан від одночасного доступу з різних потоків</td>
+</tr>
+<tr>
+<td><strong>ізоляція</strong></td>
+<td>правило, з якого місця (актора) можна чіпати певні дані</td>
+</tr>
+<tr>
+<td><strong><code>@MainActor</code></strong></td>
+<td>«цей код працює на головному потоці» — для UI</td>
+</tr>
+<tr>
+<td><strong><code>Sendable</code></strong></td>
+<td>тип, який безпечно передавати між потоками</td>
+</tr>
+<tr>
+<td><strong>data race</strong></td>
+<td>два потоки одночасно змінюють ті самі дані — баг, який Swift 6 ловить під час компіляції</td>
+</tr>
+<tr>
+<td><strong>property wrapper</strong></td>
+<td>обгортка властивості з власною логікою зберігання: <code>@State</code>, <code>@Published</code></td>
+</tr>
+<tr>
+<td><strong>макрос</strong></td>
+<td>код, що генерує код під час компіляції: <code>@Observable</code>, <code>#Preview</code></td>
+</tr>
+</tbody>
+</table>
+<p>Посилання «У книзі» під заголовком кожного уроку ведуть на відповідний розділ оригіналу, якщо захочеш звірити деталі.</p>
+<h2 id="що-таке-swift-коротко"><a href="#що-таке-swift-коротко">Що таке Swift коротко</a></h2>
+<p>Swift — компільована мова зі статичною типізацією, яку Apple представила у 2014 році як заміну Objective-C. З 2015 року вона open source, працює на macOS, iOS, Linux, Windows, і навіть на серверах та вбудованих пристроях.</p>
+<p>Головні ідеї мови:</p>
+<ul>
+<li><strong>Безпека за замовчуванням.</strong> Змінну не можна прочитати до ініціалізації, індекси масивів перевіряються, переповнення цілих чисел — помилка під час виконання, а не тихе «загортання». <code>nil</code> можливий тільки там, де тип явно це дозволяє.</li>
+<li><strong>Value types як основа.</strong> <code>struct</code> і <code>enum</code> — повноцінні типи з методами, протоколами й розширеннями. Стандартні <code>Array</code>, <code>String</code>, <code>Dictionary</code> — структури.</li>
+<li><strong>Пам'ять без GC.</strong> Об'єкти класів керуються підрахунком посилань (ARC), а не збирачем сміття.</li>
+<li><strong>Протоколи замість глибокого успадкування.</strong> Розширення протоколів дають реалізацію за замовчуванням, і більшість поведінки будується композицією.</li>
+<li><strong>Перевірка конкурентності компілятором.</strong> У режимі Swift 6 компілятор доводить відсутність data races між потоками.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Найближча аналогія — сучасний C# з nullable reference types, records і <code>async</code>/<code>await</code>, але без GC і з набагато сильнішими <code>struct</code> та <code>enum</code>. Синтаксично Swift ближчий до Kotlin.</p>
+</aside>
+<h2 id="версії-й-режими-мови-що-виставити-в-проєкті"><a href="#версії-й-режими-мови-що-виставити-в-проєкті">Версії й режими мови: що виставити в проєкті</a></h2>
+<p>У Swift є дві різні «версії», і їх легко сплутати:</p>
+<ul>
+<li><strong>версія компілятора</strong> — та, що прийшла з Xcode (зараз Swift 6.4 у Xcode 27);</li>
+<li><strong>режим мови</strong> (language mode) — набір правил, за якими компілятор перевіряє твій код: Swift 6, 5, 4.2 чи 4.</li>
+</ul>
+<p>Практичний чекліст:</p>
+<ol>
+<li><strong>Новий застосунок</strong> — режим Swift 6. У Xcode: <em>Build Settings → Swift Language Version</em>. У Swift Package: <code>swiftLanguageModes: [.v6]</code> у <code>Package.swift</code>.</li>
+<li><strong>Старий код</strong> — можна лишити Swift 5 і вмикати нові перевірки поступово через <em>Upcoming Features</em> (у пакетах — <code>.enableUpcomingFeature(...)</code>).</li>
+<li><strong>Великий проєкт</strong> — переводь по одному модулю: модулі з різними режимами нормально залежать один від одного.</li>
+<li><strong>Мінімальна iOS</strong> — <code>async</code>/<code>await</code> і актори працюють з iOS 13, тож для сучасних застосунків обмежень немає.</li>
+</ol>
+<p>Головна різниця між режимами 5 і 6 — <strong>перевірка data races</strong>: у режимі Swift 6 компілятор відмовиться збирати код, де змінюваний стан може використовуватися з кількох потоків без захисту. Більшість інших нових можливостей мови доступні в обох режимах.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Новий проєкт одразу починай у режимі Swift 6. Переводити старий код на сувору конкурентність набагато болючіше, ніж одразу писати правильно.</p>
+</aside>
+<h2 id="мапа-синтаксису-для-c-розробника"><a href="#мапа-синтаксису-для-c-розробника">Мапа синтаксису для C#-розробника</a></h2>
+<p>Детально кожна тема буде у своєму уроці. Тут — щоб одразу читати чужий код.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="c1">// Точка входу — код верхнього рівня в main.swift або тип з @main, функція main() не потрібна</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">maxLives</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w">            </span><span class="c1">// константа, як readonly local</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">score</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w">               </span><span class="c1">// змінна</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">nickname</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// опціонал, як string? з nullable</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">damage</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">crit</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">crit</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">amount</span>
+<span class="p">}</span>
+<span class="n">damage</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">crit</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w">      </span><span class="c1">// мітки аргументів — частина виклику</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Vector2</span><span class="w"> </span><span class="p">{</span><span class="w">            </span><span class="c1">// value type, копіюється</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">y</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">length</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">).</span><span class="n">squareRoot</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Enemy</span><span class="w"> </span><span class="p">{</span><span class="w">         </span><span class="c1">// reference type, ARC</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">hp</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">hp</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">hp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">hp</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">LoadState</span><span class="w"> </span><span class="p">{</span><span class="w">            </span><span class="c1">// enum з асоційованими значеннями</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">idle</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">loading</span><span class="p">(</span><span class="n">progress</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">failed</span><span class="p">(</span><span class="n">Error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span><span class="w"> </span><span class="nc">Damageable</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="c1">// як interface, але потужніший</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">takeHit</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">{</span><span class="w">             </span><span class="c1">// розширення будь-якого типу</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">isEven</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">names</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Ann"</span><span class="p">,</span><span class="w"> </span><span class="s">"Bob"</span><span class="p">]</span><span class="w">             </span><span class="c1">// масив; словник — ["key": 1]</span>
+<span class="k">for</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"Bob"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Привіт, </span><span class="si">\(</span><span class="n">name</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">            </span><span class="c1">// інтерполяція рядків</span>
+<span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">sorted</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">names</span><span class="p">.</span><span class="bp">sorted</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// замикання з trailing-синтаксисом</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">nickname</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">nickname</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">     </span><span class="c1">// розгортання опціоналу</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">length</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">nickname</span><span class="p">?.</span><span class="bp">count</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="mi">0</span><span class="w">       </span><span class="c1">// опціональний ланцюжок і ??</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">firstOrNil</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="bp">first</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// узагальнення</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">loadProfile</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">"Vadim"</span>
+<span class="p">}</span></code></pre></div>
+<p>Кожен рядок цього фрагмента розібрано окремо: колекції — урок 4, цикли й <code>if let</code> — уроки 1 і 5, замикання — урок 7, класи й успадкування — уроки 9 і 13, enum — урок 8, протоколи — урок 23, узагальнення — урок 24, помилки (<code>do-catch</code>, <code>try?</code>, <code>defer</code>) — урок 17, конкурентність — урок 18.</p>
+<p>Що одразу впадає в око:</p>
+<table>
+<thead>
+<tr>
+<th>C#</th>
+<th>Swift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>var x = 5;</code> / <code>readonly</code></td>
+<td><code>var x = 5</code> / <code>let x = 5</code></td>
+</tr>
+<tr>
+<td><code>string? s</code></td>
+<td><code>var s: String?</code></td>
+</tr>
+<tr>
+<td><code>int Foo(int a)</code></td>
+<td><code>func foo(a: Int) -&gt; Int</code></td>
+</tr>
+<tr>
+<td><code>Foo(a: 1)</code> — іменовані аргументи опційні</td>
+<td><code>foo(a: 1)</code> — мітки обов'язкові, якщо не <code>_</code></td>
+</tr>
+<tr>
+<td><code>interface</code></td>
+<td><code>protocol</code></td>
+</tr>
+<tr>
+<td>extension methods (static class)</td>
+<td><code>extension</code> будь-якого типу, з властивостями й протоколами</td>
+</tr>
+<tr>
+<td><code>switch</code> з <code>break</code></td>
+<td><code>switch</code> без провалювання, обов'язково вичерпний</td>
+</tr>
+<tr>
+<td><code>Task&lt;T&gt;</code>, <code>async</code>/<code>await</code></td>
+<td><code>async</code>/<code>await</code>, <code>Task</code>, актори</td>
+</tr>
+<tr>
+<td>GC</td>
+<td>ARC</td>
+</tr>
+<tr>
+<td><code>;</code> в кінці</td>
+<td>не потрібна</td>
+</tr>
+</tbody>
+</table>
+<h2 id="playground-і-перший-запуск"><a href="#playground-і-перший-запуск">Playground і перший запуск</a></h2>
+<p>Найшвидший спосіб пробувати код:</p>
+<ol>
+<li>Xcode → File → New → Playground → Blank. Код виконується одразу, результати видно праворуч.</li>
+<li>Або Swift-файл у терміналі: <code>swift hello.swift</code>. Код верхнього рівня виконується зверху вниз, <code>main()</code> не потрібна.</li>
+<li>Для чогось більшого — <code>swift package init --type executable</code> і <code>swift run</code>.</li>
+</ol>
+<p><code>print</code> виводить у консоль, кілька аргументів розділяються пробілом:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="bp">print</span><span class="p">(</span><span class="s">"HP:"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">"з"</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w">   </span><span class="c1">// HP: 42 з 100</span>
+<span class="bp">print</span><span class="p">(</span><span class="s">"loading"</span><span class="p">,</span><span class="w"> </span><span class="n">terminator</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="p">)</span><span class="w"> </span><span class="c1">// без переходу на новий рядок</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Створи Playground, оголоси структуру <code>Item</code> з назвою й ціною та клас <code>Inventory</code> з масивом предметів і методом <code>add</code>.</li>
+<li>Додай <code>enum Rarity</code> з варіантами <code>common</code>, <code>rare</code>, <code>epic</code> і поле <code>rarity</code> в <code>Item</code>.</li>
+<li>Виведи загальну вартість інвентарю. Не переймайся, якщо щось не компілюється — усе розберемо в наступних уроках.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><span></span><a class="next" href="01-basics.html"><small>Наступний</small>Основи</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Непрозорі й упаковані типи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li class="current"><a href="25-opaque-types.html" aria-current="page"><span class="num">25</span> Непрозорі й упаковані типи</a><ol class="sections"><li><a href="#звідки-береться-проблема">Звідки береться проблема</a></li><li><a href="#повернення-непрозорого-типу">Повернення непрозорого типу</a></li><li><a href="#упаковані-протокольні-типи">Упаковані протокольні типи</a></li><li><a href="#три-способи-зберігати-щось-що-відповідає-протоколу">Три способи зберігати «щось, що відповідає протоколу»</a></li><li><a href="#різниця-між-some-і-any">Різниця між some і any</a></li><li><a href="#непрозорі-типи-параметрів">Непрозорі типи параметрів</a></li></ol></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 25</p>
+  <h1>Непрозорі й упаковані типи</h1>
+  <p class="lede"><code>some Protocol</code> і <code>any Protocol</code>: що це, чим відрізняються, коли що використовувати, і як <code>some</code> у параметрах замінює generic-синтаксис.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/opaquetypes/">opaquetypes</a></p>
+<h2 id="звідки-береться-проблема"><a href="#звідки-береться-проблема">Звідки береться проблема</a></h2>
+<p>Generic-код у Swift зберігає точні типи — і це добре для продуктивності, але погано для сигнатур. Подивись, який тип має звичайний ланцюжок ледачих операцій:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">prices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">199</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">299</span><span class="p">]</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">premium</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">prices</span><span class="p">.</span><span class="kr">lazy</span>
+<span class="w">    </span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">Double</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// тип premium:</span>
+<span class="c1">// LazyMapSequence&lt;LazyFilterSequence&lt;LazySequence&lt;[Int]&gt;.Elements&gt;, Double&gt;</span></code></pre></div>
+<p>Якщо загорнути цей ланцюжок у функцію й написати тип результату явно, деталі реалізації стануть частиною API: змінив <code>filter</code> на <code>prefix</code> — змінився тип, і всі, хто використовує функцію, мусять перекомпілюватися або ламаються.</p>
+<h2 id="повернення-непрозорого-типу"><a href="#повернення-непрозорого-типу">Повернення непрозорого типу</a></h2>
+<p><code>some Sequence&lt;Double&gt;</code> означає: «функція повертає <strong>один конкретний</strong> тип, що відповідає <code>Sequence</code> з елементами <code>Double</code>, але я не кажу який».</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">discountedPrices</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">prices</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Sequence</span><span class="p">&lt;</span><span class="nb">Double</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">prices</span><span class="p">.</span><span class="kr">lazy</span>
+<span class="w">        </span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">Double</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">discountedPrices</span><span class="p">([</span><span class="mi">199</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w">        </span><span class="c1">// ≈159.2, ≈79.2</span>
+<span class="p">}</span></code></pre></div>
+<p>Порівняй, хто обирає конкретний тип:</p>
+<ul>
+<li>generic <code>&lt;T: Sequence&gt;</code>: конкретний тип обирає <strong>той, хто викликає</strong>;</li>
+<li><code>some Sequence</code> у результаті: конкретний тип обирає <strong>реалізація</strong>, а викликач бачить лише протокол.</li>
+</ul>
+<p>Компілятор при цьому <strong>знає</strong> справжній тип: немає накладних витрат, а асоційовані типи протоколу (як <code>Element</code>) лишаються відомими. Тому <code>for p in ...</code> вище знає, що <code>p</code> — <code>Double</code>.</p>
+<p>Головне правило: усі шляхи повернення мають давати <strong>той самий</strong> конкретний тип:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">prices</span><span class="p">(</span><span class="n">onlyPaid</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">all</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Sequence</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">onlyPaid</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">all</span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// [Int]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">all</span><span class="p">.</span><span class="kr">lazy</span><span class="w">                       </span><span class="c1">// помилка: LazySequence&lt;[Int]&gt; — інший тип</span>
+<span class="p">}</span></code></pre></div>
+<p>Виправити можна, звівши обидві гілки до одного типу (тут — повертати <code>[Int]</code> в обох), або повернути упакований тип <code>any Sequence&lt;Int&gt;</code>.</p>
+<p>Конкретний тип може <strong>залежати від generic-параметра</strong> — правило «один тип» від цього не порушується, бо для кожного <code>T</code> це один і той самий тип:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">pairwise</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Sequence</span><span class="o">&lt;</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">zip</span><span class="p">(</span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="bp">dropFirst</span><span class="p">())</span><span class="w">       </span><span class="c1">// завжди Zip2Sequence&lt;[T], ArraySlice&lt;T&gt;&gt;</span>
+<span class="p">}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pairwise</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">next</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">prev</span><span class="p">)</span><span class="w">   </span><span class="c1">// 4, 5 — типи елементів відомі компілятору</span>
+<span class="p">}</span></code></pre></div>
+<p>Непрозорий тип не можна використовувати у вимогах протоколу і всередині функціональних типів параметрів. А метод класу з результатом <code>some P</code> скомпілюється, але перевизначити його в підкласі не вийде — у підкласу був би інший прихований тип.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Найвідоміший приклад — <code>var body: some View</code> у SwiftUI. Справжній тип <code>body</code> — гігантський вкладений generic-тип, який компілятор знає, а ти не мусиш писати.</p>
+</aside>
+<h2 id="упаковані-протокольні-типи"><a href="#упаковані-протокольні-типи">Упаковані протокольні типи</a></h2>
+<p><code>any P</code> — це «коробка» (existential), в якій може лежати <strong>будь-яке</strong> значення, що відповідає протоколу, причому різні значення можуть мати різні типи. Візьмемо знижки:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Discount</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Percent</span><span class="p">:</span><span class="w"> </span><span class="n">Discount</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Fixed</span><span class="p">:</span><span class="w"> </span><span class="n">Discount</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">amount</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// конфіг з сервера: різні типи знижок в одному масиві</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">activeDiscounts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">any</span><span class="w"> </span><span class="n">Discount</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">Percent</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="n">Fixed</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">discount</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">Discount</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">code</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="s">"FIX"</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">Fixed</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Percent</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">   </span><span class="c1">// різні типи — ок</span>
+<span class="p">}</span></code></pre></div>
+<p>Ціна гнучкості:</p>
+<ul>
+<li>значення зберігається в коробці, великі значення — в купі;</li>
+<li>виклики методів ідуть через динамічну диспетчеризацію;</li>
+<li>компілятор не знає конкретного типу, тож для протоколів з асоційованими типами чи <code>Self</code>-вимогами частина можливостей недоступна напряму.</li>
+</ul>
+<p>Щоб отримати з коробки конкретний тип, можна привести через <code>as?</code> або передати значення в generic-функцію — Swift автоматично «відкриє коробку»:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">finalPrice</span><span class="p">&lt;</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">Discount</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">d</span><span class="p">:</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">boxed</span><span class="p">:</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">Discount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Percent</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<span class="n">finalPrice</span><span class="p">(</span><span class="n">boxed</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="w">     </span><span class="c1">// D виведено як Percent</span></code></pre></div>
+<p><code>any Any</code> і <code>any AnyObject</code> нічого не змінюють — ці типи й так «коробки».</p>
+<h2 id="три-способи-зберігати-щось-що-відповідає-протоколу"><a href="#три-способи-зберігати-щось-що-відповідає-протоколу">Три способи зберігати «щось, що відповідає протоколу»</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Checkout1</span><span class="p">&lt;</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">Discount</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">discounts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">D</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// generic: усі одного типу, тип обирає той, хто створює</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Checkout2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">discounts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">any</span><span class="w"> </span><span class="n">Discount</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">     </span><span class="c1">// упакований: різні типи впереміш</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">checkout3</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">discounts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">some</span><span class="w"> </span><span class="n">Discount</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">       </span><span class="c1">// непрозорий параметр: усі одного типу, як у варіанті 1</span></code></pre></div>
+<h2 id="різниця-між-some-і-any"><a href="#різниця-між-some-і-any">Різниця між some і any</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>some P</code></th>
+<th><code>any P</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Хто знає конкретний тип</td>
+<td>компілятор</td>
+<td>тільки рантайм</td>
+</tr>
+<tr>
+<td>Різні типи в різних місцях</td>
+<td>ні, один тип</td>
+<td>так</td>
+</tr>
+<tr>
+<td>Різнорідні колекції</td>
+<td>ні</td>
+<td>так, <code>[any P]</code></td>
+</tr>
+<tr>
+<td>Вартість</td>
+<td>як у конкретного типу</td>
+<td>коробка + динамічні виклики</td>
+</tr>
+<tr>
+<td>Асоційовані типи й <code>Self</code></td>
+<td>зберігаються</td>
+<td>обмежено</td>
+</tr>
+</tbody>
+</table>
+<p>Особливо помітна різниця з <code>Equatable</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">makeID</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="nb">Equatable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">makeID</span><span class="p">(),</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">makeID</span><span class="p">()</span>
+<span class="n">a</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">b</span><span class="w">                                  </span><span class="c1">// ок: компілятор знає, що це той самий тип</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">x</span><span class="p">:</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="nb">Equatable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">y</span><span class="p">:</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="nb">Equatable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"42"</span>
+<span class="c1">// x == y                               // помилка: типи можуть бути різні</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Правило вибору: <strong>за замовчуванням <code>some</code></strong> (або generics), <strong><code>any</code> — коли справді треба зберігати різні типи</strong> разом чи змінювати тип під час виконання.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>any P</code> — це звичайне використання інтерфейсу як типу в C#, з боксингом для структур. Аналога <code>some P</code> у C# немає: найближче — повертати конкретний тип, але приховати його неможливо.</p>
+</aside>
+<h2 id="непрозорі-типи-параметрів"><a href="#непрозорі-типи-параметрів">Непрозорі типи параметрів</a></h2>
+<p><code>some</code> у позиції <strong>параметра</strong> — скорочений запис generic-функції:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">preview</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">d</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Discount</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">d</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// те саме, що:</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">preview2</span><span class="p">&lt;</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">Discount</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">d</span><span class="p">:</span><span class="w"> </span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">d</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Правила:</p>
+<ul>
+<li>кожен параметр <code>some</code> — <strong>окремий</strong> параметр типу, тому <code>func compare(_ a: some Equatable, _ b: some Equatable)</code> приймає два різні типи, і <code>a == b</code> не скомпілюється;</li>
+<li>до <code>some</code> не можна додати <code>where</code> чи вимогу рівності типів — для цього повертайся до явного <code>&lt;T: P&gt;</code> з <code>where</code>;</li>
+<li><code>some</code> можна використовувати в параметрах функцій, ініціалізаторів і сабскриптів, комбінувати з <code>&amp;</code> і вкладати в інші типи: <code>[some Discount]</code>.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Напиши функцію <code>blackFridayDiscount() -&gt; some Discount</code>, що повертає комбінацію знижок (зроби generic-тип <code>Combined&lt;A, B&gt;</code>).</li>
+<li>Спробуй повернути з неї різні типи в різних гілках <code>if</code>. Виправ двома способами: зведенням до одного типу і через <code>any</code>.</li>
+<li>Збережи в масиві <code>[any Discount]</code> знижки з конфігу і застосуй їх по черзі.</li>
+<li>Перепиши generic-функцію з попереднього уроку з використанням <code>some</code> у параметрах. Де це неможливо?</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="24-generics.html"><small>Попередній</small>Узагальнення</a><a class="next" href="26-arc.html"><small>Наступний</small>Автоматичний підрахунок посилань (ARC)</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

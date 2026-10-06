@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Перелічення · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li class="current"><a href="08-enums.html" aria-current="page"><span class="num">08</span> Перелічення</a><ol class="sections"><li><a href="#синтаксис">Синтаксис</a></li><li><a href="#перелічення-і-switch">Перелічення і switch</a></li><li><a href="#перебір-варіантів">Перебір варіантів</a></li><li><a href="#асоційовані-значення">Асоційовані значення</a></li><li><a href="#сирі-значення">Сирі значення</a></li><li><a href="#рекурсивні-перелічення">Рекурсивні перелічення</a></li><li><a href="#методи-й-властивості">Методи й властивості</a></li></ol></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 08</p>
+  <h1>Перелічення</h1>
+  <p class="lede">Enum у Swift — це не набір іменованих чисел, як у C#, а повноцінний тип: з асоційованими значеннями, методами, протоколами й рекурсією. Мабуть, найпотужніший інструмент моделювання в мові.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/">enumerations</a></p>
+<h2 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">SubscriptionState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">active</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">grace</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">billingRetry</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">expired</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">Platform</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">iOS</span><span class="p">,</span><span class="w"> </span><span class="n">android</span><span class="p">,</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// в один рядок</span></code></pre></div>
+<p>Імена варіантів пишуть з малої літери. Тип — з великої і в однині.</p>
+<p>Варіанти <strong>не мають прихованих числових значень</strong>: <code>SubscriptionState.active</code> — це саме значення типу <code>SubscriptionState</code>, а не <code>0</code>.</p>
+<p>Коли тип відомий з контексту, ім'я типу можна пропустити:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">state</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">SubscriptionState</span><span class="p">.</span><span class="n">active</span>
+<span class="n">state</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">.</span><span class="n">grace</span><span class="w">          </span><span class="c1">// тип уже відомий</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>C#-enum — це обгортка над <code>int</code>, і <code>(SubscriptionState)42</code> компілюється. У Swift для власних enum неіснуюче значення неможливе. Виняток — enum, імпортовані з C та Objective-C: там у рантаймі може прийти невідоме значення, і для них існує <code>@unknown default</code> (урок 33).</p>
+</aside>
+<h2 id="перелічення-і-switch"><a href="#перелічення-і-switch">Перелічення і switch</a></h2>
+<p><code>switch</code> по enum має бути вичерпним. Якщо перелічити всі варіанти, <code>default</code> не потрібен, і це перевага: додав новий варіант — компілятор покаже всі місця, які треба оновити.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">badge</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n">SubscriptionState</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">active</span><span class="p">:</span><span class="w"> </span><span class="s">"PRO"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">grace</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">billingRetry</span><span class="p">:</span><span class="w"> </span><span class="s">"Проблема з оплатою"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">expired</span><span class="p">:</span><span class="w"> </span><span class="s">"Оформити підписку"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Уникай <code>default</code> у switch по власних enum. Він «ковтає» нові варіанти, і компілятор перестає попереджати.</p>
+</aside>
+<h2 id="перебір-варіантів"><a href="#перебір-варіантів">Перебір варіантів</a></h2>
+<p>Протокол <code>CaseIterable</code> додає статичну колекцію <code>allCases</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Difficulty</span><span class="p">:</span><span class="w"> </span><span class="n">CaseIterable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">easy</span><span class="p">,</span><span class="w"> </span><span class="n">normal</span><span class="p">,</span><span class="w"> </span><span class="n">hard</span><span class="p">,</span><span class="w"> </span><span class="n">nightmare</span>
+<span class="p">}</span>
+
+<span class="n">Difficulty</span><span class="p">.</span><span class="n">allCases</span><span class="p">.</span><span class="bp">count</span><span class="w">          </span><span class="c1">// 4</span>
+<span class="k">for</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Difficulty</span><span class="p">.</span><span class="n">allCases</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Компілятор генерує <code>allCases</code> сам, якщо варіанти не мають асоційованих значень.</p>
+<h2 id="асоційовані-значення"><a href="#асоційовані-значення">Асоційовані значення</a></h2>
+<p>Кожен варіант може нести власні дані різних типів. Значення фіксуються в момент створення екземпляра і можуть відрізнятися між екземплярами одного варіанта.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">PurchaseResult</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">success</span><span class="p">(</span><span class="n">transactionID</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt64</span><span class="p">,</span><span class="w"> </span><span class="n">isTrial</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">pending</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">userCancelled</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">failed</span><span class="p">(</span><span class="n">Error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PurchaseResult</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">transactionID</span><span class="p">:</span><span class="w"> </span><span class="mi">2_000_000_123</span><span class="p">,</span><span class="w"> </span><span class="n">isTrial</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span></code></pre></div>
+<p>Дістати значення — через зразок у <code>switch</code> чи <code>if case</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">switch</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">isTrial</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Покупка </span><span class="si">\(</span><span class="n">id</span><span class="si">)</span><span class="s">, trial: </span><span class="si">\(</span><span class="n">isTrial</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">pending</span><span class="p">:</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Чекаємо підтвердження (Ask to Buy)"</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">userCancelled</span><span class="p">:</span>
+<span class="w">    </span><span class="k">break</span>
+<span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">failed</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">error</span><span class="p">):</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Помилка:"</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// якщо всі значення прив'язуються як константи, let можна винести вперед</span>
+<span class="k">if</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// var замість let — локальна змінна копія, яку можна змінювати</span>
+<span class="k">if</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">failed</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">error</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">error</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">wrapped</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="w">    </span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Мітки асоційованих значень необов'язкові, але покращують читабельність.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Це discriminated union / sum type. У C# такого прямого механізму немає: його емулюють ієрархією record-класів з базовим абстрактним типом або OneOf-бібліотеками. У Swift — це звичайний <code>enum</code>, і компілятор перевіряє вичерпність. Ти вже бачив, як це використовує StoreKit 2: <code>Product.PurchaseResult</code> — саме такий enum.</p>
+</aside>
+<h2 id="сирі-значення"><a href="#сирі-значення">Сирі значення</a></h2>
+<p>Альтернатива асоційованим значенням — <strong>сирі значення</strong> (raw values): заздалегідь задані значення одного типу для всіх варіантів.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">HTTPStatus</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">200</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">notFound</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">404</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">serverError</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">500</span>
+<span class="p">}</span>
+
+<span class="n">HTTPStatus</span><span class="p">.</span><span class="n">notFound</span><span class="p">.</span><span class="n">rawValue</span><span class="w">   </span><span class="c1">// 404</span></code></pre></div>
+<p>На практиці сирий тип — найчастіше <code>String</code> (ключі для аналітики, JSON, конфігів) або <code>Int</code> (коди, порядок). Повторювати те саме сире значення у двох варіантах компілятор не дасть.</p>
+<p>Не плутай з асоційованими значеннями: <code>HTTPStatus.notFound.rawValue</code> завжди <code>404</code> — це властивість варіанта, а <code>.failed(error)</code> несе різну помилку щоразу — це дані конкретного значення. Обидва механізми в одному enum поєднати не вийде.</p>
+<h3 id="неявні-сирі-значення"><a href="#неявні-сирі-значення">Неявні сирі значення</a></h3>
+<p>Для цілих чисел значення рахуються від попереднього (+1), а перший без явного значення — <code>0</code>. Для рядків сире значення — ім'я варіанта:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Priority</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">low</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">medium</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">high</span><span class="w">       </span><span class="c1">// high == 21 — наступне після попереднього</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">Step</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">welcome</span><span class="p">,</span><span class="w"> </span><span class="n">permissions</span><span class="p">,</span><span class="w"> </span><span class="n">paywall</span><span class="w">     </span><span class="c1">// 0, 1, 2 — нумерація з нуля</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">Screen</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">onboarding</span><span class="p">,</span><span class="w"> </span><span class="n">paywall</span><span class="p">,</span><span class="w"> </span><span class="n">home</span><span class="w">         </span><span class="c1">// "onboarding", "paywall", "home"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"app_settings"</span>
+<span class="p">}</span></code></pre></div>
+<p>Рядкові сирі значення зручні для ключів аналітики, Remote Config і JSON.</p>
+<h3 id="створення-з-сирого-значення"><a href="#створення-з-сирого-значення">Створення з сирого значення</a></h3>
+<p>Enum з сирим типом автоматично отримує <strong>failable</strong> ініціалізатор <code>init?(rawValue:)</code> — він повертає опціонал:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">fromConfig</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"paywall"</span>
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">screen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Screen</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span><span class="w"> </span><span class="n">fromConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">open</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Невідомий екран </span><span class="si">\(</span><span class="n">fromConfig</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Значення з сервера чи конфіга завжди можуть бути невідомими (нова версія бекенду). Явно обробляй <code>nil</code>, а не роби <code>Screen(rawValue: x)!</code>.</p>
+</aside>
+<h2 id="рекурсивні-перелічення"><a href="#рекурсивні-перелічення">Рекурсивні перелічення</a></h2>
+<p>Варіант може містити значення того самого enum-типу. Такий варіант позначають <code>indirect</code> (або весь enum), щоб компілятор зберігав дані через непрямий рівень — інакше розмір значення був би нескінченним.</p>
+<p>Приклад — діалог у грі, де кожна репліка веде до наступної, а вибір розгалужує історію:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">indirect</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="nc">Dialogue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">line</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">:</span><span class="w"> </span><span class="n">Dialogue</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">choice</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">yes</span><span class="p">:</span><span class="w"> </span><span class="n">Dialogue</span><span class="p">,</span><span class="w"> </span><span class="n">no</span><span class="p">:</span><span class="w"> </span><span class="n">Dialogue</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">end</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">intro</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Dialogue</span><span class="p">.</span><span class="n">line</span><span class="p">(</span><span class="s">"Привіт, мандрівнику!"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">next</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="s">"Допоможеш нам?"</span><span class="p">,</span>
+<span class="w">        </span><span class="n">yes</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">line</span><span class="p">(</span><span class="s">"Дякуємо!"</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">end</span><span class="p">),</span>
+<span class="w">        </span><span class="n">no</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">end</span><span class="p">))</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">longestPath</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">d</span><span class="p">:</span><span class="w"> </span><span class="n">Dialogue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">end</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">line</span><span class="p">(</span><span class="kc">_</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">next</span><span class="p">):</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">longestPath</span><span class="p">(</span><span class="n">next</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="kc">_</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">yes</span><span class="p">,</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">no</span><span class="p">):</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">max</span><span class="p">(</span><span class="n">longestPath</span><span class="p">(</span><span class="n">yes</span><span class="p">),</span><span class="w"> </span><span class="n">longestPath</span><span class="p">(</span><span class="n">no</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">longestPath</span><span class="p">(</span><span class="n">intro</span><span class="p">)</span><span class="w">   </span><span class="c1">// 3</span></code></pre></div>
+<p>Рекурсивні enum природно описують дерева й ланцюжки: AST, сценарії, вкладені меню, JSON.</p>
+<h2 id="методи-й-властивості"><a href="#методи-й-властивості">Методи й властивості</a></h2>
+<p>Enum може мати методи, обчислювані властивості, ініціалізатори й реалізовувати протоколи. Збережених властивостей <strong>екземпляра</strong> в enum немає, а от статичні збережені властивості дозволені: <code>static let defaultValue = ...</code>.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">SubscriptionState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">hasAccess</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="kc">self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">grace</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">billingRetry</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">expired</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">expire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">.</span><span class="n">expired</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Змоделюй стан екрана завантаження: <code>idle</code>, <code>loading(progress: Double)</code>, <code>loaded([String])</code>, <code>failed(message: String)</code>. Напиши обчислювану властивість <code>isBusy</code>.</li>
+<li>Зроби enum <code>AnalyticsEvent</code> з асоційованими значеннями (<code>screenView(name:)</code>, <code>purchase(productID:price:)</code>, <code>abTestAssigned(test:variant:)</code>) і функцію, що перетворює подію на <code>(name: String, params: [String: String])</code>.</li>
+<li>Зроби enum <code>Rarity: Int, CaseIterable</code>, реалізуй для нього <code>Comparable</code> через <code>rawValue</code> (оператор <code>&lt;</code>) і відсортуй масив предметів за рідкістю. Потім прибери сирий тип і перевір: для enum без сирих значень компілятор згенерує <code>Comparable</code> сам за порядком варіантів.</li>
+<li>Розшир <code>Dialogue</code> варіантом <code>reward(coins: Int, next: Dialogue)</code> і функцією, що рахує максимальну кількість монет, яку можна отримати в діалозі.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="07-closures.html"><small>Попередній</small>Замикання</a><a class="next" href="09-structs-classes.html"><small>Наступний</small>Структури й класи</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

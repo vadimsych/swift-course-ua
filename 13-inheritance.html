@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Успадкування · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li class="current"><a href="13-inheritance.html" aria-current="page"><span class="num">13</span> Успадкування</a><ol class="sections"><li><a href="#базовий-клас">Базовий клас</a></li><li><a href="#підкласи">Підкласи</a></li><li><a href="#перевизначення">Перевизначення</a></li><li><a href="#заборона-перевизначення">Заборона перевизначення</a></li></ol></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 13</p>
+  <h1>Успадкування</h1>
+  <p class="lede">Базові класи, підкласи, перевизначення методів, властивостей і спостерігачів, звернення до <code>super</code> і заборона перевизначення через <code>final</code>.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/inheritance/">inheritance</a></p>
+<h2 id="базовий-клас"><a href="#базовий-клас">Базовий клас</a></h2>
+<p>Успадковувати можуть <strong>лише класи</strong>. Клас, що ні від кого не успадковується, — базовий. У Swift немає спільного кореневого класу на кшталт <code>System.Object</code>: якщо суперклас не вказано, клас просто стає базовим.</p>
+<p>Приклад — базовий екран застосунку, який знає свою назву для аналітики й реагує на показ:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">""</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">analyticsName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">"screen_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">title</span><span class="p">.</span><span class="n">lowercased</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">didAppear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"track:"</span><span class="p">,</span><span class="w"> </span><span class="n">analyticsName</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="підкласи"><a href="#підкласи">Підкласи</a></h2>
+<p>Суперклас пишуть після двокрапки. Підклас отримує все від суперкласу і може додати своє:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">PaywallScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">variant</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"control"</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">paywall</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PaywallScreen</span><span class="p">()</span>
+<span class="n">paywall</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Paywall"</span>
+<span class="n">paywall</span><span class="p">.</span><span class="n">variant</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"b"</span>
+<span class="n">paywall</span><span class="p">.</span><span class="n">didAppear</span><span class="p">()</span><span class="w">   </span><span class="c1">// track: screen_paywall</span></code></pre></div>
+<p>Підклас теж можна успадковувати — ланцюжок будь-якої глибини.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Те саме, що <code>class PaywallScreen : Screen</code>. Множинного успадкування класів немає, як і в C#. Протоколи (аналог інтерфейсів) пишуться в тому ж списку після двокрапки, суперклас — першим.</p>
+</aside>
+<h2 id="перевизначення"><a href="#перевизначення">Перевизначення</a></h2>
+<p>Щоб перевизначити метод, властивість чи сабскрипт, обов'язково пишуть <code>override</code>. Без нього перевизначення — помилка компіляції, а <code>override</code> без відповідного члена в суперкласі — теж помилка. Так випадкове перевизначення неможливе.</p>
+<h3 id="звернення-до-super"><a href="#звернення-до-super">Звернення до super</a></h3>
+<p>Реалізацію суперкласу викликають через <code>super</code>: <code>super.didAppear()</code>, <code>super.analyticsName</code>, <code>super[index]</code>.</p>
+<h3 id="перевизначення-методів"><a href="#перевизначення-методів">Перевизначення методів</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">OnboardingScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">step</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">didAppear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">super</span><span class="p">.</span><span class="n">didAppear</span><span class="p">()</span><span class="w">                      </span><span class="c1">// базова аналітика</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"onboarding step </span><span class="si">\(</span><span class="n">step</span><span class="si">)</span><span class="s"> shown"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">screens</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Screen</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">PaywallScreen</span><span class="p">(),</span><span class="w"> </span><span class="n">OnboardingScreen</span><span class="p">()]</span>
+<span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">screens</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">didAppear</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// викликається реалізація підкласу</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>У Swift <strong>усі</strong> методи класу за замовчуванням «віртуальні» — немає потреби в <code>virtual</code>. Натомість <code>override</code> обов'язковий завжди. Поведінки <code>new</code> (приховування методу) немає.</p>
+</aside>
+<h3 id="перевизначення-властивостей"><a href="#перевизначення-властивостей">Перевизначення властивостей</a></h3>
+<p>Перевизначити можна будь-яку успадковану властивість, і для підкласу неважливо, як вона влаштована в суперкласі: збережена чи обчислювана — у <code>override var</code> однаково пишуть ім'я, тип і власні <code>get</code>/<code>set</code>.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">ExperimentPaywall</span><span class="p">:</span><span class="w"> </span><span class="n">PaywallScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">analyticsName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">super</span><span class="p">.</span><span class="n">analyticsName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variant</span><span class="w">    </span><span class="c1">// screen_paywall_b</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Правила:</p>
+<ul>
+<li>Властивість лише для читання можна зробити read-write, додавши сеттер.</li>
+<li>Read-write властивість <strong>не можна</strong> зробити read-only.</li>
+<li>Якщо додаєш сеттер, мусиш дати й геттер (хоча б <code>super.property</code>).</li>
+</ul>
+<h3 id="перевизначення-спостерігачів"><a href="#перевизначення-спостерігачів">Перевизначення спостерігачів</a></h3>
+<p>Підклас може додати <code>willSet</code>/<code>didSet</code> до успадкованої властивості, навіть якщо суперклас про це нічого не знає:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">LoggedScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">didSet</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Заголовок змінено: </span><span class="si">\(</span><span class="n">oldValue</span><span class="si">)</span><span class="s"> → </span><span class="si">\(</span><span class="n">title</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Не можна додавати спостерігачі до успадкованих <strong>констант</strong> і read-only властивостей — їх неможливо змінити. Якщо ти вже перевизначаєш сеттер, <code>didSet</code> поруч не потрібен (і не дозволений) — реакцію на зміну пиши в самому сеттері.</p>
+<h3 id="перевизначення-членів-типу"><a href="#перевизначення-членів-типу">Перевизначення членів типу</a></h3>
+<p>Перевизначати можна не лише члени екземпляра, а й методи та обчислювані властивості <strong>типу</strong>, оголошені через <code>class</code> (на відміну від <code>static</code>, які перевизначати не можна):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Screen2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">defaultTransition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"push"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">make</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Screen2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Screen2</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">ModalScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">defaultTransition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"modal"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">make</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Screen2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ModalScreen</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="заборона-перевизначення"><a href="#заборона-перевизначення">Заборона перевизначення</a></h2>
+<p><code>final</code> перед методом, властивістю чи сабскриптом забороняє перевизначати їх у підкласах (зокрема й члени, додані в розширенні). <code>final class</code> забороняє успадковувати клас взагалі.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SettingsScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="c1">// class DebugSettings: SettingsScreen { }    // помилка</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">HomeScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">final</span><span class="w"> </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">didAppear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">       </span><span class="c1">// далі перевизначати не можна</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Позначай класи <code>final</code> за замовчуванням. Це стандартна практика в Swift: компілятор робить прямі виклики замість динамічних, а відкритість для успадкування — свідоме рішення. У Swift-коді глибокі ієрархії рідкість — поведінку частіше збирають з протоколів і композиції.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Зроби ієрархію <code>Purchase</code> → <code>SubscriptionPurchase</code>, <code>ConsumablePurchase</code> з перевизначеною обчислюваною властивістю <code>displayPrice</code> і методом <code>describe()</code>, що викликає <code>super.describe()</code>.</li>
+<li>Додай до підкласу спостерігач <code>didSet</code> на успадковану властивість і переконайся, що спостерігач суперкласу теж викликається.</li>
+<li>Спробуй перевизначити <code>let</code>-властивість і read-write властивість як read-only. Прочитай повідомлення компілятора.</li>
+<li>Перепиши ієрархію з пункту 1 на протокол <code>Purchase</code> і структури. Що стало простіше, а що складніше?</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="12-subscripts.html"><small>Попередній</small>Сабскрипти</a><a class="next" href="14-initialization.html"><small>Наступний</small>Ініціалізація</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

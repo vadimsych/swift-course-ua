@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Протоколи · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li class="current"><a href="23-protocols.html" aria-current="page"><span class="num">23</span> Протоколи</a><ol class="sections"><li><a href="#синтаксис">Синтаксис</a></li><li><a href="#вимоги-до-властивостей">Вимоги до властивостей</a></li><li><a href="#вимоги-до-методів">Вимоги до методів</a></li><li><a href="#вимоги-до-мутуючих-методів">Вимоги до мутуючих методів</a></li><li><a href="#вимоги-до-ініціалізаторів">Вимоги до ініціалізаторів</a></li><li><a href="#протоколи-лише-із-семантичними-вимогами">Протоколи лише із семантичними вимогами</a></li><li><a href="#протоколи-як-типи">Протоколи як типи</a></li><li><a href="#делегування">Делегування</a></li><li><a href="#відповідність-через-розширення">Відповідність через розширення</a></li><li><a href="#синтезована-реалізація">Синтезована реалізація</a></li><li><a href="#неявна-відповідність">Неявна відповідність</a></li><li><a href="#колекції-протокольних-типів">Колекції протокольних типів</a></li><li><a href="#успадкування-протоколів">Успадкування протоколів</a></li><li><a href="#протоколи-лише-для-класів">Протоколи лише для класів</a></li><li><a href="#композиція-протоколів">Композиція протоколів</a></li><li><a href="#перевірка-відповідності">Перевірка відповідності</a></li><li><a href="#опціональні-вимоги">Опціональні вимоги</a></li><li><a href="#розширення-протоколів">Розширення протоколів</a></li></ol></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 23</p>
+  <h1>Протоколи</h1>
+  <p class="lede">Протоколи — центральний інструмент абстракції в Swift. Вимоги до властивостей, методів і ініціалізаторів, протоколи як типи, делегування, розширення протоколів з реалізацією за замовчуванням, синтезовані й неявні відповідності, композиція, умовна відповідність.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/">protocols</a></p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Протокол — це інтерфейс, але потужніший. Головне, чого в C# немає: реалізацію за замовчуванням дописують окремо, через розширення, і протокол можна «приєднати» навіть до чужого типу, наприклад до <code>String</code>, не змінюючи його код.</p>
+</aside>
+<h2 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// вимоги</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">PurchaseEvent</span><span class="p">:</span><span class="w"> </span><span class="n">Trackable</span><span class="p">,</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AnalyticsScreen</span><span class="p">:</span><span class="w"> </span><span class="bp">UIViewController</span><span class="p">,</span><span class="w"> </span><span class="n">Trackable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// суперклас — першим</span></code></pre></div>
+<p>Тип <strong>приймає</strong> (adopts) протокол, коли перелічує його в оголошенні, і <strong>відповідає</strong> (conforms) йому, коли реалізує всі вимоги.</p>
+<h2 id="вимоги-до-властивостей"><a href="#вимоги-до-властивостей">Вимоги до властивостей</a></h2>
+<p>Протокол вказує ім'я, тип і чи властивість лише для читання (<code>{ get }</code>) або для читання й запису (<code>{ get set }</code>). Він <strong>не</strong> вказує, збережена вона чи обчислювана.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">eventName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">parameters</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ScreenView</span><span class="p">:</span><span class="w"> </span><span class="n">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">screen</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">eventName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"screen_view"</span><span class="w"> </span><span class="p">}</span><span class="w">                 </span><span class="c1">// обчислювана</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">parameters</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">[</span><span class="s">"screen"</span><span class="p">:</span><span class="w"> </span><span class="n">screen</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li><code>{ get set }</code> не можна задовольнити константою чи read-only обчислюваною властивістю.</li>
+<li><code>{ get }</code> можна задовольнити будь-якою властивістю, зокрема й змінною <code>var</code>.</li>
+<li>Вимоги до властивостей завжди пишуться через <code>var</code>.</li>
+<li>Статичні вимоги позначаються <code>static</code> (у класах їх можна реалізувати як <code>class</code>).</li>
+</ul>
+<h2 id="вимоги-до-методів"><a href="#вимоги-до-методів">Вимоги до методів</a></h2>
+<p>Метод описується як звичайна сигнатура без тіла. Значення параметрів за замовчуванням у протоколі задати не можна (але можна через розширення, див. нижче).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">PriceFormatter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">makeDefault</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kc">Self</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="вимоги-до-мутуючих-методів"><a href="#вимоги-до-мутуючих-методів">Вимоги до мутуючих методів</a></h2>
+<p>Якщо метод змінює екземпляр value type, у протоколі його позначають <code>mutating</code>. Класи при реалізації <code>mutating</code> не пишуть.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Resettable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Score</span><span class="p">:</span><span class="w"> </span><span class="n">Resettable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Session</span><span class="p">:</span><span class="w"> </span><span class="n">Resettable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">token</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// у класі без mutating</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="вимоги-до-ініціалізаторів"><a href="#вимоги-до-ініціалізаторів">Вимоги до ініціалізаторів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">ConfigDecodable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">])</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="ініціалізатори-протоколу-в-класах"><a href="#ініціалізатори-протоколу-в-класах">Ініціалізатори протоколу в класах</a></h3>
+<p>Клас реалізує вимогу-ініціалізатор як <code>required</code>, щоб і всі підкласи гарантовано її мали:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">RemoteSetting</span><span class="p">:</span><span class="w"> </span><span class="n">ConfigDecodable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">raw</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span>
+<span class="w">    </span><span class="kr">required</span><span class="w"> </span><span class="kd">init</span><span class="p">(</span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">raw</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p><code>final</code>-класу <code>required</code> не потрібен: підкласів у нього не буде. Якщо ініціалізатор одночасно перевизначає ініціалізатор суперкласу і реалізує протокол, пишуть <code>required override</code>.</p>
+<h3 id="failable-вимоги"><a href="#failable-вимоги">Failable-вимоги</a></h3>
+<p>Протокол може вимагати <code>init?</code>. Його можна реалізувати як <code>init?</code> або як звичайний <code>init</code>. Вимогу <code>init</code> (non-failable) — лише звичайним або <code>init!</code>.</p>
+<h2 id="протоколи-лише-із-семантичними-вимогами"><a href="#протоколи-лише-із-семантичними-вимогами">Протоколи лише із семантичними вимогами</a></h2>
+<p>Бувають протоколи без жодних методів — вони лише позначають властивість типу. Приклад — <code>Sendable</code> («можна передавати між потоками»). Свій такий протокол-маркер теж можна оголосити:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">AnalyticsSafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// «цей тип не містить персональних даних»</span></code></pre></div>
+<h2 id="протоколи-як-типи"><a href="#протоколи-як-типи">Протоколи як типи</a></h2>
+<p>Протокол можна використовувати як тип, і є три способи:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="c1">// 1. Generic-обмеження: конкретний тип визначає викликач</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">send</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="n">Trackable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// 2. Непрозорий тип: конкретний тип визначає реалізація</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">makeEvent</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Trackable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ScreenView</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="s">"home"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// 3. Упакований (boxed) тип: будь-яке значення, що відповідає протоколу</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">queue</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">any</span><span class="w"> </span><span class="n">Trackable</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span></code></pre></div>
+<p>Детально різниця між <code>some</code> і <code>any</code> — в уроці про непрозорі типи. Коротко: <code>some</code>/generics зберігають конкретний тип для компілятора і швидші, <code>any</code> дає гнучкість (різнорідні колекції) ціною динамічної диспетчеризації.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>any Trackable</code> — це те, як у C# використовують інтерфейс як тип змінної: <code>ITrackable e</code>. Generics з обмеженням <code>where T : ITrackable</code> — це <code>T: Trackable</code>. У Swift ключове слово <code>any</code> робить «коробку» явною, бо вона має ціну.</p>
+</aside>
+<h2 id="делегування"><a href="#делегування">Делегування</a></h2>
+<p>Делегування — патерн, де об'єкт передає частину відповідальності іншому об'єкту. Інтерфейс делегата описують протоколом:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">PurchaseFlowDelegate</span><span class="p">:</span><span class="w"> </span><span class="nb">AnyObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">purchaseFlowDidStart</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">flow</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">purchaseFlow</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">flow</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">,</span><span class="w"> </span><span class="n">didFinishWith</span><span class="w"> </span><span class="n">productID</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">purchaseFlowDidCancel</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">flow</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PurchaseFlow</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">weak</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">delegate</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlowDelegate</span><span class="p">?</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">buy</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">productID</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">delegate</span><span class="p">?.</span><span class="n">purchaseFlowDidStart</span><span class="p">(</span><span class="kc">self</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// ... StoreKit ...</span>
+<span class="w">        </span><span class="n">delegate</span><span class="p">?.</span><span class="n">purchaseFlow</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span><span class="w"> </span><span class="n">didFinishWith</span><span class="p">:</span><span class="w"> </span><span class="n">productID</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PaywallController</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlowDelegate</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">flow</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">flow</span><span class="p">.</span><span class="n">delegate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">self</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">purchaseFlowDidStart</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">flow</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Спінер"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">purchaseFlow</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">flow</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">,</span><span class="w"> </span><span class="n">didFinishWith</span><span class="w"> </span><span class="n">productID</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Готово"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">purchaseFlowDidCancel</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">flow</span><span class="p">:</span><span class="w"> </span><span class="n">PurchaseFlow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Деталі:</p>
+<ul>
+<li>Протокол делегата обмежують <code>AnyObject</code>, щоб властивість <code>delegate</code> могла бути <code>weak</code> і не створювала циклу посилань.</li>
+<li>Першим параметром передають відправника — так один делегат може обслуговувати кілька об'єктів.</li>
+<li>Протокол делегата можна оголосити <strong>вкладеним</strong> у тип, якому він служить: <code>PurchaseFlow.Delegate</code>.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>У C# ту саму роль зазвичай грають події (<code>event Action&lt;string&gt; Finished</code>). Делегат у Swift — це «одна підписка», яка задається інтерфейсом. У сучасному Swift-коді делегати часто замінюють замиканнями або <code>async</code>-функціями, але в UIKit вони всюди.</p>
+</aside>
+<h2 id="відповідність-через-розширення"><a href="#відповідність-через-розширення">Відповідність через розширення</a></h2>
+<p>Відповідність протоколу можна додати існуючому типу, навіть якщо в тебе немає його вихідного коду. Усі екземпляри типу одразу отримують відповідність.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">DisplayPrice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">displayPrice</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Decimal</span><span class="p">:</span><span class="w"> </span><span class="n">DisplayPrice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">displayPrice</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="kc">self</span><span class="si">)</span><span class="s"> ₴"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">p</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">149</span>
+<span class="n">p</span><span class="p">.</span><span class="n">displayPrice</span><span class="w">   </span><span class="c1">// "149 ₴"</span></code></pre></div>
+<h3 id="умовна-відповідність"><a href="#умовна-відповідність">Умовна відповідність</a></h3>
+<p>Generic-тип може відповідати протоколу лише за певних умов — через <code>where</code> у розширенні:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Array</span><span class="p">:</span><span class="w"> </span><span class="n">DisplayPrice</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">DisplayPrice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">displayPrice</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">map</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">displayPrice</span><span class="p">).</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" + "</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">cart</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Decimal</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">]</span>
+<span class="n">cart</span><span class="p">.</span><span class="n">displayPrice</span><span class="w">   </span><span class="c1">// "99 ₴ + 49 ₴"</span></code></pre></div>
+<p>Масив <code>[String]</code> при цьому <code>DisplayPrice</code> не отримує.</p>
+<h3 id="оголошення-відповідності-окремо"><a href="#оголошення-відповідності-окремо">Оголошення відповідності окремо</a></h3>
+<p>Якщо тип уже має все потрібне, достатньо оголосити відповідність порожнім розширенням:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Coupon</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">displayPrice</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"−20%"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Coupon</span><span class="p">:</span><span class="w"> </span><span class="n">DisplayPrice</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p>Важливо: навіть якщо тип уже має всі потрібні члени, він відповідає протоколу лише після явного оголошення.</p>
+<h2 id="синтезована-реалізація"><a href="#синтезована-реалізація">Синтезована реалізація</a></h2>
+<p>Для поширених протоколів компілятор сам генерує реалізацію, якщо ти оголосив відповідність:</p>
+<ul>
+<li><strong><code>Equatable</code></strong> — для структур, усі збережені властивості яких <code>Equatable</code>, і для enum, усі асоційовані значення яких <code>Equatable</code> (enum без асоційованих значень — завжди).</li>
+<li><strong><code>Hashable</code></strong> — за тими самими правилами з <code>Hashable</code>.</li>
+<li><strong><code>Comparable</code></strong> — для enum <strong>без сирих значень</strong>: порівняння за порядком оголошення варіантів, а асоційовані значення мають бути <code>Comparable</code>.</li>
+<li><strong><code>Codable</code></strong> — для структур, класів і enum з <code>Codable</code>-полями.</li>
+</ul>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Money</span><span class="p">:</span><span class="w"> </span><span class="nb">Hashable</span><span class="p">,</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">amount</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">currency</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">Tier</span><span class="p">:</span><span class="w"> </span><span class="nb">Comparable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">free</span><span class="p">,</span><span class="w"> </span><span class="n">plus</span><span class="p">,</span><span class="w"> </span><span class="n">pro</span>
+<span class="p">}</span>
+
+<span class="n">Money</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span><span class="w">   </span><span class="c1">// true</span>
+<span class="n">Tier</span><span class="p">.</span><span class="n">free</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Tier</span><span class="p">.</span><span class="n">pro</span><span class="w">                                                      </span><span class="c1">// true</span></code></pre></div>
+<p>Синтез працює, лише якщо відповідність оголошено в тому самому файлі, що й сам тип (в оголошенні або в розширенні в цьому файлі).</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Схоже на те, що <code>record</code> генерує <code>Equals</code> і <code>GetHashCode</code>. У Swift це працює для звичайних структур і enum — достатньо дописати протокол.</p>
+</aside>
+<h2 id="неявна-відповідність"><a href="#неявна-відповідність">Неявна відповідність</a></h2>
+<p>Для трьох протоколів компілятор виводить відповідність <strong>сам</strong>, без оголошення, якщо тип задовольняє їхні вимоги:</p>
+<ul>
+<li><strong><code>Copyable</code></strong> — значення можна копіювати (майже всі типи);</li>
+<li><strong><code>Sendable</code></strong> — для непублічних структур і enum, усі поля яких <code>Sendable</code> (урок про конкурентність);</li>
+<li><strong><code>BitwiseCopyable</code></strong> — значення копіюється простим копіюванням байтів (прості структури з числами).</li>
+</ul>
+<p>Явне оголошення цих протоколів нічого не додає. Важливіше вміти <strong>відмовитися</strong> від неявної відповідності — тильдою перед протоколом. Наприклад, структура тримає сирий вказівник на буфер, який належить одному потоку рендерингу:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RenderScratch</span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">buffer</span><span class="p">:</span><span class="w"> </span><span class="n">UnsafeMutableRawPointer</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">size</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="p">}</span></code></pre></div>
+<p>Після <code>~Sendable</code> звичайну відповідність <code>Sendable</code> додати не вийде — лише <code>@unchecked Sendable</code> під твою відповідальність. Щоб заборонити і це:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">unavailable</span><span class="p">)</span>
+<span class="kd">extension</span><span class="w"> </span><span class="nc">RenderScratch</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p>Окремо: розподілені актори (<code>distributed actor</code>) неявно відповідають <code>Codable</code>.</p>
+<h2 id="колекції-протокольних-типів"><a href="#колекції-протокольних-типів">Колекції протокольних типів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">events</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">any</span><span class="w"> </span><span class="n">Trackable</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="n">ScreenView</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="s">"home"</span><span class="p">),</span>
+<span class="w">    </span><span class="n">ScreenView</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="s">"paywall"</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">eventName</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">parameters</span><span class="p">)</span><span class="w">   </span><span class="c1">// доступні лише члени протоколу</span>
+<span class="p">}</span></code></pre></div>
+<p>Елемент має тип <code>any Trackable</code>, хоча реально там лежить <code>ScreenView</code>. До членів поза протоколом без приведення типу не дістатися.</p>
+<h2 id="успадкування-протоколів"><a href="#успадкування-протоколів">Успадкування протоколів</a></h2>
+<p>Протокол може успадковувати інші протоколи й додавати свої вимоги:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">HasRemoteID</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span><span class="w"> </span><span class="nc">RemoteEntity</span><span class="p">:</span><span class="w"> </span><span class="n">HasRemoteID</span><span class="p">,</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">endpoint</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Product</span><span class="p">:</span><span class="w"> </span><span class="n">RemoteEntity</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">endpoint</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"/products"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p><code>Product</code> мусить задовольнити вимоги всіх трьох протоколів (<code>Codable</code> синтезується).</p>
+<h2 id="протоколи-лише-для-класів"><a href="#протоколи-лише-для-класів">Протоколи лише для класів</a></h2>
+<p><code>AnyObject</code> у списку успадкування обмежує протокол класами (і акторами):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">ScreenRouter</span><span class="p">:</span><span class="w"> </span><span class="nb">AnyObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">deepLink</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Таке обмеження потрібне, коли семантика передбачає reference type: делегати з <code>weak</code>, спільний змінюваний стан.</p>
+<p>Протокол може також вимагати конкретний <strong>суперклас</strong>. Тоді прийняти його можуть лише підкласи цього класу, і в коді протоколу доступні члени суперкласу:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">BaseViewController</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">showSpinner</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">protocol</span><span class="w"> </span><span class="nc">Loading</span><span class="p">:</span><span class="w"> </span><span class="n">BaseViewController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">load</span><span class="p">()</span><span class="w"> </span><span class="k">async</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Loading</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">reload</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">showSpinner</span><span class="p">()</span><span class="w">          </span><span class="c1">// доступно: усі, хто Loading, — нащадки BaseViewController</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">load</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="композиція-протоколів"><a href="#композиція-протоколів">Композиція протоколів</a></h2>
+<p>Коли потрібно значення, що відповідає <strong>кільком</strong> протоколам одночасно, їх з'єднують через <code>&amp;</code>. До композиції можна додати й клас:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">sync</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">item</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">HasRemoteID</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Codable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="n">BaseViewController</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Trackable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">typealias</span><span class="w"> </span><span class="n">Persistable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">HasRemoteID</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Sendable</span></code></pre></div>
+<p>Композиція не створює нового протоколу, а лише описує тимчасовий набір вимог.</p>
+<h2 id="перевірка-відповідності"><a href="#перевірка-відповідності">Перевірка відповідності</a></h2>
+<p><code>is</code>, <code>as?</code> і <code>as!</code> працюють з протоколами так само, як з класами (урок про приведення типів):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">anything</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Any</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">ScreenView</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="s">"a"</span><span class="p">),</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">"text"</span><span class="p">]</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">anything</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">event</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"Подія </span><span class="si">\(</span><span class="n">event</span><span class="p">.</span><span class="n">eventName</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="опціональні-вимоги"><a href="#опціональні-вимоги">Опціональні вимоги</a></h2>
+<p>У протоколах, позначених <code>@objc</code>, вимоги можна зробити необов'язковими через <code>optional</code>. Це механізм для сумісності з Objective-C (саме так влаштовані делегати UIKit на кшталт <code>UITableViewDelegate</code>):</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">@objc</span><span class="w"> </span><span class="kd">protocol</span><span class="w"> </span><span class="nc">GalleryDataSource</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">numberOfImages</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kr">@objc</span><span class="w"> </span><span class="kr">optional</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">caption</span><span class="p">(</span><span class="n">at</span><span class="w"> </span><span class="n">index</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Gallery</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">weak</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">dataSource</span><span class="p">:</span><span class="w"> </span><span class="n">GalleryDataSource</span><span class="p">?</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">?.</span><span class="n">numberOfImages</span><span class="p">()</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nv">caption</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">?.</span><span class="n">caption</span><span class="p">?(</span><span class="n">at</span><span class="p">:</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">""</span><span class="w">   </span><span class="c1">// ? після імені методу</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">caption</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Опціональна вимога стає опціональним значенням: метод — опціональною функцією.</li>
+<li>Викликають її через опціональний ланцюжок: <code>caption?(at:)</code>.</li>
+<li><code>@objc</code>-протоколи можуть приймати лише <strong>класи</strong> (будь-які), але не структури й enum.</li>
+<li>Необов'язковою може бути й властивість: <code>@objc optional var title: String { get }</code>.</li>
+<li>Навіть коли в ланцюжку два <code>?</code> (опціональний делегат і опціональний метод), результат — один рівень опціональності.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>У чистому Swift-коді опціональні вимоги замінюють реалізацією за замовчуванням у розширенні протоколу.</p>
+</aside>
+<h2 id="розширення-протоколів"><a href="#розширення-протоколів">Розширення протоколів</a></h2>
+<p>Протокол можна розширити: додати методи, обчислювані властивості, ініціалізатори, сабскрипти з <strong>реалізацією</strong>. Тоді вони з'являються в усіх типів, що відповідають протоколу, без жодного коду в самих типах.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">debugLine</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">"</span><span class="si">\(</span><span class="n">eventName</span><span class="si">)</span><span class="s"> "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">parameters</span><span class="p">.</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="nv">$0</span><span class="si">)</span><span class="s">=</span><span class="si">\(</span><span class="nv">$1</span><span class="si">)</span><span class="s">"</span><span class="w"> </span><span class="p">}.</span><span class="bp">sorted</span><span class="p">().</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" "</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">ScreenView</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="s">"home"</span><span class="p">).</span><span class="n">debugLine</span><span class="w">   </span><span class="c1">// "screen_view screen=home"</span></code></pre></div>
+<h3 id="реалізація-за-замовчуванням"><a href="#реалізація-за-замовчуванням">Реалізація за замовчуванням</a></h3>
+<p>Розширення може реалізувати <strong>вимогу</strong> протоколу. Тип, що відповідає протоколу, може взяти цю реалізацію або дати свою:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">eventName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">parameters</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">parameters</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">[:]</span><span class="w"> </span><span class="p">}</span><span class="w">    </span><span class="c1">// за замовчуванням — без параметрів</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">AppOpen</span><span class="p">:</span><span class="w"> </span><span class="n">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">eventName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"app_open"</span><span class="w"> </span><span class="p">}</span><span class="w">        </span><span class="c1">// parameters не потрібні</span>
+<span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Якщо метод є лише в розширенні протоколу, а не в його вимогах, тип не може його «перевизначити»: при виклику через <code>any Trackable</code> спрацює версія з розширення. Хочеш перевизначення — додай метод у вимоги протоколу.</p>
+</aside>
+<h3 id="обмеження-в-розширеннях-протоколів"><a href="#обмеження-в-розширеннях-протоколів">Обмеження в розширеннях протоколів</a></h3>
+<p>Розширення можна обмежити умовою <code>where</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Collection</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Trackable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">sendAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"send"</span><span class="p">,</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">eventName</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Collection</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Numeric</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nb">Comparable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">spread</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Element</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">lo</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="bp">min</span><span class="p">(),</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">hi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="bp">max</span><span class="p">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hi</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lo</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="n">ScreenView</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span><span class="w"> </span><span class="s">"a"</span><span class="p">)].</span><span class="n">sendAll</span><span class="p">()</span>
+<span class="p">[</span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">].</span><span class="n">spread</span><span class="p">()</span><span class="w">     </span><span class="c1">// 210</span></code></pre></div>
+<p>Якщо підходить кілька обмежених реалізацій, Swift бере найспецифічнішу.</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Опиши протокол <code>PaymentProvider</code> з методом <code>purchase(productID:) async throws -&gt; Receipt</code> і статичною властивістю <code>name</code>. Реалізуй його двома структурами-заглушками.</li>
+<li>Додай розширення протоколу з методом <code>purchaseWithRetry</code> і реалізацію за замовчуванням для <code>name</code>.</li>
+<li>Зроби протокол делегата <code>OnboardingDelegate: AnyObject</code> і клас, що зберігає <code>weak var delegate</code>.</li>
+<li>Зроби <code>struct Money: Comparable</code> з ручною реалізацією <code>&lt;</code> і перевір, які оператори (<code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>) з'явилися автоматично.</li>
+<li>Додай умовну відповідність <code>Optional: DisplayPrice where Wrapped: DisplayPrice</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="22-extensions.html"><small>Попередній</small>Розширення</a><a class="next" href="24-generics.html"><small>Наступний</small>Узагальнення</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

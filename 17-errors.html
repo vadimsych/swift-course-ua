@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Обробка помилок · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li class="current"><a href="17-errors.html" aria-current="page"><span class="num">17</span> Обробка помилок</a><ol class="sections"><li><a href="#опис-і-кидання-помилок">Опис і кидання помилок</a></li><li><a href="#обробка-помилок">Обробка помилок</a></li><li><a href="#тип-помилки">Тип помилки</a></li><li><a href="#дії-при-виході-defer">Дії при виході: defer</a></li><li><a href="#rethrows">Rethrows</a></li></ol></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 17</p>
+  <h1>Обробка помилок</h1>
+  <p class="lede">Як Swift описує, кидає й обробляє помилки: <code>throws</code>, <code>try</code>, <code>do-catch</code>, <code>try?</code>, <code>try!</code>, типізовані помилки (<code>throws(E)</code>) і <code>defer</code>. Головна відмінність від C# — помилки є частиною сигнатури, а не прихованими винятками.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/errorhandling/">errorhandling</a></p>
+<h2 id="опис-і-кидання-помилок"><a href="#опис-і-кидання-помилок">Опис і кидання помилок</a></h2>
+<p>Помилка — значення будь-якого типу, що реалізує протокол <code>Error</code>. Найзручніше — enum:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">StoreError</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">productNotFound</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">paymentNotAllowed</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">network</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">throw</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">productNotFound</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="s">"pro_monthly"</span><span class="p">)</span></code></pre></div>
+<p>Вимог у <code>Error</code> немає — відповідність лише дозволяє кидати значення типу. Щоб помилка мала людське повідомлення, реалізують ще <code>LocalizedError</code> (<code>errorDescription</code>) або <code>CustomStringConvertible</code>.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Винятки в C# — класи, що успадковуються від <code>Exception</code>, зі стеком викликів. У Swift помилки легковагові: enum або struct без стека, а «кидання» — це по суті повернення значення через окремий канал. Це не дорого, і помилки нормально використовувати для очікуваних збоїв.</p>
+</aside>
+<h2 id="обробка-помилок"><a href="#обробка-помилок">Обробка помилок</a></h2>
+<p>Swift вимагає явно позначати місця, де може виникнути помилка: ключове слово <code>try</code> перед викликом. Читаючи код, одразу видно, які рядки можуть перервати виконання.</p>
+<p>Є чотири способи обробити помилку:</p>
+<ol>
+<li>передати її далі викликачу;</li>
+<li>обробити в <code>do-catch</code>;</li>
+<li>перетворити на опціонал (<code>try?</code>);</li>
+<li>стверджувати, що помилки не буде (<code>try!</code>).</li>
+</ol>
+<h3 id="передача-далі-throwing-функції"><a href="#передача-далі-throwing-функції">Передача далі: throwing-функції</a></h3>
+<p>Функція, що може кинути помилку, позначається <code>throws</code> перед <code>-&gt;</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Product</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">;</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="p">:</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Store</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">catalog</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="n">Product</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">canPay</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">product</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">catalog</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">productNotFound</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">p</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">buy</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Decimal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="n">canPay</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">paymentNotAllowed</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">product</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w">     </span><span class="c1">// помилка піде далі автоматично</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">price</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Якщо функцію не позначено <code>throws</code>, компілятор вимагає, щоб усі помилки, які виникають у ній, були оброблені всередині — передати їх викликачу вона не може.</p>
+<p>Ініціалізатори теж можуть бути <code>throws</code> — тоді невдала ініціалізація повідомляє причину, а не просто <code>nil</code>, як <code>init?</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Receipt</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="n">Data</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">fileAt</span><span class="w"> </span><span class="n">url</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span><span class="p">)</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="n">url</span><span class="p">)</span><span class="w">          </span><span class="c1">// помилка читання піде викликачу</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="o">!</span><span class="n">data</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">network</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">receipt</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">Receipt</span><span class="p">(</span><span class="n">fileAt</span><span class="p">:</span><span class="w"> </span><span class="n">receiptURL</span><span class="p">)</span></code></pre></div>
+<h3 id="do-catch"><a href="#do-catch">do-catch</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">store</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Store</span><span class="p">()</span>
+
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">buy</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="s">"pro_yearly"</span><span class="p">)</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Сплачено </span><span class="si">\(</span><span class="n">price</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">productNotFound</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Немає продукту </span><span class="si">\(</span><span class="n">id</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">network</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">code</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Сервер недоступний"</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">StoreError</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Інша помилка магазину"</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Невідома помилка: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">   </span><span class="c1">// error — неявна константа</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Після <code>catch</code> пишуть зразок, як у <code>case</code> всередині <code>switch</code>, разом із <code>where</code>.</li>
+<li><code>catch</code> без зразка ловить усе і надає константу <code>error</code>.</li>
+<li>Гілки не обов'язково вичерпні. Якщо помилку не зловлено, вона піде далі — тоді функція навколо мусить бути <code>throws</code>.</li>
+</ul>
+<p>Кілька зразків в одній гілці — через кому:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">paymentNotAllowed</span><span class="p">,</span><span class="w"> </span><span class="n">StoreError</span><span class="p">.</span><span class="n">network</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">showRetry</span><span class="p">()</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="перетворення-на-опціонал"><a href="#перетворення-на-опціонал">Перетворення на опціонал</a></h3>
+<p><code>try?</code> повертає <code>nil</code>, якщо виникла помилка, і відкидає саму помилку. Зручно, коли конкретна причина неважлива, а важливо лише «вийшло чи ні»:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">savedLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="n">loadInt</span><span class="p">(</span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="s">"level"</span><span class="p">))</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">avatars</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">urls</span><span class="p">.</span><span class="n">compactMap</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="nv">$0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// пропускаємо ті, що не завантажились</span></code></pre></div>
+<p>Якщо функція вже повертає опціонал, <code>try?</code> не додає зайвого рівня: результат <code>T?</code>, а не <code>T??</code>.</p>
+<h3 id="вимкнення-поширення"><a href="#вимкнення-поширення">Вимкнення поширення</a></h3>
+<p><code>try!</code> стверджує, що помилки не буде. Якщо помилка таки виникне — крах. Він доречний лише там, де помилка означає баг у самому застосунку, а не зовнішній збій:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="c1">// регулярний вираз написаний у коді: якщо він некоректний — це помилка програміста</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">promoPattern</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="p">!</span><span class="w"> </span><span class="n">Regex</span><span class="p">(</span><span class="s">"^[A-Z]{4}-</span><span class="se">\\</span><span class="s">d{4}$"</span><span class="p">)</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>try?</code> — як <code>try { x = F(); } catch { x = null; }</code> одним словом. <code>try!</code> — як виклик без catch з гарантованим падінням застосунку. Аналога <code>finally</code> немає, його роль виконує <code>defer</code>.</p>
+</aside>
+<h2 id="тип-помилки"><a href="#тип-помилки">Тип помилки</a></h2>
+<p>За замовчуванням <code>throws</code> означає «може кинути будь-яку помилку», тобто <code>any Error</code>. Можна вказати конкретний тип — <strong>типізовані помилки</strong>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="kr">throws</span><span class="p">(</span><span class="n">PromoError</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="n">code</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="p">.</span><span class="n">wrongLength</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">10</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="nc">PromoError</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">wrongLength</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">expired</span>
+<span class="p">}</span>
+
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">discount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">validate</span><span class="p">(</span><span class="s">"ABC"</span><span class="p">)</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">discount</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// error тут має тип PromoError, а не any Error</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">wrongLength</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Код має 8 символів"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">.</span><span class="n">expired</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Код протерміновано"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li><code>throws(E)</code> дозволяє кидати лише <code>E</code>.</li>
+<li>У <code>do-catch</code> можна явно вказати тип: <code>do throws(PromoError) { ... }</code>.</li>
+<li><code>throws(Never)</code> — функція, яка не кидає взагалі, а <code>throws(any Error)</code> — те саме, що <code>throws</code>.</li>
+<li>Generic-код може бути <code>throws(E)</code> з параметром <code>E</code>, і тоді тип помилки «прокидається» через функції вищого порядку.</li>
+</ul>
+<p>Корисні деталі:</p>
+<ul>
+<li>Якщо тип помилки відомий, у <code>throw</code> можна писати скорочено: <code>throw .wrongLength</code>.</li>
+<li><code>do</code>-блок, у якому всі <code>try</code> кидають той самий конкретний тип, сам вважається <code>throws(ЦейТип)</code> — тому в <code>catch</code> вище <code>error</code> має тип <code>PromoError</code>. Якщо типи різні, виводиться <code>any Error</code>. Явно задати тип можна через <code>do throws(PromoError) { }</code>, а відмовитися від виведення — через <code>do throws(any Error) { }</code>.</li>
+<li>Помилка, що дійшла до верхнього рівня програми й не оброблена, зупиняє програму.</li>
+</ul>
+<p>Типізовані помилки варто брати, коли набір помилок закритий і стабільний (внутрішній код модуля), коли generic-код лише передає помилки з переданих замикань, або коли важлива відсутність виділення пам'яті. Для публічних API бібліотек частіше лишають звичайний <code>throws</code>, щоб у майбутньому можна було додати нові види помилок без зламу сумісності.</p>
+<!-- callout -->
+
+<aside class="callout new"><b>Swift 6</b><p>Типізовані помилки з'явилися у Swift 6. У старому коді ти побачиш <code>Result&lt;Success, Failure&gt;</code> для тих самих цілей.</p>
+</aside>
+<h2 id="дії-при-виході-defer"><a href="#дії-при-виході-defer">Дії при виході: defer</a></h2>
+<p><code>defer</code> виконує код при виході з області видимості — і при <code>return</code>, і при кинутій помилці:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">exportReport</span><span class="p">()</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">openFile</span><span class="p">(</span><span class="s">"report.csv"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">               </span><span class="c1">// закриється в будь-якому разі</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="w">              </span><span class="c1">// помилка тут — file.close() все одно виконається</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Кілька <code>defer</code> виконуються у зворотному порядку. Усередині <code>defer</code> не можна виходити з блоку (<code>return</code>, <code>break</code>, <code>throw</code>). <code>defer</code> працює й без помилок (урок про керування потоком).</p>
+<h2 id="rethrows"><a href="#rethrows">Rethrows</a></h2>
+<p>Функція, яка приймає throwing-замикання і кидає помилки <strong>лише з нього</strong>, позначається <code>rethrows</code>. Якщо передати не-throwing замикання, <code>try</code> при виклику не потрібен:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">retry</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">times</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="kr">rethrows</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">precondition</span><span class="p">(</span><span class="n">times</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Потрібна щонайменше одна спроба"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mf">1.</span><span class="p">.&lt;</span><span class="n">times</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="n">action</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">action</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">retry</span><span class="p">(</span><span class="n">times</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">}</span><span class="w">                 </span><span class="c1">// без try</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">retry</span><span class="p">(</span><span class="n">times</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">download</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// з try</span></code></pre></div>
+<p>Так влаштовані <code>filter</code>, <code>contains(where:)</code> і багато інших методів колекцій. У новіших частинах стандартної бібліотеки, як-от <code>map</code>, замість <code>rethrows</code> використовують generic типізовану помилку <code>throws(E)</code>: тоді тип помилки із замикання зберігається.</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Опиши <code>enum ReceiptError: Error</code> для валідації чека (немає підпису, неправильний bundle ID, протермінована підписка) і функцію <code>validate(_:) throws(ReceiptError)</code>.</li>
+<li>Обробляй помилки цієї функції в <code>do-catch</code> з окремими гілками для кожного варіанта і з <code>where</code>.</li>
+<li>Напиши функцію, що послідовно пробує три джерела конфігурації (кеш, мережа, вбудований файл) через <code>try?</code>.</li>
+<li>Реалізуй <code>LocalizedError</code> для своєї помилки й виведи <code>error.localizedDescription</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="16-optional-chaining.html"><small>Попередній</small>Опціональні ланцюжки</a><a class="next" href="18-concurrency.html"><small>Наступний</small>Конкурентність</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

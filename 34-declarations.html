@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник: оголошення · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li class="current"><a href="34-declarations.html" aria-current="page"><span class="num">34</span> Довідник: оголошення</a><ol class="sections"><li><a href="#код-верхнього-рівня">Код верхнього рівня</a></li><li><a href="#блоки-коду">Блоки коду</a></li><li><a href="#імпорт">Імпорт</a></li><li><a href="#оголошення-констант">Оголошення констант</a></li><li><a href="#оголошення-змінних">Оголошення змінних</a></li><li><a href="#псевдоніми-типів">Псевдоніми типів</a></li><li><a href="#оголошення-функцій">Оголошення функцій</a></li><li><a href="#оголошення-перелічень">Оголошення перелічень</a></li><li><a href="#оголошення-структур">Оголошення структур</a></li><li><a href="#оголошення-класів">Оголошення класів</a></li><li><a href="#оголошення-акторів">Оголошення акторів</a></li><li><a href="#оголошення-протоколів">Оголошення протоколів</a></li><li><a href="#оголошення-ініціалізаторів">Оголошення ініціалізаторів</a></li><li><a href="#оголошення-деініціалізаторів">Оголошення деініціалізаторів</a></li><li><a href="#оголошення-розширень">Оголошення розширень</a></li><li><a href="#оголошення-сабскриптів">Оголошення сабскриптів</a></li><li><a href="#оголошення-макросів">Оголошення макросів</a></li><li><a href="#оголошення-операторів">Оголошення операторів</a></li><li><a href="#оголошення-груп-пріоритетів">Оголошення груп пріоритетів</a></li><li><a href="#модифікатори-оголошень">Модифікатори оголошень</a></li></ol></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Довідник (за потреби) · урок 34</p>
+  <h1>Довідник: оголошення</h1>
+  <p class="lede">Коротка карта всіх видів оголошень — від імпорту й змінних до операторів. Більшість тем уже розібрані в попередніх уроках; тут — те, що корисно знати додатково.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/">declarations</a></p>
+<h2 id="код-верхнього-рівня"><a href="#код-верхнього-рівня">Код верхнього рівня</a></h2>
+<p>У файлі <code>main.swift</code> (або в скрипті) інструкції верхнього рівня виконуються як програма — це точка входу. У решті файлів верхній рівень може містити лише оголошення.</p>
+<p>Альтернатива <code>main.swift</code> — тип з атрибутом <code>@main</code> і статичним методом <code>main()</code> (урок 35). Точка входу в програмі лише одна.</p>
+<h2 id="блоки-коду"><a href="#блоки-коду">Блоки коду</a></h2>
+<p><code>{ інструкції }</code> — використовуються в функціях, розгалуженнях тощо, створюють нову область видимості.</p>
+<h2 id="імпорт"><a href="#імпорт">Імпорт</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">struct</span><span class="w"> </span><span class="nc">SwiftUI</span><span class="p">.</span><span class="nc">Color</span><span class="w">      </span><span class="c1">// імпорт лише одного символу</span>
+<span class="nc">import</span><span class="w"> </span><span class="nc">func</span><span class="w"> </span><span class="nc">Darwin</span><span class="p">.</span><span class="nc">sqrt</span>
+<span class="p">@</span><span class="n">testable</span><span class="w"> </span><span class="kd">import</span><span class="w"> </span><span class="nc">PaywallKit</span><span class="w">      </span><span class="c1">// доступ до internal у тестах</span>
+<span class="p">@</span><span class="nc">preconcurrency</span><span class="w"> </span><span class="nc">import</span><span class="w"> </span><span class="nc">LegacySDK</span><span class="w"> </span><span class="c1">// м'якші перевірки Sendable для старого модуля</span></code></pre></div>
+<p>Імпорт окремого символу пишуть з видом оголошення: <code>typealias</code>, <code>struct</code>, <code>class</code>, <code>enum</code>, <code>protocol</code>, <code>let</code>, <code>var</code>, <code>func</code>. Перед <code>import</code> можна вказати рівень доступу (<code>private import</code>, <code>internal import</code>, <code>public import</code>), що визначає, чи видно залежність клієнтам модуля.</p>
+<h2 id="оголошення-констант"><a href="#оголошення-констант">Оголошення констант</a></h2>
+<p><code>let ім'я: Тип = вираз</code>. Локальній константі можна присвоїти значення пізніше, але один раз. Кортеж можна одразу розібрати: <code>let (w, h) = size</code>.</p>
+<h2 id="оголошення-змінних"><a href="#оголошення-змінних">Оголошення змінних</a></h2>
+<p>Форма визначає вид змінної:</p>
+<h3 id="збережені-змінні-й-властивості"><a href="#збережені-змінні-й-властивості">Збережені змінні й властивості</a></h3>
+<p><code>var ім'я: Тип = вираз</code> — з ініціалізатором або без (тоді тип обов'язковий і значення має з'явитися до використання).</p>
+<h3 id="обчислювані-змінні-й-властивості"><a href="#обчислювані-змінні-й-властивості">Обчислювані змінні й властивості</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="err">ім'я</span><span class="p">:</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">set</span><span class="p">(</span><span class="err">новеІм'я</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w">    </span><span class="c1">// необов'язковий</span>
+<span class="p">}</span></code></pre></div>
+<p>Можуть бути глобальними, локальними чи властивостями. Геттер може бути <code>async</code> і <code>throws</code>: <code>var data: Data { get async throws { ... } }</code>.</p>
+<h3 id="спостерігачі"><a href="#спостерігачі">Спостерігачі</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="err">ім'я</span><span class="p">:</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">вираз</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">willSet</span><span class="p">(</span><span class="err">нове</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">didSet</span><span class="p">(</span><span class="err">старе</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Спостерігачі не спрацьовують під час <code>init</code> і не викликаються повторно, якщо в <code>didSet</code> присвоїти нове значення.</p>
+<h3 id="властивості-типу"><a href="#властивості-типу">Властивості типу</a></h3>
+<p><code>static var</code>/<code>static let</code>, а в класах ще <code>class var</code> (тільки обчислювані, можна перевизначати в підкласах).</p>
+<h2 id="псевдоніми-типів"><a href="#псевдоніми-типів">Псевдоніми типів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">typealias</span><span class="w"> </span><span class="n">Bag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Set</span><span class="w">                          </span><span class="c1">// псевдонім generic-типу без параметрів: Bag&lt;String&gt;</span>
+<span class="kd">typealias</span><span class="w"> </span><span class="n">Handler</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">Result</span><span class="p">&lt;</span><span class="n">Data</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Void</span>
+<span class="kd">typealias</span><span class="w"> </span><span class="n">StringMap</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">]</span><span class="w">    </span><span class="c1">// generic-псевдонім</span>
+<span class="kd">typealias</span><span class="w"> </span><span class="n">IntKeyed</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">]</span><span class="w">       </span><span class="c1">// generic-псевдонім</span></code></pre></div>
+<p>Generic-псевдонім не може додати нових обмежень до оригінального типу.</p>
+<h2 id="оголошення-функцій"><a href="#оголошення-функцій">Оголошення функцій</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="err">ім'я</span><span class="p">&lt;</span><span class="err">параметри</span><span class="w"> </span><span class="err">типу</span><span class="p">&gt;(</span><span class="err">параметри</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="err">Результат</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">обмеження</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">інструкції</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="імена-параметрів"><a href="#імена-параметрів">Імена параметрів</a></h3>
+<p>Кожен параметр має <strong>мітку аргументу</strong> й <strong>ім'я параметра</strong>: <code>func move(from start: Int)</code>. Якщо вказано одне ім'я — воно і є міткою; <code>_</code> прибирає мітку.</p>
+<h3 id="модифікатори-параметрів"><a href="#модифікатори-параметрів">Модифікатори параметрів</a></h3>
+<ul>
+<li><strong><code>inout</code></strong> — функція може змінити змінну викликача; при виклику пишуть <code>&amp;</code>. Одну змінну не можна передати у два <code>inout</code> одночасно (урок 27).</li>
+<li><strong><code>borrowing</code></strong> — функція тимчасово отримує доступ до значення, не забираючи його. Копіювати його всередині явно не можна без <code>copy</code>.</li>
+<li><strong><code>consuming</code></strong> — функція стає власником значення. Для noncopyable-типів після виклику значення у викликача більше немає; для копійованих викликач може віддати власну копію.</li>
+</ul>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">store</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">token</span><span class="p">:</span><span class="w"> </span><span class="n">consuming</span><span class="w"> </span><span class="n">SessionToken</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">inspect</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">token</span><span class="p">:</span><span class="w"> </span><span class="n">borrowing</span><span class="w"> </span><span class="n">SessionToken</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<p><code>borrowing</code> і <code>consuming</code> здебільшого потрібні для noncopyable-типів і для оптимізації копіювань. За замовчуванням параметри функцій поводяться як <code>borrowing</code>, а параметри ініціалізаторів — як <code>consuming</code>.</p>
+<h3 id="особливі-види-параметрів"><a href="#особливі-види-параметрів">Особливі види параметрів</a></h3>
+<ul>
+<li><code>_</code> замість імені — параметр ігнорується в тілі;</li>
+<li>variadic <code>Тип...</code> — нуль чи більше значень, усередині масив; параметр після нього має мати мітку;</li>
+<li>значення за замовчуванням <code>= вираз</code> — обчислюється при кожному виклику, в контексті виклику для макросів на кшталт <code>#line</code>.</li>
+</ul>
+<h3 id="особливі-види-методів"><a href="#особливі-види-методів">Особливі види методів</a></h3>
+<ul>
+<li><code>mutating</code> — може змінювати <code>self</code> у value type;</li>
+<li><code>nonmutating</code> — сеттер value type, що не змінює <code>self</code> (наприклад, записує в сховище за посиланням);</li>
+<li><code>override</code> — перевизначає член суперкласу;</li>
+<li><code>static</code>/<code>class</code> — метод типу; <code>class</code> дозволяє перевизначення.</li>
+</ul>
+<h3 id="методи-зі-спеціальними-іменами"><a href="#методи-зі-спеціальними-іменами">Методи зі спеціальними іменами</a></h3>
+<ul>
+<li><strong><code>callAsFunction</code></strong> — екземпляр можна викликати як функцію:</li>
+</ul>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Multiplier</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">factor</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">callAsFunction</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">factor</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">triple</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Multiplier</span><span class="p">(</span><span class="n">factor</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="n">triple</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w">   </span><span class="c1">// 21</span></code></pre></div>
+<ul>
+<li><strong><code>dynamicallyCall(withArguments:)</code></strong> і <strong><code>dynamicallyCall(withKeywordArguments:)</code></strong> — для типів з <code>@dynamicCallable</code>;</li>
+<li><strong><code>subscript(dynamicMember:)</code></strong> — для типів з <code>@dynamicMemberLookup</code> (урок 35).</li>
+</ul>
+<h3 id="throwing-функції"><a href="#throwing-функції">Throwing-функції</a></h3>
+<p><code>throws</code> або <code>throws(Тип)</code> перед <code>-&gt;</code>; виклик потребує <code>try</code>. Не-throwing функцію можна передати туди, де очікують throwing, а навпаки — ні.</p>
+<h3 id="rethrowing-функції"><a href="#rethrowing-функції">Rethrowing-функції</a></h3>
+<p><code>rethrows</code> — функція кидає помилки лише з переданого їй замикання. Якщо замикання не кидає, <code>try</code> при виклику не потрібен (так працює <code>filter</code>).</p>
+<h3 id="асинхронні-функції"><a href="#асинхронні-функції">Асинхронні функції</a></h3>
+<p><code>async</code> — функцію можна призупиняти; виклик через <code>await</code>. Синхронну функцію можна передати туди, де очікують асинхронну.</p>
+<h3 id="функції-що-не-повертаються"><a href="#функції-що-не-повертаються">Функції, що не повертаються</a></h3>
+<p>Тип результату <code>Never</code> означає, що функція ніколи не повертає керування: <code>fatalError</code>, <code>preconditionFailure</code>, нескінченний цикл. Компілятор знає це і, наприклад, не вимагає <code>return</code> після виклику в <code>guard</code>-гілці.</p>
+<h2 id="оголошення-перелічень"><a href="#оголошення-перелічень">Оголошення перелічень</a></h2>
+<h3 id="варіанти-будь-яких-типів"><a href="#варіанти-будь-яких-типів">Варіанти будь-яких типів</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">circle</span><span class="p">(</span><span class="n">radius</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">rect</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">indirect</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">group</span><span class="p">([</span><span class="n">Shape</span><span class="p">],</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">""</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Асоційовані значення можуть мати мітки і значення за замовчуванням.</li>
+<li>Варіант з асоційованими значеннями можна використовувати як функцію: <code>[1.0, 2.0].map(Shape.circle)</code>.</li>
+<li><code>indirect</code> — для рекурсивних варіантів (або для всього enum).</li>
+</ul>
+<h3 id="варіанти-з-сирими-значеннями"><a href="#варіанти-з-сирими-значеннями">Варіанти з сирими значеннями</a></h3>
+<p><code>enum E: RawType { case a = literal }</code> — сирий тип відповідає одному з протоколів літералів; enum автоматично отримує <code>RawRepresentable</code> з <code>rawValue</code> і <code>init?(rawValue:)</code>. Варіанти без явного значення: для чисел — +1 від попереднього, для рядків — ім'я варіанта.</p>
+<h3 id="звертання-до-варіантів"><a href="#звертання-до-варіантів">Звертання до варіантів</a></h3>
+<p><code>Тип.варіант</code> або <code>.варіант</code>, якщо тип відомий. Зіставлення — через <code>switch</code>, <code>if case</code> тощо (урок 36).</p>
+<h2 id="оголошення-структур"><a href="#оголошення-структур">Оголошення структур</a></h2>
+<p><code>struct Ім'я&lt;параметри&gt;: протоколи where обмеження { члени }</code>. Структура — value type: копіюється, <code>let</code>-екземпляр повністю незмінний, автоматичні ініціалізатори (за замовчуванням і memberwise). Не можна успадковувати.</p>
+<h2 id="оголошення-класів"><a href="#оголошення-класів">Оголошення класів</a></h2>
+<p><code>class Ім'я&lt;параметри&gt;: Суперклас, протоколи { члени }</code>. Reference type: успадкування (один суперклас), <code>deinit</code>, приведення типів, ARC. Має щонайменше один designated-ініціалізатор (або отримує його автоматично). Модифікатори: <code>final</code>, <code>open</code>.</p>
+<h2 id="оголошення-акторів"><a href="#оголошення-акторів">Оголошення акторів</a></h2>
+<p><code>actor Ім'я: протоколи { члени }</code>. Reference type, що захищає свій стан від одночасного доступу. Без успадкування; автоматично <code>Sendable</code> (урок 18).</p>
+<h2 id="оголошення-протоколів"><a href="#оголошення-протоколів">Оголошення протоколів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="err">Ім'я</span><span class="p">:</span><span class="w"> </span><span class="err">успадковані</span><span class="w"> </span><span class="err">протоколи</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="err">властивість</span><span class="p">:</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="kr">set</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="err">типова</span><span class="p">:</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="err">метод</span><span class="p">(</span><span class="err">параметри</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="err">Тип</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="err">змінити</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="err">параметри</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">?(</span><span class="err">параметри</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="err">Елемент</span><span class="p">:</span><span class="w"> </span><span class="err">Обмеження</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">ЗаЗамовчуванням</span>
+<span class="p">}</span></code></pre></div>
+<p>Обмеження й особливості протоколів:</p>
+<ul>
+<li><code>: AnyObject</code> робить протокол доступним лише для класів і акторів, а <code>: SomeClass</code> — лише для підкласів цього класу;</li>
+<li><code>optional</code>-вимоги можливі тільки в <code>@objc</code>-протоколах;</li>
+<li>статичну вимогу (<code>static var</code>, <code>static func</code>) може задовольнити варіант enum: <code>case none</code> реалізує <code>static var none: Self</code>;</li>
+<li>статичні вимоги клас реалізує через <code>static</code> або <code>class</code>;</li>
+<li>протокол можна вкласти лише в не-generic тип.</li>
+</ul>
+<h3 id="вимоги-властивості"><a href="#вимоги-властивості">Вимоги-властивості</a></h3>
+<p>Лише <code>var</code> з <code>{ get }</code> або <code>{ get set }</code>. Протокол не визначає, збережена чи обчислювана.</p>
+<h3 id="вимоги-методи"><a href="#вимоги-методи">Вимоги-методи</a></h3>
+<p>Сигнатура без тіла, без значень параметрів за замовчуванням. Можуть бути <code>static</code>, <code>mutating</code>, <code>async</code>, <code>throws</code>.</p>
+<h3 id="вимоги-ініціалізатори"><a href="#вимоги-ініціалізатори">Вимоги-ініціалізатори</a></h3>
+<p>Реалізуються в класах як <code>required</code> (якщо клас не <code>final</code>). Вимогу <code>init</code> (не-failable) можна задовольнити лише звичайним ініціалізатором або <code>init!</code>; вимогу <code>init?</code> — будь-яким: <code>init?</code>, <code>init!</code> чи звичайним.</p>
+<h3 id="вимоги-сабскрипти"><a href="#вимоги-сабскрипти">Вимоги-сабскрипти</a></h3>
+<p>Вказують <code>{ get }</code> або <code>{ get set }</code>.</p>
+<h3 id="асоційовані-типи"><a href="#асоційовані-типи">Асоційовані типи</a></h3>
+<p><code>associatedtype</code> з необов'язковими обмеженнями, <code>where</code> і типом за замовчуванням. Протокол-нащадок може обмежити асоційований тип батьківського через <code>where</code> у своєму оголошенні.</p>
+<h2 id="оголошення-ініціалізаторів"><a href="#оголошення-ініціалізаторів">Оголошення ініціалізаторів</a></h2>
+<p><code>init</code>, <code>init?</code>, <code>init!</code>, з модифікаторами <code>convenience</code>, <code>required</code>, <code>override</code>, а також <code>async</code> і <code>throws</code>. Ініціалізатор класу мусить ініціалізувати власні властивості до <code>super.init</code>. Ініціалізатор value type може присвоїти <code>self</code> цілком.</p>
+<h3 id="failable-ініціалізатори"><a href="#failable-ініціалізатори">Failable-ініціалізатори</a></h3>
+<p><code>init?</code> повертає <code>nil</code> через <code>return nil</code>. Може делегувати іншому failable чи звичайному; підклас може перевизначити failable звичайним, але не навпаки.</p>
+<h2 id="оголошення-деініціалізаторів"><a href="#оголошення-деініціалізаторів">Оголошення деініціалізаторів</a></h2>
+<p><code>deinit { }</code> — лише в класах, акторах і noncopyable-структурах і enum. Без параметрів, викликається автоматично.</p>
+<h2 id="оголошення-розширень"><a href="#оголошення-розширень">Оголошення розширень</a></h2>
+<p><code>extension Тип: протоколи where умови { члени }</code>. Додає обчислювані властивості, методи, ініціалізатори, протоколи. Збережені властивості й перевизначення додати не можна (урок 22).</p>
+<h3 id="умовна-відповідність"><a href="#умовна-відповідність">Умовна відповідність</a></h3>
+<p><code>extension Array: Summable where Element: Summable { }</code> — відповідність лише для частини конкретизацій generic-типу.</p>
+<h3 id="перевизначені-реалізації-в-generic-контексті"><a href="#перевизначені-реалізації-в-generic-контексті">Перевизначені реалізації в generic-контексті</a></h3>
+<p>Підступ умовної відповідності: якщо в обмеженому розширенні дати «кращу» реалізацію методу, generic-код її не побачить і викличе базову. Різну поведінку надійніше робити окремими протоколами.</p>
+<h3 id="відповідність-не-може-бути-надлишковою"><a href="#відповідність-не-може-бути-надлишковою">Відповідність не може бути надлишковою</a></h3>
+<p>Тип може відповідати протоколу <strong>лише один раз</strong>. Не можна мати дві умовні відповідності одному протоколу з різними умовами, навіть якщо вони не перетинаються:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Box</span><span class="p">:</span><span class="w"> </span><span class="n">Describable</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Item</span><span class="p">:</span><span class="w"> </span><span class="nb">Comparable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="c1">// extension Box: Describable where Item: Identifiable { }   // помилка: друга відповідність</span></code></pre></div>
+<p>Якщо потрібна різна поведінка, роблять одну відповідність з мінімальною умовою, а різницю реалізують через перевантажені методи в обмежених розширеннях.</p>
+<p>Якщо компілятор скаржиться на неоднозначну відповідність батьківському протоколу, оголоси її явно з найзагальнішою умовою.</p>
+<h2 id="оголошення-сабскриптів"><a href="#оголошення-сабскриптів">Оголошення сабскриптів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">subscript</span><span class="p">(</span><span class="err">параметри</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">set</span><span class="p">(</span><span class="err">нове</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Параметри без міток за замовчуванням. Геттер може бути <code>async</code>/<code>throws</code> (без сеттера). Можуть бути generic і перевантаженими.</p>
+<h3 id="сабскрипти-типу"><a href="#сабскрипти-типу">Сабскрипти типу</a></h3>
+<p><code>static subscript</code> (або <code>class subscript</code> у класах) — сабскрипт на самому типі.</p>
+<h2 id="оголошення-макросів"><a href="#оголошення-макросів">Оголошення макросів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">freestanding</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+<span class="n">macro</span><span class="w"> </span><span class="err">ім'я</span><span class="p">(</span><span class="err">параметри</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="err">Тип</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">#</span><span class="n">externalMacro</span><span class="p">(</span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="s">"Plugin"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="s">"Impl"</span><span class="p">)</span>
+
+<span class="p">@</span><span class="n">attached</span><span class="p">(</span><span class="n">member</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">:</span><span class="w"> </span><span class="n">named</span><span class="p">(</span><span class="n">reset</span><span class="p">))</span>
+<span class="n">macro</span><span class="w"> </span><span class="n">Resettable</span><span class="p">()</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">#</span><span class="n">externalMacro</span><span class="p">(</span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="s">"Plugin"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="s">"ResettableMacro"</span><span class="p">)</span></code></pre></div>
+<p>Атрибут задає вид і ролі (урок 19). Тіло — посилання на реалізацію в плагіні компілятора або розгортання іншого макросу.</p>
+<h2 id="оголошення-операторів"><a href="#оголошення-операторів">Оголошення операторів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">prefix</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="err">√</span>
+<span class="kr">postfix</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="err">°</span>
+<span class="kr">infix</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ComparisonPrecedence</span></code></pre></div>
+<p>Оголошення лише вводить символ і (для infix) групу пріоритету; реалізація — окремою функцією (урок 29).</p>
+<h2 id="оголошення-груп-пріоритетів"><a href="#оголошення-груп-пріоритетів">Оголошення груп пріоритетів</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">precedencegroup</span><span class="w"> </span><span class="n">ExponentiationPrecedence</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">higherThan</span><span class="p">:</span><span class="w"> </span><span class="n">MultiplicationPrecedence</span>
+<span class="w">    </span><span class="n">lowerThan</span><span class="p">:</span><span class="w"> </span><span class="n">BitwiseShiftPrecedence</span>
+<span class="w">    </span><span class="kr">associativity</span><span class="p">:</span><span class="w"> </span><span class="kr">right</span>
+<span class="w">    </span><span class="n">assignment</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li><code>higherThan</code>/<code>lowerThan</code> — відношення з іншими групами (<code>lowerThan</code> — лише щодо груп з інших модулів);</li>
+<li><code>associativity</code> — <code>left</code>, <code>right</code> або <code>none</code> (за замовчуванням <code>none</code>);</li>
+<li>групи не утворюють єдиної лінійної шкали: дві групи без явного зв'язку між собою не можна змішувати без дужок;</li>
+<li><code>assignment: true</code> — оператор поводиться як присвоєння в опціональних ланцюжках.</li>
+</ul>
+<h2 id="модифікатори-оголошень"><a href="#модифікатори-оголошень">Модифікатори оголошень</a></h2>
+<ul>
+<li><strong><code>class</code></strong> — член типу класу, що може перевизначатися.</li>
+<li><strong><code>dynamic</code></strong> — виклики завжди йдуть через динамічну диспетчеризацію Objective-C (для KVO, swizzling).</li>
+<li><strong><code>final</code></strong> — заборона перевизначення чи успадкування.</li>
+<li><strong><code>lazy</code></strong> — ліниве обчислення збереженої властивості.</li>
+<li><strong><code>optional</code></strong> — необов'язкова вимога в <code>@objc</code>-протоколі.</li>
+<li><strong><code>required</code></strong> — ініціалізатор, обов'язковий для всіх підкласів.</li>
+<li><strong><code>static</code></strong> — член типу (не перевизначається).</li>
+<li><strong><code>unowned</code></strong>, <strong><code>unowned(safe)</code></strong>, <strong><code>unowned(unsafe)</code></strong> — посилання без утримання; <code>unsafe</code> вимикає перевірку в рантаймі.</li>
+<li><strong><code>weak</code></strong> — слабке посилання, обнуляється при звільненні.</li>
+<li><strong><code>nonisolated</code></strong> — член, вільний від ізоляції актора; <code>nonisolated(unsafe)</code> — вимикає перевірки ізоляції для змінної під твою відповідальність.</li>
+</ul>
+<h3 id="рівні-доступу"><a href="#рівні-доступу">Рівні доступу</a></h3>
+<p><code>open</code>, <code>public</code>, <code>package</code>, <code>internal</code>, <code>fileprivate</code>, <code>private</code>, а також форми для сеттерів: <code>private(set)</code> тощо. Урок 28.</p>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Зроби тип з <code>callAsFunction</code>, що форматує ціну, і виклич його як функцію.</li>
+<li>Напиши функцію, що приймає <code>consuming</code> noncopyable-значення, і переконайся, що компілятор забороняє використання після виклику.</li>
+<li>Оголоси власний оператор <code>**</code> для піднесення до степеня з правою асоціативністю і пріоритетом вище за множення.</li>
+<li>Спробуй оголосити дві умовні відповідності одному протоколу й прочитай помилку. Перероби рішення на одну відповідність.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="33-statements.html"><small>Попередній</small>Довідник: інструкції</a><a class="next" href="35-attributes.html"><small>Наступний</small>Довідник: атрибути</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

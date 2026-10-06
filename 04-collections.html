@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Колекції · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li class="current"><a href="04-collections.html" aria-current="page"><span class="num">04</span> Колекції</a><ol class="sections"><li><a href="#змінність-колекцій">Змінність колекцій</a></li><li><a href="#масиви">Масиви</a></li><li><a href="#множини">Множини</a></li><li><a href="#операції-над-множинами">Операції над множинами</a></li><li><a href="#словники">Словники</a></li></ol></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 04</p>
+  <h1>Колекції</h1>
+  <p class="lede"><code>Array</code>, <code>Set</code> і <code>Dictionary</code>: створення, зміна, ітерація, операції над множинами. Усі три — value types з copy-on-write, і це головна відмінність від <code>List&lt;T&gt;</code> та <code>Dictionary&lt;K,V&gt;</code> у C#.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes/">collectiontypes</a></p>
+<h2 id="змінність-колекцій"><a href="#змінність-колекцій">Змінність колекцій</a></h2>
+<p>Колекція в <code>var</code> змінна, у <code>let</code> — повністю незмінна: не можна ні додати елемент, ні змінити існуючий.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">weekdays</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Пн"</span><span class="p">,</span><span class="w"> </span><span class="s">"Вт"</span><span class="p">,</span><span class="w"> </span><span class="s">"Ср"</span><span class="p">]</span>
+<span class="c1">// weekdays.append("Чт")     // помилка компіляції</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">queue</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"player1"</span><span class="p">)</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Колекції Swift — структури. <code>var b = a</code> для масиву створює <strong>логічну копію</strong>, а не друге посилання на той самий список. Фізично дані копіюються лише при першій зміні однієї з копій (copy-on-write), тому присвоєння дешеве.</p>
+</aside>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">original</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">copy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">original</span>
+<span class="n">copy</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">original</span><span class="p">)</span><span class="w">   </span><span class="c1">// [1, 2, 3] — у C# з List&lt;int&gt; тут було б [1, 2, 3, 4]</span></code></pre></div>
+<h2 id="масиви"><a href="#масиви">Масиви</a></h2>
+<p><code>Array&lt;Element&gt;</code> — впорядкована колекція з довільним доступом.</p>
+<h3 id="array-shorthand"><a href="#array-shorthand">Скорочений запис типу</a></h3>
+<p><code>[Int]</code> — те саме, що <code>Array&lt;Int&gt;</code>. Скорочена форма — стандарт.</p>
+<h3 id="array-create"><a href="#array-create">Створення</a></h3>
+<p>Порожні літерали <code>[]</code> і <code>[:]</code> не несуть інформації про тип, тому потрібна анотація — або змінна, тип якої вже відомий. Тоді присвоєння <code>[]</code> просто очищає колекцію:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">empty</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">empty2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">zeros</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">        </span><span class="c1">// [0, 0, 0, 0, 0]</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">level</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w">                   </span><span class="c1">// конкатенація</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">names</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Ada"</span><span class="p">,</span><span class="w"> </span><span class="s">"Linus"</span><span class="p">,</span><span class="w"> </span><span class="s">"Grace"</span><span class="p">]</span><span class="w">            </span><span class="c1">// літерал, тип [String]</span></code></pre></div>
+<h3 id="array-access"><a href="#array-access">Доступ і зміна</a></h3>
+<p>Більшість операцій має прямий аналог у <code>List&lt;T&gt;</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Що треба</th>
+<th>C# <code>List&lt;T&gt;</code></th>
+<th>Swift <code>Array</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>кількість, порожній?</td>
+<td><code>Count</code>, <code>Count == 0</code></td>
+<td><code>count</code>, <code>isEmpty</code></td>
+</tr>
+<tr>
+<td>додати в кінець</td>
+<td><code>Add(x)</code>, <code>AddRange(xs)</code></td>
+<td><code>append(x)</code>, <code>append(contentsOf:)</code> або <code>+=</code></td>
+</tr>
+<tr>
+<td>вставити</td>
+<td><code>Insert(i, x)</code></td>
+<td><code>insert(x, at: i)</code></td>
+</tr>
+<tr>
+<td>видалити</td>
+<td><code>RemoveAt(i)</code></td>
+<td><code>remove(at: i)</code> — повертає видалений елемент</td>
+</tr>
+<tr>
+<td>видалити останній</td>
+<td><code>RemoveAt(Count - 1)</code></td>
+<td><code>removeLast()</code>, <code>popLast()</code> (опціонал)</td>
+</tr>
+<tr>
+<td>видалити за умовою</td>
+<td><code>RemoveAll(pred)</code></td>
+<td><code>removeAll(where:)</code></td>
+</tr>
+<tr>
+<td>перший / останній</td>
+<td><code>First()</code>, <code>Last()</code></td>
+<td><code>first</code>, <code>last</code> — опціонали, не кидають</td>
+</tr>
+<tr>
+<td>замінити діапазон</td>
+<td><code>RemoveRange</code> + <code>InsertRange</code></td>
+<td><code>items[a...b] = [...]</code> — будь-якої довжини</td>
+</tr>
+</tbody>
+</table>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"intro"</span><span class="p">,</span><span class="w"> </span><span class="s">"level1"</span><span class="p">,</span><span class="w"> </span><span class="s">"level2"</span><span class="p">,</span><span class="w"> </span><span class="s">"boss"</span><span class="p">]</span>
+<span class="n">queue</span><span class="p">[</span><span class="mf">1.</span><span class="p">..</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"tutorial"</span><span class="p">]</span><span class="w">          </span><span class="c1">// два елементи замінено одним</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="n">popLast</span><span class="p">()</span><span class="w">           </span><span class="c1">// Optional("boss")</span>
+<span class="n">queue</span><span class="p">.</span><span class="bp">removeAll</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="s">"tut"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Індекс поза межами — <strong>крах</strong>, а не виняток, який можна перехопити. <code>deck[10]</code> на масиві з трьох елементів зупинить застосунок. Тому використовуй <code>first</code>, <code>last</code>, <code>indices.contains(i)</code> або власне розширення з безпечним сабскриптом.</p>
+</aside>
+<h3 id="array-iteration"><a href="#array-iteration">Ітерація</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="n">card</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">deck</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">card</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">deck</span><span class="p">.</span><span class="n">enumerated</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">card</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p><code>enumerated()</code> повертає пари (позиція, елемент). Позиція — порядковий номер з нуля, і для звичайних масивів збігається з індексом.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Замість LINQ — методи прямо на колекціях: <code>map</code> (<code>Select</code>), <code>filter</code> (<code>Where</code>), <code>reduce</code> (<code>Aggregate</code>), <code>compactMap</code> (Select + відкинути null), <code>flatMap</code> (<code>SelectMany</code>), <code>sorted(by:)</code> (<code>OrderBy</code>), <code>contains(where:)</code> (<code>Any</code>), <code>allSatisfy</code> (<code>All</code>), <code>first(where:)</code> (<code>FirstOrDefault</code>). Вони не ліниві: повертають новий масив одразу. Ліниве обчислення вмикається через <code>.lazy</code>.</p>
+</aside>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">scores</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">top</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">scores</span><span class="p">.</span><span class="bp">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}.</span><span class="bp">sorted</span><span class="p">(</span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="o">&gt;</span><span class="p">)</span><span class="w">   </span><span class="c1">// [300, 120]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">scores</span><span class="p">.</span><span class="bp">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">)</span><span class="w">                       </span><span class="c1">// 545</span></code></pre></div>
+<h2 id="множини"><a href="#множини">Множини</a></h2>
+<p><code>Set&lt;Element&gt;</code> зберігає унікальні значення без порядку. Перевірка належності — O(1).</p>
+<h3 id="хешування"><a href="#хешування">Хешування</a></h3>
+<p>Елементи множини (і ключі словника) мають бути <strong><code>Hashable</code></strong>. Усі базові типи — <code>String</code>, <code>Int</code>, <code>Double</code>, <code>Bool</code> — уже хешовані, так само як варіанти enum без асоційованих значень. Власні типи стають <code>Hashable</code>, якщо оголосити відповідність, а компілятор згенерує реалізацію (урок про протоколи).</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Те саме, що <code>GetHashCode</code> + <code>Equals</code>, але генерується автоматично для структур, у яких усі поля хешовані.</p>
+</aside>
+<h3 id="set-type"><a href="#set-type">Тип і створення</a></h3>
+<p>Скороченого запису немає, тільки <code>Set&lt;String&gt;</code>. Множину можна ініціалізувати літералом масиву, якщо тип вказано явно:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">tags</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Set</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">unlocked</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"forest"</span><span class="p">,</span><span class="w"> </span><span class="s">"cave"</span><span class="p">]</span><span class="w">   </span><span class="c1">// тип елементів виведеться</span></code></pre></div>
+<h3 id="set-access"><a href="#set-access">Доступ і зміна</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">unlocked</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="s">"castle"</span><span class="p">)</span>
+<span class="n">unlocked</span><span class="p">.</span><span class="bp">count</span>
+<span class="n">unlocked</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="s">"cave"</span><span class="p">)</span><span class="w">              </span><span class="c1">// true</span>
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">removed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">unlocked</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">"forest"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Прибрано </span><span class="si">\(</span><span class="n">removed</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">unlocked</span><span class="p">.</span><span class="bp">removeAll</span><span class="p">()</span></code></pre></div>
+<h3 id="set-iteration"><a href="#set-iteration">Ітерація</a></h3>
+<p>Порядок не визначений. Якщо потрібен стабільний — <code>sorted()</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="n">zone</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">unlocked</span><span class="p">.</span><span class="bp">sorted</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<h2 id="операції-над-множинами"><a href="#операції-над-множинами">Операції над множинами</a></h2>
+<h3 id="основні"><a href="#основні">Основні</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">owned</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"sword"</span><span class="p">,</span><span class="w"> </span><span class="s">"shield"</span><span class="p">,</span><span class="w"> </span><span class="s">"potion"</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">shop</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"potion"</span><span class="p">,</span><span class="w"> </span><span class="s">"bow"</span><span class="p">,</span><span class="w"> </span><span class="s">"map"</span><span class="p">]</span>
+
+<span class="n">owned</span><span class="p">.</span><span class="n">union</span><span class="p">(</span><span class="n">shop</span><span class="p">)</span><span class="w">                 </span><span class="c1">// усе разом</span>
+<span class="n">owned</span><span class="p">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">shop</span><span class="p">)</span><span class="w">          </span><span class="c1">// ["potion"]</span>
+<span class="n">owned</span><span class="p">.</span><span class="n">subtracting</span><span class="p">(</span><span class="n">shop</span><span class="p">)</span><span class="w">           </span><span class="c1">// ["sword", "shield"]</span>
+<span class="n">owned</span><span class="p">.</span><span class="n">symmetricDifference</span><span class="p">(</span><span class="n">shop</span><span class="p">)</span><span class="w">   </span><span class="c1">// усе, крім спільного</span></code></pre></div>
+<p>Кожна має мутуючу пару: <code>formUnion</code>, <code>formIntersection</code>, <code>subtract</code>, <code>formSymmetricDifference</code>.</p>
+<h3 id="належність-і-рівність"><a href="#належність-і-рівність">Належність і рівність</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">starter</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"sword"</span><span class="p">]</span>
+<span class="n">starter</span><span class="p">.</span><span class="n">isSubset</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">owned</span><span class="p">)</span><span class="w">          </span><span class="c1">// true</span>
+<span class="n">owned</span><span class="p">.</span><span class="n">isSuperset</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">starter</span><span class="p">)</span><span class="w">        </span><span class="c1">// true</span>
+<span class="n">starter</span><span class="p">.</span><span class="n">isStrictSubset</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">owned</span><span class="p">)</span><span class="w">    </span><span class="c1">// true — підмножина, але не рівна</span>
+<span class="n">owned</span><span class="p">.</span><span class="n">isStrictSuperset</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">starter</span><span class="p">)</span><span class="w">  </span><span class="c1">// true</span>
+<span class="n">owned</span><span class="p">.</span><span class="n">isDisjoint</span><span class="p">(</span><span class="n">with</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">"bow"</span><span class="p">])</span><span class="w">      </span><span class="c1">// true — спільних немає</span>
+<span class="n">owned</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="p">[</span><span class="s">"potion"</span><span class="p">,</span><span class="w"> </span><span class="s">"shield"</span><span class="p">,</span><span class="w"> </span><span class="s">"sword"</span><span class="p">]</span><span class="w">  </span><span class="c1">// true — порядок не важливий</span></code></pre></div>
+<h2 id="словники"><a href="#словники">Словники</a></h2>
+<p><code>Dictionary&lt;Key, Value&gt;</code> — пари ключ-значення без порядку. Ключ має бути <code>Hashable</code>.</p>
+<h3 id="dict-type"><a href="#dict-type">Тип і створення</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">prices</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">stock</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">]()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">levels</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s">"forest"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"cave"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"castle"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">      </span><span class="c1">// кінцева кома дозволена в літералах масивів і словників</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="dict-access"><a href="#dict-access">Доступ і зміна</a></h3>
+<p>Сабскрипт <strong>повертає опціонал</strong>, бо ключа може не бути:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">lvl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="s">"cave"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Печера — рівень </span><span class="si">\(</span><span class="n">lvl</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">levels</span><span class="p">[</span><span class="s">"swamp"</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4</span><span class="w">          </span><span class="c1">// додати</span>
+<span class="n">levels</span><span class="p">[</span><span class="s">"cave"</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="w">           </span><span class="c1">// замінити</span>
+<span class="n">levels</span><span class="p">[</span><span class="s">"forest"</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">       </span><span class="c1">// видалити</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">old</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">levels</span><span class="p">.</span><span class="n">updateValue</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="s">"castle"</span><span class="p">)</span><span class="w">  </span><span class="c1">// повертає старе значення або nil</span>
+<span class="n">levels</span><span class="p">.</span><span class="n">removeValue</span><span class="p">(</span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="s">"swamp"</span><span class="p">)</span>
+
+<span class="n">levels</span><span class="p">[</span><span class="s">"dungeon"</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="c1">// значення за замовчуванням для відсутнього ключа</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p><code>dict["x"]</code> у C# кидає <code>KeyNotFoundException</code>. У Swift повертається <code>nil</code>, тож аналог <code>TryGetValue</code> — це просто <code>if let</code>. Присвоєння <code>nil</code> видаляє ключ, а не зберігає null.</p>
+</aside>
+<h3 id="dict-iteration"><a href="#dict-iteration">Ітерація</a></h3>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="n">lvl</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"</span><span class="si">\(</span><span class="n">zone</span><span class="si">)</span><span class="s">: </span><span class="si">\(</span><span class="n">lvl</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="w"> </span><span class="n">zone</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">levels</span><span class="p">.</span><span class="n">keys</span><span class="p">.</span><span class="bp">sorted</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">allLevels</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="n">levels</span><span class="p">.</span><span class="n">values</span><span class="p">)</span></code></pre></div>
+<p><code>keys</code> і <code>values</code> — це легкі «погляди» на словник. Якщо потрібен масив, обгорни їх у <code>Array(...)</code>. Порядок обходу не визначений і може змінюватися між запусками, тому для стабільного виведення сортуй ключі.</p>
+<p>Корисні методи: <code>mapValues</code>, <code>filter</code>, <code>merge(_:uniquingKeysWith:)</code>, <code>Dictionary(grouping:by:)</code> (аналог <code>GroupBy</code>).</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">words</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"apple"</span><span class="p">,</span><span class="w"> </span><span class="s">"avocado"</span><span class="p">,</span><span class="w"> </span><span class="s">"banana"</span><span class="p">,</span><span class="w"> </span><span class="s">"blueberry"</span><span class="p">,</span><span class="w"> </span><span class="s">"cherry"</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">byLetter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Dictionary</span><span class="p">(</span><span class="n">grouping</span><span class="p">:</span><span class="w"> </span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="bp">first</span><span class="p">!</span><span class="w"> </span><span class="p">})</span>
+<span class="c1">// ["a": ["apple", "avocado"], "b": [...], "c": ["cherry"]]</span></code></pre></div>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Порахуй частоту кожного слова в реченні у <code>[String: Int]</code>, використовуючи <code>default:</code>.</li>
+<li>Дано два масиви ID гравців (сьогодні й учора). Знайди нових, тих, хто пішов, і тих, хто грав обидва дні, через <code>Set</code>.</li>
+<li>Покажи на прикладі, що зміна копії масиву не змінює оригінал, а зміна копії масиву <strong>класів</strong> змінює об'єкти. Чому так?</li>
+<li>Згрупуй масив <code>(name: String, score: Int)</code> за десятками очок через <code>Dictionary(grouping:by:)</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="03-strings.html"><small>Попередній</small>Рядки й символи</a><a class="next" href="05-control-flow.html"><small>Наступний</small>Керування потоком виконання</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

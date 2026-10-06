@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Властивості · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li class="current"><a href="10-properties.html" aria-current="page"><span class="num">10</span> Властивості</a><ol class="sections"><li><a href="#збережені-властивості">Збережені властивості</a></li><li><a href="#обчислювані-властивості">Обчислювані властивості</a></li><li><a href="#спостерігачі-властивостей">Спостерігачі властивостей</a></li><li><a href="#property-wrappers">Property wrappers</a></li><li><a href="#глобальні-й-локальні-змінні">Глобальні й локальні змінні</a></li><li><a href="#властивості-типу">Властивості типу</a></li></ol></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 10</p>
+  <h1>Властивості</h1>
+  <p class="lede">Збережені й обчислювані властивості, <code>lazy</code>, спостерігачі <code>willSet</code>/<code>didSet</code>, property wrappers з projected value, глобальні змінні та властивості типу.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/">properties</a></p>
+<h2 id="збережені-властивості"><a href="#збережені-властивості">Збережені властивості</a></h2>
+<p>Збережена властивість — <code>let</code> чи <code>var</code> усередині структури або класу; enum збережених властивостей екземпляра не має. Що можна змінювати, визначають <strong>дві</strong> речі одночасно: як оголошено властивість і як оголошено сам екземпляр.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Order</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w">            </span><span class="c1">// не змінюється ніколи</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"new"</span><span class="w">      </span><span class="c1">// змінюється, якщо змінюваний сам екземпляр</span>
+<span class="p">}</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">OrderBox</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"new"</span>
+<span class="p">}</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>var order = Order(...)</code></th>
+<th><code>let order = Order(...)</code></th>
+<th><code>let box = OrderBox()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.status = "paid"</code></td>
+<td>✓</td>
+<td>✗ — <code>let</code> заморожує все значення структури</td>
+<td>✓ — <code>let</code> фіксує лише посилання</td>
+</tr>
+<tr>
+<td><code>.id = UUID()</code></td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<p>Звідси корисна звичка: моделі даних робити структурами з <code>var</code>-полями, а «незмінність» вирішувати на рівні змінної (<code>let</code>), а не прописувати в кожному полі.</p>
+<h3 id="ліниві-властивості"><a href="#ліниві-властивості">Ліниві властивості</a></h3>
+<p><code>lazy var</code> обчислює початкове значення при <strong>першому зверненні</strong>. Корисно, коли значення дороге або залежить від стану, що з'явиться після ініціалізації:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PriceFormatter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">currencyCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"UAH"</span>
+
+<span class="w">    </span><span class="c1">// NumberFormatter дорогий у створенні; до того ж налаштування</span>
+<span class="w">    </span><span class="c1">// залежить від currencyCode, тому обчислюємо в момент першого використання</span>
+<span class="w">    </span><span class="kr">lazy</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">formatter</span><span class="p">:</span><span class="w"> </span><span class="n">NumberFormatter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NumberFormatter</span><span class="p">()</span>
+<span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="n">numberStyle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">.</span><span class="n">currency</span>
+<span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="n">currencyCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">currencyCode</span><span class="w">       </span><span class="c1">// у lazy можна звертатися до self</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">f</span>
+<span class="w">    </span><span class="p">}()</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">formatter</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="bp">NSNumber</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="n">value</span><span class="si">)</span><span class="s">"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Чому <code>lazy</code> буває лише з <code>var</code>: значення з'являється вже після того, як об'єкт створено, а <code>let</code> мусить отримати значення до кінця <code>init</code>. Зате саме тому у виразі <code>lazy</code>-властивості доступний <code>self</code>.</p>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p><code>lazy</code> <strong>не потокобезпечна</strong>. Якщо два потоки одночасно вперше звернуться до властивості, ініціалізатор може виконатися двічі. У Swift 6 компілятор і так не дасть ділити змінюваний стан між потоками без синхронізації, але пам'ятай про це.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Аналог — <code>Lazy&lt;T&gt;</code>, тільки вбудований у мову і без <code>.Value</code>.</p>
+</aside>
+<h3 id="де-бекінг-поле"><a href="#де-бекінг-поле">Де «бекінг-поле»?</a></h3>
+<p>У C# поряд з властивістю часто живе приватне поле <code>_status</code>. У Swift збережена властивість сама і є сховищем — окремого поля немає й не потрібно. Якщо потрібна логіка навколо запису, її додають спостерігачами або обгорткою (нижче), а не ручним полем.</p>
+<h2 id="обчислювані-властивості"><a href="#обчислювані-властивості">Обчислювані властивості</a></h2>
+<p>Обчислювана властивість нічого не зберігає: вона має геттер і, за бажанням, сеттер.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Countdown</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">minutesAndSeconds</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">minutes</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">(</span><span class="n">totalSeconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="n">totalSeconds</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="n">minutes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="n">seconds</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">timer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Countdown</span><span class="p">(</span><span class="n">totalSeconds</span><span class="p">:</span><span class="w"> </span><span class="mi">135</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">minutesAndSeconds</span><span class="p">)</span><span class="w">        </span><span class="c1">// (minutes: 2, seconds: 15)</span>
+<span class="n">timer</span><span class="p">.</span><span class="n">minutesAndSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">totalSeconds</span><span class="p">)</span><span class="w">             </span><span class="c1">// 300</span></code></pre></div>
+<h3 id="скорочений-сеттер"><a href="#скорочений-сеттер">Скорочений сеттер</a></h3>
+<p>Якщо не вказати ім'я параметра сеттера, воно буде <code>newValue</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">set</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="n">minutes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="n">seconds</span>
+<span class="p">}</span></code></pre></div>
+<h3 id="скорочений-геттер"><a href="#скорочений-геттер">Скорочений геттер</a></h3>
+<p>Тіло геттера з одного виразу повертає його без <code>return</code> (як і в функціях).</p>
+<h3 id="властивості-лише-для-читання"><a href="#властивості-лише-для-читання">Властивості лише для читання</a></h3>
+<p>Без сеттера властивість доступна лише для читання. Тоді <code>get { }</code> можна не писати:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Cart</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">prices</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Double</span><span class="p">]</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">total</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">prices</span><span class="p">.</span><span class="bp">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<p>Ключове слово тут завжди <code>var</code> — навіть для властивості лише для читання: її значення обчислюється щоразу заново, тож константою вона не є.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Те саме, що властивості з <code>get</code>/<code>set</code> у C#. Відмінність лише в тому, що збережена властивість (як auto-property) і обчислювана виглядають по-різному: перша — <code>var x = 0</code>, друга — <code>var x: Int { ... }</code>.</p>
+</aside>
+<h2 id="спостерігачі-властивостей"><a href="#спостерігачі-властивостей">Спостерігачі властивостей</a></h2>
+<p><code>willSet</code> і <code>didSet</code> реагують на кожне присвоєння значення, навіть якщо нове значення дорівнює старому.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">willSet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">"Здоров'я зміниться на </span><span class="si">\(</span><span class="n">newValue</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">didSet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Гравець переможений"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// присвоєння в didSet не викликає спостерігачів повторно</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>У <code>willSet</code> нове значення — <code>newValue</code>, у <code>didSet</code> старе — <code>oldValue</code>. Імена можна змінити: <code>willSet(next)</code>, <code>didSet(previous)</code>.</li>
+<li>Спостерігачі можна додати до власних збережених властивостей, до успадкованих (збережених і обчислюваних) через <code>override</code>, але не до власних обчислюваних — там і так є сеттер.</li>
+<li>Під час ініціалізації в <code>init</code> спостерігачі <strong>не</strong> викликаються для власних властивостей. Спостерігачі суперкласу викликаються, коли підклас присвоює властивість після виклику <code>super.init</code>.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p><code>increment(&amp;score)</code> спрацює <code>didSet</code> у <code>score</code> навіть тоді, коли функція нічого не змінила: <code>inout</code> наприкінці завжди записує значення назад. Якщо <code>didSet</code> шле подію в аналітику, порівнюй <code>oldValue</code> з новим значенням.</p>
+</aside>
+<h2 id="property-wrappers"><a href="#property-wrappers">Property wrappers</a></h2>
+<p>Property wrapper відокремлює <strong>логіку зберігання</strong> від оголошення властивості. Класичний iOS-приклад — налаштування, що мають жити в <code>UserDefaults</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="p">@</span><span class="n">propertyWrapper</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Stored</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">key</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">defaultValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">storage</span><span class="p">:</span><span class="w"> </span><span class="n">UserDefaults</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">.</span><span class="n">standard</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="n">object</span><span class="p">(</span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="n">defaultValue</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span><span class="w"> </span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">AppSettings</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Stored</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="s">"hasSeenOnboarding"</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">hasSeenOnboarding</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Stored</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="s">"launchCount"</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">launchCount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">AppSettings</span><span class="p">()</span>
+<span class="n">settings</span><span class="p">.</span><span class="n">launchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">// читає й пише UserDefaults під капотом</span></code></pre></div>
+<p>Обгортка — структура, клас чи enum з атрибутом <code>@propertyWrapper</code> і властивістю <code>wrappedValue</code>. Для <code>@Stored var launchCount</code> компілятор створює приватне поле <code>_launchCount</code> типу <code>Stored&lt;Int&gt;</code> і властивість <code>launchCount</code>, що звертається до <code>_launchCount.wrappedValue</code>.</p>
+<h3 id="як-обгортка-отримує-початкові-значення"><a href="#як-обгортка-отримує-початкові-значення">Як обгортка отримує початкові значення</a></h3>
+<p>Що саме викличеться, залежить від того, як записано оголошення:</p>
+<table>
+<thead>
+<tr>
+<th>Запис</th>
+<th>Ініціалізатор обгортки</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@W var x: T</code></td>
+<td><code>init()</code></td>
+</tr>
+<tr>
+<td><code>@W var x = value</code></td>
+<td><code>init(wrappedValue: value)</code></td>
+</tr>
+<tr>
+<td><code>@W(a: 1) var x: T</code></td>
+<td><code>init(a: 1)</code> — як у <code>@Stored(key:defaultValue:)</code> вище</td>
+</tr>
+<tr>
+<td><code>@W(a: 1) var x = value</code></td>
+<td><code>init(wrappedValue: value, a: 1)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Тобто значення після <code>=</code> завжди йде в параметр <code>wrappedValue</code>, а аргументи атрибута — в інші параметри. Якщо обгортка підтримує кілька форм, у неї просто кілька ініціалізаторів.</p>
+<h3 id="projected-value"><a href="#projected-value">Projected value</a></h3>
+<p>Обгортка може надавати додаткове значення через властивість <code>projectedValue</code>. Доступ до нього — через <code>$</code> перед іменем:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">propertyWrapper</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Tracked</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">changeCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">didSet</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">changeCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">wrappedValue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">wrappedValue</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">projectedValue</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">changeCount</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Profile</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Tracked</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"guest"</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Profile</span><span class="p">()</span>
+<span class="n">p</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"neo"</span>
+<span class="n">p</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"trinity"</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="err">$</span><span class="n">nickname</span><span class="p">)</span><span class="w">   </span><span class="c1">// 2</span></code></pre></div>
+<p>Усередині типу до projected value звертаються без <code>self.</code>: просто <code>$nickname</code>. Projected value може бути будь-якого типу — навіть самою обгорткою (<code>var projectedValue: Self { self }</code>).</p>
+<p>Саме так працюють <code>@State</code> і <code>@Binding</code> у SwiftUI (а також <code>@Bindable</code>): <code>$name</code> — це projected value, яке дає <code>Binding</code>. У <code>@Environment</code> projected value немає.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Прямого аналога немає. Найближче — атрибути + source generators або Fody-weaving. У Swift обгортки — частина мови.</p>
+</aside>
+<h2 id="глобальні-й-локальні-змінні"><a href="#глобальні-й-локальні-змінні">Глобальні й локальні змінні</a></h2>
+<p>Збережені й обчислювані змінні, а також спостерігачі можна оголошувати і поза типами — глобально або локально у функції.</p>
+<ul>
+<li><strong>Глобальні</strong> константи й змінні в бібліотечних файлах ініціалізуються <strong>ліниво</strong> при першому зверненні, без <code>lazy</code>, і потокобезпечно — рівно один раз. Виняток — код верхнього рівня в <code>main.swift</code> чи скрипті: там змінні ініціалізуються по черзі, як звичайні інструкції.</li>
+<li><strong>Локальні</strong> — ніколи не ліниві, якщо не позначені <code>lazy</code>.</li>
+<li>Property wrappers можна застосовувати до локальних змінних, але не до глобальних.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout new"><b>Swift 6</b><p>Глобальна <code>var</code> — це змінюваний стан, доступний з будь-якого потоку. У режимі Swift 6 компілятор відмовиться її компілювати, поки ти не ізолюєш її глобальним актором (<code>@MainActor var</code>) або не зробиш <code>let</code> з <code>Sendable</code>-типом.</p>
+</aside>
+<h2 id="властивості-типу"><a href="#властивості-типу">Властивості типу</a></h2>
+<p>Властивості, що належать самому типу, а не екземпляру, — аналог <code>static</code> у C#.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">MainActor</span><span class="w">          </span><span class="c1">// змінювана статична властивість — це глобальний стан, тож ізолюємо її</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">FeatureFlags</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">configVersion</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isNewPaywallEnabled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">summary</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"v</span><span class="si">\(</span><span class="n">configVersion</span><span class="si">)</span><span class="s">, paywall: </span><span class="si">\(</span><span class="n">isNewPaywallEnabled</span><span class="si">)</span><span class="s">"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">Theme</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">accentColor</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"orange"</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// підклас може перевизначити</span>
+<span class="p">}</span>
+
+<span class="n">FeatureFlags</span><span class="p">.</span><span class="n">isNewPaywallEnabled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">FeatureFlags</span><span class="p">.</span><span class="n">summary</span><span class="p">)</span></code></pre></div>
+<ul>
+<li><code>static let</code>/<code>static var</code> пишуть одразу зі значенням: ініціалізатора, який би їх заповнив, у типу немає.</li>
+<li>Значення обчислюється при першому зверненні й рівно один раз, навіть якщо звертаються кілька потоків одночасно — тому <code>static let shared = ...</code> є стандартним способом зробити синглтон.</li>
+<li><code>class var</code> у класах дозволяє перевизначати обчислювану властивість типу в підкласах. <code>static</code> — забороняє.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Зроби структуру <code>Price</code> зі збереженою ціною в копійках (<code>Int</code>) і обчислюваною <code>hryvnias: Double</code> з геттером і сеттером.</li>
+<li>Додай до класу <code>Wallet</code> властивість <code>coins</code> з <code>didSet</code>, який відправляє подію аналітики, тільки якщо значення справді змінилося.</li>
+<li>Напиши property wrapper <code>@History</code> для будь-якого типу, projected value якого — масив усіх попередніх значень.</li>
+<li>Напиши обгортку <code>@UserDefault(key:defaultValue:)</code>, що читає й пише значення в <code>UserDefaults</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="09-structs-classes.html"><small>Попередній</small>Структури й класи</a><a class="next" href="11-methods.html"><small>Наступний</small>Методи</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

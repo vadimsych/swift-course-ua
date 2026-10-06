@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Розширення · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li class="current"><a href="22-extensions.html" aria-current="page"><span class="num">22</span> Розширення</a><ol class="sections"><li><a href="#синтаксис">Синтаксис</a></li><li><a href="#обчислювані-властивості">Обчислювані властивості</a></li><li><a href="#ініціалізатори">Ініціалізатори</a></li><li><a href="#методи">Методи</a></li><li><a href="#сабскрипти">Сабскрипти</a></li><li><a href="#вкладені-типи">Вкладені типи</a></li><li><a href="#як-використовують-розширення-на-практиці">Як використовують розширення на практиці</a></li></ol></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 22</p>
+  <h1>Розширення</h1>
+  <p class="lede"><code>extension</code> додає функціональність до будь-якого існуючого типу, навіть чужого: обчислювані властивості, методи, ініціалізатори, сабскрипти, вкладені типи й відповідність протоколам.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/extensions/">extensions</a></p>
+<h2 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">SomeType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// нова функціональність</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">SomeType</span><span class="p">:</span><span class="w"> </span><span class="n">SomeProtocol</span><span class="p">,</span><span class="w"> </span><span class="n">AnotherProtocol</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// реалізація протоколів</span>
+<span class="p">}</span></code></pre></div>
+<p>Розширювати можна класи, структури, перелічення й протоколи, зокрема типи зі стандартної бібліотеки, Foundation і сторонніх SDK. Розширення generic-типу може додавати обмеження (урок про узагальнення).</p>
+<p>Що розширення <strong>не можуть</strong>:</p>
+<ul>
+<li>додавати <strong>збережені</strong> властивості й спостерігачі до існуючих властивостей;</li>
+<li>перевизначати існуючу функціональність;</li>
+<li>додавати designated-ініціалізатори чи <code>deinit</code> до класів.</li>
+</ul>
+<p>Розширення — частина типу на етапі компіляції, тож його члени доступні в усіх екземплярах, де б їх не створили.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Як extension methods, але без статичного класу і з більшими можливостями: розширення може додати не лише методи, а й властивості, ініціалізатори та протоколи.</p>
+</aside>
+<h2 id="обчислювані-властивості"><a href="#обчислювані-властивості">Обчислювані властивості</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">/// 0.256 → "25.6%"</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">asPercent</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="kc">self</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">).</span><span class="n">formatted</span><span class="p">(.</span><span class="n">number</span><span class="p">.</span><span class="n">precision</span><span class="p">(.</span><span class="n">fractionLength</span><span class="p">(</span><span class="mf">0.</span><span class="p">..</span><span class="mi">1</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"%"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">conversion</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.256</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">conversion</span><span class="p">.</span><span class="n">asPercent</span><span class="p">)</span><span class="w">   </span><span class="c1">// "25.6%" — роздільник залежить від локалі пристрою</span></code></pre></div>
+<h2 id="ініціалізатори"><a href="#ініціалізатори">Ініціалізатори</a></h2>
+<p>Розширення можуть додавати <strong>convenience</strong>-ініціалізатори до класів і будь-які ініціалізатори до value types.</p>
+<p>Важлива техніка: якщо додати ініціалізатор структурі в розширенні, автоматичні ініціалізатори (за замовчуванням і memberwise) <strong>зберігаються</strong>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RGB</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">RGB</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">hex</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">r</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">((</span><span class="n">hex</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">g</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">((</span><span class="n">hex</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">(</span><span class="n">hex</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RGB</span><span class="p">()</span><span class="w">                  </span><span class="c1">// за замовчуванням — збережено</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RGB</span><span class="p">(</span><span class="n">r</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="c1">// memberwise — збережено</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RGB</span><span class="p">(</span><span class="n">hex</span><span class="p">:</span><span class="w"> </span><span class="mh">0xFF8800</span><span class="p">)</span><span class="w">     </span><span class="c1">// з розширення</span></code></pre></div>
+<p>Автоматичні ініціалізатори зберігаються, лише якщо всі збережені властивості мають значення за замовчуванням (для ініціалізатора без параметрів) і в самому оголошенні структури немає власних ініціалізаторів.</p>
+<p>Особливе правило для структур <strong>з іншого модуля</strong>: ініціалізатор у розширенні не може звертатися до <code>self</code>, доки не викличе якийсь ініціалізатор, оголошений у модулі-власнику типу. Так модуль-власник зберігає контроль над тим, як створюються його значення.</p>
+<h2 id="методи"><a href="#методи">Методи</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Array</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">/// [1, 2, 3, 4, 5].chunked(into: 2) → [[1, 2], [3, 4], [5]]</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">chunked</span><span class="p">(</span><span class="n">into</span><span class="w"> </span><span class="n">size</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[[</span><span class="n">Element</span><span class="p">]]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">stride</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="bp">count</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="n">size</span><span class="p">).</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nb">Array</span><span class="p">(</span><span class="kc">self</span><span class="p">[</span><span class="nv">$0</span><span class="p">..&lt;</span><span class="n">Swift</span><span class="p">.</span><span class="bp">min</span><span class="p">(</span><span class="nv">$0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="bp">count</span><span class="p">)])</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">batches</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="mf">1.</span><span class="p">..</span><span class="mi">7</span><span class="p">).</span><span class="n">chunked</span><span class="p">(</span><span class="n">into</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">   </span><span class="c1">// [[1, 2, 3], [4, 5, 6], [7]]</span></code></pre></div>
+<h3 id="мутуючі-методи"><a href="#мутуючі-методи">Мутуючі методи</a></h3>
+<p>Методи, що змінюють value type, позначаються <code>mutating</code>, як і в самому типі:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">mutating</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">clamp</span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="n">range</span><span class="p">:</span><span class="w"> </span><span class="n">ClosedRange</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Swift</span><span class="p">.</span><span class="bp">min</span><span class="p">(</span><span class="n">Swift</span><span class="p">.</span><span class="bp">max</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">.</span><span class="n">lowerBound</span><span class="p">),</span><span class="w"> </span><span class="n">range</span><span class="p">.</span><span class="n">upperBound</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">140</span>
+<span class="n">volume</span><span class="p">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mf">0.</span><span class="p">..</span><span class="mi">100</span><span class="p">)</span><span class="w">   </span><span class="c1">// 100</span></code></pre></div>
+<h2 id="сабскрипти"><a href="#сабскрипти">Сабскрипти</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">UInt8</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">/// Прапорець на позиції 0…7, наприклад набір вимкнених звуків.</span>
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">flag</span><span class="w"> </span><span class="n">index</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="kc">self</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">newValue</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">mutedChannels</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">mutedChannels</span><span class="p">[</span><span class="n">flag</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">mutedChannels</span><span class="p">[</span><span class="n">flag</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w">   </span><span class="c1">// true</span>
+<span class="n">mutedChannels</span><span class="w">            </span><span class="c1">// 4</span></code></pre></div>
+<h2 id="вкладені-типи"><a href="#вкладені-типи">Вкладені типи</a></h2>
+<p>Розширення може додати в тип вкладений тип — зручно, щоб згрупувати константи чи допоміжні моделі поруч з кодом, який їх використовує:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">extension</span><span class="w"> </span><span class="nc">URLRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">struct</span><span class="w"> </span><span class="nc">RetryHint</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">attempts</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">backoff</span><span class="p">:</span><span class="w"> </span><span class="n">TimeInterval</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">defaultRetry</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RetryHint</span><span class="p">(</span><span class="n">attempts</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">backoff</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w">   </span><span class="c1">// статична властивість</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">authorized</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">url</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">URLRequest</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// статичний метод</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">request</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URLRequest</span><span class="p">(</span><span class="n">url</span><span class="p">:</span><span class="w"> </span><span class="n">url</span><span class="p">)</span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="s">"Bearer </span><span class="si">\(</span><span class="n">token</span><span class="si">)</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">forHTTPHeaderField</span><span class="p">:</span><span class="w"> </span><span class="s">"Authorization"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">hint</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URLRequest</span><span class="p">.</span><span class="n">defaultRetry</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">request</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">URLRequest</span><span class="p">.</span><span class="n">authorized</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://api.example.com/me"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">:</span><span class="w"> </span><span class="s">"abc"</span><span class="p">)</span></code></pre></div>
+<p>Як видно, розширення можуть додавати й <strong>статичні</strong> властивості та методи — так само, як члени екземпляра. Статичні збережені властивості (<code>static let</code>) теж дозволені, на відміну від збережених властивостей екземпляра.</p>
+<h2 id="як-використовують-розширення-на-практиці"><a href="#як-використовують-розширення-на-практиці">Як використовують розширення на практиці</a></h2>
+<ul>
+<li><strong>Організація коду.</strong> Відповідність кожному протоколу — в окремому розширенні: <code>extension PaywallView: UITableViewDataSource { }</code>. Так файл читається блоками.</li>
+<li><strong>Відокремлення приватних помічників</strong>: <code>private extension ProfileViewModel { ... }</code>.</li>
+<li><strong>Збереження memberwise-ініціалізатора</strong> — власні <code>init</code> у розширенні.</li>
+<li><strong>Ретроактивне моделювання</strong>: додати чужому типу відповідність своєму протоколу.</li>
+</ul>
+<!-- callout -->
+
+<aside class="callout trap"><b>Пастка</b><p>Якщо твій модуль і стороння бібліотека додадуть до одного типу методи з однаковою сигнатурою, виникне конфлікт. Для розширень системних типів у бібліотеках давай імена з префіксом або роби їх <code>internal</code>/<code>private</code>.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Розшир <code>Date</code> обчислюваними властивостями <code>isToday</code>, <code>startOfDay</code> і методом <code>adding(days:)</code>.</li>
+<li>Розшир <code>String</code> ініціалізатором <code>init(price: Decimal, currency: String)</code>, що форматує ціну.</li>
+<li>Розшир <code>Array where Element == Int</code> методом <code>average() -&gt; Double?</code>.</li>
+<li>Розбий будь-який свій великий клас на основне оголошення та кілька розширень за відповідальністю.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="21-nested-types.html"><small>Попередній</small>Вкладені типи</a><a class="next" href="23-protocols.html"><small>Наступний</small>Протоколи</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>

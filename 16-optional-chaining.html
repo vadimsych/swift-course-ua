@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Опціональні ланцюжки · Swift для C#</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
+    <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <details class="toc" open><summary>Зміст</summary>
+    <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li class="current"><a href="16-optional-chaining.html" aria-current="page"><span class="num">16</span> Опціональні ланцюжки</a><ol class="sections"><li><a href="#ідея">Ідея</a></li><li><a href="#читання-й-запис-властивостей">Читання й запис властивостей</a></li><li><a href="#виклик-методів">Виклик методів</a></li><li><a href="#сабскрипти">Сабскрипти</a></li><li><a href="#методи-з-опціональним-результатом">Методи з опціональним результатом</a></li></ol></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
+    </details>
+  </aside>
+  <main>
+<article class="chapter">
+  <p class="eyebrow">Мова крок за кроком · урок 16</p>
+  <h1>Опціональні ланцюжки</h1>
+  <p class="lede">Як безпечно звертатися до властивостей, методів і сабскриптів через кілька рівнів опціоналів за допомогою <code>?.</code>, і що відбувається з типом результату.</p>
+  <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/optionalchaining/">optionalchaining</a></p>
+<h2 id="ідея"><a href="#ідея">Ідея</a></h2>
+<p>Опціональний ланцюжок — це <code>?</code> після опціонального значення перед зверненням до його члена. Якщо значення <code>nil</code>, решта ланцюжка пропускається, і весь вираз дає <code>nil</code>. Альтернатива — <code>!</code>, але вона на <code>nil</code> падає.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Це той самий null-conditional <code>?.</code>, що й у C#, включно з тим, що <code>a?.Count</code> дає nullable-результат. Різниця в тому, що опціонали Swift однаково працюють для value і reference types, а компілятор не дасть використати результат без розгортання.</p>
+</aside>
+<p>Для прикладів візьмемо конфіг віддаленої конфігурації (Remote Config), де майже все може бути відсутнім. Зверни увагу: це структури — опціональні ланцюжки однаково працюють і зі структурами, і з класами.</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RemoteConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">paywall</span><span class="p">:</span><span class="w"> </span><span class="n">PaywallConfig</span><span class="p">?</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">flags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">PaywallConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">products</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">ProductConfig</span><span class="p">]</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">trial</span><span class="p">:</span><span class="w"> </span><span class="n">TrialConfig</span><span class="p">?</span>
+
+<span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">slot</span><span class="w"> </span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">ProductConfig</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">products</span><span class="p">.</span><span class="bp">indices</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">products</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">highlighted</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">ProductConfig</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">products</span><span class="p">.</span><span class="bp">first</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">isHighlighted</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ProductConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">isHighlighted</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">TrialConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">days</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RemoteConfig</span><span class="p">()</span></code></pre></div>
+<h2 id="читання-й-запис-властивостей"><a href="#читання-й-запис-властивостей">Читання й запис властивостей</a></h2>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?.</span><span class="n">title</span><span class="w">          </span><span class="c1">// String? — хоча title не опціональний</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">days</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?.</span><span class="n">trial</span><span class="p">?.</span><span class="n">days</span><span class="w">     </span><span class="c1">// Int?, а не Int??</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">days</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?.</span><span class="n">trial</span><span class="p">?.</span><span class="n">days</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Пробний період: </span><span class="si">\(</span><span class="n">days</span><span class="si">)</span><span class="s"> днів"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p><strong>Результат ланцюжка завжди опціональний</strong>, але лише на один рівень:</p>
+<ul>
+<li>якщо член не опціональний, він стає опціональним (<code>String</code> → <code>String?</code>);</li>
+<li>якщо вже опціональний, таким і лишається (<code>Int?</code> → <code>Int?</code>), скільки б <code>?</code> не було в ланцюжку.</li>
+</ul>
+<p>Присвоєння через ланцюжок спрацює лише тоді, коли всі ланки не <code>nil</code>. Інакше нічого не відбудеться — і <strong>права частина присвоєння навіть не обчислюється</strong>. Тобто якщо праворуч стоїть виклик дорогої функції, вона не виконається:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?.</span><span class="n">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">makeLocalizedTitle</span><span class="p">()</span><span class="w">   </span><span class="c1">// paywall == nil → makeLocalizedTitle() не викликається</span></code></pre></div>
+<h2 id="виклик-методів"><a href="#виклик-методів">Виклик методів</a></h2>
+<p>Метод викликається через ланцюжок так само. Результат стає опціональним, навіть для методів без результату: <code>Void</code> перетворюється на <code>Void?</code>. Завдяки цьому можна перевірити, чи виклик узагалі відбувся:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">didReset</span><span class="p">:</span><span class="w"> </span><span class="nb">Void</span><span class="p">?</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?.</span><span class="n">products</span><span class="p">.</span><span class="bp">removeAll</span><span class="p">()</span>
+<span class="k">if</span><span class="w"> </span><span class="n">didReset</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Пейвола в конфігу немає — нічого скидати"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+<p>Те саме з присвоєнням: вираз <code>config.paywall?.title = "Pro"</code> має тип <code>Void?</code>, і його можна порівняти з <code>nil</code>.</p>
+<h2 id="сабскрипти"><a href="#сабскрипти">Сабскрипти</a></h2>
+<p>Для сабскрипта <code>?</code> ставиться <strong>перед</strong> квадратними дужками — одразу після значення, яке може бути <code>nil</code>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">second</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?[</span><span class="n">slot</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">]?.</span><span class="n">id</span><span class="w">   </span><span class="c1">// String?</span></code></pre></div>
+<p>Тут два <code>?</code>: перший — бо <code>paywall</code> опціональний, другий — бо сам сабскрипт повертає опціонал.</p>
+<p>Якщо сабскрипт повертає опціонал (як у словника), знак ставиться <strong>після</strong> закривальної дужки, і так можна змінювати значення всередині:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="n">config</span><span class="p">.</span><span class="n">flags</span><span class="p">[</span><span class="s">"onboarding"</span><span class="p">]?.</span><span class="n">append</span><span class="p">(</span><span class="s">"skip_intro"</span><span class="p">)</span><span class="w">   </span><span class="c1">// ключа немає — нічого не відбудеться</span>
+<span class="n">config</span><span class="p">.</span><span class="n">flags</span><span class="p">[</span><span class="s">"onboarding"</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"v2"</span><span class="p">]</span>
+<span class="n">config</span><span class="p">.</span><span class="n">flags</span><span class="p">[</span><span class="s">"onboarding"</span><span class="p">]?.</span><span class="n">append</span><span class="p">(</span><span class="s">"skip_intro"</span><span class="p">)</span><span class="w">   </span><span class="c1">// ["v2", "skip_intro"]</span></code></pre></div>
+<h2 id="методи-з-опціональним-результатом"><a href="#методи-з-опціональним-результатом">Методи з опціональним результатом</a></h2>
+<p>Якщо метод сам повертає опціонал і ланцюжок треба продовжити від його результату, <code>?</code> ставиться <strong>після дужок виклику</strong>:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">highlightedID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">paywall</span><span class="p">?.</span><span class="n">highlighted</span><span class="p">()?.</span><span class="n">id</span><span class="p">.</span><span class="n">uppercased</span><span class="p">()</span><span class="w">   </span><span class="c1">// String?</span></code></pre></div>
+<p><code>?</code> після <code>highlighted()</code> стосується результату методу, а не самого методу.</p>
+<!-- callout -->
+
+<aside class="callout tip"><b>Порада</b><p>Довгі ланцюжки на кшталт <code>a?.b?.c?.d?.e</code> — ознака, що модель даних варто переглянути. Часто зручніше один раз розгорнути проміжне значення через <code>guard let paywall = config.paywall else { return }</code> і далі працювати з не-опціональним.</p>
+</aside>
+<!-- callout -->
+
+<aside class="callout practice"><b>Практика</b>
+<ol>
+<li>Для моделі <code>User → Subscription? → Plan? → price: Decimal</code> напиши обчислювану властивість, що повертає ціну як рядок або «Безкоштовно».</li>
+<li>Через ланцюжок додай елемент у масив у словнику <code>[String: [String]]</code>, якщо ключ існує, і переконайся, що для неіснуючого ключа нічого не станеться.</li>
+<li>Перевір через порівняння з <code>nil</code>, чи вдалося присвоєння через ланцюжок.</li>
+<li>Порівняй типи виразів <code>a?.b</code> для випадків, коли <code>b</code> — <code>Int</code>, <code>Int?</code> і метод, що повертає <code>Int?</code>.</li>
+</ol>
+</aside>
+</article>
+<nav class="pager" aria-label="Сусідні уроки"><a class="prev" href="15-deinitialization.html"><small>Попередній</small>Деініціалізація</a><a class="next" href="17-errors.html"><small>Наступний</small>Обробка помилок</a></nav>
+<footer>
+  <p>Авторський навчальний курс українською. Структура тем відповідає книзі «The Swift Programming Language» від Apple (Swift 6.4), текст і приклади написані окремо. Оригінал книги: <a href="https://docs.swift.org/swift-book/">docs.swift.org/swift-book</a> (© Apple Inc. and the Swift project authors, Apache License 2.0).</p>
+</footer>
+  </main>
+</div>
+<script>
+  (function () {
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
+    var toc = document.querySelector('.toc');
+    if (toc && narrow) toc.open = false;
+    var cur = document.querySelector('.rail li.current');
+    if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
+  })();
+</script>
+</body>
+</html>
