@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li class="current"><a href="18-concurrency.html" aria-current="page"><span class="num">18</span> Конкурентність</a><ol class="sections"><li><a href="#асинхронні-функції">Асинхронні функції</a></li><li><a href="#асинхронні-послідовності">Асинхронні послідовності</a></li><li><a href="#паралельний-виклик-async-let">Паралельний виклик: async let</a></li><li><a href="#задачі-й-групи-задач">Задачі й групи задач</a></li><li><a href="#ізоляція">Ізоляція</a></li><li><a href="#головний-актор">Головний актор</a></li><li><a href="#актори">Актори</a></li><li><a href="#глобальні-актори">Глобальні актори</a></li><li><a href="#sendable">Sendable</a></li></ol></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -26,7 +27,7 @@
   <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/concurrency/">concurrency</a></p>
 <h2 id="асинхронні-функції"><a href="#асинхронні-функції">Асинхронні функції</a></h2>
 <p>Функція, що може призупинитися посередині виконання, позначається <code>async</code>. Виклик позначається <code>await</code> — це <strong>точка призупинення</strong>, де потік може бути відданий іншій роботі.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">300</span><span class="p">))</span><span class="w">   </span><span class="c1">// імітація мережі</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1_250</span>
 <span class="p">}</span>
@@ -34,10 +35,19 @@
 <span class="kd">func</span><span class="w"> </span><span class="nf">refreshHeader</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">balance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">fetchBalance</span><span class="p">(</span><span class="n">userID</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Баланс: </span><span class="si">\(</span><span class="n">balance</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">func fetchBalance(userID: Int) async -&gt; Int {
+    try? await Task.sleep(for: .milliseconds(300))   // імітація мережі
+    return 1_250
+}
+
+func refreshHeader() async {
+    let balance = await fetchBalance(userID: 7)
+    print(&quot;Баланс: \(balance)&quot;)
+}</template></div>
 <p>Якщо функція і асинхронна, і може кинути помилку, порядок — <code>async throws</code>, а при виклику — <code>try await</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">loadProfile</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Vadim"</span><span class="w"> </span><span class="p">}</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">loadProfile</span><span class="p">()</span></code></pre></div>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">loadProfile</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Vadim"</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">loadProfile</span><span class="p">()</span></code></pre><template class="src">func loadProfile() async throws -&gt; String { &quot;Vadim&quot; }
+let name = try await loadProfile()</template></div>
 <p>Викликати асинхронну функцію можна лише з асинхронного контексту: з іншої <code>async</code>-функції, з <code>Task { }</code>, з методу <code>.task { }</code> у SwiftUI, з <code>static func main() async</code> в <code>@main</code>-типі.</p>
 <!-- callout -->
 
@@ -57,7 +67,7 @@
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 <span class="p">}</span></code></pre></div>
 <p>Власні послідовності роблять, реалізуючи протокол <code>AsyncSequence</code> або, найпростіше, через <code>AsyncStream</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">ticks</span><span class="p">(</span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">AsyncStream</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">ticks</span><span class="p">(</span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">AsyncStream</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">AsyncStream</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">continuation</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span><span class="n">Task</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mf">1.</span><span class="p">..</span><span class="bp">count</span><span class="w"> </span><span class="p">{</span>
@@ -69,7 +79,19 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">for</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ticks</span><span class="p">(</span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"тік"</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">}</span></code></pre></div>
+<span class="k">for</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ticks</span><span class="p">(</span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"тік"</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">}</span></code></pre><template class="src">func ticks(count: Int) -&gt; AsyncStream&lt;Int&gt; {
+    AsyncStream { continuation in
+        Task {
+            for i in 1...count {
+                try? await Task.sleep(for: .seconds(1))
+                continuation.yield(i)
+            }
+            continuation.finish()
+        }
+    }
+}
+
+for await t in ticks(count: 3) { print(&quot;тік&quot;, t) }</template></div>
 <!-- callout -->
 
 <aside class="callout csharp"><b>C#</b><p>Аналог — <code>IAsyncEnumerable&lt;T&gt;</code> і <code>await foreach</code>. У StoreKit 2 ти вже зустрічав такий потік: <code>Transaction.updates</code>.</p>
@@ -220,7 +242,7 @@
 </aside>
 <h2 id="актори"><a href="#актори">Актори</a></h2>
 <p>Актор — reference type, як клас, але його <strong>змінюваний стан доступний лише з однієї задачі одночасно</strong>. Звернення ззовні проходить через <code>await</code>, бо, можливо, доведеться почекати, поки актор звільниться.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">actor</span><span class="w"> </span><span class="n">TokenStore</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">actor</span><span class="w"> </span><span class="n">TokenStore</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">token</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">refreshCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 
@@ -234,7 +256,21 @@
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">store</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TokenStore</span><span class="p">()</span>
 <span class="k">await</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="s">"abc"</span><span class="p">)</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">current</span><span class="p">()</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">current</span><span class="p">()</span></code></pre><template class="src">actor TokenStore {
+    private var token: String?
+    private var refreshCount = 0
+
+    func current() -&gt; String? { token }
+
+    func update(_ new: String) {
+        token = new
+        refreshCount += 1
+    }
+}
+
+let store = TokenStore()
+await store.update(&quot;abc&quot;)
+let t = await store.current()</template></div>
 <ul>
 <li>Усередині актора <code>await</code> для власних членів не потрібен: код уже ізольований.</li>
 <li>Актори не підтримують успадкування.</li>
@@ -259,7 +295,7 @@
 </aside>
 <h2 id="глобальні-актори"><a href="#глобальні-актори">Глобальні актори</a></h2>
 <p>Глобальний актор — актор-синглтон, атрибутом якого можна позначити будь-які типи, функції чи змінні. <code>@MainActor</code> — один з них. Можна оголосити власний:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">globalActor</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">globalActor</span>
 <span class="kd">actor</span><span class="w"> </span><span class="n">DatabaseActor</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">shared</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DatabaseActor</span><span class="p">()</span>
 <span class="p">}</span>
@@ -268,7 +304,16 @@
 <span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LocalStorage</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">records</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">r</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">records</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">@globalActor
+actor DatabaseActor {
+    static let shared = DatabaseActor()
+}
+
+@DatabaseActor
+final class LocalStorage {
+    var records: [String] = []
+    func add(_ r: String) { records.append(r) }
+}</template></div>
 <p>Усе, що позначено <code>@DatabaseActor</code>, виконується послідовно в одній області ізоляції, навіть якщо розкидано по різних типах.</p>
 <h2 id="sendable"><a href="#sendable">Sendable</a></h2>
 <p>Між областями ізоляції можна передавати лише значення, які <strong>безпечно ділити</strong>. Такі типи відповідають протоколу <code>Sendable</code>:</p>
@@ -332,5 +377,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li class="current"><a href="14-initialization.html" aria-current="page"><span class="num">14</span> Ініціалізація</a><ol class="sections"><li><a href="#початкові-значення-збережених-властивостей">Початкові значення збережених властивостей</a></li><li><a href="#власна-ініціалізація">Власна ініціалізація</a></li><li><a href="#ініціалізатори-за-замовчуванням">Ініціалізатори за замовчуванням</a></li><li><a href="#делегування-ініціалізаторів-у-value-types">Делегування ініціалізаторів у value types</a></li><li><a href="#ініціалізація-класів-і-успадкування">Ініціалізація класів і успадкування</a></li><li><a href="#failable-ініціалізатори">Failable-ініціалізатори</a></li><li><a href="#required-ініціалізатори">Required-ініціалізатори</a></li><li><a href="#значення-за-замовчуванням-через-замикання">Значення за замовчуванням через замикання</a></li></ol></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -31,68 +32,100 @@
 <aside class="callout csharp"><b>C#</b><p>У C# поля автоматично отримують <code>default</code>: <code>0</code>, <code>null</code>, <code>false</code>. У Swift значень за замовчуванням «нізвідки» немає. Неініціалізована властивість — помилка компіляції. Виняток — опціонали <code>var</code>, що за замовчуванням <code>nil</code>.</p>
 </aside>
 <h3 id="ініціалізатори"><a href="#ініціалізатори">Ініціалізатори</a></h3>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Stopwatch</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Stopwatch</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">seconds</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">seconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct Stopwatch {
+    var seconds: Double
+    init() {
+        seconds = 0
+    }
+}</template></div>
 <p>Присвоєння в ініціалізаторі (і значення за замовчуванням) <strong>не викликають</strong> спостерігачів властивості.</p>
 <h3 id="значення-за-замовчуванням"><a href="#значення-за-замовчуванням">Значення за замовчуванням</a></h3>
 <p>Якщо властивість завжди починає з того самого значення, краще задати його в оголошенні:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Stopwatch</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Stopwatch</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">seconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct Stopwatch {
+    var seconds = 0.0
+}</template></div>
 <p>Так коротше, тип виводиться, і з'являється ініціалізатор за замовчуванням (нижче).</p>
 <h2 id="власна-ініціалізація"><a href="#власна-ініціалізація">Власна ініціалізація</a></h2>
 <h3 id="параметри"><a href="#параметри">Параметри</a></h3>
 <p>Ініціалізаторів може бути кілька — з різними параметрами:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Avatar</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Avatar</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">imageName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">imageName</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">imageName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">imageName</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">initials</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">imageName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"initials_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">initials</span><span class="p">.</span><span class="kr">prefix</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">uppercased</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">level</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">imageName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">"avatar_gold"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">"avatar_basic"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Avatar</span><span class="p">(</span><span class="n">initials</span><span class="p">:</span><span class="w"> </span><span class="s">"vs"</span><span class="p">)</span><span class="w">    </span><span class="c1">// imageName == "initials_VS"</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Avatar</span><span class="p">(</span><span class="n">initials</span><span class="p">:</span><span class="w"> </span><span class="s">"vs"</span><span class="p">)</span><span class="w">    </span><span class="c1">// imageName == "initials_VS"</span></code></pre><template class="src">struct Avatar {
+    var imageName: String
+    init(imageName: String) { self.imageName = imageName }
+    init(initials: String) { imageName = &quot;initials_&quot; + initials.prefix(2).uppercased() }
+    init(level: Int) { imageName = level &gt;= 50 ? &quot;avatar_gold&quot; : &quot;avatar_basic&quot; }
+}
+
+let a = Avatar(initials: &quot;vs&quot;)    // imageName == &quot;initials_VS&quot;</template></div>
 <h3 id="імена-параметрів-і-мітки"><a href="#імена-параметрів-і-мітки">Імена параметрів і мітки</a></h3>
 <p>У ініціалізаторів немає власного імені, як у функцій, тому їх розрізняють <strong>за мітками й типами параметрів</strong>. Через це Swift автоматично дає мітку кожному параметру ініціалізатора, і писати мітки при виклику обов'язково.</p>
 <h3 id="параметри-без-мітки"><a href="#параметри-без-мітки">Параметри без мітки</a></h3>
 <p>Якщо мітка зайва, використовуй <code>_</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Hex</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Hex</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="n">radix</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">color</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Hex</span><span class="p">(</span><span class="s">"FF8800"</span><span class="p">)</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">color</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Hex</span><span class="p">(</span><span class="s">"FF8800"</span><span class="p">)</span></code></pre><template class="src">struct Hex {
+    var value: Int
+    init(_ text: String) { value = Int(text, radix: 16) ?? 0 }
+}
+let color = Hex(&quot;FF8800&quot;)</template></div>
 <h3 id="опціональні-властивості"><a href="#опціональні-властивості">Опціональні властивості</a></h3>
 <p>Властивість, яка може «логічно» не мати значення (зокрема відразу після ініціалізації), оголошують опціональною. Вона автоматично отримує <code>nil</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Quiz</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Quiz</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">question</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">answer</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span><span class="w">     </span><span class="c1">// nil, поки користувач не відповів</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">question</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">question</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">question</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">final class Quiz {
+    let question: String
+    var answer: String?     // nil, поки користувач не відповів
+    init(question: String) { self.question = question }
+}</template></div>
 <h3 id="константні-властивості"><a href="#константні-властивості">Константні властивості</a></h3>
 <p><code>let</code>-властивості можна присвоїти в будь-якому місці ініціалізатора, але рівно один раз. У класах <code>let</code>-властивість може присвоїти лише клас, що її оголосив, а не підклас.</p>
 <h2 id="ініціалізатори-за-замовчуванням"><a href="#ініціалізатори-за-замовчуванням">Ініціалізатори за замовчуванням</a></h2>
 <p>Якщо всі властивості структури чи класу мають значення за замовчуванням і немає власних ініціалізаторів, тип отримує <code>init()</code> без параметрів.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Session</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Session</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">token</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">?</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">retries</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="p">}</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Session</span><span class="p">()</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Session</span><span class="p">()</span></code></pre><template class="src">final class Session {
+    var token: String?
+    var retries = 0
+}
+let s = Session()</template></div>
 <h3 id="memberwise-ініціалізатори-структур"><a href="#memberwise-ініціалізатори-структур">Memberwise-ініціалізатори структур</a></h3>
 <p>Структури додатково отримують ініціалізатор з параметрами для всіх збережених властивостей у порядку оголошення. Параметри для властивостей зі значеннями за замовчуванням можна пропускати:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Tile</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Tile</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="p">}</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tile</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tile</span><span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tile</span><span class="p">()</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tile</span><span class="p">()</span></code></pre><template class="src">struct Tile {
+    var x = 0
+    var y = 0
+}
+let a = Tile(x: 2, y: 3)
+let b = Tile(y: 5)
+let c = Tile()</template></div>
 <h2 id="делегування-ініціалізаторів-у-value-types"><a href="#делегування-ініціалізаторів-у-value-types">Делегування ініціалізаторів у value types</a></h2>
 <p>Ініціалізатор може викликати інший ініціалізатор того самого типу через <code>self.init</code>, щоб не дублювати код. У value types це просто, бо успадкування немає.</p>
 <p>Зручний прийом — тримати допоміжні ініціалізатори в <code>extension</code>: тоді делегування працює, а автоматичні memberwise-ініціалізатор і ініціалізатор за замовчуванням залишаються:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RetryPolicy</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RetryPolicy</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">maxAttempts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">delay</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">multiplier</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">2.0</span>
@@ -110,7 +143,25 @@
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">p1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RetryPolicy</span><span class="p">()</span><span class="w">                       </span><span class="c1">// автоматичний — збережено</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">p2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RetryPolicy</span><span class="p">(</span><span class="n">maxAttempts</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">         </span><span class="c1">// memberwise — збережено</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">p3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RetryPolicy</span><span class="p">(</span><span class="n">aggressive</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w">       </span><span class="c1">// власний, делегує</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">p3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RetryPolicy</span><span class="p">(</span><span class="n">aggressive</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w">       </span><span class="c1">// власний, делегує</span></code></pre><template class="src">struct RetryPolicy {
+    var maxAttempts = 3
+    var delay = 1.0
+    var multiplier = 2.0
+}
+
+extension RetryPolicy {
+    init(aggressive: Bool) {
+        if aggressive {
+            self.init(maxAttempts: 10, delay: 0.2, multiplier: 1.5)   // делегуємо memberwise
+        } else {
+            self.init()                                              // і ініціалізатору за замовчуванням
+        }
+    }
+}
+
+let p1 = RetryPolicy()                       // автоматичний — збережено
+let p2 = RetryPolicy(maxAttempts: 5)         // memberwise — збережено
+let p3 = RetryPolicy(aggressive: true)       // власний, делегує</template></div>
 <p>Якби <code>init(aggressive:)</code> стояв у самому оголошенні структури, обидва автоматичні ініціалізатори зникли б, і їх довелося б писати вручну.</p>
 <h2 id="ініціалізація-класів-і-успадкування"><a href="#ініціалізація-класів-і-успадкування">Ініціалізація класів і успадкування</a></h2>
 <p>Усі збережені властивості класу, <strong>включно з успадкованими</strong>, мають отримати значення під час ініціалізації. Для цього в класах є два види ініціалізаторів.</p>
@@ -120,7 +171,7 @@
 <li><strong>Convenience</strong> (допоміжний) — для зручних варіантів створення. Він мусить зрештою викликати designated-ініціалізатор того самого класу.</li>
 </ul>
 <h3 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h3>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Connection</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Connection</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">host</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">port</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
 
@@ -132,7 +183,19 @@
 <span class="w">    </span><span class="kr">convenience</span><span class="w"> </span><span class="kd">init</span><span class="p">(</span><span class="n">host</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">           </span><span class="c1">// convenience</span>
 <span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">host</span><span class="p">:</span><span class="w"> </span><span class="n">host</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">class Connection {
+    var host: String
+    var port: Int
+
+    init(host: String, port: Int) {            // designated
+        self.host = host
+        self.port = port
+    }
+
+    convenience init(host: String) {           // convenience
+        self.init(host: host, port: 443)
+    }
+}</template></div>
 <h3 id="правила-делегування-в-класах"><a href="#правила-делегування-в-класах">Правила делегування в класах</a></h3>
 <ol>
 <li>Designated-ініціалізатор мусить викликати designated-ініціалізатор <strong>безпосереднього суперкласу</strong>.</li>
@@ -184,7 +247,7 @@
 <li><strong>Правило 2.</strong> Якщо підклас має реалізації <strong>всіх</strong> designated-ініціалізаторів суперкласу (успадковані за правилом 1 або написані самостійно, зокрема як convenience), він успадковує й усі convenience-ініціалізатори.</li>
 </ul>
 <p>Розглянемо мережевий клієнт:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
 
 <span class="kd">class</span><span class="w"> </span><span class="nc">APIClient</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">baseURL</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span>
@@ -198,7 +261,21 @@
 <span class="w">    </span><span class="kr">convenience</span><span class="w"> </span><span class="kd">init</span><span class="p">(</span><span class="n">host</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                     </span><span class="c1">// convenience</span>
 <span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">baseURL</span><span class="p">:</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="w"> </span><span class="s">"https://</span><span class="si">\(</span><span class="n">host</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">import Foundation
+
+class APIClient {
+    let baseURL: URL
+    let timeout: TimeInterval
+
+    init(baseURL: URL, timeout: TimeInterval) {          // designated
+        self.baseURL = baseURL
+        self.timeout = timeout
+    }
+
+    convenience init(host: String) {                     // convenience
+        self.init(baseURL: URL(string: &quot;https://\(host)&quot;)!, timeout: 30)
+    }
+}</template></div>
 <p><strong>Правило 1 у дії.</strong> Мок для тестів лише додає властивість зі значенням за замовчуванням і не пише жодного ініціалізатора — тому отримує все:</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">RecordingClient</span><span class="p">:</span><span class="w"> </span><span class="n">APIClient</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">recordedPaths</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
@@ -223,7 +300,7 @@
 <p>Якщо прибрати перевизначення <code>init(baseURL:timeout:)</code>, <code>CachingClient(host:)</code> перестане компілюватися: правило 2 більше не виконується.</p>
 <h2 id="failable-ініціалізатори"><a href="#failable-ініціалізатори">Failable-ініціалізатори</a></h2>
 <p>Коли створення може не вдатися (неправильні параметри, відсутній ресурс), використовують <code>init?</code>. Він повертає опціонал, а невдачу позначають <code>return nil</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Email</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Email</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">?(</span><span class="kc">_</span><span class="w"> </span><span class="n">raw</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="s">"@"</span><span class="p">),</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="bp">count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
@@ -232,14 +309,23 @@
 <span class="p">}</span>
 
 <span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Email</span><span class="p">(</span><span class="s">"a@b.c"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">email</span><span class="p">.</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="n">Email</span><span class="p">(</span><span class="s">"oops"</span><span class="p">)</span><span class="w">   </span><span class="c1">// nil</span></code></pre></div>
+<span class="n">Email</span><span class="p">(</span><span class="s">"oops"</span><span class="p">)</span><span class="w">   </span><span class="c1">// nil</span></code></pre><template class="src">struct Email {
+    let value: String
+    init?(_ raw: String) {
+        guard raw.contains(&quot;@&quot;), raw.count &gt;= 3 else { return nil }
+        value = raw
+    }
+}
+
+if let email = Email(&quot;a@b.c&quot;) { print(email.value) }
+Email(&quot;oops&quot;)   // nil</template></div>
 <p><code>return nil</code> тут — лише сигнал «створення не вдалося»; успішний шлях нічого не повертає, як і в звичайному <code>init</code>. Мати failable і звичайний ініціалізатор з однаковими параметрами не можна.</p>
 <!-- callout -->
 
 <aside class="callout tip"><b>Порада</b><p>Числові перетворення в стандартній бібліотеці теж failable: <code>Int(exactly: 3.5)</code> повертає <code>nil</code>, а <code>Int("42")</code> — опціонал.</p>
 </aside>
 <h3 id="failable-ініціалізатори-для-enum"><a href="#failable-ініціалізатори-для-enum">Failable-ініціалізатори для enum</a></h3>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Currency</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Currency</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">uah</span><span class="p">,</span><span class="w"> </span><span class="n">usd</span><span class="p">,</span><span class="w"> </span><span class="n">eur</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">?(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="n">code</span><span class="p">.</span><span class="n">uppercased</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -249,16 +335,29 @@
 <span class="w">        </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">enum Currency {
+    case uah, usd, eur
+    init?(code: String) {
+        switch code.uppercased() {
+        case &quot;UAH&quot;: self = .uah
+        case &quot;USD&quot;: self = .usd
+        case &quot;EUR&quot;: self = .eur
+        default: return nil
+        }
+    }
+}</template></div>
 <h3 id="для-enum-із-сирими-значеннями"><a href="#для-enum-із-сирими-значеннями">Для enum із сирими значеннями</a></h3>
 <p>Такі enum отримують <code>init?(rawValue:)</code> автоматично, і він повертає <code>nil</code> для невідомого значення:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Theme</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">light</span><span class="p">,</span><span class="w"> </span><span class="n">dark</span><span class="p">,</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="p">}</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">enum</span><span class="w"> </span><span class="nc">Theme</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">light</span><span class="p">,</span><span class="w"> </span><span class="n">dark</span><span class="p">,</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="p">}</span>
 
 <span class="n">Theme</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span><span class="w"> </span><span class="s">"dark"</span><span class="p">)</span><span class="w">      </span><span class="c1">// .dark</span>
-<span class="n">Theme</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span><span class="w"> </span><span class="s">"sepia"</span><span class="p">)</span><span class="w">     </span><span class="c1">// nil — такого варіанта немає</span></code></pre></div>
+<span class="n">Theme</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span><span class="w"> </span><span class="s">"sepia"</span><span class="p">)</span><span class="w">     </span><span class="c1">// nil — такого варіанта немає</span></code></pre><template class="src">enum Theme: String { case light, dark, system }
+
+Theme(rawValue: &quot;dark&quot;)      // .dark
+Theme(rawValue: &quot;sepia&quot;)     // nil — такого варіанта немає</template></div>
 <h3 id="поширення-невдачі"><a href="#поширення-невдачі">Поширення невдачі</a></h3>
 <p>Failable-ініціалізатор може делегувати іншому failable — у value type вбік, у класі вбік або вгору. Якщо делегат повертає <code>nil</code>, увесь процес одразу завершується невдачею, і код після делегування не виконується:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">HexColor</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">HexColor</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">rgb</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span>
 
 <span class="w">    </span><span class="kd">init</span><span class="p">?(</span><span class="n">hex</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -273,11 +372,26 @@
 <span class="p">}</span>
 
 <span class="n">HexColor</span><span class="p">(</span><span class="n">css</span><span class="p">:</span><span class="w"> </span><span class="s">"#FF8800"</span><span class="p">)?.</span><span class="n">rgb</span><span class="w">   </span><span class="c1">// 16746496</span>
-<span class="n">HexColor</span><span class="p">(</span><span class="n">css</span><span class="p">:</span><span class="w"> </span><span class="s">"#XYZ"</span><span class="p">)</span><span class="w">           </span><span class="c1">// nil</span></code></pre></div>
+<span class="n">HexColor</span><span class="p">(</span><span class="n">css</span><span class="p">:</span><span class="w"> </span><span class="s">"#XYZ"</span><span class="p">)</span><span class="w">           </span><span class="c1">// nil</span></code></pre><template class="src">struct HexColor {
+    let rgb: UInt32
+
+    init?(hex: String) {
+        guard hex.count == 6, let value = UInt32(hex, radix: 16) else { return nil }
+        rgb = value
+    }
+
+    init?(css: String) {                      // &quot;#FF8800&quot; або &quot;ff8800&quot;
+        let trimmed = css.hasPrefix(&quot;#&quot;) ? String(css.dropFirst()) : css
+        self.init(hex: trimmed)               // якщо nil — css-ініціалізатор теж nil
+    }
+}
+
+HexColor(css: &quot;#FF8800&quot;)?.rgb   // 16746496
+HexColor(css: &quot;#XYZ&quot;)           // nil</template></div>
 <p>Failable може делегувати й звичайному ініціалізатору — це нормально.</p>
 <h3 id="перевизначення-failable-ініціалізатора"><a href="#перевизначення-failable-ініціалізатора">Перевизначення failable-ініціалізатора</a></h3>
 <p>Підклас може замінити failable-ініціалізатор суперкласу звичайним, який ніколи не повертає <code>nil</code> (навпаки не можна):</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Slug</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Slug</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">verified</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                    </span><span class="c1">// звичайний</span>
@@ -299,7 +413,29 @@
 <span class="p">}</span>
 
 <span class="n">Slug</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span><span class="w">          </span><span class="c1">// nil</span>
-<span class="n">LenientSlug</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span><span class="w">   </span><span class="c1">// "hello-world" — ніколи не nil</span></code></pre></div>
+<span class="n">LenientSlug</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span><span class="w">   </span><span class="c1">// "hello-world" — ніколи не nil</span></code></pre><template class="src">class Slug {
+    let text: String
+
+    init(verified text: String) {                    // звичайний
+        self.text = text
+    }
+
+    init?(_ raw: String) {                           // failable
+        guard !raw.isEmpty, raw.allSatisfy({ $0.isLowercase || $0 == &quot;-&quot; }) else { return nil }
+        text = raw
+    }
+}
+
+final class LenientSlug: Slug {
+    override init(_ raw: String) {                   // перевизначено як звичайний
+        let cleaned = raw.lowercased()
+            .map { $0.isLetter ? $0 : &quot;-&quot; }
+        super.init(verified: String(cleaned))        // делегуємо не-failable ініціалізатору
+    }
+}
+
+Slug(&quot;Hello World&quot;)          // nil
+LenientSlug(&quot;Hello World&quot;)   // &quot;hello-world&quot; — ніколи не nil</template></div>
 <h3 id="init"><a href="#init">init!</a></h3>
 <p><code>init!</code> створює неявно розгорнутий опціонал. Правила:</p>
 <ul>
@@ -309,7 +445,7 @@
 </ul>
 <h2 id="required-ініціалізатори"><a href="#required-ініціалізатори">Required-ініціалізатори</a></h2>
 <p><code>required</code> означає, що <strong>кожен підклас</strong> зобов'язаний реалізувати цей ініціалізатор. У підкласі теж пишуть <code>required</code> (а не <code>override</code>):</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Widget</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Widget</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kr">required</span><span class="w"> </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
 <span class="p">}</span>
 
@@ -317,11 +453,19 @@
 <span class="w">    </span><span class="kr">required</span><span class="w"> </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kc">super</span><span class="p">.</span><span class="kd">init</span><span class="p">()</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">class Widget {
+    required init() {}
+}
+
+class Slider: Widget {
+    required init() {
+        super.init()
+    }
+}</template></div>
 <p>Коли підклас пише власний ініціалізатор, він втрачає автоматично успадковані — і <code>required</code>-ініціалізатори доводиться дописувати вручну. Саме тому в підкласі <code>UIView</code> з власним <code>init</code> з'являється обов'язковий <code>required init?(coder:)</code>.</p>
 <h2 id="значення-за-замовчуванням-через-замикання"><a href="#значення-за-замовчуванням-через-замикання">Значення за замовчуванням через замикання</a></h2>
 <p>Початкове значення властивості можна обчислити замиканням, яке <strong>одразу викликається</strong> (зверни увагу на <code>()</code> в кінці):</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">LootTable</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">LootTable</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">weights</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">table</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">rarity</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="s">"common"</span><span class="p">,</span><span class="w"> </span><span class="s">"rare"</span><span class="p">,</span><span class="w"> </span><span class="s">"epic"</span><span class="p">,</span><span class="w"> </span><span class="s">"legendary"</span><span class="p">].</span><span class="n">enumerated</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -329,7 +473,15 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">table</span>
 <span class="w">    </span><span class="p">}()</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct LootTable {
+    let weights: [String: Int] = {
+        var table: [String: Int] = [:]
+        for rarity in [&quot;common&quot;, &quot;rare&quot;, &quot;epic&quot;, &quot;legendary&quot;].enumerated() {
+            table[rarity.element] = 1 &lt;&lt; (6 - rarity.offset * 2)   // 64, 16, 4, 1
+        }
+        return table
+    }()
+}</template></div>
 <p>Замикання виконується до ініціалізації решти екземпляра, тому в ньому не можна звертатися до інших властивостей, методів чи <code>self</code>. Без <code>()</code> властивості присвоювалося б саме замикання, а не результат.</p>
 <!-- callout -->
 
@@ -357,5 +509,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

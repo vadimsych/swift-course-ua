@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li class="current"><a href="29-advanced-operators.html" aria-current="page"><span class="num">29</span> Розширені оператори</a><ol class="sections"><li><a href="#бітові-оператори">Бітові оператори</a></li><li><a href="#оператори-з-переповненням">Оператори з переповненням</a></li><li><a href="#пріоритет-і-асоціативність">Пріоритет і асоціативність</a></li><li><a href="#операторні-методи">Операторні методи</a></li><li><a href="#власні-оператори">Власні оператори</a></li><li><a href="#result-builders">Result builders</a></li></ol></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -26,15 +27,21 @@
   <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/advancedoperators/">advancedoperators</a></p>
 <h2 id="бітові-оператори"><a href="#бітові-оператори">Бітові оператори</a></h2>
 <p>Працюють з окремими бітами цілих чисел — для прапорців, масок, кольорів, бінарних протоколів.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mb">0b1100_1010</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mb">0b1100_1010</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mb">0b1010_0110</span>
 
 <span class="o">~</span><span class="n">a</span><span class="w">          </span><span class="c1">// NOT: 0b0011_0101 — інвертує кожен біт</span>
 <span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// AND: 0b1000_0010 — 1 там, де обидва 1</span>
 <span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// OR:  0b1110_1110 — 1 там, де хоча б один 1</span>
-<span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// XOR: 0b0110_1100 — 1 там, де біти різні</span></code></pre></div>
+<span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="c1">// XOR: 0b0110_1100 — 1 там, де біти різні</span></code></pre><template class="src">let a: UInt8 = 0b1100_1010
+let b: UInt8 = 0b1010_0110
+
+~a          // NOT: 0b0011_0101 — інвертує кожен біт
+a &amp; b       // AND: 0b1000_0010 — 1 там, де обидва 1
+a | b       // OR:  0b1110_1110 — 1 там, де хоча б один 1
+a ^ b       // XOR: 0b0110_1100 — 1 там, де біти різні</template></div>
 <p>Практичний приклад — набір прапорців дозволів:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">canRead</span><span class="p">:</span><span class="w">  </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w">     </span><span class="c1">// 0b001</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">canRead</span><span class="p">:</span><span class="w">  </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w">     </span><span class="c1">// 0b001</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">canWrite</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="c1">// 0b010</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">canShare</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w">     </span><span class="c1">// 0b100</span>
 
@@ -42,7 +49,15 @@
 <span class="n">permissions</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">canWrite</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w">                </span><span class="c1">// false</span>
 <span class="n">permissions</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">canWrite</span><span class="w">                    </span><span class="c1">// увімкнути</span>
 <span class="n">permissions</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="n">canShare</span><span class="w">                   </span><span class="c1">// вимкнути</span>
-<span class="n">permissions</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">canRead</span><span class="w">                     </span><span class="c1">// перемкнути</span></code></pre></div>
+<span class="n">permissions</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">canRead</span><span class="w">                     </span><span class="c1">// перемкнути</span></code></pre><template class="src">let canRead:  UInt8 = 1 &lt;&lt; 0     // 0b001
+let canWrite: UInt8 = 1 &lt;&lt; 1     // 0b010
+let canShare: UInt8 = 1 &lt;&lt; 2     // 0b100
+
+var permissions = canRead | canShare       // 0b101
+permissions &amp; canWrite != 0                // false
+permissions |= canWrite                    // увімкнути
+permissions &amp;= ~canShare                   // вимкнути
+permissions ^= canRead                     // перемкнути</template></div>
 <!-- callout -->
 
 <aside class="callout tip"><b>Порада</b><p>Для наборів прапорців у Swift є протокол <code>OptionSet</code>, що дає типобезпечний синтаксис множин: <code>let p: Permissions = [.read, .write]</code>, <code>p.contains(.share)</code>. Під капотом — ті самі бітові операції.</p>
@@ -50,11 +65,15 @@
 <h3 id="зсуви"><a href="#зсуви">Зсуви</a></h3>
 <p><code>&lt;&lt;</code> і <code>&gt;&gt;</code> зсувають біти вліво й вправо.</p>
 <p><strong>Беззнакові числа</strong> — логічний зсув: біти, що виходять за межі, відкидаються, а звільнені позиції заповнюються нулями. Зсув на n ліворуч — множення на 2ⁿ, праворуч — ділення.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">argb</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mh">0xFF_3A_7B_C4</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">argb</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mh">0xFF_3A_7B_C4</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">alpha</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">argb</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 255</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">red</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">argb</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0x3A = 58</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">green</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">argb</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0x7B = 123</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">blue</span><span class="w">  </span><span class="p">=</span><span class="w">  </span><span class="n">argb</span><span class="w">        </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0xC4 = 196</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">blue</span><span class="w">  </span><span class="p">=</span><span class="w">  </span><span class="n">argb</span><span class="w">        </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="w">     </span><span class="c1">// 0xC4 = 196</span></code></pre><template class="src">let argb: UInt32 = 0xFF_3A_7B_C4
+let alpha = (argb &gt;&gt; 24) &amp; 0xFF     // 255
+let red   = (argb &gt;&gt; 16) &amp; 0xFF     // 0x3A = 58
+let green = (argb &gt;&gt; 8)  &amp; 0xFF     // 0x7B = 123
+let blue  =  argb        &amp; 0xFF     // 0xC4 = 196</template></div>
 <p><strong>Знакові числа</strong> зберігаються в доповняльному коді: найстарший біт — знаковий. При зсуві праворуч звільнені позиції заповнюються <strong>знаковим бітом</strong> (арифметичний зсув), тому від'ємні числа лишаються від'ємними: <code>-16 &gt;&gt; 2 == -4</code>.</p>
 <!-- callout -->
 
@@ -62,14 +81,21 @@
 </aside>
 <h2 id="оператори-з-переповненням"><a href="#оператори-з-переповненням">Оператори з переповненням</a></h2>
 <p>Звичайна арифметика при переповненні — <strong>крах</strong> (урок про оператори). Якщо загортання потрібне свідомо, використовують оператори з <code>&amp;</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">hash</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2_166_136_261</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">var</span><span class="w"> </span><span class="nv">hash</span><span class="p">:</span><span class="w"> </span><span class="nb">UInt32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2_166_136_261</span>
 <span class="k">for</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s">"swift"</span><span class="p">.</span><span class="n">utf8</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">hash</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="nb">UInt32</span><span class="p">(</span><span class="n">byte</span><span class="p">))</span><span class="w"> </span><span class="o">&amp;*</span><span class="w"> </span><span class="mi">16_777_619</span><span class="w">     </span><span class="c1">// FNV-1a: множення із загортанням</span>
 <span class="p">}</span>
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">max</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int8</span><span class="p">.</span><span class="bp">max</span>
 <span class="bp">max</span><span class="w"> </span><span class="o">&amp;+</span><span class="w"> </span><span class="mi">1</span><span class="w">      </span><span class="c1">// -128: переповнення вгору загортається до мінімуму</span>
-<span class="nb">Int8</span><span class="p">.</span><span class="bp">min</span><span class="w"> </span><span class="o">&amp;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 127: переповнення вниз — до максимуму</span></code></pre></div>
+<span class="nb">Int8</span><span class="p">.</span><span class="bp">min</span><span class="w"> </span><span class="o">&amp;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 127: переповнення вниз — до максимуму</span></code></pre><template class="src">var hash: UInt32 = 2_166_136_261
+for byte in &quot;swift&quot;.utf8 {
+    hash = (hash ^ UInt32(byte)) &amp;* 16_777_619     // FNV-1a: множення із загортанням
+}
+
+let max = Int8.max
+max &amp;+ 1      // -128: переповнення вгору загортається до мінімуму
+Int8.min &amp;- 1 // 127: переповнення вниз — до максимуму</template></div>
 <ul>
 <li><code>&amp;+</code>, <code>&amp;-</code>, <code>&amp;*</code> — додавання, віднімання, множення із загортанням;</li>
 <li><code>&amp;&lt;&lt;</code>, <code>&amp;&gt;&gt;</code> — зсуви, де величина зсуву береться за модулем ширини типу (як у C#).</li>
@@ -77,7 +103,7 @@
 <p>Для перевірки переповнення без краху є методи <code>addingReportingOverflow(_:)</code> тощо, що повертають <code>(partialValue, overflow: Bool)</code>.</p>
 <h2 id="пріоритет-і-асоціативність"><a href="#пріоритет-і-асоціативність">Пріоритет і асоціативність</a></h2>
 <p><strong>Пріоритет</strong> визначає, яка операція виконується першою; <strong>асоціативність</strong> — як групуються оператори однакового пріоритету (зліва направо чи справа наліво).</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="c1">// 10 - (4 * (2 &lt;&lt; 1)) = -6 — зсув сильніший за множення</span></code></pre></div>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="c1">// 10 - (4 * (2 &lt;&lt; 1)) = -6 — зсув сильніший за множення</span></code></pre><template class="src">10 - 4 * 2 &lt;&lt; 1   // 10 - (4 * (2 &lt;&lt; 1)) = -6 — зсув сильніший за множення</template></div>
 <p>Swift об'єднує оператори в <strong>групи пріоритетів</strong>. Основні, від найвищого:</p>
 <ol>
 <li><code>BitwiseShiftPrecedence</code> — <code>&lt;&lt;</code>, <code>&gt;&gt;</code></li>
@@ -98,7 +124,7 @@
 </aside>
 <h2 id="операторні-методи"><a href="#операторні-методи">Операторні методи</a></h2>
 <p>Класи й структури можуть реалізувати існуючі оператори для своїх типів. Оператор оголошується як статичний метод:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">cents</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">currency</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 
@@ -113,7 +139,22 @@
 <span class="p">}</span>
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="mi">4_99</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span>
-<span class="kd">let</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="mi">1_00</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span><span class="w">   </span><span class="c1">// 15.97</span></code></pre></div>
+<span class="kd">let</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Money</span><span class="p">(</span><span class="n">cents</span><span class="p">:</span><span class="w"> </span><span class="mi">1_00</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="s">"USD"</span><span class="p">)</span><span class="w">   </span><span class="c1">// 15.97</span></code></pre><template class="src">struct Money {
+    var cents: Int
+    var currency: String
+
+    static func + (lhs: Money, rhs: Money) -&gt; Money {
+        precondition(lhs.currency == rhs.currency, &quot;Різні валюти&quot;)
+        return Money(cents: lhs.cents + rhs.cents, currency: lhs.currency)
+    }
+
+    static func * (lhs: Money, rhs: Int) -&gt; Money {
+        Money(cents: lhs.cents * rhs, currency: lhs.currency)
+    }
+}
+
+let price = Money(cents: 4_99, currency: &quot;USD&quot;)
+let total = price * 3 + Money(cents: 1_00, currency: &quot;USD&quot;)   // 15.97</template></div>
 <h3 id="префіксні-й-постфіксні-оператори"><a href="#префіксні-й-постфіксні-оператори">Префіксні й постфіксні оператори</a></h3>
 <p>Унарні оператори позначаються <code>prefix</code> або <code>postfix</code>:</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Money</span><span class="w"> </span><span class="p">{</span>
@@ -174,7 +215,7 @@
 </aside>
 <h2 id="result-builders"><a href="#result-builders">Result builders</a></h2>
 <p><strong>Result builder</strong> — тип, що дозволяє будувати складні значення декларативно: як список виразів з <code>if</code>, <code>for</code> і <code>switch</code>, а компілятор сам склеює їх у результат. Саме на цьому побудовано SwiftUI (<code>@ViewBuilder</code>).</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">resultBuilder</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">resultBuilder</span>
 <span class="kd">enum</span><span class="w"> </span><span class="nc">QueryBuilder</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildBlock</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">parts</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">...)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">parts</span>
@@ -212,7 +253,45 @@
 <span class="w">        </span><span class="s">"country &lt;&gt; '</span><span class="si">\(</span><span class="n">code</span><span class="si">)</span><span class="s">'"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-<span class="c1">// WHERE deleted = 0 AND plan != 'free' AND country &lt;&gt; 'UA' AND country &lt;&gt; 'PL'</span></code></pre></div>
+<span class="c1">// WHERE deleted = 0 AND plan != 'free' AND country &lt;&gt; 'UA' AND country &lt;&gt; 'PL'</span></code></pre><template class="src">@resultBuilder
+enum QueryBuilder {
+    static func buildBlock(_ parts: String...) -&gt; [String] {
+        parts
+    }
+    static func buildOptional(_ part: [String]?) -&gt; String {
+        part?.joined(separator: &quot; AND &quot;) ?? &quot;&quot;
+    }
+    static func buildEither(first part: [String]) -&gt; String {
+        part.joined(separator: &quot; AND &quot;)
+    }
+    static func buildEither(second part: [String]) -&gt; String {
+        part.joined(separator: &quot; AND &quot;)
+    }
+    static func buildArray(_ parts: [[String]]) -&gt; String {
+        parts.flatMap { $0 }.joined(separator: &quot; AND &quot;)
+    }
+    static func buildFinalResult(_ parts: [String]) -&gt; String {
+        parts.filter { !$0.isEmpty }.joined(separator: &quot; AND &quot;)
+    }
+}
+
+func whereClause(@QueryBuilder _ build: () -&gt; String) -&gt; String {
+    &quot;WHERE &quot; + build()
+}
+
+let onlyPaid = true
+let countries = [&quot;UA&quot;, &quot;PL&quot;]
+
+let sql = whereClause {
+    &quot;deleted = 0&quot;
+    if onlyPaid {
+        &quot;plan != &#x27;free&#x27;&quot;
+    }
+    for code in countries {
+        &quot;country &lt;&gt; &#x27;\(code)&#x27;&quot;
+    }
+}
+// WHERE deleted = 0 AND plan != &#x27;free&#x27; AND country &lt;&gt; &#x27;UA&#x27; AND country &lt;&gt; &#x27;PL&#x27;</template></div>
 <p>Компілятор перетворює тіло замикання на виклики статичних методів builder-а:</p>
 <ul>
 <li><code>buildBlock</code> — склеює послідовність виразів;</li>
@@ -252,5 +331,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

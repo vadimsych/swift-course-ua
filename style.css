@@ -184,3 +184,19 @@ footer p { max-width: 90ch; }
 .callout.practice > b { color: var(--accent); }
 .callout .code { margin-top: 8px; }
 .callout ol, .callout ul { margin-bottom: 0; }
+
+/* ---------- code runner ---------- */
+.run-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.run-btn { font-family: var(--font-mono); font-size: 12.5px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: var(--paper); cursor: pointer; }
+.run-btn.secondary { background: transparent; color: var(--fg); border-color: var(--line); }
+.run-btn:hover { filter: brightness(1.08); }
+.run-btn:disabled { opacity: 0.6; cursor: progress; }
+.run-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.run-editor { display: block; width: 100%; box-sizing: border-box; min-height: 66px; padding: 16px 18px; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.6; color: var(--code-fg); background: var(--code-bg); border: 1px solid var(--accent); border-radius: 6px; resize: vertical; tab-size: 4; white-space: pre; overflow-x: auto; }
+.run-editor:focus { outline: none; box-shadow: 0 0 0 2px var(--accent-soft); }
+.run-output { margin: 8px 0 0; padding: 12px 16px; border-radius: 6px; background: var(--paper); border: 1px dashed var(--line); font-family: var(--font-mono); font-size: 13px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--fg); }
+.run-output.is-error { border-color: var(--accent); color: var(--accent); }
+.run-output.is-pending { color: var(--muted); }
+.sandbox-link { margin: 0 0 18px; }
+.sandbox-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+#playground { max-width: none; }

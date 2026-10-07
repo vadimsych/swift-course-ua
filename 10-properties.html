@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li class="current"><a href="10-properties.html" aria-current="page"><span class="num">10</span> Властивості</a><ol class="sections"><li><a href="#збережені-властивості">Збережені властивості</a></li><li><a href="#обчислювані-властивості">Обчислювані властивості</a></li><li><a href="#спостерігачі-властивостей">Спостерігачі властивостей</a></li><li><a href="#property-wrappers">Property wrappers</a></li><li><a href="#глобальні-й-локальні-змінні">Глобальні й локальні змінні</a></li><li><a href="#властивості-типу">Властивості типу</a></li></ol></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -62,7 +63,7 @@
 <p>Звідси корисна звичка: моделі даних робити структурами з <code>var</code>-полями, а «незмінність» вирішувати на рівні змінної (<code>let</code>), а не прописувати в кожному полі.</p>
 <h3 id="ліниві-властивості"><a href="#ліниві-властивості">Ліниві властивості</a></h3>
 <p><code>lazy var</code> обчислює початкове значення при <strong>першому зверненні</strong>. Корисно, коли значення дороге або залежить від стану, що з'явиться після ініціалізації:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
 
 <span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PriceFormatter</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">currencyCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"UAH"</span>
@@ -79,7 +80,24 @@
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">formatter</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="bp">NSNumber</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="n">value</span><span class="si">)</span><span class="s">"</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">import Foundation
+
+final class PriceFormatter {
+    var currencyCode = &quot;UAH&quot;
+
+    // NumberFormatter дорогий у створенні; до того ж налаштування
+    // залежить від currencyCode, тому обчислюємо в момент першого використання
+    lazy var formatter: NumberFormatter = {
+        let f = NumberFormatter()
+        f.numberStyle = .currency
+        f.currencyCode = currencyCode       // у lazy можна звертатися до self
+        return f
+    }()
+
+    func format(_ value: Double) -&gt; String {
+        formatter.string(from: value as NSNumber) ?? &quot;\(value)&quot;
+    }
+}</template></div>
 <p>Чому <code>lazy</code> буває лише з <code>var</code>: значення з'являється вже після того, як об'єкт створено, а <code>let</code> мусить отримати значення до кінця <code>init</code>. Зате саме тому у виразі <code>lazy</code>-властивості доступний <code>self</code>.</p>
 <!-- callout -->
 
@@ -93,7 +111,7 @@
 <p>У C# поряд з властивістю часто живе приватне поле <code>_status</code>. У Swift збережена властивість сама і є сховищем — окремого поля немає й не потрібно. Якщо потрібна логіка навколо запису, її додають спостерігачами або обгорткою (нижче), а не ручним полем.</p>
 <h2 id="обчислювані-властивості"><a href="#обчислювані-властивості">Обчислювані властивості</a></h2>
 <p>Обчислювана властивість нічого не зберігає: вона має геттер і, за бажанням, сеттер.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Countdown</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Countdown</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">minutesAndSeconds</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">minutes</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -109,7 +127,23 @@
 <span class="kd">var</span><span class="w"> </span><span class="nv">timer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Countdown</span><span class="p">(</span><span class="n">totalSeconds</span><span class="p">:</span><span class="w"> </span><span class="mi">135</span><span class="p">)</span>
 <span class="bp">print</span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">minutesAndSeconds</span><span class="p">)</span><span class="w">        </span><span class="c1">// (minutes: 2, seconds: 15)</span>
 <span class="n">timer</span><span class="p">.</span><span class="n">minutesAndSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<span class="bp">print</span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">totalSeconds</span><span class="p">)</span><span class="w">             </span><span class="c1">// 300</span></code></pre></div>
+<span class="bp">print</span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">totalSeconds</span><span class="p">)</span><span class="w">             </span><span class="c1">// 300</span></code></pre><template class="src">struct Countdown {
+    var totalSeconds = 0
+
+    var minutesAndSeconds: (minutes: Int, seconds: Int) {
+        get {
+            (totalSeconds / 60, totalSeconds % 60)
+        }
+        set(parts) {
+            totalSeconds = parts.minutes * 60 + parts.seconds
+        }
+    }
+}
+
+var timer = Countdown(totalSeconds: 135)
+print(timer.minutesAndSeconds)        // (minutes: 2, seconds: 15)
+timer.minutesAndSeconds = (5, 0)
+print(timer.totalSeconds)             // 300</template></div>
 <h3 id="скорочений-сеттер"><a href="#скорочений-сеттер">Скорочений сеттер</a></h3>
 <p>Якщо не вказати ім'я параметра сеттера, воно буде <code>newValue</code>:</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">set</span><span class="w"> </span><span class="p">{</span>
@@ -119,10 +153,13 @@
 <p>Тіло геттера з одного виразу повертає його без <code>return</code> (як і в функціях).</p>
 <h3 id="властивості-лише-для-читання"><a href="#властивості-лише-для-читання">Властивості лише для читання</a></h3>
 <p>Без сеттера властивість доступна лише для читання. Тоді <code>get { }</code> можна не писати:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Cart</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Cart</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">prices</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Double</span><span class="p">]</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">total</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">prices</span><span class="p">.</span><span class="bp">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct Cart {
+    var prices: [Double]
+    var total: Double { prices.reduce(0, +) }
+}</template></div>
 <p>Ключове слово тут завжди <code>var</code> — навіть для властивості лише для читання: її значення обчислюється щоразу заново, тож константою вона не є.</p>
 <!-- callout -->
 
@@ -130,7 +167,7 @@
 </aside>
 <h2 id="спостерігачі-властивостей"><a href="#спостерігачі-властивостей">Спостерігачі властивостей</a></h2>
 <p><code>willSet</code> і <code>didSet</code> реагують на кожне присвоєння значення, навіть якщо нове значення дорівнює старому.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kr">willSet</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">"Здоров'я зміниться на </span><span class="si">\(</span><span class="n">newValue</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
@@ -140,7 +177,17 @@
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// присвоєння в didSet не викликає спостерігачів повторно</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">final class Player {
+    var health = 100 {
+        willSet {
+            print(&quot;Здоров&#x27;я зміниться на \(newValue)&quot;)
+        }
+        didSet {
+            if health &lt;= 0 { print(&quot;Гравець переможений&quot;) }
+            if health &gt; 100 { health = 100 }   // присвоєння в didSet не викликає спостерігачів повторно
+        }
+    }
+}</template></div>
 <ul>
 <li>У <code>willSet</code> нове значення — <code>newValue</code>, у <code>didSet</code> старе — <code>oldValue</code>. Імена можна змінити: <code>willSet(next)</code>, <code>didSet(previous)</code>.</li>
 <li>Спостерігачі можна додати до власних збережених властивостей, до успадкованих (збережених і обчислюваних) через <code>override</code>, але не до власних обчислюваних — там і так є сеттер.</li>
@@ -152,7 +199,7 @@
 </aside>
 <h2 id="property-wrappers"><a href="#property-wrappers">Property wrappers</a></h2>
 <p>Property wrapper відокремлює <strong>логіку зберігання</strong> від оголошення властивості. Класичний iOS-приклад — налаштування, що мають жити в <code>UserDefaults</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
 
 <span class="p">@</span><span class="n">propertyWrapper</span>
 <span class="kd">struct</span><span class="w"> </span><span class="nc">Stored</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -172,7 +219,27 @@
 <span class="p">}</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nv">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">AppSettings</span><span class="p">()</span>
-<span class="n">settings</span><span class="p">.</span><span class="n">launchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">// читає й пише UserDefaults під капотом</span></code></pre></div>
+<span class="n">settings</span><span class="p">.</span><span class="n">launchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">// читає й пише UserDefaults під капотом</span></code></pre><template class="src">import Foundation
+
+@propertyWrapper
+struct Stored&lt;Value&gt; {
+    let key: String
+    let defaultValue: Value
+    var storage: UserDefaults = .standard
+
+    var wrappedValue: Value {
+        get { storage.object(forKey: key) as? Value ?? defaultValue }
+        set { storage.set(newValue, forKey: key) }
+    }
+}
+
+struct AppSettings {
+    @Stored(key: &quot;hasSeenOnboarding&quot;, defaultValue: false) var hasSeenOnboarding: Bool
+    @Stored(key: &quot;launchCount&quot;, defaultValue: 0) var launchCount: Int
+}
+
+var settings = AppSettings()
+settings.launchCount += 1          // читає й пише UserDefaults під капотом</template></div>
 <p>Обгортка — структура, клас чи enum з атрибутом <code>@propertyWrapper</code> і властивістю <code>wrappedValue</code>. Для <code>@Stored var launchCount</code> компілятор створює приватне поле <code>_launchCount</code> типу <code>Stored&lt;Int&gt;</code> і властивість <code>launchCount</code>, що звертається до <code>_launchCount.wrappedValue</code>.</p>
 <h3 id="як-обгортка-отримує-початкові-значення"><a href="#як-обгортка-отримує-початкові-значення">Як обгортка отримує початкові значення</a></h3>
 <p>Що саме викличеться, залежить від того, як записано оголошення:</p>
@@ -205,7 +272,7 @@
 <p>Тобто значення після <code>=</code> завжди йде в параметр <code>wrappedValue</code>, а аргументи атрибута — в інші параметри. Якщо обгортка підтримує кілька форм, у неї просто кілька ініціалізаторів.</p>
 <h3 id="projected-value"><a href="#projected-value">Projected value</a></h3>
 <p>Обгортка може надавати додаткове значення через властивість <code>projectedValue</code>. Доступ до нього — через <code>$</code> перед іменем:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">propertyWrapper</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">propertyWrapper</span>
 <span class="kd">struct</span><span class="w"> </span><span class="nc">Tracked</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">changeCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span>
@@ -222,7 +289,24 @@
 <span class="kd">var</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Profile</span><span class="p">()</span>
 <span class="n">p</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"neo"</span>
 <span class="n">p</span><span class="p">.</span><span class="n">nickname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"trinity"</span>
-<span class="bp">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="err">$</span><span class="n">nickname</span><span class="p">)</span><span class="w">   </span><span class="c1">// 2</span></code></pre></div>
+<span class="bp">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="err">$</span><span class="n">nickname</span><span class="p">)</span><span class="w">   </span><span class="c1">// 2</span></code></pre><template class="src">@propertyWrapper
+struct Tracked&lt;Value&gt; {
+    private(set) var changeCount = 0
+    var wrappedValue: Value {
+        didSet { changeCount += 1 }
+    }
+    init(wrappedValue: Value) { self.wrappedValue = wrappedValue }
+    var projectedValue: Int { changeCount }
+}
+
+struct Profile {
+    @Tracked var nickname = &quot;guest&quot;
+}
+
+var p = Profile()
+p.nickname = &quot;neo&quot;
+p.nickname = &quot;trinity&quot;
+print(p.$nickname)   // 2</template></div>
 <p>Усередині типу до projected value звертаються без <code>self.</code>: просто <code>$nickname</code>. Projected value може бути будь-якого типу — навіть самою обгорткою (<code>var projectedValue: Self { self }</code>).</p>
 <p>Саме так працюють <code>@State</code> і <code>@Binding</code> у SwiftUI (а також <code>@Bindable</code>): <code>$name</code> — це projected value, яке дає <code>Binding</code>. У <code>@Environment</code> projected value немає.</p>
 <!-- callout -->
@@ -242,7 +326,7 @@
 </aside>
 <h2 id="властивості-типу"><a href="#властивості-типу">Властивості типу</a></h2>
 <p>Властивості, що належать самому типу, а не екземпляру, — аналог <code>static</code> у C#.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">MainActor</span><span class="w">          </span><span class="c1">// змінювана статична властивість — це глобальний стан, тож ізолюємо її</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">MainActor</span><span class="w">          </span><span class="c1">// змінювана статична властивість — це глобальний стан, тож ізолюємо її</span>
 <span class="kd">struct</span><span class="w"> </span><span class="nc">FeatureFlags</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">configVersion</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
 <span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isNewPaywallEnabled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
@@ -254,7 +338,19 @@
 <span class="p">}</span>
 
 <span class="n">FeatureFlags</span><span class="p">.</span><span class="n">isNewPaywallEnabled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
-<span class="bp">print</span><span class="p">(</span><span class="n">FeatureFlags</span><span class="p">.</span><span class="n">summary</span><span class="p">)</span></code></pre></div>
+<span class="bp">print</span><span class="p">(</span><span class="n">FeatureFlags</span><span class="p">.</span><span class="n">summary</span><span class="p">)</span></code></pre><template class="src">@MainActor          // змінювана статична властивість — це глобальний стан, тож ізолюємо її
+struct FeatureFlags {
+    static let configVersion = 3
+    static var isNewPaywallEnabled = false
+    static var summary: String { &quot;v\(configVersion), paywall: \(isNewPaywallEnabled)&quot; }
+}
+
+class Theme {
+    class var accentColor: String { &quot;orange&quot; }   // підклас може перевизначити
+}
+
+FeatureFlags.isNewPaywallEnabled = true
+print(FeatureFlags.summary)</template></div>
 <ul>
 <li><code>static let</code>/<code>static var</code> пишуть одразу зі значенням: ініціалізатора, який би їх заповнив, у типу немає.</li>
 <li>Значення обчислюється при першому зверненні й рівно один раз, навіть якщо звертаються кілька потоків одночасно — тому <code>static let shared = ...</code> є стандартним способом зробити синглтон.</li>
@@ -286,5 +382,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

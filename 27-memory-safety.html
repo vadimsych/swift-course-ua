@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li class="current"><a href="27-memory-safety.html" aria-current="page"><span class="num">27</span> Безпека пам'яті</a><ol class="sections"><li><a href="#конфліктний-доступ-до-памяті">Конфліктний доступ до пам'яті</a></li><li><a href="#конфлікти-з-inout-параметрами">Конфлікти з inout-параметрами</a></li><li><a href="#конфлікти-з-self-у-методах">Конфлікти з self у методах</a></li><li><a href="#конфлікти-з-властивостями">Конфлікти з властивостями</a></li></ol></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -60,21 +61,28 @@
 <span class="n">charge</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="p">&amp;</span><span class="n">working</span><span class="p">,</span><span class="w"> </span><span class="n">notify</span><span class="p">:</span><span class="w"> </span><span class="n">showBalance</span><span class="p">)</span>
 <span class="n">balance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">working</span></code></pre></div>
 <p>Передача <strong>однієї змінної у два <code>inout</code></strong> — завжди конфлікт, і його компілятор ловить одразу:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">from</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">amount</span>
 <span class="w">    </span><span class="n">to</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">amount</span>
 <span class="p">}</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nv">wallet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">bank</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">500</span>
 <span class="n">transfer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="p">&amp;</span><span class="n">wallet</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="p">&amp;</span><span class="n">bank</span><span class="p">)</span><span class="w">       </span><span class="c1">// ок</span>
-<span class="c1">// transfer(10, from: &amp;wallet, to: &amp;wallet)  // помилка компіляції</span></code></pre></div>
+<span class="c1">// transfer(10, from: &amp;wallet, to: &amp;wallet)  // помилка компіляції</span></code></pre><template class="src">func transfer(_ amount: Int, from: inout Int, to: inout Int) {
+    from -= amount
+    to += amount
+}
+
+var wallet = 100, bank = 500
+transfer(10, from: &amp;wallet, to: &amp;bank)       // ок
+// transfer(10, from: &amp;wallet, to: &amp;wallet)  // помилка компіляції</template></div>
 <!-- callout -->
 
 <aside class="callout csharp"><b>C#</b><p>У C# одну змінну можна передати в два <code>ref</code>-параметри. У Swift — ні: компілятор вважає це помилкою, бо незрозуміло, яке значення має лишитись у змінній.</p>
 </aside>
 <h2 id="конфлікти-з-self-у-методах"><a href="#конфлікти-з-self-у-методах">Конфлікти з self у методах</a></h2>
 <p><code>mutating</code>-метод має тривалий доступ на запис до <strong>всього</strong> <code>self</code> на час виклику. Тому передати в нього як <code>inout</code> частину того самого значення не можна:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Shop</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Shop</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">gold</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">stock</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"sword"</span><span class="p">,</span><span class="w"> </span><span class="s">"shield"</span><span class="p">]</span>
 
@@ -87,12 +95,25 @@
 <span class="kd">var</span><span class="w"> </span><span class="nv">shop</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Shop</span><span class="p">()</span>
 <span class="kd">var</span><span class="w"> </span><span class="nv">pocket</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="n">shop</span><span class="p">.</span><span class="n">sell</span><span class="p">(</span><span class="s">"sword"</span><span class="p">,</span><span class="w"> </span><span class="n">earnings</span><span class="p">:</span><span class="w"> </span><span class="p">&amp;</span><span class="n">pocket</span><span class="p">)</span><span class="w">        </span><span class="c1">// ок: pocket — окрема змінна</span>
-<span class="c1">// shop.sell("shield", earnings: &amp;shop.gold) // помилка: self і shop.gold перекриваються</span></code></pre></div>
+<span class="c1">// shop.sell("shield", earnings: &amp;shop.gold) // помилка: self і shop.gold перекриваються</span></code></pre><template class="src">struct Shop {
+    var gold = 0
+    var stock = [&quot;sword&quot;, &quot;shield&quot;]
+
+    mutating func sell(_ item: String, earnings: inout Int) {
+        stock.removeAll { $0 == item }
+        earnings += 25
+    }
+}
+
+var shop = Shop()
+var pocket = 0
+shop.sell(&quot;sword&quot;, earnings: &amp;pocket)        // ок: pocket — окрема змінна
+// shop.sell(&quot;shield&quot;, earnings: &amp;shop.gold) // помилка: self і shop.gold перекриваються</template></div>
 <p>Правильно — або змінювати <code>gold</code> усередині методу, або передати окрему змінну й потім записати результат.</p>
 <h2 id="конфлікти-з-властивостями"><a href="#конфлікти-з-властивостями">Конфлікти з властивостями</a></h2>
 <p>Для value types (структури, кортежі, enum) <strong>усе значення — одна ділянка пам'яті</strong>: змінити властивість означає змінити все значення. Для класів кожна збережена властивість — окрема ділянка, бо екземпляр живе в купі, а змінна лише посилається на нього.</p>
 <p>Візьмемо прямокутник кнопки, який треба «перетягнути» між двома своїми полями — функцією з двома <code>inout</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Frame</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">100.0</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">40.0</span><span class="w"> </span><span class="p">}</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Frame</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">100.0</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">40.0</span><span class="w"> </span><span class="p">}</span>
 <span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">FrameBox</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">100.0</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">40.0</span><span class="w"> </span><span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nf">shift</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">delta</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">,</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Double</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -113,7 +134,28 @@
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">render</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">                   </span><span class="c1">// escaping-замикання захопило frame</span>
 <span class="w">    </span><span class="c1">// shift(10, from: &amp;frame.width, to: &amp;frame.height)   // крах у рантаймі: frame тепер видно ззовні функції</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">render</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct Frame { var width = 100.0; var height = 40.0 }
+final class FrameBox { var width = 100.0; var height = 40.0 }
+
+func shift(_ delta: Double, from a: inout Double, to b: inout Double) {
+    a -= delta
+    b += delta
+}
+
+func layout() {
+    var frame = Frame()
+    shift(10, from: &amp;frame.width, to: &amp;frame.height)      // ок: компілятор бачить усю функцію
+
+    let box = FrameBox()
+    shift(10, from: &amp;box.width, to: &amp;box.height)          // ок: поля об&#x27;єкта — окремі ділянки
+}
+
+func layoutLater() -&gt; () -&gt; Void {
+    var frame = Frame()
+    let render = { print(frame.width) }                   // escaping-замикання захопило frame
+    // shift(10, from: &amp;frame.width, to: &amp;frame.height)   // крах у рантаймі: frame тепер видно ззовні функції
+    return render
+}</template></div>
 <p>Компілятор дозволяє одночасний доступ до <strong>різних збережених властивостей</strong> структури лише тоді, коли може довести, що ніхто інший не бачить цю змінну. Для локальної змінної, яку не захопило escaping-замикання, це легко довести. Якщо ж змінна глобальна, є властивістю класу чи її захопило escaping-замикання, компілятор не знає, хто ще до неї звернеться, і вважає доступ до будь-якого поля доступом до всього значення. Залежно від ситуації це помилка компіляції або (як із захопленою змінною вище) перевірка в рантаймі з крахом.</p>
 <p>Послаблення не діє для обчислюваних властивостей і властивостей типу (<code>static</code>/<code>class</code>): доступ через геттер чи сеттер завжди зачіпає все значення.</p>
 <p>Ці правила суворіші, ніж потрібно для фізичної безпеки пам'яті — частина коду, яку компілятор відкидає, насправді коректна. Але така суворість дає змогу перевіряти все локально й дешево.</p>
@@ -147,5 +189,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

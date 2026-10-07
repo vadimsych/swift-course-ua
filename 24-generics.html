@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li class="current"><a href="24-generics.html" aria-current="page"><span class="num">24</span> Узагальнення</a><ol class="sections"><li><a href="#яку-проблему-розвязують-узагальнення">Яку проблему розв'язують узагальнення</a></li><li><a href="#generic-функції">Generic-функції</a></li><li><a href="#параметри-типу">Параметри типу</a></li><li><a href="#іменування-параметрів-типу">Іменування параметрів типу</a></li><li><a href="#generic-типи">Generic-типи</a></li><li><a href="#розширення-generic-типу">Розширення generic-типу</a></li><li><a href="#обмеження-типів">Обмеження типів</a></li><li><a href="#асоційовані-типи">Асоційовані типи</a></li><li><a href="#generic-where">Generic where</a></li><li><a href="#розширення-з-where">Розширення з where</a></li><li><a href="#контекстні-where">Контекстні where</a></li><li><a href="#асоційовані-типи-з-where">Асоційовані типи з where</a></li><li><a href="#generic-сабскрипти">Generic-сабскрипти</a></li><li><a href="#неявні-обмеження-і-noncopyable-типи">Неявні обмеження і noncopyable-типи</a></li></ol></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -26,11 +27,12 @@
   <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/">generics</a></p>
 <h2 id="яку-проблему-розвязують-узагальнення"><a href="#яку-проблему-розвязують-узагальнення">Яку проблему розв'язують узагальнення</a></h2>
 <p>Уяви, що ти написав утиліту для масиву ID і вона працює. А потім та сама задача з'являється для <code>[Product]</code>, для <code>[URL]</code>, для <code>[String]</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">firstDuplicate</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
-<span class="c1">// firstDuplicate(products)     // помилка: очікується [Int]</span></code></pre></div>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">firstDuplicate</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
+<span class="c1">// firstDuplicate(products)     // помилка: очікується [Int]</span></code></pre><template class="src">func firstDuplicate(_ items: [Int]) -&gt; Int? { /* ... */ nil }
+// firstDuplicate(products)     // помилка: очікується [Int]</template></div>
 <p>Копіювати функцію під кожен тип — шлях до розбіжностей і багів. Узагальнення дозволяє описати алгоритм один раз і сказати, <strong>що саме</strong> алгоритму потрібно від типу елементів. Стандартна бібліотека майже повністю така: <code>Array&lt;Element&gt;</code>, <code>Dictionary&lt;Key, Value&gt;</code>, <code>Optional&lt;Wrapped&gt;</code>, <code>Result&lt;Success, Failure&gt;</code>.</p>
 <h2 id="generic-функції"><a href="#generic-функції">Generic-функції</a></h2>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">firstDuplicate</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nb">Hashable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">firstDuplicate</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nb">Hashable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">seen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Set</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">seen</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">item</span><span class="p">).</span><span class="n">inserted</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">}</span>
@@ -39,7 +41,16 @@
 <span class="p">}</span>
 
 <span class="n">firstDuplicate</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">])</span><span class="w">            </span><span class="c1">// 8</span>
-<span class="n">firstDuplicate</span><span class="p">([</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">,</span><span class="w"> </span><span class="s">"a"</span><span class="p">])</span><span class="w">         </span><span class="c1">// "a"</span></code></pre></div>
+<span class="n">firstDuplicate</span><span class="p">([</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">,</span><span class="w"> </span><span class="s">"a"</span><span class="p">])</span><span class="w">         </span><span class="c1">// "a"</span></code></pre><template class="src">func firstDuplicate&lt;T: Hashable&gt;(_ items: [T]) -&gt; T? {
+    var seen = Set&lt;T&gt;()
+    for item in items {
+        if !seen.insert(item).inserted { return item }
+    }
+    return nil
+}
+
+firstDuplicate([3, 8, 1, 8])            // 8
+firstDuplicate([&quot;a&quot;, &quot;b&quot;, &quot;a&quot;])         // &quot;a&quot;</template></div>
 <p><code>&lt;T: Hashable&gt;</code> — список <strong>параметрів типу</strong>. Конкретний тип <code>T</code> визначається в місці виклику з аргументів.</p>
 <h2 id="параметри-типу"><a href="#параметри-типу">Параметри типу</a></h2>
 <p>Параметр типу — заповнювач для конкретного типу. Він може використовуватися як тип параметрів, результату і всередині тіла. Параметрів може бути кілька: <code>&lt;Key, Value&gt;</code>.</p>
@@ -47,7 +58,7 @@
 <p>Порада з практики: якщо параметр має роль, дай йому ім'я цієї ролі (<code>Element</code>, <code>Key</code>, <code>Payload</code>, <code>Model</code>) — у сигнатурі на кшталт <code>func cache&lt;Key, Payload&gt;</code> одразу видно, що до чого. Однолітерні <code>T</code>/<code>U</code> лишай для коротких допоміжних функцій, де роль очевидна. Пишуться імена як типи — з великої літери.</p>
 <h2 id="generic-типи"><a href="#generic-типи">Generic-типи</a></h2>
 <p>Власні класи, структури й enum теж можуть бути узагальненими:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RingBuffer</span><span class="p">&lt;</span><span class="n">Element</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">RingBuffer</span><span class="p">&lt;</span><span class="n">Element</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">storage</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Element</span><span class="p">?]</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">head</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
@@ -71,7 +82,31 @@
 <span class="kd">var</span><span class="w"> </span><span class="nv">lastFrames</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RingBuffer</span><span class="p">&lt;</span><span class="nb">Double</span><span class="p">&gt;(</span><span class="n">capacity</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <span class="n">lastFrames</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="mf">16.6</span><span class="p">)</span>
 <span class="n">lastFrames</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="mf">17.1</span><span class="p">)</span>
-<span class="n">lastFrames</span><span class="p">.</span><span class="n">read</span><span class="p">()</span><span class="w">   </span><span class="c1">// 16.6</span></code></pre></div>
+<span class="n">lastFrames</span><span class="p">.</span><span class="n">read</span><span class="p">()</span><span class="w">   </span><span class="c1">// 16.6</span></code></pre><template class="src">struct RingBuffer&lt;Element&gt; {
+    private var storage: [Element?]
+    private var head = 0
+    private(set) var count = 0
+
+    init(capacity: Int) {
+        storage = Array(repeating: nil, count: capacity)
+    }
+
+    mutating func write(_ value: Element) {
+        storage[(head + count) % storage.count] = value
+        if count &lt; storage.count { count += 1 } else { head = (head + 1) % storage.count }
+    }
+
+    mutating func read() -&gt; Element? {
+        guard count &gt; 0 else { return nil }
+        defer { head = (head + 1) % storage.count; count -= 1 }
+        return storage[head]
+    }
+}
+
+var lastFrames = RingBuffer&lt;Double&gt;(capacity: 3)
+lastFrames.write(16.6)
+lastFrames.write(17.1)
+lastFrames.read()   // 16.6</template></div>
 <p>Тип можна вказати явно (<code>RingBuffer&lt;Double&gt;</code>) або дати компілятору вивести його.</p>
 <h2 id="розширення-generic-типу"><a href="#розширення-generic-типу">Розширення generic-типу</a></h2>
 <p>У розширенні <strong>не повторюють</strong> список параметрів: параметри з оригінального оголошення доступні за тими самими іменами:</p>
@@ -86,7 +121,7 @@
 <h3 id="синтаксис"><a href="#синтаксис">Синтаксис</a></h3>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">show</span><span class="p">&lt;</span><span class="n">V</span><span class="p">:</span><span class="w"> </span><span class="bp">UIView</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">:</span><span class="w"> </span><span class="n">Decodable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">view</span><span class="p">:</span><span class="w"> </span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">:</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// V — підклас UIView, M — відповідає протоколу</span></code></pre></div>
 <h3 id="обмеження-в-дії"><a href="#обмеження-в-дії">Обмеження в дії</a></h3>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">indexOfMax</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nb">Comparable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">indexOfMax</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nb">Comparable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">best</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="bp">indices</span><span class="p">.</span><span class="bp">first</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="bp">indices</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">values</span><span class="p">[</span><span class="n">best</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">best</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">i</span>
@@ -95,7 +130,16 @@
 <span class="p">}</span>
 
 <span class="n">indexOfMax</span><span class="p">([</span><span class="mf">3.2</span><span class="p">,</span><span class="w"> </span><span class="mf">9.9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">])</span><span class="w">     </span><span class="c1">// 1</span>
-<span class="n">indexOfMax</span><span class="p">([</span><span class="s">"b"</span><span class="p">,</span><span class="w"> </span><span class="s">"z"</span><span class="p">,</span><span class="w"> </span><span class="s">"a"</span><span class="p">])</span><span class="w">     </span><span class="c1">// 1</span></code></pre></div>
+<span class="n">indexOfMax</span><span class="p">([</span><span class="s">"b"</span><span class="p">,</span><span class="w"> </span><span class="s">"z"</span><span class="p">,</span><span class="w"> </span><span class="s">"a"</span><span class="p">])</span><span class="w">     </span><span class="c1">// 1</span></code></pre><template class="src">func indexOfMax&lt;T: Comparable&gt;(_ values: [T]) -&gt; Int? {
+    guard var best = values.indices.first else { return nil }
+    for i in values.indices where values[i] &gt; values[best] {
+        best = i
+    }
+    return best
+}
+
+indexOfMax([3.2, 9.9, 1.0])     // 1
+indexOfMax([&quot;b&quot;, &quot;z&quot;, &quot;a&quot;])     // 1</template></div>
 <p>Без <code>T: Comparable</code> оператор <code>&gt;</code> не скомпілювався б: компілятор не знає, чи довільний <code>T</code> можна порівнювати.</p>
 <!-- callout -->
 
@@ -103,11 +147,15 @@
 </aside>
 <h2 id="асоційовані-типи"><a href="#асоційовані-типи">Асоційовані типи</a></h2>
 <p>Протокол може мати <strong>асоційований тип</strong> — заповнювач, який визначає тип, що реалізує протокол.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Repository</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Repository</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="n">Entity</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">all</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Entity</span><span class="p">]</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">entity</span><span class="p">:</span><span class="w"> </span><span class="n">Entity</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">protocol Repository {
+    associatedtype Entity
+    func all() async throws -&gt; [Entity]
+    func save(_ entity: Entity) async throws
+}</template></div>
 <h3 id="асоційовані-типи-в-дії"><a href="#асоційовані-типи-в-дії">Асоційовані типи в дії</a></h3>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Note</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">}</span>
 
@@ -123,23 +171,34 @@
 </aside>
 <h3 id="розширення-існуючого-типу-для-асоційованого-типу"><a href="#розширення-існуючого-типу-для-асоційованого-типу">Розширення існуючого типу для асоційованого типу</a></h3>
 <p>Якщо існуючий тип уже має потрібні члени, відповідність оголошується порожнім розширенням, а асоційований тип компілятор <strong>виводить сам</strong> з наявних сигнатур:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Emptiable</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Emptiable</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="n">Value</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">isEmpty</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">first</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">extension</span><span class="w"> </span><span class="nc">String</span><span class="p">:</span><span class="w"> </span><span class="n">Emptiable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// Value виведено як Character з властивості first</span>
-<span class="kd">extension</span><span class="w"> </span><span class="nc">Set</span><span class="p">:</span><span class="w"> </span><span class="n">Emptiable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// Value виведено як Element</span></code></pre></div>
+<span class="kd">extension</span><span class="w"> </span><span class="nc">Set</span><span class="p">:</span><span class="w"> </span><span class="n">Emptiable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">      </span><span class="c1">// Value виведено як Element</span></code></pre><template class="src">protocol Emptiable {
+    associatedtype Value
+    var isEmpty: Bool { get }
+    var first: Value? { get }
+}
+
+extension String: Emptiable { }   // Value виведено як Character з властивості first
+extension Set: Emptiable { }      // Value виведено як Element</template></div>
 <h3 id="обмеження-на-асоційований-тип"><a href="#обмеження-на-асоційований-тип">Обмеження на асоційований тип</a></h3>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Cache</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Cache</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="nb">Hashable</span>
 <span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="n">Value</span>
 <span class="w">    </span><span class="kd">subscript</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="n">Key</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Value</span><span class="p">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="kr">set</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">protocol Cache {
+    associatedtype Key: Hashable
+    associatedtype Value
+    subscript(key: Key) -&gt; Value? { get set }
+}</template></div>
 <h3 id="протокол-в-обмеженнях-власного-асоційованого-типу"><a href="#протокол-в-обмеженнях-власного-асоційованого-типу">Протокол в обмеженнях власного асоційованого типу</a></h3>
 <p>Асоційований тип може вимагати відповідності тому самому протоколу. Так описують рекурсивні структури:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">TreeNode</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">TreeNode</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="n">Child</span><span class="p">:</span><span class="w"> </span><span class="n">TreeNode</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">children</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Child</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
@@ -147,14 +206,26 @@
 <span class="kd">struct</span><span class="w"> </span><span class="nc">MenuItem</span><span class="p">:</span><span class="w"> </span><span class="n">TreeNode</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">children</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">MenuItem</span><span class="p">]</span><span class="w">     </span><span class="c1">// Child == MenuItem</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">protocol TreeNode {
+    associatedtype Child: TreeNode
+    var children: [Child] { get }
+}
+
+struct MenuItem: TreeNode {
+    let title: String
+    var children: [MenuItem]     // Child == MenuItem
+}</template></div>
 <h2 id="generic-where"><a href="#generic-where">Generic where</a></h2>
 <p><code>where</code> перед тілом задає додаткові вимоги: відповідність протоколу, рівність типів, суперклас.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">groupByKey</span><span class="p">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="p">,</span><span class="w"> </span><span class="n">Key</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Key</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">]]</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">groupByKey</span><span class="p">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="p">,</span><span class="w"> </span><span class="n">Key</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Key</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">]]</span>
 <span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="nb">Hashable</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Identifiable</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="nb">Dictionary</span><span class="p">(</span><span class="n">grouping</span><span class="p">:</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">func groupByKey&lt;S: Sequence, Key&gt;(_ items: S, key: (S.Element) -&gt; Key) -&gt; [Key: [S.Element]]
+    where Key: Hashable, S.Element: Identifiable
+{
+    Dictionary(grouping: items, by: key)
+}</template></div>
 <h2 id="розширення-з-where"><a href="#розширення-з-where">Розширення з where</a></h2>
 <p>Розширення може додавати члени лише для тих конкретизацій типу, що задовольняють умову:</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">RingBuffer</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Numeric</span><span class="w"> </span><span class="p">{</span>
@@ -190,15 +261,18 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span></code></pre></div>
 <h2 id="асоційовані-типи-з-where"><a href="#асоційовані-типи-з-where">Асоційовані типи з where</a></h2>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Paginated</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">Paginated</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">associatedtype</span><span class="w"> </span><span class="n">Page</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Page</span><span class="p">.</span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Decodable</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">page</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">number</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Page</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">protocol Paginated {
+    associatedtype Page: Sequence where Page.Element: Decodable
+    func page(_ number: Int) async throws -&gt; Page
+}</template></div>
 <p>Протокол-нащадок може уточнити асоційований тип батьківського:</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">protocol</span><span class="w"> </span><span class="nc">NumberRepository</span><span class="p">:</span><span class="w"> </span><span class="n">Repository</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Entity</span><span class="p">:</span><span class="w"> </span><span class="n">Numeric</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
 <h2 id="generic-сабскрипти"><a href="#generic-сабскрипти">Generic-сабскрипти</a></h2>
 <p>Сабскрипт може мати власні параметри типу й <code>where</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Dictionary</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">extension</span><span class="w"> </span><span class="nc">Dictionary</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">subscript</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="kr">Type</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kc">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="n">T</span>
 <span class="w">    </span><span class="p">}</span>
@@ -206,11 +280,19 @@
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">payload</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Any</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.99</span><span class="p">,</span><span class="w"> </span><span class="s">"trial"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">]</span>
 <span class="n">payload</span><span class="p">[</span><span class="s">"price"</span><span class="p">,</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">.</span><span class="kc">self</span><span class="p">]</span><span class="w">   </span><span class="c1">// Optional(4.99)</span>
-<span class="n">payload</span><span class="p">[</span><span class="s">"trial"</span><span class="p">,</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">]</span><span class="w">   </span><span class="c1">// nil</span></code></pre></div>
+<span class="n">payload</span><span class="p">[</span><span class="s">"trial"</span><span class="p">,</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">]</span><span class="w">   </span><span class="c1">// nil</span></code></pre><template class="src">extension Dictionary where Key == String {
+    subscript&lt;T&gt;(key: String, as type: T.Type) -&gt; T? {
+        self[key] as? T
+    }
+}
+
+let payload: [String: Any] = [&quot;price&quot;: 4.99, &quot;trial&quot;: true]
+payload[&quot;price&quot;, as: Double.self]   // Optional(4.99)
+payload[&quot;trial&quot;, as: String.self]   // nil</template></div>
 <h2 id="неявні-обмеження-і-noncopyable-типи"><a href="#неявні-обмеження-і-noncopyable-типи">Неявні обмеження і noncopyable-типи</a></h2>
 <p>У generic-коді є вимога, яку ти ніколи не пишеш: параметр типу має бути <strong>копійованим</strong> (<code>Copyable</code>). Звичайна функція <code>func cache&lt;T&gt;(_ x: T)</code> може вільно копіювати <code>x</code>, бо компілятор неявно вважає <code>T: Copyable</code>.</p>
 <p>Сенс з'являється, коли тип копіювати <strong>не можна</strong>. Такі типи позначають <code>~Copyable</code>: значення має рівно одного власника, і компілятор стежить, щоб його не використали після передачі:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">LicenseKey</span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="n">Copyable</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">LicenseKey</span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="n">Copyable</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="n">consuming</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">activate</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// після виклику ключ більше не існує</span>
 <span class="w">        </span><span class="n">value</span>
@@ -222,12 +304,26 @@
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="n">activate</span><span class="p">()</span>
 <span class="w">    </span><span class="c1">// key.activate()       // помилка: ключ уже використано</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct LicenseKey: ~Copyable {
+    let value: String
+    consuming func activate() -&gt; String {   // після виклику ключ більше не існує
+        value
+    }
+}
+
+func redeem() {
+    let key = LicenseKey(value: &quot;ABCD-1234&quot;)
+    let result = key.activate()
+    // key.activate()       // помилка: ключ уже використано
+    print(result)
+}</template></div>
 <p>Приклад навмисно всередині функції: noncopyable-значення в глобальній змінній не можна «спожити», бо глобальна змінна живе весь час роботи програми.</p>
 <p>Щоб generic-функція приймала і копійовані, і noncopyable-типи, неявну вимогу <strong>знімають</strong> тильдою: <code>&lt;T: ~Copyable&gt;</code>. Це не означає «T некопійований», а лише «T може бути некопійованим». Відповідно, всередині такої функції копіювати значення не можна:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">describe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="n">Copyable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">borrowing</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">describe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="n">Copyable</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">borrowing</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s">"значення типу </span><span class="si">\(</span><span class="n">T</span><span class="p">.</span><span class="kc">self</span><span class="si">)</span><span class="s">"</span><span class="w">     </span><span class="c1">// читати можна, копіювати — ні</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">func describe&lt;T: ~Copyable&gt;(_ value: borrowing T) -&gt; String {
+    &quot;значення типу \(T.self)&quot;     // читати можна, копіювати — ні
+}</template></div>
 <ul>
 <li><code>borrowing</code> — функція тимчасово отримує значення без права його знищити.</li>
 <li><code>consuming</code> — функція забирає значення, і після виклику у викликача його більше немає.</li>
@@ -263,5 +359,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li class="current"><a href="36-patterns-generic-params.html" aria-current="page"><span class="num">36</span> Довідник: зразки й generic-параметри</a><ol class="sections"><li><a href="#зразки">Зразки</a></li><li><a href="#generic-параметри">Generic-параметри</a></li></ol></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -38,14 +39,21 @@
 <p>Ім'я, з яким значення зв'язується: <code>let total = 42</code> — <code>total</code> тут зразок-ідентифікатор. Якщо ліворуч від <code>=</code> у <code>let</code>/<code>var</code> стоїть ідентифікатор, він збігається з будь-яким значенням.</p>
 <h3 id="привязування-значення"><a href="#привязування-значення">Прив'язування значення</a></h3>
 <p><code>let</code> або <code>var</code> перед зразком прив'язує всі вкладені ідентифікатори до відповідних частин значення:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">session</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="p">:</span><span class="w"> </span><span class="s">"ann"</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">)</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">session</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="p">:</span><span class="w"> </span><span class="s">"ann"</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">)</span>
 <span class="k">switch</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="p">{</span>
 <span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w">     </span><span class="c1">// let поширюється на обидва</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">)</span>
 <span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">ttl</span><span class="p">):</span><span class="w">               </span><span class="c1">// або для кожного окремо</span>
 <span class="w">    </span><span class="n">ttl</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">60</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ttl</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">let session = (user: &quot;ann&quot;, ttl: 3600)
+switch session {
+case let (name, ttl) where ttl &gt; 0:     // let поширюється на обидва
+    print(name, ttl)
+case (let name, var ttl):               // або для кожного окремо
+    ttl += 60
+    print(name, ttl)
+}</template></div>
 <h3 id="кортеж"><a href="#кортеж">Кортеж</a></h3>
 <p>Список зразків у дужках: <code>(x, 0)</code>, <code>(_, let y)</code>, <code>(1..&lt;10, "ok")</code>. Кортеж з одного елемента — це просто зразок у дужках. Якщо кортеж-зразок має анотацію типу, кожен елемент має відповідати типу.</p>
 <h3 id="варіант-перелічення"><a href="#варіант-перелічення">Варіант перелічення</a></h3>
@@ -69,7 +77,7 @@
 <p>Цей зразок збігається й з <strong>опціональним</strong> значенням, якщо варіант не має конфлікту з <code>Optional.none</code>/<code>.some</code>. Тобто для <code>let push: Push?</code> можна писати <code>case .promo:</code> без <code>?</code> — Swift автоматично розгорне опціонал.</p>
 <h3 id="опціонал"><a href="#опціонал">Опціонал</a></h3>
 <p><code>зразок?</code> — збігається з <code>.some(значення)</code>, де значення відповідає внутрішньому зразку:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">tokens</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">?]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"a1"</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="s">"b2"</span><span class="p">]</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">let</span><span class="w"> </span><span class="nv">tokens</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">?]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">"a1"</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="s">"b2"</span><span class="p">]</span>
 <span class="k">for</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">token</span><span class="p">?</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="w">                </span><span class="c1">// лише не-nil</span>
 <span class="p">}</span>
@@ -78,7 +86,16 @@
 <span class="k">case</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="p">?</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"додатне </span><span class="si">\(</span><span class="n">n</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
 <span class="k">case</span><span class="w"> </span><span class="kc">_</span><span class="p">?:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"не додатне"</span><span class="p">)</span>
 <span class="k">case</span><span class="w"> </span><span class="kc">nil</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"не число"</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">let tokens: [String?] = [&quot;a1&quot;, nil, &quot;b2&quot;]
+for case let token? in tokens {
+    print(token)                // лише не-nil
+}
+
+switch Int(&quot;42&quot;) {
+case let n? where n &gt; 0: print(&quot;додатне \(n)&quot;)
+case _?: print(&quot;не додатне&quot;)
+case nil: print(&quot;не число&quot;)
+}</template></div>
 <h3 id="приведення-типу"><a href="#приведення-типу">Приведення типу</a></h3>
 <ul>
 <li><code>is Тип</code> — збігається, якщо значення в рантаймі має цей тип (або підтип); нічого не прив'язує;</li>
@@ -99,7 +116,7 @@
 <span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">break</span>
 <span class="p">}</span></code></pre></div>
 <p>Перевантаживши <code>~=</code>, можна навчити <code>switch</code> нових видів порівнянь:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Prefix</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">}</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Prefix</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span><span class="w"> </span><span class="n">Prefix</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">value</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="n">pattern</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
@@ -109,7 +126,17 @@
 <span class="k">case</span><span class="w"> </span><span class="n">Prefix</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="s">"pro_"</span><span class="p">):</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Преміум-план"</span><span class="p">)</span>
 <span class="k">case</span><span class="w"> </span><span class="n">Prefix</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="s">"lite_"</span><span class="p">):</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Базовий план"</span><span class="p">)</span>
 <span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Невідомий план"</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">struct Prefix { let value: String }
+
+func ~= (pattern: Prefix, value: String) -&gt; Bool {
+    value.hasPrefix(pattern.value)
+}
+
+switch &quot;pro_monthly&quot; {
+case Prefix(value: &quot;pro_&quot;): print(&quot;Преміум-план&quot;)
+case Prefix(value: &quot;lite_&quot;): print(&quot;Базовий план&quot;)
+default: print(&quot;Невідомий план&quot;)
+}</template></div>
 <h2 id="generic-параметри"><a href="#generic-параметри">Generic-параметри</a></h2>
 <h3 id="список-параметрів"><a href="#список-параметрів">Список параметрів</a></h3>
 <p><code>&lt;параметри&gt;</code> після імені функції, типу, ініціалізатора чи сабскрипта. Кожен параметр — ім'я, за бажанням з обмеженням:</p>
@@ -117,15 +144,20 @@
 <span class="kd">struct</span><span class="w"> </span><span class="nc">Pair</span><span class="p">&lt;</span><span class="n">First</span><span class="p">,</span><span class="w"> </span><span class="n">Second</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span></code></pre></div>
 <p>Обмеження: протокол, композиція протоколів, клас (тип має бути його підкласом) або придушене обмеження <code>~Copyable</code>/<code>~Escapable</code>.</p>
 <p>Існують також <strong>пакети параметрів</strong> (<code>each T</code>) для функцій і типів з довільною кількістю generic-параметрів. На них, наприклад, побудовано <code>ViewBuilder</code> у SwiftUI, що приймає будь-яку кількість дочірніх view:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">describeAll</span><span class="p">&lt;</span><span class="n">each</span><span class="w"> </span><span class="n">T</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="k">repeat</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">describeAll</span><span class="p">&lt;</span><span class="n">each</span><span class="w"> </span><span class="n">T</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="k">repeat</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">parts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">    </span><span class="k">repeat</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">describing</span><span class="p">:</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">value</span><span class="p">))</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">parts</span>
 <span class="p">}</span>
-<span class="n">describeAll</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"two"</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span><span class="w">   </span><span class="c1">// ["1", "two", "3.0"]</span></code></pre></div>
+<span class="n">describeAll</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"two"</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span><span class="w">   </span><span class="c1">// ["1", "two", "3.0"]</span></code></pre><template class="src">func describeAll&lt;each T&gt;(_ value: repeat each T) -&gt; [String] {
+    var parts: [String] = []
+    repeat parts.append(String(describing: each value))
+    return parts
+}
+describeAll(1, &quot;two&quot;, 3.0)   // [&quot;1&quot;, &quot;two&quot;, &quot;3.0&quot;]</template></div>
 <h3 id="цілочисельні-generic-параметри"><a href="#цілочисельні-generic-параметри">Цілочисельні generic-параметри</a></h3>
 <p>Параметр може бути <strong>значенням</strong> типу <code>Int</code>, а не типом. Оголошується через <code>let</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">FixedBuffer</span><span class="p">&lt;</span><span class="kd">let</span><span class="w"> </span><span class="nv">Capacity</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">Element</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">FixedBuffer</span><span class="p">&lt;</span><span class="kd">let</span><span class="w"> </span><span class="nv">Capacity</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">Element</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">storage</span><span class="p">:</span><span class="w"> </span><span class="n">InlineArray</span><span class="p">&lt;</span><span class="n">Capacity</span><span class="p">,</span><span class="w"> </span><span class="n">Element</span><span class="p">&gt;</span>
 <span class="p">}</span>
 
@@ -135,7 +167,17 @@
 <span class="w">    </span><span class="n">InlineArray</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="kd">let</span><span class="w"> </span><span class="nv">z</span><span class="p">:</span><span class="w"> </span><span class="n">InlineArray</span><span class="p">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">()</span><span class="w">     </span><span class="c1">// N виведено як 4</span>
-<span class="bp">print</span><span class="p">(</span><span class="n">FixedBuffer</span><span class="p">&lt;</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;.</span><span class="n">Capacity</span><span class="p">)</span><span class="w">      </span><span class="c1">// 8 — доступ як до статичної константи</span></code></pre></div>
+<span class="bp">print</span><span class="p">(</span><span class="n">FixedBuffer</span><span class="p">&lt;</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nb">Int</span><span class="p">&gt;.</span><span class="n">Capacity</span><span class="p">)</span><span class="w">      </span><span class="c1">// 8 — доступ як до статичної константи</span></code></pre><template class="src">struct FixedBuffer&lt;let Capacity: Int, Element&gt; {
+    var storage: InlineArray&lt;Capacity, Element&gt;
+}
+
+let frames = FixedBuffer&lt;60, Double&gt;(storage: InlineArray(repeating: 0))
+
+func zeros&lt;let N: Int&gt;() -&gt; InlineArray&lt;N, Int&gt; {
+    InlineArray(repeating: 0)
+}
+let z: InlineArray&lt;4, Int&gt; = zeros()     // N виведено як 4
+print(FixedBuffer&lt;8, Int&gt;.Capacity)      // 8 — доступ як до статичної константи</template></div>
 <p>Правила:</p>
 <ul>
 <li>тип параметра — <code>Int</code> (або псевдонім, що зводиться до <code>Int</code>);</li>
@@ -147,11 +189,15 @@
 <p>Головний споживач цієї можливості в стандартній бібліотеці — <code>InlineArray&lt;count, Element&gt;</code>: масив фіксованого розміру, що зберігається без виділення пам'яті в купі.</p>
 <h3 id="where-умови"><a href="#where-умови">where-умови</a></h3>
 <p><code>where</code> перед тілом оголошення задає додаткові вимоги:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">syncAll</span><span class="p">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">syncAll</span><span class="p">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="p">&gt;(</span><span class="kc">_</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">Element</span><span class="p">:</span><span class="w"> </span><span class="n">Codable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 
 <span class="kd">extension</span><span class="w"> </span><span class="nc">Dictionary</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="n">Numeric</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">total</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="bp">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">func syncAll&lt;S: Sequence&gt;(_ items: S) where S.Element: Codable &amp; Sendable { }
+
+extension Dictionary where Value: Numeric {
+    func total() -&gt; Value { values.reduce(0, +) }
+}</template></div>
 <p>Види вимог:</p>
 <ul>
 <li><code>T: Протокол</code> або <code>T: Клас</code> — відповідність чи успадкування;</li>
@@ -187,5 +233,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

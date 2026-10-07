@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li><a href="26-arc.html"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li class="current"><a href="35-attributes.html" aria-current="page"><span class="num">35</span> Довідник: атрибути</a><ol class="sections"><li><a href="#атрибути-оголошень">Атрибути оголошень</a></li><li><a href="#атрибути-типів">Атрибути типів</a></li><li><a href="#атрибути-гілок-switch">Атрибути гілок switch</a></li></ol></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -70,7 +71,7 @@
 <p>Прибирає попередження про невикористаний результат функції.</p>
 <h3 id="dynamiccallable"><a href="#dynamiccallable">dynamicCallable</a></h3>
 <p>Дозволяє викликати екземпляр як функцію з довільною кількістю аргументів. Тип мусить реалізувати <code>dynamicallyCall(withArguments:)</code> та/або <code>dynamicallyCall(withKeywordArguments:)</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">dynamicCallable</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">dynamicCallable</span>
 <span class="kd">struct</span><span class="w"> </span><span class="nc">Logger</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">dynamicallyCall</span><span class="p">(</span><span class="n">withKeywordArguments</span><span class="w"> </span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">KeyValuePairs</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">Any</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="bp">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="nv">$0</span><span class="p">.</span><span class="n">key</span><span class="si">)</span><span class="s">=</span><span class="si">\(</span><span class="nv">$0</span><span class="p">.</span><span class="n">value</span><span class="si">)</span><span class="s">"</span><span class="w"> </span><span class="p">}.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">" "</span><span class="p">))</span>
@@ -78,7 +79,15 @@
 <span class="p">}</span>
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">log</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Logger</span><span class="p">()</span>
-<span class="n">log</span><span class="p">(</span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="s">"purchase"</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="mf">4.99</span><span class="p">)</span><span class="w">   </span><span class="c1">// event=purchase price=4.99</span></code></pre></div>
+<span class="n">log</span><span class="p">(</span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="s">"purchase"</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="mf">4.99</span><span class="p">)</span><span class="w">   </span><span class="c1">// event=purchase price=4.99</span></code></pre><template class="src">@dynamicCallable
+struct Logger {
+    func dynamicallyCall(withKeywordArguments args: KeyValuePairs&lt;String, Any&gt;) {
+        print(args.map { &quot;\($0.key)=\($0.value)&quot; }.joined(separator: &quot; &quot;))
+    }
+}
+
+let log = Logger()
+log(event: &quot;purchase&quot;, price: 4.99)   // event=purchase price=4.99</template></div>
 <p>Застосовується для взаємодії з динамічними мовами (Python, JavaScript).</p>
 <h3 id="dynamicmemberlookup"><a href="#dynamicmemberlookup">dynamicMemberLookup</a></h3>
 <p>Звертання <code>value.будь_яке_ім'я</code> компілятор перетворює на виклик <code>subscript(dynamicMember:)</code>. Є два варіанти сабскрипта:</p>
@@ -87,7 +96,7 @@
 <li>з параметром-key path — звертання перевіряється компілятором; якщо є обидва сабскрипти, перевагу має key path.</li>
 </ul>
 <p>Приклад з key path — тема оформлення, що «пропускає» звертання до вкладеної палітри:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Palette</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">accent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"orange"</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">background</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"white"</span><span class="w"> </span><span class="p">}</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Palette</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">accent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"orange"</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">background</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"white"</span><span class="w"> </span><span class="p">}</span>
 
 <span class="p">@</span><span class="n">dynamicMemberLookup</span>
 <span class="kd">struct</span><span class="w"> </span><span class="nc">Theme</span><span class="w"> </span><span class="p">{</span>
@@ -103,7 +112,23 @@
 <span class="kd">var</span><span class="w"> </span><span class="nv">dark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Theme</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Dark"</span><span class="p">)</span>
 <span class="n">dark</span><span class="p">.</span><span class="n">accent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"teal"</span><span class="w">        </span><span class="c1">// насправді dark.palette.accent</span>
 <span class="bp">print</span><span class="p">(</span><span class="n">dark</span><span class="p">.</span><span class="n">background</span><span class="p">)</span><span class="w">      </span><span class="c1">// "white"</span>
-<span class="c1">// dark.font                // помилка компіляції: у Palette немає font</span></code></pre></div>
+<span class="c1">// dark.font                // помилка компіляції: у Palette немає font</span></code></pre><template class="src">struct Palette { var accent = &quot;orange&quot;; var background = &quot;white&quot; }
+
+@dynamicMemberLookup
+struct Theme {
+    var name: String
+    var palette = Palette()
+
+    subscript&lt;T&gt;(dynamicMember path: WritableKeyPath&lt;Palette, T&gt;) -&gt; T {
+        get { palette[keyPath: path] }
+        set { palette[keyPath: path] = newValue }
+    }
+}
+
+var dark = Theme(name: &quot;Dark&quot;)
+dark.accent = &quot;teal&quot;        // насправді dark.palette.accent
+print(dark.background)      // &quot;white&quot;
+// dark.font                // помилка компіляції: у Palette немає font</template></div>
 <h3 id="export"><a href="#export">export</a></h3>
 <p>Застосовується до функцій і методів бібліотек і керує тим, що саме з них бачать клієнтські модулі:</p>
 <ul>
@@ -216,5 +241,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>

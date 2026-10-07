@@ -14,6 +14,7 @@
   <aside class="rail">
     <p class="brand"><a href="index.html">Swift <span>для C#</span></a></p>
     <p class="sub">Курс українською за структурою «The Swift Programming Language» (Swift 6.4)</p>
+    <p class="sandbox-link"><a href="playground.html">▶ Пісочниця для коду</a></p>
     <details class="toc" open><summary>Зміст</summary>
     <nav aria-label="Зміст курсу"><ol><li class="part"><span>Старт</span><ol><li><a href="00-start.html"><span class="num">00</span> Як влаштований курс і що таке Swift</a></li></ol></li><li class="part"><span>Мова крок за кроком</span><ol><li><a href="01-basics.html"><span class="num">01</span> Основи</a></li><li><a href="02-operators.html"><span class="num">02</span> Базові оператори</a></li><li><a href="03-strings.html"><span class="num">03</span> Рядки й символи</a></li><li><a href="04-collections.html"><span class="num">04</span> Колекції</a></li><li><a href="05-control-flow.html"><span class="num">05</span> Керування потоком виконання</a></li><li><a href="06-functions.html"><span class="num">06</span> Функції</a></li><li><a href="07-closures.html"><span class="num">07</span> Замикання</a></li><li><a href="08-enums.html"><span class="num">08</span> Перелічення</a></li><li><a href="09-structs-classes.html"><span class="num">09</span> Структури й класи</a></li><li><a href="10-properties.html"><span class="num">10</span> Властивості</a></li><li><a href="11-methods.html"><span class="num">11</span> Методи</a></li><li><a href="12-subscripts.html"><span class="num">12</span> Сабскрипти</a></li><li><a href="13-inheritance.html"><span class="num">13</span> Успадкування</a></li><li><a href="14-initialization.html"><span class="num">14</span> Ініціалізація</a></li><li><a href="15-deinitialization.html"><span class="num">15</span> Деініціалізація</a></li><li><a href="16-optional-chaining.html"><span class="num">16</span> Опціональні ланцюжки</a></li><li><a href="17-errors.html"><span class="num">17</span> Обробка помилок</a></li><li><a href="18-concurrency.html"><span class="num">18</span> Конкурентність</a></li><li><a href="19-macros.html"><span class="num">19</span> Макроси</a></li><li><a href="20-type-casting.html"><span class="num">20</span> Приведення типів</a></li><li><a href="21-nested-types.html"><span class="num">21</span> Вкладені типи</a></li><li><a href="22-extensions.html"><span class="num">22</span> Розширення</a></li><li><a href="23-protocols.html"><span class="num">23</span> Протоколи</a></li><li><a href="24-generics.html"><span class="num">24</span> Узагальнення</a></li><li><a href="25-opaque-types.html"><span class="num">25</span> Непрозорі й упаковані типи</a></li><li class="current"><a href="26-arc.html" aria-current="page"><span class="num">26</span> Автоматичний підрахунок посилань (ARC)</a><ol class="sections"><li><a href="#як-працює-arc">Як працює ARC</a></li><li><a href="#як-побачити-arc-у-роботі">Як побачити ARC у роботі</a></li><li><a href="#цикли-сильних-посилань-між-обєктами">Цикли сильних посилань між об'єктами</a></li><li><a href="#розрив-циклів-між-обєктами">Розрив циклів між об'єктами</a></li><li><a href="#цикли-сильних-посилань-через-замикання">Цикли сильних посилань через замикання</a></li><li><a href="#розрив-циклів-у-замиканнях">Розрив циклів у замиканнях</a></li></ol></li><li><a href="27-memory-safety.html"><span class="num">27</span> Безпека пам'яті</a></li><li><a href="28-access-control.html"><span class="num">28</span> Контроль доступу</a></li><li><a href="29-advanced-operators.html"><span class="num">29</span> Розширені оператори</a></li></ol></li><li class="part"><span>Довідник (за потреби)</span><ol><li><a href="30-lexical-structure.html"><span class="num">30</span> Довідник: лексична структура</a></li><li><a href="31-types.html"><span class="num">31</span> Довідник: типи</a></li><li><a href="32-expressions.html"><span class="num">32</span> Довідник: вирази</a></li><li><a href="33-statements.html"><span class="num">33</span> Довідник: інструкції</a></li><li><a href="34-declarations.html"><span class="num">34</span> Довідник: оголошення</a></li><li><a href="35-attributes.html"><span class="num">35</span> Довідник: атрибути</a></li><li><a href="36-patterns-generic-params.html"><span class="num">36</span> Довідник: зразки й generic-параметри</a></li></ol></li><li class="part"><span>Еволюція мови</span><ol><li><a href="37-evolution.html"><span class="num">37</span> Еволюція мови</a></li></ol></li></ol></nav>
     </details>
@@ -73,7 +74,7 @@
 </aside>
 <h2 id="як-побачити-arc-у-роботі"><a href="#як-побачити-arc-у-роботі">Як побачити ARC у роботі</a></h2>
 <p>Найпростіший інструмент — <code>print</code> у <code>deinit</code>. Візьмемо екран, що живе, поки його показує навігація:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CheckoutScreen</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CheckoutScreen</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">orderID</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">orderID</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">orderID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">orderID</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="kd">deinit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"CheckoutScreen </span><span class="si">\(</span><span class="n">orderID</span><span class="si">)</span><span class="s"> звільнено"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
@@ -87,11 +88,25 @@
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">nav</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Navigator</span><span class="p">()</span>
 <span class="n">nav</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">CheckoutScreen</span><span class="p">(</span><span class="n">orderID</span><span class="p">:</span><span class="w"> </span><span class="s">"A-17"</span><span class="p">))</span><span class="w">   </span><span class="c1">// сильне посилання тримає масив stack</span>
-<span class="n">nav</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span><span class="w">                                   </span><span class="c1">// останнє посилання зникло → deinit</span></code></pre></div>
+<span class="n">nav</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span><span class="w">                                   </span><span class="c1">// останнє посилання зникло → deinit</span></code></pre><template class="src">final class CheckoutScreen {
+    let orderID: String
+    init(orderID: String) { self.orderID = orderID }
+    deinit { print(&quot;CheckoutScreen \(orderID) звільнено&quot;) }
+}
+
+final class Navigator {
+    var stack: [CheckoutScreen] = []
+    func push(_ s: CheckoutScreen) { stack.append(s) }
+    func pop() { stack.removeLast() }
+}
+
+let nav = Navigator()
+nav.push(CheckoutScreen(orderID: &quot;A-17&quot;))   // сильне посилання тримає масив stack
+nav.pop()                                   // останнє посилання зникло → deinit</template></div>
 <p>Екран ніхто не «видаляв» явно: ARC звільнив його, щойно масив перестав на нього посилатися. Якщо після <code>pop()</code> повідомлення <strong>немає</strong> — значить, хтось іще тримає екран. Найчастіше цей «хтось» — цикл посилань.</p>
 <h2 id="цикли-сильних-посилань-між-обєктами"><a href="#цикли-сильних-посилань-між-обєктами">Цикли сильних посилань між об'єктами</a></h2>
 <p>Типова ситуація в iOS: контролер володіє ViewModel, а ViewModel повідомляє контролера про зміни через посилання назад.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ProfileViewModel</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ProfileViewModel</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">view</span><span class="p">:</span><span class="w"> </span><span class="n">ProfileController</span><span class="p">?</span><span class="w">          </span><span class="c1">// ⚠️ сильне посилання назад</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">refresh</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">view</span><span class="p">?.</span><span class="n">render</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
@@ -104,7 +119,20 @@
 <span class="p">}</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nv">screen</span><span class="p">:</span><span class="w"> </span><span class="n">ProfileController</span><span class="p">?</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ProfileController</span><span class="p">()</span>
-<span class="n">screen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">      </span><span class="c1">// deinit не викличеться</span></code></pre></div>
+<span class="n">screen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">      </span><span class="c1">// deinit не викличеться</span></code></pre><template class="src">final class ProfileViewModel {
+    var view: ProfileController?          // ⚠️ сильне посилання назад
+    func refresh() { view?.render() }
+}
+
+final class ProfileController {
+    let viewModel = ProfileViewModel()
+    init() { viewModel.view = self }
+    func render() { }
+    deinit { print(&quot;ProfileController звільнено&quot;) }
+}
+
+var screen: ProfileController? = ProfileController()
+screen = nil      // deinit не викличеться</template></div>
 <div class="code text"><pre><code>ProfileController ──viewModel──▶ ProfileViewModel
         ▲                               │
         └──────────── view ─────────────┘</code></pre></div>
@@ -129,7 +157,7 @@
 </aside>
 <h3 id="безвласницькі-посилання"><a href="#безвласницькі-посилання">Безвласницькі посилання</a></h3>
 <p><code>unowned</code> теж не утримує об'єкт, але й не стає <code>nil</code> — це не опціонал. Якщо звернутися до нього після звільнення об'єкта, буде крах. Підходить для зв'язку «дитина → батько», де дитина не живе довше за батька:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Form</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Form</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">fields</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Field</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">isValid</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span><span class="n">allSatisfy</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">isValid</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 
@@ -152,7 +180,30 @@
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">didEdit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"Форма валідна:"</span><span class="p">,</span><span class="w"> </span><span class="n">form</span><span class="p">.</span><span class="n">isValid</span><span class="p">)</span><span class="w">   </span><span class="c1">// без розгортання опціоналу</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">final class Form {
+    private(set) var fields: [Field] = []
+    var isValid: Bool { fields.allSatisfy(\.isValid) }
+
+    func addField(placeholder: String) {
+        fields.append(Field(form: self, placeholder: placeholder))
+    }
+}
+
+final class Field {
+    unowned let form: Form          // поле не існує без форми
+    let placeholder: String
+    var text = &quot;&quot;
+    var isValid: Bool { !text.isEmpty }
+
+    init(form: Form, placeholder: String) {
+        self.form = form
+        self.placeholder = placeholder
+    }
+
+    func didEdit() {
+        print(&quot;Форма валідна:&quot;, form.isValid)   // без розгортання опціоналу
+    }
+}</template></div>
 <p>Форма тримає поля сильно (через масив), поля посилаються на форму через <code>unowned</code>. Поле не може пережити форму, бо живе лише в її масиві.</p>
 <p>Існують також:</p>
 <ul>
@@ -165,7 +216,7 @@
 </aside>
 <h3 id="коли-обидва-посилання-мають-бути-не-опціональними"><a href="#коли-обидва-посилання-мають-бути-не-опціональними">Коли обидва посилання мають бути не-опціональними</a></h3>
 <p>Буває, що обидва об'єкти обов'язково існують разом: наприклад, ігровий світ створює свій фізичний рушій, і рушію потрібен світ. Найчистіше рішення — створювати залежний об'єкт ліниво: у <code>lazy</code>-властивості вже можна використовувати <code>self</code>.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">World</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">World</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kr">lazy</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">physics</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PhysicsEngine</span><span class="p">(</span><span class="n">world</span><span class="p">:</span><span class="w"> </span><span class="kc">self</span><span class="p">)</span><span class="w">   </span><span class="c1">// створюється при першому зверненні</span>
 <span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">}</span>
@@ -177,7 +228,19 @@
 <span class="p">}</span>
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">World</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Arena"</span><span class="p">)</span>
-<span class="bp">print</span><span class="p">(</span><span class="n">w</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">world</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="w">     </span><span class="c1">// жодних опціоналів</span></code></pre></div>
+<span class="bp">print</span><span class="p">(</span><span class="n">w</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">world</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="w">     </span><span class="c1">// жодних опціоналів</span></code></pre><template class="src">final class World {
+    let name: String
+    lazy var physics = PhysicsEngine(world: self)   // створюється при першому зверненні
+    init(name: String) { self.name = name }
+}
+
+final class PhysicsEngine {
+    unowned let world: World
+    init(world: World) { self.world = world }
+}
+
+let w = World(name: &quot;Arena&quot;)
+print(w.physics.world.name)     // жодних опціоналів</template></div>
 <!-- callout -->
 
 <aside class="callout trap"><b>Пастка</b><p><code>unowned</code> тут чесно попереджає про помилки часу життя. Вираз <code>World(name: "Arena").physics.world.name</code> впаде: тимчасовий <code>World</code> звільняється одразу після створення <code>physics</code>, і рушій лишається з посиланням на знищений об'єкт. У прикладі вище світ живе, бо його тримає константа <code>w</code>.</p>
@@ -185,7 +248,7 @@
 <p>Старіший варіант того самого — властивість типу <code>PhysicsEngine!</code> (неявно розгорнутий опціонал), яку присвоюють у <code>init</code> після ініціалізації решти властивостей. Його часто можна побачити в UIKit-коді.</p>
 <h2 id="цикли-сильних-посилань-через-замикання"><a href="#цикли-сильних-посилань-через-замикання">Цикли сильних посилань через замикання</a></h2>
 <p>Замикання — теж reference type, і воно <strong>сильно</strong> захоплює все, що використовує, включно з <code>self</code>. Якщо об'єкт (прямо чи через інші об'єкти) зберігає замикання, а замикання захоплює об'єкт, виникає цикл. На практиці це найчастіше джерело витоків:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SearchViewModel</span><span class="w"> </span><span class="p">{</span>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SearchViewModel</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">results</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">onQueryChange</span><span class="p">:</span><span class="w"> </span><span class="p">((</span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Void</span><span class="p">)?</span>
 
@@ -195,7 +258,17 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="kd">deinit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"SearchViewModel звільнено"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre><template class="src">final class SearchViewModel {
+    var results: [String] = []
+    private var onQueryChange: ((String) -&gt; Void)?
+
+    init() {
+        onQueryChange = { query in
+            self.results = [&quot;\(query)…&quot;]     // ⚠️ замикання тримає self
+        }
+    }
+    deinit { print(&quot;SearchViewModel звільнено&quot;) }
+}</template></div>
 <div class="code text"><pre><code>SearchViewModel ──onQueryChange──▶ [замикання]
        ▲                                │
        └───────────── self ─────────────┘</code></pre></div>
@@ -255,5 +328,6 @@
     if (cur && !narrow && cur.scrollIntoView) cur.scrollIntoView({block: 'center'});
   })();
 </script>
+<script src="runner.js"></script>
 </body>
 </html>
