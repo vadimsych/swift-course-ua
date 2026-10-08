@@ -51,21 +51,42 @@ print(discountedPrice(price: 199, percent: 25))</template></div>
 damage(base: 20, multiplier: 1.5)</template></div>
 <p>Функції з однаковими іменами, але різними мітками чи типами параметрів — різні перевантаження, як у C#.</p>
 <h3 id="без-результату"><a href="#без-результату">Без результату</a></h3>
-<p>Якщо функція оголошує тип результату, вона мусить повернути значення на <strong>кожному</strong> шляху виконання — інакше помилка компіляції.</p>
-<p>Якщо <code>-&gt;</code> немає, функція повертає <code>Void</code> — порожній кортеж <code>()</code>. Результат функції можна не використовувати, але для функцій з результатом компілятор попередить про це. Щоб попередження не було, функцію позначають <code>@discardableResult</code>.</p>
-<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<p>Функція без <code>-&gt;</code> нічого не повертає — це аналог <code>void</code> у C#:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">      </span><span class="c1">// як void Log(string message)</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"[LOG]"</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="p">@</span><span class="n">discardableResult</span>
-<span class="kd">func</span><span class="w"> </span><span class="nf">save</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
-<span class="n">save</span><span class="p">()</span><span class="w">   </span><span class="c1">// без попередження</span></code></pre><template class="src">func log(_ message: String) {
+<span class="p">}</span></code></pre><template class="src">func log(_ message: String) {      // як void Log(string message)
     print(&quot;[LOG]&quot;, message)
-}
+}</template></div>
+<p>Формально Swift називає цей «порожній результат» типом <code>Void</code>, але думати про нього можна просто як про <code>void</code>.</p>
+<h3 id="значення-треба-повернути-на-кожному-шляху"><a href="#значення-треба-повернути-на-кожному-шляху">Значення треба повернути на кожному шляху</a></h3>
+<p>Якщо в сигнатурі є <code>-&gt; Тип</code>, кожен можливий шлях виконання мусить закінчитися <code>return</code>. Інакше помилка компіляції — як <code>not all code paths return a value</code> у C#:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">discount</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">level</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="w">          </span><span class="c1">// без цього рядка — помилка: а що повертати для level &lt;= 10?</span>
+<span class="p">}</span></code></pre><template class="src">func discount(for level: Int) -&gt; Int {
+    if level &gt; 10 {
+        return 20
+    }
+    return 0          // без цього рядка — помилка: а що повертати для level &lt;= 10?
+}</template></div>
+<h3 id="попередження-про-невикористаний-результат"><a href="#попередження-про-невикористаний-результат">Попередження про невикористаний результат</a></h3>
+<p>Якщо функція повертає значення, а ти його проігнорував, Swift покаже <strong>попередження</strong>: раз функція щось повертає, мабуть, це варто перевірити.</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">save</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w">       </span><span class="c1">// true, якщо збереглося</span>
+<span class="n">save</span><span class="p">()</span><span class="w">                             </span><span class="c1">// ⚠️ результат не використано</span></code></pre><template class="src">func save() -&gt; Bool { true }       // true, якщо збереглося
+save()                             // ⚠️ результат не використано</template></div>
+<p>Буває, що результат — лише бонус і ігнорувати його нормально. Тоді функцію позначають <code>@discardableResult</code>, і попередження зникає:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">discardableResult</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">saveSilently</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
 
-@discardableResult
-func save() -&gt; Bool { true }
-save()   // без попередження</template></div>
+<span class="n">saveSilently</span><span class="p">()</span><span class="w">                      </span><span class="c1">// без попередження</span>
+<span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">saveSilently</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Не збереглося"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// перевірити все одно можна</span></code></pre><template class="src">@discardableResult
+func saveSilently() -&gt; Bool { true }
+
+saveSilently()                      // без попередження
+if !saveSilently() { print(&quot;Не збереглося&quot;) }   // перевірити все одно можна</template></div>
+<p>У стандартній бібліотеці так позначено, наприклад, <code>removeLast()</code>: він повертає видалений елемент, але найчастіше цей елемент не потрібен.</p>
 <h3 id="кілька-результатів-через-кортеж"><a href="#кілька-результатів-через-кортеж">Кілька результатів через кортеж</a></h3>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">splitDuration</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">seconds</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">minutes</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">(</span><span class="n">seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
@@ -109,30 +130,66 @@ if let kyiv = parseCoordinate(&quot;50.45, 30.52&quot;) {
 }</template></div>
 <p>Зверни увагу, де стоїть <code>?</code>: тут опціональний увесь результат — або є обидві координати, або немає нічого. Тип <code>(lat: Double?, lon: Double?)</code> описував би інше: кожна координата могла б бути відсутньою окремо.</p>
 <h3 id="неявний-return"><a href="#неявний-return">Неявний return</a></h3>
-<p>Якщо тіло функції — один вираз, <code>return</code> можна не писати:</p>
+<p>Якщо тіло функції — рівно <strong>один вираз</strong>, його значення повертається само, <code>return</code> можна не писати:</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">isAdult</span><span class="p">(</span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">label</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">battery</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Зарядіть пристрій"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"OK"</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// if-вираз — теж один вираз</span>
 <span class="p">}</span></code></pre><template class="src">func isAdult(age: Int) -&gt; Bool {
     age &gt;= 18
-}</template></div>
-<p>Це працює й для <code>if</code>/<code>switch</code>-виразів у тілі. Вираз має давати значення потрібного типу — або бути викликом, з якого виконання не повертається (на кшталт <code>fatalError</code>).</p>
-<h2 id="мітки-аргументів-і-імена-параметрів"><a href="#мітки-аргументів-і-імена-параметрів">Мітки аргументів і імена параметрів</a></h2>
-<p>У параметра є <strong>мітка аргументу</strong> (для виклику) і <strong>ім'я параметра</strong> (для тіла). За замовчуванням вони однакові.</p>
-<h3 id="власна-мітка"><a href="#власна-мітка">Власна мітка</a></h3>
-<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="n">start</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">end</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Рух з </span><span class="si">\(</span><span class="n">start</span><span class="si">)</span><span class="s"> до </span><span class="si">\(</span><span class="n">end</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="n">move</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span></code></pre><template class="src">func move(from start: Int, to end: Int) {
-    print(&quot;Рух з \(start) до \(end)&quot;)
 }
-move(from: 1, to: 5)</template></div>
-<p>Мета — щоб виклик читався як речення англійською: <code>move(from:to:)</code>, <code>insert(_:at:)</code>, <code>firstIndex(of:)</code>. Це центральна ідея Swift API Design Guidelines.</p>
-<h3 id="без-мітки"><a href="#без-мітки">Без мітки</a></h3>
-<p><code>_</code> замість мітки прибирає її з виклику:</p>
-<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">}</span>
-<span class="n">square</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span></code></pre><template class="src">func square(_ x: Int) -&gt; Int { x * x }
-square(7)</template></div>
-<p>Зазвичай мітку прибирають, коли зміст першого аргументу очевидний з назви функції.</p>
+
+func label(for battery: Double) -&gt; String {
+    if battery &lt; 0.2 { &quot;Зарядіть пристрій&quot; } else { &quot;OK&quot; }   // if-вираз — теж один вираз
+}</template></div>
+<p>Щойно в тілі з'являється хоча б ще одна інструкція, <code>return</code> знову потрібен:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">label</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">battery</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"перевіряємо </span><span class="si">\(</span><span class="n">battery</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">battery</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Зарядіть пристрій"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"OK"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre><template class="src">func label(for battery: Double) -&gt; String {
+    print(&quot;перевіряємо \(battery)&quot;)
+    return if battery &lt; 0.2 { &quot;Зарядіть пристрій&quot; } else { &quot;OK&quot; }
+}</template></div>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>Схоже на expression-bodied member <code>bool IsAdult(int age) =&gt; age &gt;= 18;</code>, тільки без <code>=&gt;</code>.</p>
+</aside>
+<h2 id="мітки-аргументів-і-імена-параметрів"><a href="#мітки-аргументів-і-імена-параметрів">Мітки аргументів і імена параметрів</a></h2>
+<p>У Swift у параметра може бути <strong>два імені</strong>: одне пишуть при виклику (<strong>мітка аргументу</strong>), друге використовують усередині функції (<strong>ім'я параметра</strong>).</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="n">start</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">end</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"Рух з </span><span class="si">\(</span><span class="n">start</span><span class="si">)</span><span class="s"> до </span><span class="si">\(</span><span class="n">end</span><span class="si">)</span><span class="s">"</span><span class="p">)</span><span class="w">    </span><span class="c1">// усередині — start і end</span>
+<span class="p">}</span>
+
+<span class="n">move</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">                     </span><span class="c1">// ззовні — from і to</span></code></pre><template class="src">func move(from start: Int, to end: Int) {
+    print(&quot;Рух з \(start) до \(end)&quot;)    // усередині — start і end
+}
+
+move(from: 1, to: 5)                     // ззовні — from і to</template></div>
+<p><code>from start: Int</code> читається так: мітка <code>from</code>, ім'я <code>start</code>, тип <code>Int</code>. Навіщо два імені: ззовні виклик звучить як речення англійською («move from 1 to 5»), а всередині змінні мають нормальні імена — <code>print(from)</code> читався б дивно.</p>
+<p>Варіанти, які трапляються:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">       </span><span class="c1">// одне ім'я — воно і мітка, і ім'я</span>
+<span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Ann"</span><span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// мітка відрізняється від імені</span>
+<span class="n">send</span><span class="p">(</span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="s">"a@b.c"</span><span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">}</span><span class="w">          </span><span class="c1">// _ — без мітки</span>
+<span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span></code></pre><template class="src">func greet(name: String) { print(name) }       // одне ім&#x27;я — воно і мітка, і ім&#x27;я
+greet(name: &quot;Ann&quot;)
+
+func send(to email: String) { print(email) }   // мітка відрізняється від імені
+send(to: &quot;a@b.c&quot;)
+
+func square(_ x: Int) -&gt; Int { x * x }          // _ — без мітки
+square(4)</template></div>
+<p><code>_</code> ставлять, коли зміст аргументу й так зрозумілий з назви функції.</p>
+<!-- callout -->
+
+<aside class="callout csharp"><b>C#</b><p>У C# у параметра одне ім'я, і писати його при виклику необов'язково: <code>Move(1, 5)</code> або <code>Move(start: 1, end: 5)</code>. У Swift мітки при виклику <strong>обов'язкові</strong>, і мітка може відрізнятися від імені параметра.</p>
+</aside>
+<p>Повне ім'я функції в Swift пишуть разом з мітками: <code>move(from:to:)</code>, <code>square(_:)</code>. Функції з однаковою назвою, але різними мітками — різні функції.</p>
 <h3 id="значення-за-замовчуванням"><a href="#значення-за-замовчуванням">Значення за замовчуванням</a></h3>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">spawn</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">kind</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="bp">count</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">elite</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="n">spawn</span><span class="p">(</span><span class="s">"goblin"</span><span class="p">)</span>
@@ -143,45 +200,86 @@ spawn(&quot;orc&quot;, count: 3)
 spawn(&quot;dragon&quot;, elite: true)</template></div>
 <p>Параметри зі значеннями за замовчуванням зазвичай ставлять наприкінці. На відміну від C#, значення за замовчуванням не обов'язково compile-time константа: це будь-який вираз, обчислений під час виклику.</p>
 <h3 id="variadic-параметри"><a href="#variadic-параметри">Variadic-параметри</a></h3>
-<p><code>Тип...</code> приймає нуль або більше значень; усередині це масив:</p>
+<p><code>Тип...</code> дозволяє передати скільки завгодно значень через кому, від нуля й більше. Усередині функції це звичайний масив:</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">...)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">"[</span><span class="si">\(</span><span class="n">event</span><span class="si">)</span><span class="s">]"</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">.</span><span class="n">joined</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="s">", "</span><span class="p">))</span><span class="w">   </span><span class="c1">// tags — це [String]</span>
 <span class="p">}</span>
-<span class="n">track</span><span class="p">(</span><span class="s">"purchase"</span><span class="p">)</span>
+<span class="n">track</span><span class="p">(</span><span class="s">"purchase"</span><span class="p">)</span><span class="w">                                   </span><span class="c1">// tags = []</span>
 <span class="n">track</span><span class="p">(</span><span class="s">"paywall_view"</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="s">"onboarding"</span><span class="p">,</span><span class="w"> </span><span class="s">"variant_b"</span><span class="p">)</span></code></pre><template class="src">func track(_ event: String, tags: String...) {
     print(&quot;[\(event)]&quot;, tags.joined(separator: &quot;, &quot;))   // tags — це [String]
 }
-track(&quot;purchase&quot;)
+track(&quot;purchase&quot;)                                   // tags = []
 track(&quot;paywall_view&quot;, tags: &quot;onboarding&quot;, &quot;variant_b&quot;)</template></div>
-<p>Кілька variadic-параметрів в одній функції — нормально, просто наступний параметр мусить мати мітку, щоб компілятор зрозумів, де закінчується список. А от готовий масив у variadic не передаси; якщо таке потрібно, роблять друге перевантаження з <code>[String]</code>.</p>
 <!-- callout -->
 
-<aside class="callout csharp"><b>C#</b><p>Аналог <code>params double[] numbers</code>.</p>
+<aside class="callout csharp"><b>C#</b><p>Аналог <code>params string[] tags</code>.</p>
 </aside>
+<p>Два обмеження:</p>
+<ul>
+<li>параметр, що йде <strong>після</strong> variadic, мусить мати мітку — так компілятор розуміє, де закінчується список;</li>
+<li>готовий масив у variadic передати <strong>не можна</strong> (у C# з <code>params</code> можна). Якщо таке потрібно, роблять другу версію функції, що приймає <code>[String]</code>.</li>
+</ul>
 <h3 id="параметри-inout"><a href="#параметри-inout">Параметри inout</a></h3>
-<p>Параметри функції — <strong>константи</strong>. Якщо функція має змінити змінну викликача, параметр позначають <code>inout</code>, а при виклику пишуть <code>&amp;</code>:</p>
+<p>Звичайна функція не може змінити змінну, яку їй передали: параметри — константи. Якщо функція має змінити саму змінну викликача, параметр позначають <code>inout</code>, а при виклику перед змінною ставлять <code>&amp;</code>. Це майже те саме, що <code>ref</code> у C#:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">addCoins</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">coins</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">coins</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">10</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">wallet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span>
+<span class="n">addCoins</span><span class="p">(&amp;</span><span class="n">wallet</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">wallet</span><span class="p">)</span><span class="w">          </span><span class="c1">// 60</span></code></pre><template class="src">func addCoins(_ coins: inout Int) {
+    coins += 10
+}
+
+var wallet = 50
+addCoins(&amp;wallet)
+print(wallet)          // 60</template></div>
+<table>
+<thead>
+<tr>
+<th>C#</th>
+<th>Swift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>void AddCoins(ref int coins)</code></td>
+<td><code>func addCoins(_ coins: inout Int)</code></td>
+</tr>
+<tr>
+<td><code>AddCoins(ref wallet)</code></td>
+<td><code>addCoins(&amp;wallet)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Функція може змінити й кілька змінних одразу:</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">applyHit</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">damage</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">health</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">shield</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">absorbed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="n">shield</span><span class="p">,</span><span class="w"> </span><span class="n">damage</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">absorbed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="n">shield</span><span class="p">,</span><span class="w"> </span><span class="n">damage</span><span class="p">)</span><span class="w">   </span><span class="c1">// скільки шкоди забрав щит</span>
 <span class="w">    </span><span class="n">shield</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">absorbed</span>
-<span class="w">    </span><span class="n">health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">damage</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">absorbed</span>
+<span class="w">    </span><span class="n">health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">damage</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">absorbed</span><span class="w">          </span><span class="c1">// решта — у здоров'я</span>
 <span class="p">}</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nv">hp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">shield</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">30</span>
 <span class="n">applyHit</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="p">&amp;</span><span class="n">hp</span><span class="p">,</span><span class="w"> </span><span class="n">shield</span><span class="p">:</span><span class="w"> </span><span class="p">&amp;</span><span class="n">shield</span><span class="p">)</span>
 <span class="bp">print</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span><span class="w"> </span><span class="n">shield</span><span class="p">)</span><span class="w">   </span><span class="c1">// 80 0</span></code></pre><template class="src">func applyHit(_ damage: Int, to health: inout Int, shield: inout Int) {
-    let absorbed = min(shield, damage)
+    let absorbed = min(shield, damage)   // скільки шкоди забрав щит
     shield -= absorbed
-    health -= damage - absorbed
+    health -= damage - absorbed          // решта — у здоров&#x27;я
 }
 
 var hp = 100, shield = 30
 applyHit(50, to: &amp;hp, shield: &amp;shield)
 print(hp, shield)   // 80 0</template></div>
-<p>Аргумент для <code>inout</code> — завжди щось, у що можна записати: <code>var</code>-змінна, властивість, елемент масиву. Константа чи літерал не підійде. Значення за замовчуванням і variadic для <code>inout</code> недоступні.</p>
-<!-- callout -->
+<p>Передати в <code>inout</code> можна лише те, що можна змінити: <code>var</code>-змінну, властивість, елемент масиву. <code>let</code> чи число — ні.</p>
+<p><strong>А для класів?</strong> Щоб змінити властивості об'єкта класу, <code>inout</code> не потрібен: функція отримує посилання на той самий об'єкт. <code>inout</code> з класом потрібен лише тоді, коли треба <strong>замінити</strong> сам об'єкт на інший:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">hp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span>
 
-<aside class="callout csharp"><b>C#</b><p>Схоже на <code>ref</code>, але механіка інша: «copy-in copy-out». Значення копіюється у функцію, а при виході записується назад. Компілятор оптимізує це до передачі за посиланням, але поведінку треба уявляти саме так. Звідси правила безпеки пам'яті, про які пізніше: не можна передати одну змінну в два <code>inout</code> одночасно. Аналога <code>out</code> немає — повертай значення або кортеж.</p>
-</aside>
+<span class="kd">func</span><span class="w"> </span><span class="nf">hit</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">hp</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">}</span><span class="w">             </span><span class="c1">// змінює той самий об'єкт — без inout</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Player</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// підміняє об'єкт — потрібен inout</span></code></pre><template class="src">final class Player { var hp = 100 }
+
+func hit(_ p: Player) { p.hp -= 20 }             // змінює той самий об&#x27;єкт — без inout
+func reset(_ p: inout Player) { p = Player() }   // підміняє об&#x27;єкт — потрібен inout</template></div>
+<p>На практиці <code>inout</code> пишуть нечасто: у Swift зазвичай просто повертають нове значення (<code>wallet = withBonus(wallet)</code>).</p>
 <h2 id="функціональні-типи"><a href="#функціональні-типи">Функціональні типи</a></h2>
 <p>Кожна функція має тип, складений з типів параметрів і результату: <code>(Int, Int) -&gt; Int</code>, <code>() -&gt; Void</code>, <code>(String) -&gt; Bool</code>.</p>
 <h3 id="використання"><a href="#використання">Використання</a></h3>
@@ -209,16 +307,27 @@ let strategies: [String: (Double) -&gt; Double] = [
 let priceForUser = strategies[&quot;variant_b&quot;]?(19.4)   // Optional(19.99)</template></div>
 <p>Мітки аргументів не є частиною функціонального типу, тому через змінну функцію викликають без міток.</p>
 <h3 id="як-тип-параметра"><a href="#як-тип-параметра">Як тип параметра</a></h3>
+<p>Функцію можна передати в іншу функцію як аргумент. Функцію, що приймає іншу функцію, називають <strong>функцією вищого порядку</strong> — ти постійно користуєшся ними в C#: <code>list.Where(x =&gt; ...)</code>.</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">applyTwice</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 <span class="p">}</span>
+
 <span class="kd">func</span><span class="w"> </span><span class="nf">increment</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+
 <span class="bp">print</span><span class="p">(</span><span class="n">applyTwice</span><span class="p">(</span><span class="n">increment</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span><span class="w">   </span><span class="c1">// 7</span></code></pre><template class="src">func applyTwice(_ f: (Int) -&gt; Int, to value: Int) -&gt; Int {
     f(f(value))
 }
+
 func increment(_ x: Int) -&gt; Int { x + 1 }
+
 print(applyTwice(increment, to: 5))   // 7</template></div>
+<p>Тип параметра <code>f</code> — <code>(Int) -&gt; Int</code>: «будь-яка функція, що приймає <code>Int</code> і повертає <code>Int</code>», тобто <code>Func&lt;int, int&gt;</code> у C#. Ми передаємо <code>increment</code> <strong>без дужок</strong> — не викликаємо, а віддаємо саму функцію. Усередині:</p>
+<ol>
+<li><code>f(5)</code> → <code>increment(5)</code> → 6;</li>
+<li><code>f(6)</code> → <code>increment(6)</code> → 7.</li>
+</ol>
 <h3 id="як-тип-результату"><a href="#як-тип-результату">Як тип результату</a></h3>
+<p>Функція може й <strong>повертати</strong> функцію. Наприклад, один раз обрати форматер за валютою, а потім багато разів ним користуватися:</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">formatter</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">uah</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"</span><span class="si">\(</span><span class="n">v</span><span class="si">)</span><span class="s"> ₴"</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">usd</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nb">Double</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"$</span><span class="si">\(</span><span class="n">v</span><span class="si">)</span><span class="s">"</span><span class="w"> </span><span class="p">}</span>
@@ -231,8 +340,9 @@ print(applyTwice(increment, to: 5))   // 7</template></div>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span><span class="w"> </span><span class="nv">format</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">formatter</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="s">"UAH"</span><span class="p">)</span>
-<span class="bp">print</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="mf">99.9</span><span class="p">))</span><span class="w">   </span><span class="c1">// 99.9 ₴</span></code></pre><template class="src">func formatter(for currency: String) -&gt; (Double) -&gt; String {
+<span class="kd">let</span><span class="w"> </span><span class="nv">format</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">formatter</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="s">"UAH"</span><span class="p">)</span><span class="w">   </span><span class="c1">// 1. отримали функцію uah — нічого ще не форматується</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="mf">99.9</span><span class="p">))</span><span class="w">                  </span><span class="c1">// 2. викликали її → "99.9 ₴"</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="w">                    </span><span class="c1">// 3. і ще раз → "10.0 ₴"</span></code></pre><template class="src">func formatter(for currency: String) -&gt; (Double) -&gt; String {
     func uah(_ v: Double) -&gt; String { &quot;\(v) ₴&quot; }
     func usd(_ v: Double) -&gt; String { &quot;$\(v)&quot; }
     func plain(_ v: Double) -&gt; String { &quot;\(v) \(currency)&quot; }
@@ -244,11 +354,13 @@ print(applyTwice(increment, to: 5))   // 7</template></div>
     }
 }
 
-let format = formatter(for: &quot;UAH&quot;)
-print(format(99.9))   // 99.9 ₴</template></div>
+let format = formatter(for: &quot;UAH&quot;)   // 1. отримали функцію uah — нічого ще не форматується
+print(format(99.9))                  // 2. викликали її → &quot;99.9 ₴&quot;
+print(format(10))                    // 3. і ще раз → &quot;10.0 ₴&quot;</template></div>
+<p>Тип результату <code>(Double) -&gt; String</code> означає, що <code>formatter</code> повертає не рядок, а функцію, яка вміє перетворити число на рядок.</p>
 <!-- callout -->
 
-<aside class="callout csharp"><b>C#</b><p>Функціональні типи — це <code>Func&lt;int, int, int&gt;</code> і <code>Action&lt;string&gt;</code>, тільки з нормальним синтаксисом. Групи методів і лямбди в Swift уніфіковані: будь-яку функцію можна присвоїти змінній без обгортки.</p>
+<aside class="callout csharp"><b>C#</b><p>Функціональні типи — це <code>Func&lt;double, string&gt;</code>, <code>Action&lt;string&gt;</code> і так далі. Аналог <code>formatter</code> у C# повертав би <code>Func&lt;double, string&gt;</code>. Різниця лише в синтаксисі: у Swift будь-яку функцію можна покласти в змінну чи передати без обгортки.</p>
 </aside>
 <h2 id="вкладені-функції"><a href="#вкладені-функції">Вкладені функції</a></h2>
 <p>Функцію можна оголосити всередині іншої. Вона невидима ззовні, але бачить змінні зовнішньої функції. Так зручно ховати допоміжну логіку, потрібну лише в одному місці:</p>
