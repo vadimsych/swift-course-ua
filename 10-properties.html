@@ -28,39 +28,62 @@
   <p class="source">У книзі: <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/">properties</a></p>
 <h2 id="збережені-властивості"><a href="#збережені-властивості">Збережені властивості</a></h2>
 <p>Збережена властивість — <code>let</code> чи <code>var</code> усередині структури або класу; enum збережених властивостей екземпляра не має. Що можна змінювати, визначають <strong>дві</strong> речі одночасно: як оголошено властивість і як оголошено сам екземпляр.</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Order</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w">            </span><span class="c1">// не змінюється ніколи</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"new"</span><span class="w">      </span><span class="c1">// змінюється, якщо змінюваний сам екземпляр</span>
+<p>Змінити властивість можна, лише коли відчинені <strong>обидва замки</strong>:</p>
+<ol>
+<li><strong>Замок на властивості.</strong> <code>let id</code> закритий завжди: значення задається один раз в ініціалізаторі. <code>var status</code> відчинений.</li>
+<li><strong>Замок на змінній.</strong> Для структури <code>let order</code> закриває все значення разом з усіма полями. Для класу <code>let box</code> фіксує лише посилання, а поля об'єкта міняти можна.</li>
+</ol>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Order</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w">            </span><span class="c1">// замок на властивості закритий</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"new"</span><span class="w">      </span><span class="c1">// відчинений</span>
 <span class="p">}</span>
 
 <span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">OrderBox</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">()</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"new"</span>
-<span class="p">}</span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><code>var order = Order(...)</code></th>
-<th><code>let order = Order(...)</code></th>
-<th><code>let box = OrderBox()</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>.status = "paid"</code></td>
-<td>✓</td>
-<td>✗ — <code>let</code> заморожує все значення структури</td>
-<td>✓ — <code>let</code> фіксує лише посилання</td>
-</tr>
-<tr>
-<td><code>.id = UUID()</code></td>
-<td>✗</td>
-<td>✗</td>
-<td>✗</td>
-</tr>
-</tbody>
-</table>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Order</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">())</span>
+<span class="n">order</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"paid"</span><span class="w">       </span><span class="c1">// ✓ обидва замки відчинені</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">frozen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Order</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">())</span>
+<span class="c1">// frozen.status = "paid"   // ✗ let заморожує все значення структури</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">box</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">OrderBox</span><span class="p">()</span>
+<span class="n">box</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"paid"</span><span class="w">         </span><span class="c1">// ✓ для класу let фіксує лише посилання</span>
+<span class="c1">// box = OrderBox()         // ✗ а от інший об'єкт сюди вже не покладеш</span>
+
+<span class="c1">// order.id = UUID()        // ✗ id — let у самому типі</span>
+<span class="c1">// box.id = UUID()          // ✗ так само для класу</span>
+
+<span class="bp">print</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">frozen</span><span class="p">.</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">box</span><span class="p">.</span><span class="n">status</span><span class="p">)</span><span class="w">   </span><span class="c1">// paid new paid</span></code></pre><template class="src">import Foundation
+
+struct Order {
+    let id: UUID            // замок на властивості закритий
+    var status = &quot;new&quot;      // відчинений
+}
+
+final class OrderBox {
+    let id = UUID()
+    var status = &quot;new&quot;
+}
+
+var order = Order(id: UUID())
+order.status = &quot;paid&quot;       // ✓ обидва замки відчинені
+
+let frozen = Order(id: UUID())
+// frozen.status = &quot;paid&quot;   // ✗ let заморожує все значення структури
+
+let box = OrderBox()
+box.status = &quot;paid&quot;         // ✓ для класу let фіксує лише посилання
+// box = OrderBox()         // ✗ а от інший об&#x27;єкт сюди вже не покладеш
+
+// order.id = UUID()        // ✗ id — let у самому типі
+// box.id = UUID()          // ✗ так само для класу
+
+print(order.status, frozen.status, box.status)   // paid new paid</template></div>
 <p>Звідси корисна звичка: моделі даних робити структурами з <code>var</code>-полями, а «незмінність» вирішувати на рівні змінної (<code>let</code>), а не прописувати в кожному полі.</p>
 <h3 id="ліниві-властивості"><a href="#ліниві-властивості">Ліниві властивості</a></h3>
 <p><code>lazy var</code> обчислює початкове значення при <strong>першому зверненні</strong>. Корисно, коли значення дороге або залежить від стану, що з'явиться після ініціалізації:</p>
