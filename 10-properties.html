@@ -257,32 +257,74 @@ print(r.area, r.perimeter)   // 12.0 14.0</template></div>
 <aside class="callout csharp"><b>C#</b><p>Те саме, що властивості з <code>get</code>/<code>set</code> у C#. Відмінність лише в тому, що збережена властивість (як auto-property) і обчислювана виглядають по-різному: перша — <code>var x = 0</code>, друга — <code>var x: Int { ... }</code>.</p>
 </aside>
 <h2 id="спостерігачі-властивостей"><a href="#спостерігачі-властивостей">Спостерігачі властивостей</a></h2>
-<p><code>willSet</code> і <code>didSet</code> реагують на кожне присвоєння значення, навіть якщо нове значення дорівнює старому.</p>
+<p>Спостерігач — шматок коду, який сам запускається, коли властивості присвоюють значення. Їх два:</p>
+<ul>
+<li><code>willSet</code> — <strong>перед</strong> зміною. Нове значення, яке ось-ось запишеться, доступне як <code>newValue</code>.</li>
+<li><code>didSet</code> — <strong>після</strong> зміни. Попереднє значення доступне як <code>oldValue</code>.</li>
+</ul>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kr">willSet</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">"Здоров'я зміниться на </span><span class="si">\(</span><span class="n">newValue</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">"було </span><span class="si">\(</span><span class="n">health</span><span class="si">)</span><span class="s">, буде </span><span class="si">\(</span><span class="n">newValue</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="kr">didSet</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Гравець переможений"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// присвоєння в didSet не викликає спостерігачів повторно</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">"стало </span><span class="si">\(</span><span class="n">health</span><span class="si">)</span><span class="s">, раніше було </span><span class="si">\(</span><span class="n">oldValue</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></code></pre><template class="src">final class Player {
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">player</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Player</span><span class="p">()</span>
+<span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">70</span>
+<span class="c1">// було 100, буде 70</span>
+<span class="c1">// стало 70, раніше було 100</span></code></pre><template class="src">final class Player {
     var health = 100 {
         willSet {
-            print(&quot;Здоров&#x27;я зміниться на \(newValue)&quot;)
+            print(&quot;було \(health), буде \(newValue)&quot;)
         }
         didSet {
-            if health &lt;= 0 { print(&quot;Гравець переможений&quot;) }
-            if health &gt; 100 { health = 100 }   // присвоєння в didSet не викликає спостерігачів повторно
+            print(&quot;стало \(health), раніше було \(oldValue)&quot;)
         }
     }
-}</template></div>
+}
+
+let player = Player()
+player.health = 70
+// було 100, буде 70
+// стало 70, раніше було 100</template></div>
+<p>Порядок: спершу <code>willSet</code>, потім значення записується, потім <code>didSet</code>.</p>
+<p>Типове застосування <code>didSet</code> — підправити значення або відреагувати на нього:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">didSet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// не даємо вийти за межу</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">"Гравець переможений"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">player</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Player</span><span class="p">()</span>
+<span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">150</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="p">)</span><span class="w">   </span><span class="c1">// 100</span>
+<span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w">      </span><span class="c1">// Гравець переможений</span></code></pre><template class="src">final class Player {
+    var health = 100 {
+        didSet {
+            if health &gt; 100 { health = 100 }   // не даємо вийти за межу
+            if health &lt;= 0 { print(&quot;Гравець переможений&quot;) }
+        }
+    }
+}
+
+let player = Player()
+player.health = 150
+print(player.health)   // 100
+player.health = 0      // Гравець переможений</template></div>
+<p>Присвоєння <code>health = 100</code> всередині <code>didSet</code> не запускає спостерігачі вдруге, тож нескінченного циклу не буде.</p>
+<p>Ще кілька правил:</p>
 <ul>
-<li>У <code>willSet</code> нове значення — <code>newValue</code>, у <code>didSet</code> старе — <code>oldValue</code>. Імена можна змінити: <code>willSet(next)</code>, <code>didSet(previous)</code>.</li>
-<li>Спостерігачі можна додати до власних збережених властивостей, до успадкованих (збережених і обчислюваних) через <code>override</code>, але не до власних обчислюваних — там і так є сеттер.</li>
-<li>Під час ініціалізації в <code>init</code> спостерігачі <strong>не</strong> викликаються для власних властивостей. Спостерігачі суперкласу викликаються, коли підклас присвоює властивість після виклику <code>super.init</code>.</li>
+<li>Спостерігачі спрацьовують на <strong>кожне</strong> присвоєння, навіть якщо значення не змінилось: <code>player.health = player.health</code> теж їх викличе.</li>
+<li>Імена <code>newValue</code> і <code>oldValue</code> можна замінити своїми: <code>willSet(next)</code>, <code>didSet(previous)</code>.</li>
+<li>Спостерігачі ставлять на збережені властивості. На власну обчислювану не можна, і не треба: у неї вже є <code>set</code>, куди можна дописати ту саму логіку. На успадковану властивість, будь-яку, спостерігачі додають через <code>override</code> у підкласі.</li>
+<li>Присвоєння всередині власного <code>init</code> спостерігачі <strong>не</strong> запускає: об'єкт ще не готовий. Виняток — підклас, що змінює властивість суперкласу після <code>super.init</code>: тоді спостерігачі суперкласу спрацюють.</li>
 </ul>
 <!-- callout -->
 
