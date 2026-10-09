@@ -169,10 +169,39 @@ print(timer.minutesAndSeconds)        // (minutes: 2, seconds: 15)
 timer.minutesAndSeconds = (5, 0)
 print(timer.totalSeconds)             // 300</template></div>
 <h3 id="скорочений-сеттер"><a href="#скорочений-сеттер">Скорочений сеттер</a></h3>
-<p>Якщо не вказати ім'я параметра сеттера, воно буде <code>newValue</code>:</p>
-<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">set</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="n">minutes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="n">seconds</span>
-<span class="p">}</span></code></pre></div>
+<p>У прикладі вище ім'я нового значення задано вручну: <code>set(parts)</code>. Якщо дужки з ім'ям не писати, Swift сам назве нове значення <code>newValue</code>. Це той самий <code>Countdown</code>, тільки зі скороченим сеттером:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Countdown</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">minutesAndSeconds</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">minutes</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">(</span><span class="n">totalSeconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="n">totalSeconds</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// без (parts) — нове значення доступне як newValue</span>
+<span class="w">            </span><span class="n">totalSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="n">minutes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newValue</span><span class="p">.</span><span class="n">seconds</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nv">timer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Countdown</span><span class="p">()</span>
+<span class="n">timer</span><span class="p">.</span><span class="n">minutesAndSeconds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span><span class="w">   </span><span class="c1">// (1, 30) потрапляє в newValue</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">totalSeconds</span><span class="p">)</span><span class="w">           </span><span class="c1">// 90</span></code></pre><template class="src">struct Countdown {
+    var totalSeconds = 0
+
+    var minutesAndSeconds: (minutes: Int, seconds: Int) {
+        get {
+            (totalSeconds / 60, totalSeconds % 60)
+        }
+        set {   // без (parts) — нове значення доступне як newValue
+            totalSeconds = newValue.minutes * 60 + newValue.seconds
+        }
+    }
+}
+
+var timer = Countdown()
+timer.minutesAndSeconds = (1, 30)   // (1, 30) потрапляє в newValue
+print(timer.totalSeconds)           // 90</template></div>
+<p>Обидві форми працюють однаково. Зазвичай пишуть скорочену, а власне ім'я дають, коли воно робить код зрозумілішим.</p>
 <h3 id="скорочений-геттер"><a href="#скорочений-геттер">Скорочений геттер</a></h3>
 <p>Тіло геттера з одного виразу повертає його без <code>return</code> (як і в функціях).</p>
 <h3 id="властивості-лише-для-читання"><a href="#властивості-лише-для-читання">Властивості лише для читання</a></h3>
