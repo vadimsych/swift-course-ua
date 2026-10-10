@@ -446,12 +446,60 @@ final class LenientSlug: Slug {
 Slug(&quot;Hello World&quot;)          // nil
 LenientSlug(&quot;Hello World&quot;)   // &quot;hello-world&quot; — ніколи не nil</template></div>
 <h3 id="init"><a href="#init">init!</a></h3>
-<p><code>init!</code> створює неявно розгорнутий опціонал. Правила:</p>
+<p><code>init!</code> — варіант <code>init?</code>, який теж може повернути <code>nil</code>, але результат — <strong>неявно розгорнутий</strong> опціонал (<code>Port!</code>). Користуватися ним можна як звичайним значенням, без <code>?</code> і <code>if let</code>. Якщо ж там <code>nil</code>, звернення спричинить крах.</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Port</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+
+<span class="w">    </span><span class="kd">init</span><span class="p">!(</span><span class="kc">_</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Int</span><span class="p">(</span><span class="n">text</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mf">1.</span><span class="p">..</span><span class="mi">65535</span><span class="p">).</span><span class="bp">contains</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">safe</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// звичайний init викликає init! усередині</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w">         </span><span class="c1">// якщо там nil — крах</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">a</span><span class="p">:</span><span class="w"> </span><span class="n">Port</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Port</span><span class="p">(</span><span class="s">"8080"</span><span class="p">)</span><span class="w">      </span><span class="c1">// результат одразу як Port</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">)</span><span class="w">                  </span><span class="c1">// 8080</span>
+
+<span class="bp">print</span><span class="p">(</span><span class="n">Port</span><span class="p">(</span><span class="s">"22"</span><span class="p">).</span><span class="n">value</span><span class="p">)</span><span class="w">         </span><span class="c1">// 22 — і без змінної теж</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Port</span><span class="p">(</span><span class="s">"abc"</span><span class="p">)</span><span class="w">             </span><span class="c1">// без явного типу b стає звичайним Port?</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w">                 </span><span class="c1">// true</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Port</span><span class="p">(</span><span class="n">safe</span><span class="p">:</span><span class="w"> </span><span class="s">"443"</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">value</span><span class="p">)</span><span class="w">                  </span><span class="c1">// 443</span></code></pre><template class="src">struct Port {
+    let value: Int
+
+    init!(_ text: String) {
+        guard let n = Int(text), (1...65535).contains(n) else { return nil }
+        value = n
+    }
+
+    init(safe text: String) {   // звичайний init викликає init! усередині
+        self.init(text)         // якщо там nil — крах
+    }
+}
+
+let a: Port = Port(&quot;8080&quot;)      // результат одразу як Port
+print(a.value)                  // 8080
+
+print(Port(&quot;22&quot;).value)         // 22 — і без змінної теж
+
+let b = Port(&quot;abc&quot;)             // без явного типу b стає звичайним Port?
+print(b == nil)                 // true
+
+let c = Port(safe: &quot;443&quot;)
+print(c.value)                  // 443</template></div>
+<p>Зверни увагу на <code>b</code>: якщо тип не вказати, Swift робить зі змінної звичайний опціонал <code>Port?</code>, і <code>b.value</code> вже не скомпілюється без розгортання. «Неявне розгортання» спрацьовує, лише коли результат одразу використовують як <code>Port</code>.</p>
+<p>Правила нижче стосуються <strong>делегування</strong>, тобто виклику одного ініціалізатора з іншого через <code>self.init(...)</code> чи <code>super.init(...)</code>, як <code>init(safe:)</code> викликає <code>init!</code> у прикладі:</p>
 <ul>
-<li><code>init?</code> можна перевизначити через <code>init!</code> і навпаки;</li>
-<li>з <code>init?</code> можна делегувати до <code>init!</code> і навпаки;</li>
-<li>з <strong>звичайного</strong> <code>init</code> можна делегувати до <code>init!</code>, але якщо той поверне <code>nil</code>, станеться крах — як при примусовому розгортанні.</li>
+<li>з <code>init?</code> можна викликати <code>init!</code> і навпаки;</li>
+<li>зі <strong>звичайного</strong> <code>init</code> можна викликати <code>init!</code>, але якщо той поверне <code>nil</code>, буде крах, як при примусовому розгортанні. Тобто <code>Port(safe: "abc")</code> впаде;</li>
+<li>у підкласі <code>init?</code> батька можна перевизначити як <code>init!</code> і навпаки.</li>
 </ul>
+<p>На практиці <code>init!</code> трапляється рідко, здебільшого в старих API з Objective-C. У своєму коді майже завжди краще <code>init?</code>.</p>
 <h2 id="required-ініціалізатори"><a href="#required-ініціалізатори">Required-ініціалізатори</a></h2>
 <p><code>required</code> означає, що <strong>кожен підклас</strong> зобов'язаний реалізувати цей ініціалізатор. У підкласі теж пишуть <code>required</code> (а не <code>override</code>):</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Widget</span><span class="w"> </span><span class="p">{</span>
