@@ -331,80 +331,91 @@ player.health = 0      // Гравець переможений</template></div>
 <aside class="callout trap"><b>Пастка</b><p><code>increment(&amp;score)</code> спрацює <code>didSet</code> у <code>score</code> навіть тоді, коли функція нічого не змінила: <code>inout</code> наприкінці завжди записує значення назад. Якщо <code>didSet</code> шле подію в аналітику, порівнюй <code>oldValue</code> з новим значенням.</p>
 </aside>
 <h2 id="property-wrappers"><a href="#property-wrappers">Property wrappers</a></h2>
-<p>Property wrapper відокремлює <strong>логіку зберігання</strong> від оголошення властивості. Класичний iOS-приклад — налаштування, що мають жити в <code>UserDefaults</code>:</p>
-<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<h3 id="проблема"><a href="#проблема">Проблема</a></h3>
+<p>Припустимо, у гравця кілька властивостей, які не можна виводити за межі: здоров'я 0–100, рівень 0–10. Вручну кожна потребує прихованого поля й обчислюваної властивості з перевіркою:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">_health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_health</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="bp">max</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="p">@</span><span class="n">propertyWrapper</span>
-<span class="kd">struct</span><span class="w"> </span><span class="nc">Stored</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">key</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">defaultValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">storage</span><span class="p">:</span><span class="w"> </span><span class="n">UserDefaults</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">.</span><span class="n">standard</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">_level</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">level</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_level</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_level</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="bp">max</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// і так для кожної нової властивості</span>
+<span class="p">}</span></code></pre></div>
+<p>Логіка однакова, а повторювати її доводиться щоразу.</p>
+<h3 id="рішення-обгортка"><a href="#рішення-обгортка">Рішення: обгортка</a></h3>
+<p>Property wrapper — тип, у який цю логіку виносять <strong>один раз</strong>. Вимоги дві: атрибут <code>@propertyWrapper</code> і властивість <code>wrappedValue</code>. Це те значення, яке бачитиме користувач властивості.</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">propertyWrapper</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Clamped</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">range</span><span class="p">:</span><span class="w"> </span><span class="n">ClosedRange</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;</span>
 
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="n">object</span><span class="p">(</span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="n">defaultValue</span><span class="w"> </span><span class="p">}</span>
-<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span><span class="w"> </span><span class="n">forKey</span><span class="p">:</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">range</span><span class="p">:</span><span class="w"> </span><span class="n">ClosedRange</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">range</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">range</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="bp">max</span><span class="p">(</span><span class="n">wrappedValue</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">.</span><span class="n">lowerBound</span><span class="p">),</span><span class="w"> </span><span class="n">range</span><span class="p">.</span><span class="n">upperBound</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">min</span><span class="p">(</span><span class="bp">max</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">.</span><span class="n">lowerBound</span><span class="p">),</span><span class="w"> </span><span class="n">range</span><span class="p">.</span><span class="n">upperBound</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">struct</span><span class="w"> </span><span class="nc">AppSettings</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">@</span><span class="n">Stored</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="s">"hasSeenOnboarding"</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">hasSeenOnboarding</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span>
-<span class="w">    </span><span class="p">@</span><span class="n">Stored</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="s">"launchCount"</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">launchCount</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Clamped</span><span class="p">(</span><span class="mf">0.</span><span class="p">..</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Clamped</span><span class="p">(</span><span class="mf">0.</span><span class="p">..</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">level</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
 <span class="p">}</span>
 
-<span class="kd">var</span><span class="w"> </span><span class="nv">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">AppSettings</span><span class="p">()</span>
-<span class="n">settings</span><span class="p">.</span><span class="n">launchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">// читає й пише UserDefaults під капотом</span></code></pre><template class="src">import Foundation
+<span class="kd">var</span><span class="w"> </span><span class="nv">player</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Player</span><span class="p">()</span>
+<span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">150</span>
+<span class="n">player</span><span class="p">.</span><span class="n">level</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="p">,</span><span class="w"> </span><span class="n">player</span><span class="p">.</span><span class="n">level</span><span class="p">)</span><span class="w">   </span><span class="c1">// 100 0</span></code></pre><template class="src">@propertyWrapper
+struct Clamped {
+    private var value: Int
+    private let range: ClosedRange&lt;Int&gt;
 
-@propertyWrapper
-struct Stored&lt;Value&gt; {
-    let key: String
-    let defaultValue: Value
-    var storage: UserDefaults = .standard
+    init(wrappedValue: Int, _ range: ClosedRange&lt;Int&gt;) {
+        self.range = range
+        self.value = min(max(wrappedValue, range.lowerBound), range.upperBound)
+    }
 
-    var wrappedValue: Value {
-        get { storage.object(forKey: key) as? Value ?? defaultValue }
-        set { storage.set(newValue, forKey: key) }
+    var wrappedValue: Int {
+        get { value }
+        set { value = min(max(newValue, range.lowerBound), range.upperBound) }
     }
 }
 
-struct AppSettings {
-    @Stored(key: &quot;hasSeenOnboarding&quot;, defaultValue: false) var hasSeenOnboarding: Bool
-    @Stored(key: &quot;launchCount&quot;, defaultValue: 0) var launchCount: Int
+struct Player {
+    @Clamped(0...100) var health = 100
+    @Clamped(0...10) var level = 1
 }
 
-var settings = AppSettings()
-settings.launchCount += 1          // читає й пише UserDefaults під капотом</template></div>
-<p>Обгортка — структура, клас чи enum з атрибутом <code>@propertyWrapper</code> і властивістю <code>wrappedValue</code>. Для <code>@Stored var launchCount</code> компілятор створює приватне поле <code>_launchCount</code> типу <code>Stored&lt;Int&gt;</code> і властивість <code>launchCount</code>, що звертається до <code>_launchCount.wrappedValue</code>.</p>
-<h3 id="як-обгортка-отримує-початкові-значення"><a href="#як-обгортка-отримує-початкові-значення">Як обгортка отримує початкові значення</a></h3>
-<p>Що саме викличеться, залежить від того, як записано оголошення:</p>
-<table>
-<thead>
-<tr>
-<th>Запис</th>
-<th>Ініціалізатор обгортки</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>@W var x: T</code></td>
-<td><code>init()</code></td>
-</tr>
-<tr>
-<td><code>@W var x = value</code></td>
-<td><code>init(wrappedValue: value)</code></td>
-</tr>
-<tr>
-<td><code>@W(a: 1) var x: T</code></td>
-<td><code>init(a: 1)</code> — як у <code>@Stored(key:defaultValue:)</code> вище</td>
-</tr>
-<tr>
-<td><code>@W(a: 1) var x = value</code></td>
-<td><code>init(wrappedValue: value, a: 1)</code></td>
-</tr>
-</tbody>
-</table>
-<p>Тобто значення після <code>=</code> завжди йде в параметр <code>wrappedValue</code>, а аргументи атрибута — в інші параметри. Якщо обгортка підтримує кілька форм, у неї просто кілька ініціалізаторів.</p>
+var player = Player()
+player.health = 150
+player.level = -3
+print(player.health, player.level)   // 100 0</template></div>
+<p>Тепер обмеження додається одним словом <code>@Clamped(...)</code> перед властивістю.</p>
+<h3 id="що-робить-компілятор"><a href="#що-робить-компілятор">Що робить компілятор</a></h3>
+<p><code>@Clamped</code> — не магія, а скорочення. Рядок <code>@Clamped(0...100) var health = 100</code> компілятор розгортає приблизно в те, що ми писали вручну:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">_health</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Clamped</span><span class="p">(</span><span class="n">wrappedValue</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">..</span><span class="mi">100</span><span class="p">)</span><span class="w">   </span><span class="c1">// сама обгортка</span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">health</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_health</span><span class="p">.</span><span class="n">wrappedValue</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_health</span><span class="p">.</span><span class="n">wrappedValue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+<ol>
+<li>З'являється приховане поле <code>_health</code>, в якому лежить екземпляр <code>Clamped</code>.</li>
+<li><code>health</code> стає обчислюваною властивістю, що читає й пише <code>_health.wrappedValue</code>.</li>
+<li>Значення після <code>=</code> (тут <code>100</code>) потрапляє в параметр <code>wrappedValue:</code> ініціалізатора, а аргументи в дужках після назви (тут <code>0...100</code>) — у решту параметрів.</li>
+</ol>
+<p>Якщо значення після <code>=</code> нема (<code>@W var x: Int</code>), викликається ініціалізатор без <code>wrappedValue:</code>, наприклад <code>init()</code>. Тому обгортка, яка має підтримувати обидва записи, просто має кілька ініціалізаторів.</p>
+<p>Обгорткою може бути структура, клас чи enum. У SwiftUI ти постійно бачиш вбудовані обгортки: <code>@State</code>, <code>@Binding</code>, <code>@AppStorage</code> (зберігає значення в налаштуваннях застосунку, <code>UserDefaults</code>).</p>
 <h3 id="projected-value"><a href="#projected-value">Projected value</a></h3>
-<p>Обгортка може надавати додаткове значення через властивість <code>projectedValue</code>. Доступ до нього — через <code>$</code> перед іменем:</p>
+<p>Крім <code>wrappedValue</code>, обгортка може віддавати ще одне, додаткове значення — <code>projectedValue</code>. Дістають його, поставивши <code>$</code> перед іменем властивості. Наприклад, обгортка, що рахує, скільки разів властивість змінювали:</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="p">@</span><span class="n">propertyWrapper</span>
 <span class="kd">struct</span><span class="w"> </span><span class="nc">Tracked</span><span class="p">&lt;</span><span class="n">Value</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">changeCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
@@ -502,7 +513,7 @@ print(FeatureFlags.summary)</template></div>
 <div class="quiz-item"><p class="quiz-q"><span class="quiz-n">4.</span> Яке твердження про обчислювані властивості <strong>неправильне</strong>?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0">Вони нічого не зберігають, а рахуються щоразу</button></li><li><button type="button" class="quiz-opt" data-correct="1">Read-only обчислювану властивість оголошують через <code>let</code></button></li><li><button type="button" class="quiz-opt" data-correct="0">Сеттер отримує нове значення в <code>newValue</code>, якщо ім'я не вказано</button></li><li><button type="button" class="quiz-opt" data-correct="0">Тіло з одного виразу повертає значення без <code>return</code></button></li></ol><div class="quiz-why" hidden><p>Обчислювані властивості завжди оголошують через <code>var</code>.</p></div></div>
 <div class="quiz-item"><p class="quiz-q"><span class="quiz-n">5.</span> Які імена значень доступні в <code>willSet</code> і <code>didSet</code> за замовчуванням?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0"><code>value</code> і <code>previous</code></button></li><li><button type="button" class="quiz-opt" data-correct="1"><code>newValue</code> у <code>willSet</code> і <code>oldValue</code> у <code>didSet</code></button></li><li><button type="button" class="quiz-opt" data-correct="0"><code>oldValue</code> у <code>willSet</code> і <code>newValue</code> у <code>didSet</code></button></li><li><button type="button" class="quiz-opt" data-correct="0">Імен немає</button></li></ol><div class="quiz-why" hidden><p>Перед зміною доступне майбутнє значення, після — попереднє.</p></div></div>
 <div class="quiz-item"><p class="quiz-q"><span class="quiz-n">6.</span> Чи спрацює <code>didSet</code>, якщо властивість присвоюють в <code>init</code> того самого типу?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0">Так, завжди</button></li><li><button type="button" class="quiz-opt" data-correct="1">Ні</button></li><li><button type="button" class="quiz-opt" data-correct="0">Лише в класах</button></li><li><button type="button" class="quiz-opt" data-correct="0">Лише якщо значення змінилось</button></li></ol><div class="quiz-why" hidden><p>Під час ініціалізації власні спостерігачі не викликаються.</p></div></div>
-<div class="quiz-item"><p class="quiz-q"><span class="quiz-n">7.</span> Що таке property wrapper?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0">Клас-обгортка над будь-яким об'єктом</button></li><li><button type="button" class="quiz-opt" data-correct="1">Тип з <code>wrappedValue</code>, що задає логіку зберігання властивості; застосовується атрибутом <code>@Ім'я</code></button></li><li><button type="button" class="quiz-opt" data-correct="0">Макрос для генерації властивостей</button></li><li><button type="button" class="quiz-opt" data-correct="0">Спосіб зробити властивість приватною</button></li></ol><div class="quiz-why" hidden><p>Логіку пишуть один раз і застосовують до багатьох властивостей: <code>@Stored(key:defaultValue:)</code>, <code>@State</code>.</p></div></div>
+<div class="quiz-item"><p class="quiz-q"><span class="quiz-n">7.</span> Що таке property wrapper?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0">Клас-обгортка над будь-яким об'єктом</button></li><li><button type="button" class="quiz-opt" data-correct="1">Тип з <code>wrappedValue</code>, що задає логіку зберігання властивості; застосовується атрибутом <code>@Ім'я</code></button></li><li><button type="button" class="quiz-opt" data-correct="0">Макрос для генерації властивостей</button></li><li><button type="button" class="quiz-opt" data-correct="0">Спосіб зробити властивість приватною</button></li></ol><div class="quiz-why" hidden><p>Логіку пишуть один раз і застосовують до багатьох властивостей: <code>@Clamped(0...100)</code>, <code>@State</code>.</p></div></div>
 <div class="quiz-item"><p class="quiz-q"><span class="quiz-n">8.</span> Що повертає <code>$name</code> для властивості з property wrapper?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0">Саме значення</button></li><li><button type="button" class="quiz-opt" data-correct="1">Projected value обгортки — наприклад, <code>Binding</code> у <code>@State</code></button></li><li><button type="button" class="quiz-opt" data-correct="0">Ім'я властивості рядком</button></li><li><button type="button" class="quiz-opt" data-correct="0">Приватне сховище</button></li></ol><div class="quiz-why" hidden><p><code>$</code> дає <code>projectedValue</code>, а сама обгортка зберігається в полі <code>_name</code>.</p></div></div>
 <div class="quiz-item"><p class="quiz-q"><span class="quiz-n">9.</span> Коли ініціалізується глобальна змінна в бібліотечному файлі?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="0">Під час запуску застосунку</button></li><li><button type="button" class="quiz-opt" data-correct="1">Ліниво, при першому зверненні</button></li><li><button type="button" class="quiz-opt" data-correct="0">Ніколи</button></li><li><button type="button" class="quiz-opt" data-correct="0">Щоразу при зверненні</button></li></ol><div class="quiz-why" hidden><p>Глобальні змінні ініціалізуються ліниво й рівно один раз. Виняток — код верхнього рівня в <code>main.swift</code>.</p></div></div>
 <div class="quiz-item"><p class="quiz-q"><span class="quiz-n">10.</span> Чим <code>static var</code> відрізняється від звичайної властивості?</p><ol class="quiz-opts" type="A"><li><button type="button" class="quiz-opt" data-correct="1">Вона належить самому типу, одна на всіх</button></li><li><button type="button" class="quiz-opt" data-correct="0">Її не можна змінювати</button></li><li><button type="button" class="quiz-opt" data-correct="0">Вона існує лише в класах</button></li><li><button type="button" class="quiz-opt" data-correct="0">Вона обчислюється щоразу</button></li></ol><div class="quiz-why" hidden><p>Звертаються до неї через ім'я типу: <code>FeatureFlags.isEnabled</code>.</p></div></div>
