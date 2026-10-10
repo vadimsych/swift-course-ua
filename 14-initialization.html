@@ -521,25 +521,52 @@ class Slider: Widget {
 }</template></div>
 <p>Коли підклас пише власний ініціалізатор, він втрачає автоматично успадковані — і <code>required</code>-ініціалізатори доводиться дописувати вручну. Саме тому в підкласі <code>UIView</code> з власним <code>init</code> з'являється обов'язковий <code>required init?(coder:)</code>.</p>
 <h2 id="значення-за-замовчуванням-через-замикання"><a href="#значення-за-замовчуванням-через-замикання">Значення за замовчуванням через замикання</a></h2>
-<p>Початкове значення властивості можна обчислити замиканням, яке <strong>одразу викликається</strong> (зверни увагу на <code>()</code> в кінці):</p>
-<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">LootTable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">weights</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">table</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[:]</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">rarity</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="s">"common"</span><span class="p">,</span><span class="w"> </span><span class="s">"rare"</span><span class="p">,</span><span class="w"> </span><span class="s">"epic"</span><span class="p">,</span><span class="w"> </span><span class="s">"legendary"</span><span class="p">].</span><span class="n">enumerated</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">table</span><span class="p">[</span><span class="n">rarity</span><span class="p">.</span><span class="n">element</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rarity</span><span class="p">.</span><span class="n">offset</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1">// 64, 16, 4, 1</span>
+<p>Зазвичай значення за замовчуванням — один вираз: <code>var score = 0</code>. Але іноді, щоб його отримати, потрібно кілька рядків коду: цикл, налаштування об'єкта. Тоді код загортають у замикання й <strong>одразу викликають</strong> його — звідси <code>()</code> у кінці:</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Deck</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">cards</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">result</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">suit</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="s">"♠"</span><span class="p">,</span><span class="w"> </span><span class="s">"♥"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="s">"A"</span><span class="p">,</span><span class="w"> </span><span class="s">"K"</span><span class="p">,</span><span class="w"> </span><span class="s">"Q"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">suit</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">table</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span>
 <span class="w">    </span><span class="p">}()</span>
-<span class="p">}</span></code></pre><template class="src">struct LootTable {
-    let weights: [String: Int] = {
-        var table: [String: Int] = [:]
-        for rarity in [&quot;common&quot;, &quot;rare&quot;, &quot;epic&quot;, &quot;legendary&quot;].enumerated() {
-            table[rarity.element] = 1 &lt;&lt; (6 - rarity.offset * 2)   // 64, 16, 4, 1
+<span class="p">}</span>
+
+<span class="bp">print</span><span class="p">(</span><span class="n">Deck</span><span class="p">().</span><span class="n">cards</span><span class="p">)</span><span class="w">   </span><span class="c1">// ["A♠", "K♠", "Q♠", "A♥", "K♥", "Q♥"]</span></code></pre><template class="src">struct Deck {
+    let cards: [String] = {
+        var result: [String] = []
+        for suit in [&quot;♠&quot;, &quot;♥&quot;] {
+            for rank in [&quot;A&quot;, &quot;K&quot;, &quot;Q&quot;] {
+                result.append(rank + suit)
+            }
         }
-        return table
+        return result
     }()
-}</template></div>
-<p>Замикання виконується до ініціалізації решти екземпляра, тому в ньому не можна звертатися до інших властивостей, методів чи <code>self</code>. Без <code>()</code> властивості присвоювалося б саме замикання, а не результат.</p>
+}
+
+print(Deck().cards)   // [&quot;A♠&quot;, &quot;K♠&quot;, &quot;Q♠&quot;, &quot;A♥&quot;, &quot;K♥&quot;, &quot;Q♥&quot;]</template></div>
+<p>Читай це як «безіменна функція, яку тут же викликали». Те саме можна записати через звичайну функцію:</p>
+<div class="code swift"><span class="lang">Swift</span><pre><code><span class="kd">func</span><span class="w"> </span><span class="nf">makeCards</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="nb">String</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// той самий цикл</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="s">"A♠"</span><span class="p">,</span><span class="w"> </span><span class="s">"K♠"</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Deck</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">cards</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">makeCards</span><span class="p">()</span>
+<span class="p">}</span></code></pre></div>
+<p>Замикання просто дає тримати цей код поруч із властивістю. Як це працює:</p>
+<ol>
+<li>Під час створення <code>Deck</code> Swift доходить до <code>cards</code>.</li>
+<li>Виконує замикання <code>{ ... }</code>, бо одразу після нього стоїть <code>()</code>.</li>
+<li>Результат, тобто масив, записує в <code>cards</code>. Саме замикання більше не потрібне.</li>
+</ol>
+<p>Дві пастки:</p>
+<ul>
+<li><strong>Без <code>()</code></strong> у властивість намагалося б записатися саме замикання, а не результат. Компілятор підкаже: <code>did you mean to call it with '()'?</code></li>
+<li><strong>Усередині не можна звертатися до інших властивостей чи <code>self</code></strong>: замикання виконується, поки екземпляр ще будується. Помилка: <code>property initializers run before 'self' is available</code>. Якщо значення залежить від інших властивостей, роби властивість <code>lazy var</code>: її значення обчислиться пізніше, при першому зверненні, коли <code>self</code> уже готовий.</li>
+</ul>
 <!-- callout -->
 
 <section class="quiz" aria-label="Перевір себе">
