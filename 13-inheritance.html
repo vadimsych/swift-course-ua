@@ -102,24 +102,37 @@
 <span class="p">}</span></code></pre></div>
 <p>Не можна додавати спостерігачі до успадкованих <strong>констант</strong> і read-only властивостей — їх неможливо змінити. Якщо ти вже перевизначаєш сеттер, <code>didSet</code> поруч не потрібен (і не дозволений) — реакцію на зміну пиши в самому сеттері.</p>
 <h3 id="перевизначення-членів-типу"><a href="#перевизначення-членів-типу">Перевизначення членів типу</a></h3>
-<p>Перевизначати можна не лише члени екземпляра, а й методи та обчислювані властивості <strong>типу</strong>, оголошені через <code>class</code> (на відміну від <code>static</code>, які перевизначати не можна):</p>
-<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Screen2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">defaultTransition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"push"</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">make</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Screen2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Screen2</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<p>Члени типу (ті, що викликаються на самому типі) теж можна перевизначати, але тільки якщо в базовому класі вони оголошені через <code>class</code>, а не <code>static</code>. Нагадування з уроку 11: <code>class func</code> / <code>class var</code> — це «static, який можна override».</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">kind</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"screen"</span><span class="w">                  </span><span class="c1">// static: перевизначити не можна</span>
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">transition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"push"</span><span class="w"> </span><span class="p">}</span><span class="w">     </span><span class="c1">// class: підклас може перевизначити</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">open</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"відкриваю </span><span class="si">\(</span><span class="n">kind</span><span class="si">)</span><span class="s"> з анімацією </span><span class="si">\(</span><span class="n">transition</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">class</span><span class="w"> </span><span class="nc">ModalScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">defaultTransition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"modal"</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">make</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Screen2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ModalScreen</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span></code></pre><template class="src">class Screen2 {
-    class var defaultTransition: String { &quot;push&quot; }
-    class func make() -&gt; Screen2 { Screen2() }
+<span class="kd">class</span><span class="w"> </span><span class="nc">ModalScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">transition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"modal"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Screen</span><span class="p">.</span><span class="n">open</span><span class="p">()</span><span class="w">        </span><span class="c1">// відкриваю screen з анімацією push</span>
+<span class="n">ModalScreen</span><span class="p">.</span><span class="n">open</span><span class="p">()</span><span class="w">   </span><span class="c1">// відкриваю screen з анімацією modal</span></code></pre><template class="src">class Screen {
+    static let kind = &quot;screen&quot;                  // static: перевизначити не можна
+    class var transition: String { &quot;push&quot; }     // class: підклас може перевизначити
+
+    class func open() {
+        print(&quot;відкриваю \(kind) з анімацією \(transition)&quot;)
+    }
 }
 
-class ModalScreen: Screen2 {
-    override class var defaultTransition: String { &quot;modal&quot; }
-    override class func make() -&gt; Screen2 { ModalScreen() }
-}</template></div>
+class ModalScreen: Screen {
+    override class var transition: String { &quot;modal&quot; }
+}
+
+Screen.open()        // відкриваю screen з анімацією push
+ModalScreen.open()   // відкриваю screen з анімацією modal</template></div>
+<p>У підкласі перевизначення пишуть як <code>override class var</code> / <code>override class func</code>. Член, оголошений через <code>static</code>, перевизначити не можна: це те саме, що <code>final class</code>.</p>
 <h2 id="заборона-перевизначення"><a href="#заборона-перевизначення">Заборона перевизначення</a></h2>
 <p><code>final</code> перед методом, властивістю чи сабскриптом забороняє перевизначати їх у підкласах (зокрема й члени, додані в розширенні). <code>final class</code> забороняє успадковувати клас взагалі.</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SettingsScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>

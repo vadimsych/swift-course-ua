@@ -143,7 +143,7 @@ let frozen = Stamina()
 var step = OnboardingStep.welcome
 step.advance()   // .permissions</template></div>
 <h2 id="методи-типу"><a href="#методи-типу">Методи типу</a></h2>
-<p>Методи, що викликаються на самому типі, позначаються <code>static</code>. У класах можна використати <code>class func</code>, щоб дозволити підкласам їх перевизначати.</p>
+<p>Методи, що викликаються на самому типі, а не на екземплярі, позначаються <code>static</code>. У класах є ще варіант <code>class func</code> — про нього нижче.</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Currency</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">code</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">symbol</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
@@ -185,9 +185,47 @@ step.advance()   // .permissions</template></div>
 Currency.find(code: &quot;UAH&quot;)?.format(99.5)   // &quot;99.5 ₴&quot;</template></div>
 <p>Якщо результат методу (екземпляра чи типу) нормально ігнорувати — наприклад, <code>insert</code> повертає, чи вдалося вставити, — метод позначають <code>@discardableResult</code>, і компілятор не попереджатиме про невикористане значення.</p>
 <p>У методі типу <code>self</code> посилається на <strong>сам тип</strong>, а не на екземпляр. Всередині методу типу інші статичні члени можна викликати без префікса. У методі екземпляра до статичних членів звертаються через ім'я типу або <code>Self</code>.</p>
+<h3 id="static-і-class-у-класах"><a href="#static-і-class-у-класах"><code>static</code> і <code>class</code> у класах</a></h3>
+<p>У класі член типу можна оголосити двома словами, і різниця лише одна:</p>
+<ul>
+<li><code>static</code> — звичайний статичний член. Підклас <strong>не може</strong> його перевизначити.</li>
+<li><code>class</code> — теж статичний член (викликається на типі, не на екземплярі), але підклас <strong>може</strong> перевизначити його через <code>override class</code>.</li>
+</ul>
+<p>Тобто <code>class func</code> / <code>class var</code> — це «static, який можна override». Слово <code>class</code> тут не має стосунку до оголошення класу, просто так назвали модифікатор.</p>
+<div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">class</span><span class="w"> </span><span class="nc">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">kind</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"screen"</span><span class="w">                  </span><span class="c1">// static: перевизначити не можна</span>
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">transition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"push"</span><span class="w"> </span><span class="p">}</span><span class="w">     </span><span class="c1">// class: підклас може перевизначити</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">open</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">"відкриваю </span><span class="si">\(</span><span class="n">kind</span><span class="si">)</span><span class="s"> з анімацією </span><span class="si">\(</span><span class="n">transition</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">ModalScreen</span><span class="p">:</span><span class="w"> </span><span class="n">Screen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">transition</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"modal"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Screen</span><span class="p">.</span><span class="n">open</span><span class="p">()</span><span class="w">        </span><span class="c1">// відкриваю screen з анімацією push</span>
+<span class="n">ModalScreen</span><span class="p">.</span><span class="n">open</span><span class="p">()</span><span class="w">   </span><span class="c1">// відкриваю screen з анімацією modal</span></code></pre><template class="src">class Screen {
+    static let kind = &quot;screen&quot;                  // static: перевизначити не можна
+    class var transition: String { &quot;push&quot; }     // class: підклас може перевизначити
+
+    class func open() {
+        print(&quot;відкриваю \(kind) з анімацією \(transition)&quot;)
+    }
+}
+
+class ModalScreen: Screen {
+    override class var transition: String { &quot;modal&quot; }
+}
+
+Screen.open()        // відкриваю screen з анімацією push
+ModalScreen.open()   // відкриваю screen з анімацією modal</template></div>
+<p><code>ModalScreen</code> не переписував <code>open()</code>, але коли метод викликали на <code>ModalScreen</code>, він узяв уже перевизначений <code>transition</code>. Зі <code>static var transition</code> так не вийде: <code>override static</code> дає помилку компіляції <code>cannot override static method</code>.</p>
+<p><code>class</code> можна поставити лише перед методами й обчислюваними властивостями, і лише в класах. Збережену властивість типу (<code>static let kind = …</code>) оголошують тільки через <code>static</code>. У структурах і перелічення наслідування нема, тож там завжди <code>static</code>.</p>
 <!-- callout -->
 
-<aside class="callout csharp"><b>C#</b><p><code>static</code> — як <code>static</code> у C#. <code>class func</code> — статичний метод, який підклас може перевизначити; у C# такого немає.</p>
+<aside class="callout csharp"><b>C#</b><p><code>static</code> — як <code>static</code> у C#. <code>class func</code> — статичний метод, який підклас може перевизначити; у C# найближче — <code>static virtual</code> в інтерфейсах (C# 11), але для звичайних класів такого немає.</p>
 </aside>
 <!-- callout -->
 
