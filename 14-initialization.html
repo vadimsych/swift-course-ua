@@ -283,7 +283,9 @@ class APIClient {
 <span class="p">}</span>
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">mock</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">RecordingClient</span><span class="p">(</span><span class="n">host</span><span class="p">:</span><span class="w"> </span><span class="s">"example.com"</span><span class="p">)</span><span class="w">   </span><span class="c1">// і designated, і convenience</span></code></pre></div>
-<p><strong>Правило 2 у дії.</strong> Клієнт з кешем мусить ініціалізувати свою властивість, тому пише власний designated-ініціалізатор. Щоб не втратити <code>init(host:)</code> суперкласу, він реалізує <strong>усі</strong> designated-ініціалізатори суперкласу:</p>
+<p><strong>Правило 2 у дії.</strong> Клієнт з кешем додає властивість <code>cache</code> без значення за замовчуванням. Її треба заповнити, тому він пише власний designated-ініціалізатор з параметром <code>cache</code>. Правило 1 після цього не діє: власний designated є, отже <code>init(baseURL:timeout:)</code> батька не успадковується.</p>
+<p>Чому від цього зникає й <code>init(host:)</code>? Подивись, що він робить усередині: викликає <code>self.init(baseURL:timeout:)</code>. Для <code>CachingClient</code> такого ініціалізатора нема, а батьківський не знає про <code>cache</code> і залишив би поле порожнім. Тому компілятор не дає успадкувати <code>init(host:)</code>: <code>CachingClient(host:)</code> дає помилку <code>extra argument 'host' in call</code>.</p>
+<p>Щоб повернути <code>init(host:)</code>, підклас сам реалізує <code>init(baseURL:timeout:)</code> і підставляє в ньому кеш за замовчуванням. Тепер усі designated-ініціалізатори батька є, і <code>init(host:)</code> успадковується:</p>
 <div class="code swift"><span class="lang">Swift</span><pre><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CachingClient</span><span class="p">:</span><span class="w"> </span><span class="n">APIClient</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">cache</span><span class="p">:</span><span class="w"> </span><span class="n">URLCache</span>
 
@@ -298,7 +300,13 @@ class APIClient {
 <span class="p">}</span>
 
 <span class="kd">let</span><span class="w"> </span><span class="nv">cached</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">CachingClient</span><span class="p">(</span><span class="n">host</span><span class="p">:</span><span class="w"> </span><span class="s">"api.example.com"</span><span class="p">)</span><span class="w">   </span><span class="c1">// convenience успадковано</span></code></pre></div>
-<p>Якщо прибрати перевизначення <code>init(baseURL:timeout:)</code>, <code>CachingClient(host:)</code> перестане компілюватися: правило 2 більше не виконується.</p>
+<p>Ланцюжок виклику <code>CachingClient(host: "api.example.com")</code>:</p>
+<ol>
+<li>успадкований <code>init(host:)</code> викликає <code>self.init(baseURL:timeout:)</code>;</li>
+<li>для <code>CachingClient</code> це перевизначена версія, яка викликає <code>self.init(baseURL:timeout:cache:)</code> з <code>.shared</code>;</li>
+<li>той заповнює <code>cache</code> і викликає <code>super.init(baseURL:timeout:)</code>.</li>
+</ol>
+<p>Кожне поле заповнене, тому компілятор і дозволяє успадкування.</p>
 <h2 id="failable-ініціалізатори"><a href="#failable-ініціалізатори">Failable-ініціалізатори</a></h2>
 <p>Коли створення може не вдатися (неправильні параметри, відсутній ресурс), використовують <code>init?</code>. Він повертає опціонал, а невдачу позначають <code>return nil</code>:</p>
 <div class="code swift" data-runnable><span class="lang">Swift</span><pre><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Email</span><span class="w"> </span><span class="p">{</span>
